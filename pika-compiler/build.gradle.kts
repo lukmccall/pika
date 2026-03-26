@@ -99,7 +99,7 @@ tasks.test {
 }
 
 kotlin {
-  jvmToolchain(17)
+  jvmToolchain(11)
   compilerOptions {
     optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
   }

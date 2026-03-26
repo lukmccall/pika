@@ -10,7 +10,7 @@ plugins {
 }
 
 kotlin {
-  jvmToolchain(17)
+  jvmToolchain(11)
 }
 
 // Coordinates for the compiler plugin artifacts (must match root build.gradle.kts)
