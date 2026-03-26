@@ -9,6 +9,10 @@ plugins {
   id("com.vanniktech.maven.publish") version "0.30.0"
 }
 
+kotlin {
+  jvmToolchain(17)
+}
+
 // Coordinates for the compiler plugin artifacts (must match root build.gradle.kts)
 val pluginGroup = "io.github.lukmccall.pika"
 val pikaVersion: String = libs.versions.pika.get()
