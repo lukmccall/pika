@@ -1,0 +1,53 @@
+FILE: typeInfoCustomClass.kt
+    package test
+
+    public final class Person : R|kotlin/Any| {
+        public constructor(name: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val name: R|kotlin/String| = R|<local>/name|
+            public get(): R|kotlin/String|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval personInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|test/Person|>()
+        when () {
+            (R|<local>/personInfo| !is R|io/github/lukmccall/pika/TypeInfo.Simple|) ->  {
+                ^box String(FAIL: Person should be TypeInfo.Simple)
+            }
+        }
+
+        when () {
+            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(test.Person)) ->  {
+                ^box <strcat>(String(FAIL: Person typeName expected test.Person but got ), R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.kClass|, <getClass>(Q|test/Person|)) ->  {
+                ^box String(FAIL: Person kClass)
+            }
+        }
+
+        when () {
+            R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.isNullable| ->  {
+                ^box String(FAIL: Person should not be nullable)
+            }
+        }
+
+        lval nullablePersonInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|test/Person?|>()
+        when () {
+            (R|<local>/nullablePersonInfo| !is R|io/github/lukmccall/pika/TypeInfo.Simple|) ->  {
+                ^box String(FAIL: Person? should be TypeInfo.Simple)
+            }
+        }
+
+        when () {
+            R|<local>/nullablePersonInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.isNullable|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: Person? should be nullable)
+            }
+        }
+
+        ^box String(OK)
+    }

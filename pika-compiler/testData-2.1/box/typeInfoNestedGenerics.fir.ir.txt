@@ -1,0 +1,155 @@
+FILE fqName:test fileName:/typeInfoNestedGenerics.kt
+  FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:nestedInfo type:io.github.lukmccall.pika.TypeInfo [val]
+        CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean, typeArguments: kotlin.collections.List<io.github.lukmccall.pika.TypeInfo>) declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+          typeName: CONST String type=kotlin.String value="kotlin.collections.Map"
+          kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:Map modality:ABSTRACT visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<kotlin.collections.Map<K of kotlin.collections.Map, V of kotlin.collections.Map>>
+          isNullable: CONST Boolean type=kotlin.Boolean value=false
+          typeArguments: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=INVOKE
+            <T>: io.github.lukmccall.pika.TypeInfo
+            elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.TypeInfo> varargElementType=io.github.lukmccall.pika.TypeInfo
+              CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+                typeName: CONST String type=kotlin.String value="kotlin.String"
+                kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                isNullable: CONST Boolean type=kotlin.Boolean value=false
+              CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean, typeArguments: kotlin.collections.List<io.github.lukmccall.pika.TypeInfo>) declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+                typeName: CONST String type=kotlin.String value="kotlin.collections.List"
+                kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<E of kotlin.collections.List>>
+                isNullable: CONST Boolean type=kotlin.Boolean value=false
+                typeArguments: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=INVOKE
+                  <T>: io.github.lukmccall.pika.TypeInfo
+                  elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.TypeInfo> varargElementType=io.github.lukmccall.pika.TypeInfo
+                    CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+                      typeName: CONST String type=kotlin.String value="kotlin.Int"
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                      isNullable: CONST Boolean type=kotlin.Boolean value=true
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+            GET_VAR 'val nestedInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested should be Parameterized"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.String origin=GET_PROPERTY
+                $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+                  GET_VAR 'val nestedInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.collections.Map"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested typeName"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-typeArguments> (): kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=GET_PROPERTY
+                  $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+                    GET_VAR 'val nestedInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+              arg1: CONST Int type=kotlin.Int value=2
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested should have 2 type arguments"
+      VAR name:nestedKeyArg type:io.github.lukmccall.pika.TypeInfo.Simple [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
+              CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.TypeInfo origin=GET_ARRAY_ELEMENT
+                $this: CALL 'public final fun <get-typeArguments> (): kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=GET_PROPERTY
+                  $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+                    GET_VAR 'val nestedInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+                index: CONST Int type=kotlin.Int value=0
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_0: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: nested key should be Simple"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_0: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val nestedKeyArg: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.String"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested key typeName"
+      VAR name:nestedValueArg type:io.github.lukmccall.pika.TypeInfo.Parameterized [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.TypeInfo.Parameterized? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+              CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.TypeInfo origin=GET_ARRAY_ELEMENT
+                $this: CALL 'public final fun <get-typeArguments> (): kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=GET_PROPERTY
+                  $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+                    GET_VAR 'val nestedInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+                index: CONST Int type=kotlin.Int value=1
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: nested value should be Parameterized"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val nestedValueArg: io.github.lukmccall.pika.TypeInfo.Parameterized declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.collections.List"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested value typeName"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-typeArguments> (): kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=GET_PROPERTY
+                  $this: GET_VAR 'val nestedValueArg: io.github.lukmccall.pika.TypeInfo.Parameterized declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested value should have 1 type arg"
+      VAR name:nestedListArg type:io.github.lukmccall.pika.TypeInfo.Simple [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
+              CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.TypeInfo origin=GET_ARRAY_ELEMENT
+                $this: CALL 'public final fun <get-typeArguments> (): kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=GET_PROPERTY
+                  $this: GET_VAR 'val nestedValueArg: io.github.lukmccall.pika.TypeInfo.Parameterized declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+                index: CONST Int type=kotlin.Int value=0
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_2: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: nested list arg should be Simple"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_2: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val nestedListArg: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.Int"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested list arg typeName"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+            $this: CALL 'public final fun <get-isNullable> (): kotlin.Boolean declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.Boolean origin=GET_PROPERTY
+              $this: GET_VAR 'val nestedListArg: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: nested list arg should be nullable"
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+        CONST String type=kotlin.String value="OK"

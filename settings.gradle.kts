@@ -1,19 +1,27 @@
 pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    
+  includeBuild("pika-gradle")
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
 }
 
 dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
+  repositories {
+    mavenCentral()
+  }
+  versionCatalogs {
+    create("libs") {
+      from(files("gradle/libs.toml"))
+      providers.gradleProperty("kotlinVersion").orNull?.let { kotlinVersion ->
+        version("kotlin", kotlinVersion)
+      }
     }
+  }
 }
 
-rootProject.name = "compiler-plugin-template"
+rootProject.name = "pika"
 
-include("compiler-plugin")
-include("gradle-plugin")
-include("plugin-annotations")
+include("pika-compiler")
+include("pika-api")
+include("sample")

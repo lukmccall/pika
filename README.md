@@ -5,13 +5,15 @@ This is a template project for writing a compiler plugin for the Kotlin compiler
 ## Details
 
 This project has three modules:
+
 - The [`:compiler-plugin`](compiler-plugin/src) module contains the compiler plugin itself.
 - The [`:plugin-annotations`](plugin-annotations/src/commonMain/kotlin) module contains annotations which can be used in
-user code for interacting with compiler plugin.
+  user code for interacting with compiler plugin.
 - The [`:gradle-plugin`](gradle-plugin/src) module contains a simple Gradle plugin to add the compiler plugin and
-annotation dependency to a Kotlin project. 
+  annotation dependency to a Kotlin project.
 
 Extension point registration:
+
 - K2 Frontend (FIR) extensions can be registered in `SimplePluginRegistrar`.
 - All other extensions (including K1 frontend and backend) can be registered in `SimplePluginComponentRegistrar`.
 
@@ -28,4 +30,5 @@ which is pre-configured in this repository.
 [//]: # (Links)
 
 [test-framework]: https://github.com/JetBrains/kotlin/blob/master/compiler/test-infrastructure/ReadMe.md
+
 [test-plugin]: https://github.com/JetBrains/kotlin-compiler-devkit

@@ -1,0 +1,58 @@
+FILE: typeInfoNestedGenerics.kt
+    package test
+
+    public final fun box(): R|kotlin/String| {
+        lval nestedInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|kotlin/collections/Map<kotlin/String, kotlin/collections/List<kotlin/Int?>>|>()
+        when () {
+            (R|<local>/nestedInfo| !is R|io/github/lukmccall/pika/TypeInfo.Parameterized|) ->  {
+                ^box String(FAIL: nested should be Parameterized)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nestedInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|, String(kotlin.collections.Map)) ->  {
+                ^box String(FAIL: nested typeName)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nestedInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box String(FAIL: nested should have 2 type arguments)
+            }
+        }
+
+        lval nestedKeyArg: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(0)) as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: nested key should be Simple)
+        when () {
+            !=(R|<local>/nestedKeyArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.String)) ->  {
+                ^box String(FAIL: nested key typeName)
+            }
+        }
+
+        lval nestedValueArg: R|io/github/lukmccall/pika/TypeInfo.Parameterized| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(1)) as? R|io/github/lukmccall/pika/TypeInfo.Parameterized|) ?: ^box String(FAIL: nested value should be Parameterized)
+        when () {
+            !=(R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|, String(kotlin.collections.List)) ->  {
+                ^box String(FAIL: nested value typeName)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: nested value should have 1 type arg)
+            }
+        }
+
+        lval nestedListArg: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(0)) as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: nested list arg should be Simple)
+        when () {
+            !=(R|<local>/nestedListArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.Int)) ->  {
+                ^box String(FAIL: nested list arg typeName)
+            }
+        }
+
+        when () {
+            R|<local>/nestedListArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.isNullable|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: nested list arg should be nullable)
+            }
+        }
+
+        ^box String(OK)
+    }

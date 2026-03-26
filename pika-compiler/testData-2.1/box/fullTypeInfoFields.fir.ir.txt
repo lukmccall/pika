@@ -1,0 +1,339 @@
+FILE fqName:test fileName:/fullTypeInfoFields.kt
+  CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Person
+    PROPERTY name:name visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]
+        EXPRESSION_BODY
+          GET_VAR 'name: kotlin.String declared in test.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-name> visibility:public modality:FINAL <> ($this:test.Person) returnType:kotlin.String
+        correspondingProperty: PROPERTY name:name visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:test.Person
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-name> (): kotlin.String declared in test.Person'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+              receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-name>' type=test.Person origin=null
+    PROPERTY name:age visibility:private modality:FINAL [var]
+      FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private
+        EXPRESSION_BODY
+          GET_VAR 'age: kotlin.Int declared in test.Person.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-age> visibility:private modality:FINAL <> ($this:test.Person) returnType:kotlin.Int
+        correspondingProperty: PROPERTY name:age visibility:private modality:FINAL [var]
+        $this: VALUE_PARAMETER name:<this> type:test.Person
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-age> (): kotlin.Int declared in test.Person'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+              receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-age>' type=test.Person origin=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<set-age> visibility:private modality:FINAL <> ($this:test.Person, <set-?>:kotlin.Int) returnType:kotlin.Unit
+        correspondingProperty: PROPERTY name:age visibility:private modality:FINAL [var]
+        $this: VALUE_PARAMETER name:<this> type:test.Person
+        VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+        BLOCK_BODY
+          SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+            receiver: GET_VAR '<this>: test.Person declared in test.Person.<set-age>' type=test.Person origin=null
+            value: GET_VAR '<set-?>: kotlin.Int declared in test.Person.<set-age>' type=kotlin.Int origin=null
+    PROPERTY name:tags visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:tags type:kotlin.collections.List<kotlin.String> visibility:private [final]
+        EXPRESSION_BODY
+          GET_VAR 'tags: kotlin.collections.List<kotlin.String> declared in test.Person.<init>' type=kotlin.collections.List<kotlin.String> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-tags> visibility:public modality:FINAL <> ($this:test.Person) returnType:kotlin.collections.List<kotlin.String>
+        correspondingProperty: PROPERTY name:tags visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:test.Person
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-tags> (): kotlin.collections.List<kotlin.String> declared in test.Person'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:tags type:kotlin.collections.List<kotlin.String> visibility:private [final]' type=kotlin.collections.List<kotlin.String> origin=null
+              receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-tags>' type=test.Person origin=null
+    CONSTRUCTOR visibility:public <> (name:kotlin.String, age:kotlin.Int, tags:kotlin.collections.List<kotlin.String>) returnType:test.Person [primary]
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      VALUE_PARAMETER name:age index:1 type:kotlin.Int
+      VALUE_PARAMETER name:tags index:2 type:kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:fullPersonInfo type:io.github.lukmccall.pika.FullTypeInfo [val]
+        CONSTRUCTOR_CALL 'public constructor <init> (className: kotlin.String, kClass: kotlin.reflect.KClass<*>, fields: kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo>, baseClass: io.github.lukmccall.pika.FullTypeInfo?, interfaces: kotlin.collections.List<kotlin.reflect.KClass<*>>, classAnnotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullTypeInfo' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+          className: CONST String type=kotlin.String value="test.Person"
+          kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+          fields: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=INVOKE
+            <T>: io.github.lukmccall.pika.FullFieldInfo
+            elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.FullFieldInfo> varargElementType=io.github.lukmccall.pika.FullFieldInfo
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                name: CONST String type=kotlin.String value="name"
+                typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+                  typeName: CONST String type=kotlin.String value="kotlin.String"
+                  kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                  isNullable: CONST Boolean type=kotlin.Boolean value=false
+                annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
+                  <T>: io.github.lukmccall.pika.AnnotationInfo
+                  elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
+                visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.Visibility
+                isMutable: CONST Boolean type=kotlin.Boolean value=false
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                name: CONST String type=kotlin.String value="age"
+                typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+                  typeName: CONST String type=kotlin.String value="kotlin.Int"
+                  kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                  isNullable: CONST Boolean type=kotlin.Boolean value=false
+                annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
+                  <T>: io.github.lukmccall.pika.AnnotationInfo
+                  elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
+                visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PRIVATE' type=io.github.lukmccall.pika.Visibility
+                isMutable: CONST Boolean type=kotlin.Boolean value=true
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                name: CONST String type=kotlin.String value="tags"
+                typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean, typeArguments: kotlin.collections.List<io.github.lukmccall.pika.TypeInfo>) declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+                  typeName: CONST String type=kotlin.String value="kotlin.collections.List"
+                  kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<E of kotlin.collections.List>>
+                  isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  typeArguments: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.TypeInfo
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.TypeInfo> varargElementType=io.github.lukmccall.pika.TypeInfo
+                      CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+                        typeName: CONST String type=kotlin.String value="kotlin.String"
+                        kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                        isNullable: CONST Boolean type=kotlin.Boolean value=false
+                annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
+                  <T>: io.github.lukmccall.pika.AnnotationInfo
+                  elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
+                visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.Visibility
+                isMutable: CONST Boolean type=kotlin.Boolean value=false
+          baseClass: CONST Null type=kotlin.Nothing? value=null
+          interfaces: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.reflect.KClass<kotlin.Any?>> origin=INVOKE
+            <T>: kotlin.reflect.KClass<kotlin.Any?>
+            elements: VARARG type=kotlin.Array<kotlin.reflect.KClass<kotlin.Any?>> varargElementType=kotlin.reflect.KClass<kotlin.Any?>
+          classAnnotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
+            <T>: io.github.lukmccall.pika.AnnotationInfo
+            elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
+          isNullable: CONST Boolean type=kotlin.Boolean value=false
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-fields> (): kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> declared in io.github.lukmccall.pika.FullTypeInfo' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=GET_PROPERTY
+                  $this: GET_VAR 'val fullPersonInfo: io.github.lukmccall.pika.FullTypeInfo declared in test.box' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+              arg1: CONST Int type=kotlin.Int value=3
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value="FAIL: fullTypeInfo should have 3 fields but got "
+              CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-fields> (): kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> declared in io.github.lukmccall.pika.FullTypeInfo' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=GET_PROPERTY
+                  $this: GET_VAR 'val fullPersonInfo: io.github.lukmccall.pika.FullTypeInfo declared in test.box' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+      VAR name:nameFieldInfo type:io.github.lukmccall.pika.FullFieldInfo [val]
+        BLOCK type=io.github.lukmccall.pika.FullFieldInfo origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.FullFieldInfo? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+              <T>: io.github.lukmccall.pika.FullFieldInfo
+              $receiver: CALL 'public final fun <get-fields> (): kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> declared in io.github.lukmccall.pika.FullTypeInfo' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=GET_PROPERTY
+                $this: GET_VAR 'val fullPersonInfo: io.github.lukmccall.pika.FullTypeInfo declared in test.box' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.FullFieldInfo, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.FullFieldInfo) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.FullFieldInfo
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.FullFieldInfo): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.FullFieldInfo declared in test.box.<anonymous>' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                        arg1: CONST String type=kotlin.String value="name"
+          WHEN type=io.github.lukmccall.pika.FullFieldInfo origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_0: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: name not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_0: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-visibility> (): io.github.lukmccall.pika.Visibility declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.Visibility origin=GET_PROPERTY
+                $this: GET_VAR 'val nameFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              arg1: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.Visibility
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: name should be PUBLIC"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun <get-isMutable> (): kotlin.Boolean declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: GET_VAR 'val nameFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: name should not be mutable"
+      VAR name:nameFieldType type:io.github.lukmccall.pika.TypeInfo.Simple [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
+              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+                $this: GET_VAR 'val nameFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: name typeInfo should be Simple"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val nameFieldType: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.String"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: name typeName"
+      VAR name:ageFieldInfo type:io.github.lukmccall.pika.FullFieldInfo [val]
+        BLOCK type=io.github.lukmccall.pika.FullFieldInfo origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:io.github.lukmccall.pika.FullFieldInfo? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+              <T>: io.github.lukmccall.pika.FullFieldInfo
+              $receiver: CALL 'public final fun <get-fields> (): kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> declared in io.github.lukmccall.pika.FullTypeInfo' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=GET_PROPERTY
+                $this: GET_VAR 'val fullPersonInfo: io.github.lukmccall.pika.FullTypeInfo declared in test.box' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.FullFieldInfo, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.FullFieldInfo) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.FullFieldInfo
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.FullFieldInfo): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.FullFieldInfo declared in test.box.<anonymous>' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                        arg1: CONST String type=kotlin.String value="age"
+          WHEN type=io.github.lukmccall.pika.FullFieldInfo origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_2: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: age not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_2: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-visibility> (): io.github.lukmccall.pika.Visibility declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.Visibility origin=GET_PROPERTY
+                $this: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              arg1: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PRIVATE' type=io.github.lukmccall.pika.Visibility
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value="FAIL: age should be PRIVATE but got "
+              CALL 'public final fun <get-visibility> (): io.github.lukmccall.pika.Visibility declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.Visibility origin=GET_PROPERTY
+                $this: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+            $this: CALL 'public final fun <get-isMutable> (): kotlin.Boolean declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.Boolean origin=GET_PROPERTY
+              $this: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: age should be mutable"
+      VAR name:ageFieldType type:io.github.lukmccall.pika.TypeInfo.Simple [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
+              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+                $this: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_3: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: age typeInfo should be Simple"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_3: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val ageFieldType: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.Int"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: age typeName"
+      VAR name:tagsFieldInfo type:io.github.lukmccall.pika.FullFieldInfo [val]
+        BLOCK type=io.github.lukmccall.pika.FullFieldInfo origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:io.github.lukmccall.pika.FullFieldInfo? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+              <T>: io.github.lukmccall.pika.FullFieldInfo
+              $receiver: CALL 'public final fun <get-fields> (): kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> declared in io.github.lukmccall.pika.FullTypeInfo' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=GET_PROPERTY
+                $this: GET_VAR 'val fullPersonInfo: io.github.lukmccall.pika.FullTypeInfo declared in test.box' type=io.github.lukmccall.pika.FullTypeInfo origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.FullFieldInfo, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.FullFieldInfo) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.FullFieldInfo
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.FullFieldInfo): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.FullFieldInfo declared in test.box.<anonymous>' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+                        arg1: CONST String type=kotlin.String value="tags"
+          WHEN type=io.github.lukmccall.pika.FullFieldInfo origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_4: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: tags not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_4: io.github.lukmccall.pika.FullFieldInfo? declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-visibility> (): io.github.lukmccall.pika.Visibility declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.Visibility origin=GET_PROPERTY
+                $this: GET_VAR 'val tagsFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              arg1: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.Visibility
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: tags should be PUBLIC"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun <get-isMutable> (): kotlin.Boolean declared in io.github.lukmccall.pika.FullFieldInfo' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: GET_VAR 'val tagsFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: tags should not be mutable"
+      VAR name:tagsFieldType type:io.github.lukmccall.pika.TypeInfo.Parameterized [val]
+        BLOCK type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:io.github.lukmccall.pika.TypeInfo.Parameterized? [val]
+            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
+              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+                $this: GET_VAR 'val tagsFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+          WHEN type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_5: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: tags typeInfo should be Parameterized"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_5: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.String origin=GET_PROPERTY
+                $this: GET_VAR 'val tagsFieldType: io.github.lukmccall.pika.TypeInfo.Parameterized declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+              arg1: CONST String type=kotlin.String value="kotlin.collections.List"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: tags typeName"
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+        CONST String type=kotlin.String value="OK"
