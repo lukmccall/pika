@@ -15,7 +15,7 @@ env:
 jobs:
   publish:
     name: Publish to Maven Central
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
