@@ -1,34 +1,129 @@
-# Kotlin Compiler Plugin template
+# Pika
 
-This is a template project for writing a compiler plugin for the Kotlin compiler.
+A Kotlin compiler plugin that generates complete type information at compile time, providing runtime access to generics, nullability, annotations, and more - without reflection.
 
-## Details
+## How It Works
 
-This project has three modules:
+Pika operates as a Kotlin IR (Intermediate Representation) compiler plugin:
 
-- The [`:compiler-plugin`](compiler-plugin/src) module contains the compiler plugin itself.
-- The [`:plugin-annotations`](plugin-annotations/src/commonMain/kotlin) module contains annotations which can be used in
-  user code for interacting with compiler plugin.
-- The [`:gradle-plugin`](gradle-plugin/src) module contains a simple Gradle plugin to add the compiler plugin and
-  annotation dependency to a Kotlin project.
+1. During compilation, the plugin intercepts calls to `typeInfo<T>()` and `fullTypeInfo<T>()`
+2. It analyzes the type argument `T` at compile time
+3. The call is replaced with IR code that constructs the appropriate `TypeInfo` or `FullTypeInfo` object
+4. At runtime, the function returns the pre-constructed type information with zero reflection overhead
 
-Extension point registration:
+## Installation
 
-- K2 Frontend (FIR) extensions can be registered in `SimplePluginRegistrar`.
-- All other extensions (including K1 frontend and backend) can be registered in `SimplePluginComponentRegistrar`.
+Add the Pika Gradle plugin to your project:
 
-## Tests
+```kotlin
+// settings.gradle.kts
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+```
 
-The [Kotlin compiler test framework][test-framework] is set up for this project.
-To create a new test, add a new `.kt` file in a [compiler-plugin/testData](compiler-plugin/testData) sub-directory:
-`testData/box` for codegen tests and `testData/diagnostics` for diagnostics tests.
-The generated JUnit 5 test classes will be updated automatically when tests are next run.
-They can be manually updated with the `generateTests` Gradle task as well.
-To aid in running tests, it is recommended to install the [Kotlin Compiler DevKit][test-plugin] IntelliJ plugin,
-which is pre-configured in this repository.
+```kotlin
+// build.gradle.kts
+plugins {
+    kotlin("jvm") version "2.3.20"
+    id("io.github.lukmccall.pika") version "0.0.1-2.3.20"
+}
+```
 
-[//]: # (Links)
+The plugin automatically adds the required `pika-api` runtime dependency.
 
-[test-framework]: https://github.com/JetBrains/kotlin/blob/master/compiler/test-infrastructure/ReadMe.md
+## API Reference
 
-[test-plugin]: https://github.com/JetBrains/kotlin-compiler-devkit
+### typeInfo<T>()
+
+Returns basic type metadata as a `TypeInfo` sealed class:
+
+```kotlin
+import io.github.lukmccall.pika.typeInfo
+
+// Simple types
+val stringType = typeInfo<String>()
+// TypeInfo.Simple(fqName="kotlin.String", kClass=String::class, isNullable=false)
+
+// Nullable types
+val nullableInt = typeInfo<Int?>()
+// TypeInfo.Simple(fqName="kotlin.Int", kClass=Int::class, isNullable=true)
+
+// Generic types
+val listType = typeInfo<List<String>>()
+// TypeInfo.Parameterized(fqName="kotlin.collections.List", kClass=List::class,
+//   typeArguments=[TypeInfo.Simple(...)], isNullable=false)
+
+// Nested generics
+val mapType = typeInfo<Map<String, List<Int?>>>()
+
+// Star projections
+val anyList = typeInfo<List<*>>()
+// Contains TypeInfo.Star for the type argument
+```
+
+### fullTypeInfo<T>()
+
+Returns comprehensive metadata including fields, inheritance, and annotations:
+
+```kotlin
+import io.github.lukmccall.pika.fullTypeInfo
+
+annotation class Serializable(val name: String)
+
+@Serializable(name = "user")
+open class Base(val id: Int)
+
+class User(
+    id: Int,
+    val name: String,
+    var email: String?
+) : Base(id)
+
+val info = fullTypeInfo<User>()
+
+// Access class information
+info.fqName        // "com.example.User"
+info.kClass        // User::class
+info.isNullable    // false
+
+// Access fields (declared on User, not inherited)
+info.fields.forEach { field ->
+    println("${field.name}: ${field.typeInfo}")
+    println("  visibility: ${field.visibility}")
+    println("  mutable: ${field.isMutable}")
+    println("  annotations: ${field.annotations}")
+}
+
+// Access inheritance
+info.baseClass     // FullTypeInfo for Base class
+info.interfaces    // List of implemented interfaces
+
+// Access annotations
+info.annotations.forEach { annotation ->
+    println("@${annotation.fqName}")
+    println("  arguments: ${annotation.arguments}")
+}
+```
+
+## Supported Kotlin Versions
+
+Pika is tested against the following Kotlin versions:
+
+| Kotlin Version | Plugin Version |
+|----------------|----------------|
+| 2.1.20         | 0.0.1-2.1.20   |
+| 2.2.0          | 0.0.1-2.2.0    |
+| 2.2.10         | 0.0.1-2.2.10   |
+| 2.2.20         | 0.0.1-2.2.20   |
+| 2.2.21         | 0.0.1-2.2.21   |
+| 2.3.0          | 0.0.1-2.3.0    |
+| 2.3.10         | 0.0.1-2.3.10   |
+| 2.3.20         | 0.0.1-2.3.20   |
+
+## Author
+
+**Łukasz Kosmaty** ([@lukmccall](https://github.com/lukmccall))
