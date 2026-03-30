@@ -1,15 +1,26 @@
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package io.github.lukmccall.pika.ir
 
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.expressions.IrCall
+import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
+import org.jetbrains.kotlin.ir.types.IrSimpleType
+import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 import org.jetbrains.kotlin.name.FqName
 
 /**
  * IR transformer that replaces calls to typeInfo<T>() and fullTypeInfo<T>() with constructed expressions.
+ *
+ * Note: When the type argument is a type parameter (e.g., inside an inline function),
+ * we skip transformation and leave the call intact. The JvmIrIntrinsicExtension will
+ * handle these calls during codegen after inline functions are inlined and type
+ * parameters are substituted with concrete types.
  */
 class TypeInfoCallTransformer(
   private val context: IrPluginContext,
@@ -34,11 +45,26 @@ class TypeInfoCallTransformer(
 
     val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
 
+    // If the type argument is a type parameter, skip transformation.
+    // The JvmIrIntrinsicExtension will handle this call during codegen
+    // after inline functions are inlined and type parameters are substituted.
+    if (isTypeParameter(typeArg)) {
+      return expression
+    }
+
     return when (functionName) {
       TYPE_INFO_FUNCTION_NAME -> poet.pika.typeInfo(typeArg)
       FULL_TYPE_INFO_FUNCTION_NAME -> poet.pika.fullTypeInfo(typeArg, typeArg.isMarkedNullable())
       else -> expression
     }
+  }
+
+  /**
+   * Check if the type is a type parameter (not a concrete type).
+   */
+  private fun isTypeParameter(type: IrType): Boolean {
+    val simpleType = type as? IrSimpleType ?: return false
+    return simpleType.classifier is IrTypeParameterSymbol
   }
 
   private fun isPluginCall(function: org.jetbrains.kotlin.ir.declarations.IrSimpleFunction): Boolean {

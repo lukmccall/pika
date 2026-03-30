@@ -1,7 +1,11 @@
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.intrinsic.PikaJvmIrIntrinsicSupport
+import org.jetbrains.kotlin.backend.common.LoweringContext
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
+import org.jetbrains.kotlin.backend.common.extensions.IrIntrinsicExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class PikaIrGenerationExtension : IrGenerationExtension {
@@ -14,5 +18,11 @@ class PikaIrGenerationExtension : IrGenerationExtension {
       typeInfoCallTransformer,
       null
     )
+  }
+
+  override fun getPlatformIntrinsicExtension(loweringContext: LoweringContext): IrIntrinsicExtension? {
+    val ctx = loweringContext as? JvmBackendContext ?: return null
+    val irPluginContext = ctx.irPluginContext ?: return null
+    return PikaJvmIrIntrinsicSupport(ctx, irPluginContext)
   }
 }

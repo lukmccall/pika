@@ -63,6 +63,12 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("typeInfoProxyInline.kt")
+  public void testTypeInfoProxyInline() {
+    runTest("pika-compiler/testData/box/typeInfoProxyInline.kt");
+  }
+
+  @Test
   @TestMetadata("typeInfoSimpleTypes.kt")
   public void testTypeInfoSimpleTypes() {
     runTest("pika-compiler/testData/box/typeInfoSimpleTypes.kt");

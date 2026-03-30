@@ -1,0 +1,22 @@
+FILE: typeInfoProxyInline.kt
+    package test
+
+    public final inline fun <reified T> proxy(): R|io/github/lukmccall/pika/TypeInfo| {
+        ^proxy R|io/github/lukmccall/pika/typeInfo|<R|T|>()
+    }
+    public final fun box(): R|kotlin/String| {
+        lval info: R|io/github/lukmccall/pika/TypeInfo| = R|test/proxy|<R|kotlin/String|>()
+        when () {
+            (R|<local>/info| !is R|io/github/lukmccall/pika/TypeInfo.Simple|) ->  {
+                ^box String(FAIL: should be Simple)
+            }
+        }
+
+        when () {
+            !=(R|<local>/info|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.String)) ->  {
+                ^box <strcat>(String(FAIL: expected kotlin.String got ), R|<local>/info|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|)
+            }
+        }
+
+        ^box String(OK)
+    }

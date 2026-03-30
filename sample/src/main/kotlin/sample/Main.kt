@@ -113,12 +113,42 @@ fun main() {
   println("Class types:")
   println("  typeInfo<User>(): ${formatTypeInfo(typeInfo<User>())}")
   println("  typeInfo<User?>(): ${formatTypeInfo(typeInfo<User?>())}")
+  println()
+
+  // Inline proxy function test
+  println("Inline proxy function (typeInfo through inline function):")
+  println("  proxy<String>(): ${formatTypeInfo(proxy<String>())}")
+  println("  proxy<List<Int?>>(): ${formatTypeInfo(proxy<List<Int?>>())}")
+  println()
+
+  // Inline nested proxy function test
+  println("Inline nested proxy function (typeInfo through inline function):")
+  println("  proxy2<String>(): ${formatTypeInfo(proxy2<String>())}")
+  println("  proxy2<List<Int?>>(): ${formatTypeInfo(proxy2<List<Int?>>())}")
+  println()
+
+  // generic function test (non-reified - throws exception)
+  println("generic function (typeInfo through non-reified generic function):")
+  try {
+    generic<String>()
+  } catch (e: IllegalStateException) {
+    println("  generic<String>(): Throws: ${e.message}")
+  }
 }
 
 /**
+ * Inline proxy function that calls typeInfo<T>().
+ * This tests that typeInfo works correctly through inline functions.
+ */
+inline fun <reified T> proxy(): TypeInfo = typeInfo<T>()
+inline fun <reified T> proxy2(): TypeInfo = proxy<T>()
+
+fun <T> generic(): TypeInfo? = typeInfo<T>()
+/**
  * Helper function to format TypeInfo for display.
  */
-fun formatTypeInfo(info: TypeInfo): String = when (info) {
+fun formatTypeInfo(info: TypeInfo?): String = when (info) {
+  null -> "null"
   is TypeInfo.Simple -> {
     val nullable = if (info.isNullable) "?" else ""
     "${info.typeName}$nullable"

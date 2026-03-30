@@ -2,7 +2,10 @@ package io.github.lukmccall.pika.runners
 
 import io.github.lukmccall.pika.services.configurePlugin
 import org.jetbrains.kotlin.test.FirParser
+import org.jetbrains.kotlin.test.backend.handlers.AsmLikeInstructionListingHandler
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
+import org.jetbrains.kotlin.test.builders.configureJvmArtifactsHandlersStep
+import org.jetbrains.kotlin.test.directives.AsmLikeInstructionListingDirectives
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives
 import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives
@@ -25,6 +28,7 @@ open class AbstractJvmBoxTest : AbstractFirBlackBoxCodegenTestBase(FirParser.Lig
      * - FirDiagnosticsDirectives
      * - CodegenTestDirectives
      * - JvmEnvironmentConfigurationDirectives
+     * - AsmLikeInstructionListingDirectives
      *
      * All of them are located in `org.jetbrains.kotlin.test.directives` package
      */
@@ -34,6 +38,11 @@ open class AbstractJvmBoxTest : AbstractFirBlackBoxCodegenTestBase(FirParser.Lig
       +JvmEnvironmentConfigurationDirectives.FULL_JDK
 
       +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
+    }
+
+    useDirectives(AsmLikeInstructionListingDirectives)
+    configureJvmArtifactsHandlersStep {
+      useHandlers(::AsmLikeInstructionListingHandler)
     }
 
     configurePlugin()
