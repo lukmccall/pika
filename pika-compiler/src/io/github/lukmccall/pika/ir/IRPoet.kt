@@ -2,6 +2,7 @@
 
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.Identifiers
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
@@ -11,6 +12,7 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
+import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -193,33 +195,6 @@ class IRPoet(
           varargElementType = type,
           elements = elements
         )
-      }
-    }
-
-    /**
-     * emptyList<{type}>()
-     */
-    fun emptyList(type: IrType): IrExpression {
-      val listType = irBuiltIns
-        .listClass
-        .typeWith(type)
-
-      val emptyList = symbolFinder
-        .kotlinStd
-        .collections
-        .emptyList
-        .single()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = listType,
-        symbol = emptyList,
-        typeArgumentsCount = 1,
-        origin = null,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = type
       }
     }
 
@@ -717,7 +692,6 @@ class IRPoet(
       properties: List<IrExpression>,
       functions: List<IrExpression>,
       baseClassExpr: IrExpression?,
-      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression {
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
       val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
@@ -756,5 +730,37 @@ class IRPoet(
         call.arguments[4] = baseClassExpr ?: kotlin.`null`()
       }
     }
+
+    fun pIntrospectionOf(instance: IrExpression, originalCall: IrCall): IrExpression {
+      val instanceType = instance.type as? IrSimpleType
+        ?: return originalCall
+
+      val irClass = instanceType.classOrNull?.owner
+        ?: return originalCall
+
+      // Find the __PIntrospectionData function on the class
+      val introspectionDataFunction = irClass.declarations
+        .filterIsInstance<IrSimpleFunction>()
+        .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        ?: return originalCall
+
+      // Build return type: PIntrospectionData<T>
+      val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
+      val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
+
+      return IrCallImpl(
+        startOffset = originalCall.startOffset,
+        endOffset = originalCall.endOffset,
+        type = returnType,
+        symbol = introspectionDataFunction.symbol,
+        typeArgumentsCount = 0,
+        origin = null,
+        superQualifierSymbol = null
+      ).apply {
+        dispatchReceiver = instance
+      }
+    }
+
+
   }
 }

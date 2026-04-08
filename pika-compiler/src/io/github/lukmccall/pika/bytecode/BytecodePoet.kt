@@ -201,7 +201,7 @@ class BytecodePoet(
     // Call throwNonReifiedPTypeDescriptorError() which throws at runtime if not inlined.
     // When inlined, removeReifyMarker() will remove this instruction.
     invokestatic(
-      "io/github/lukmccall/pika/TypeInfoKt",
+      "io/github/lukmccall/pika/PTypeDescriptorOfKt",
       "throwNonReifiedPTypeDescriptorError",
       "()Lio/github/lukmccall/pika/PTypeDescriptor;",
       false

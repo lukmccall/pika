@@ -1,3 +1,45 @@
+public abstract interface class io/github/lukmccall/pika/Introspectable {
+}
+
+public final class io/github/lukmccall/pika/PAnnotation {
+	public fun <init> (Lkotlin/reflect/KClass;Ljava/util/Map;)V
+	public final fun getArguments ()Ljava/util/Map;
+	public final fun getKClass ()Lkotlin/reflect/KClass;
+}
+
+public final class io/github/lukmccall/pika/PFunction {
+	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;)V
+	public final fun getName ()Ljava/lang/String;
+	public final fun getVisibility ()Lio/github/lukmccall/pika/PVisibility;
+}
+
+public final class io/github/lukmccall/pika/PIntrospectionData {
+	public fun <init> (Lkotlin/reflect/KClass;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;)V
+	public final fun getAnnotations ()Ljava/util/List;
+	public final fun getBaseClass ()Lio/github/lukmccall/pika/PIntrospectionData;
+	public final fun getFunctions ()Ljava/util/List;
+	public final fun getKClass ()Lkotlin/reflect/KClass;
+	public final fun getProperties ()Ljava/util/List;
+}
+
+public final class io/github/lukmccall/pika/PIntrospectionOfKt {
+	public static final fun pIntrospectionOf (Lio/github/lukmccall/pika/Introspectable;)Lio/github/lukmccall/pika/PIntrospectionData;
+}
+
+public final class io/github/lukmccall/pika/PProperty {
+	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;Ljava/util/List;Lio/github/lukmccall/pika/PTypeDescriptor;Lkotlin/jvm/functions/Function1;ZZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function1;)V
+	public final fun getAnnotations ()Ljava/util/List;
+	public final fun getDelegateGetter ()Lkotlin/jvm/functions/Function1;
+	public final fun getGetter ()Lkotlin/jvm/functions/Function1;
+	public final fun getHasBackingField ()Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getSetter ()Lkotlin/jvm/functions/Function2;
+	public final fun getType ()Lio/github/lukmccall/pika/PTypeDescriptor;
+	public final fun getVisibility ()Lio/github/lukmccall/pika/PVisibility;
+	public final fun isDelegated ()Z
+	public final fun isMutable ()Z
+}
+
 public final class io/github/lukmccall/pika/PType {
 	public fun <init> (Lkotlin/reflect/KClass;)V
 	public final fun getKClass ()Lkotlin/reflect/KClass;
@@ -24,8 +66,18 @@ public final class io/github/lukmccall/pika/PTypeDescriptor$Star : io/github/luk
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class io/github/lukmccall/pika/TypeInfoKt {
+public final class io/github/lukmccall/pika/PTypeDescriptorOfKt {
 	public static final fun pTypeDescriptorOf ()Lio/github/lukmccall/pika/PTypeDescriptor;
 	public static final fun throwNonReifiedPTypeDescriptorError ()Lio/github/lukmccall/pika/PTypeDescriptor;
+}
+
+public final class io/github/lukmccall/pika/PVisibility : java/lang/Enum {
+	public static final field INTERNAL Lio/github/lukmccall/pika/PVisibility;
+	public static final field PRIVATE Lio/github/lukmccall/pika/PVisibility;
+	public static final field PROTECTED Lio/github/lukmccall/pika/PVisibility;
+	public static final field PUBLIC Lio/github/lukmccall/pika/PVisibility;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/lukmccall/pika/PVisibility;
+	public static fun values ()[Lio/github/lukmccall/pika/PVisibility;
 }
 

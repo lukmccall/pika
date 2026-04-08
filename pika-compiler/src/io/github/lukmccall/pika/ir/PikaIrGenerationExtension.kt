@@ -9,18 +9,27 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class PikaIrGenerationExtension : IrGenerationExtension {
-  override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
+  override fun generate(
+    moduleFragment: IrModuleFragment,
+    pluginContext: IrPluginContext
+  ) {
     val symbolFinder = createSymbolFinder(pluginContext)
     val poet = IRPoet(pluginContext, symbolFinder)
 
-    // Generate __PIntrospectionData() for Introspectable classes first
-    // (must run before TypeInfoCallTransformer so pIntrospectionOf can find the function)
-    val introspectableTransformer = IntrospectableTransformer(pluginContext, poet, symbolFinder)
-    moduleFragment.transform(introspectableTransformer, null)
+    // Generate __PIntrospectionData() for Introspectable classes
+    val introspectableTransformer = IntrospectableTransformer(
+      pluginContext,
+      poet,
+      symbolFinder
+    )
 
     // Transform typeInfo calls (including pIntrospectionOf)
-    val typeInfoCallTransformer = TypeInfoCallTransformer(pluginContext, poet, symbolFinder)
-    moduleFragment.transform(typeInfoCallTransformer, null)
+    val typeInfoCallTransformer = TypeInfoCallTransformer(poet)
+
+    with(moduleFragment) {
+      transform(introspectableTransformer, data = null)
+      transform(typeInfoCallTransformer, data = null)
+    }
   }
 
   override fun getPlatformIntrinsicExtension(loweringContext: LoweringContext): IrIntrinsicExtension? {

@@ -65,7 +65,7 @@ class PikaJvmIrIntrinsicSupport(
 
     return when (fqName) {
       Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      "TypeInfoKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
+      "PTypeDescriptorOfKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
       else -> null
     }
   }

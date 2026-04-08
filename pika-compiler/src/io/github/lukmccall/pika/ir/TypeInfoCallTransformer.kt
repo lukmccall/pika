@@ -2,22 +2,17 @@
 
 package io.github.lukmccall.pika.ir
 
-import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import io.github.lukmccall.pika.Identifiers
+import io.github.lukmccall.pika.Identifiers.toFq
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.classOrNull
-import org.jetbrains.kotlin.ir.types.typeWith
-import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
-import org.jetbrains.kotlin.name.FqName
 
 /**
  * IR transformer that replaces calls to pTypeDescriptorOf<T>()
@@ -29,17 +24,8 @@ import org.jetbrains.kotlin.name.FqName
  * parameters are substituted with concrete types.
  */
 class TypeInfoCallTransformer(
-  private val context: IrPluginContext,
-  private val poet: IRPoet,
-  private val symbolFinder: SymbolFinder
+  private val poet: IRPoet
 ) : IrTransformer<Nothing?>() {
-
-  companion object {
-    private val PLUGIN_PACKAGE = FqName("io.github.lukmccall.pika")
-    private const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
-    private const val P_INTROSPECTION_OF_FUNCTION_NAME = "pIntrospectionOf"
-    private const val INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
-  }
 
   override fun visitCall(expression: IrCall, data: Nothing?): IrElement {
     expression.transformChildren(this, data)
@@ -52,7 +38,7 @@ class TypeInfoCallTransformer(
     }
 
     return when (functionName) {
-      P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
+      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
 
         // If the type argument is a type parameter, skip transformation.
@@ -62,45 +48,14 @@ class TypeInfoCallTransformer(
 
         poet.pika.pTypeDescriptor(typeArg)
       }
-      P_INTROSPECTION_OF_FUNCTION_NAME -> {
+
+      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
         val instanceArg = expression.arguments[0]
           ?: return expression
-        generateIntrospectionCall(instanceArg, expression)
+        poet.pika.pIntrospectionOf(instanceArg, expression)
       }
+
       else -> expression
-    }
-  }
-
-  /**
-   * Generate a call to instance.__PIntrospectionData()
-   */
-  private fun generateIntrospectionCall(instance: IrExpression, originalCall: IrCall): IrExpression {
-    val instanceType = instance.type as? IrSimpleType
-      ?: return originalCall
-
-    val irClass = instanceType.classOrNull?.owner
-      ?: return originalCall
-
-    // Find the __PIntrospectionData function on the class
-    val introspectionDataFunction = irClass.declarations
-      .filterIsInstance<IrSimpleFunction>()
-      .find { it.name.asString() == INTROSPECTION_DATA_FUNCTION_NAME }
-      ?: return originalCall
-
-    // Build return type: PIntrospectionData<T>
-    val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
-    val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
-
-    return IrCallImpl(
-      startOffset = originalCall.startOffset,
-      endOffset = originalCall.endOffset,
-      type = returnType,
-      symbol = introspectionDataFunction.symbol,
-      typeArgumentsCount = 0,
-      origin = null,
-      superQualifierSymbol = null
-    ).apply {
-      dispatchReceiver = instance
     }
   }
 
@@ -114,8 +69,9 @@ class TypeInfoCallTransformer(
 
   private fun isPluginCall(function: IrSimpleFunction): Boolean {
     val functionName = function.name.asString()
-    if (functionName != P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
-        functionName != P_INTROSPECTION_OF_FUNCTION_NAME) {
+    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
+      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
+    ) {
       return false
     }
     val packageFqName = function.parent.let { parent ->
@@ -124,7 +80,7 @@ class TypeInfoCallTransformer(
         else -> null
       }
     }
-    return packageFqName == PLUGIN_PACKAGE
+    return packageFqName == Identifiers.PACKAGE_NAME.toFq()
   }
 
 }
