@@ -17,13 +17,15 @@ val mainSourceDir = when {
 
 val testFixturesSourceDir = when {
   kotlinMinorVersion >= "2.3" -> "test-fixtures-2.3+"
-  kotlinMinorVersion >= "2.2" -> "test-fixtures-2.2"
+  kotlinVersionStr >= "2.2.20" -> "test-fixtures-2.2.20"
+  kotlinMinorVersion >= "2.2" -> "test-fixtures-2.2.0"
   else -> "test-fixtures-2.1"
 }
 
 val testDataDir = when {
   kotlinMinorVersion >= "2.3" -> "testData"
-  kotlinMinorVersion >= "2.2" -> "testData-2.2"
+  kotlinVersionStr >= "2.2.20" -> "testData-2.2.20"
+  kotlinMinorVersion >= "2.2" -> "testData-2.2.0"
   else -> "testData-2.1"
 }
 

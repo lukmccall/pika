@@ -14,6 +14,20 @@ annotation class MyAnnotation(val value: String)
 open class BaseEntity(open val id: String)
 
 /**
+ * Simple test class for Introspectable.
+ */
+open class SimplePerson(val name: String) : Introspectable
+
+/**
+ * Test class with delegated properties.
+ */
+class DelegatedExample : Introspectable {
+  val lazyValue by lazy { "computed lazily" }
+  val regularValue: String = "regular"
+  val computedValue: Int get() = 42
+}
+
+/**
  * Example class with various field types, annotations, and inheritance.
  */
 @MyAnnotation("user-class")
@@ -26,139 +40,134 @@ class User(
 ) : BaseEntity(id), Serializable
 
 fun main() {
-  println("=== fullTypeInfo<T>() Examples ===")
+  println("=== Introspectable Test ===")
   println()
+  val person = SimplePerson("Alice")
 
-  // Get full type information for User class
-  val userInfo: FullTypeInfo = fullTypeInfo<User>()
+  // Two equivalent ways to get introspection data:
+  // 1. Using the helper function (recommended)
+  val data = pIntrospectionOf(person)
+  // 2. Or directly: person.__PIntrospectionData()
 
-  println("Full Type Information for User:")
-  println("  Class: ${userInfo.className}")
-  println("  KClass: ${userInfo.kClass}")
-  println("  Is Nullable: ${userInfo.isNullable}")
-  println()
+  println("kClass: ${data.kClass}")
+  println("properties: ${data.properties.size}")
 
-  println("Class Annotations:")
-  if (userInfo.classAnnotations.isEmpty()) {
-    println("  (none)")
-  } else {
-    for (annotation in userInfo.classAnnotations) {
-      println("  - @${annotation.className}")
-      if (annotation.arguments.isNotEmpty()) {
-        println("    Arguments: ${annotation.arguments}")
-      }
-    }
+  for (prop in data.properties) {
+    println("  - ${prop.name}: getter(person)=${prop.getter(person)}")
   }
   println()
 
-  println("Inheritance:")
-  println("  Base Class: ${userInfo.baseClass?.className ?: "none"}")
-  if (userInfo.baseClass != null) {
-    println("    Base Class Fields: ${userInfo.baseClass!!.fields.map { it.name }}")
-  }
-  println("  Interfaces: ${userInfo.interfaces.map { it.simpleName }}")
-  println()
-
-  println("Fields (declared on User only):")
-  for (field in userInfo.fields) {
-    val visibilityStr = when (field.visibility) {
-      Visibility.PUBLIC -> "public"
-      Visibility.PRIVATE -> "private"
-      Visibility.PROTECTED -> "protected"
-      Visibility.INTERNAL -> "internal"
-    }
-    val mutabilityStr = if (field.isMutable) "var" else "val"
-    println("  - $visibilityStr $mutabilityStr ${field.name}: ${formatTypeInfo(field.typeInfo)}")
-    if (field.annotations.isNotEmpty()) {
-      for (annotation in field.annotations) {
-        println("      @${annotation.className}")
-      }
-    }
-  }
-  println()
-
-  println("=== typeInfo<T>() Examples (basic type info) ===")
+  println("=== pTypeDescriptorOf<T>() Examples (basic type info) ===")
   println()
 
   // Simple types
   println("Simple types:")
-  println("  typeInfo<String>(): ${formatTypeInfo(typeInfo<String>())}")
-  println("  typeInfo<Int>(): ${formatTypeInfo(typeInfo<Int>())}")
-  println("  typeInfo<Boolean>(): ${formatTypeInfo(typeInfo<Boolean>())}")
+  println("  pTypeDescriptorOf<String>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String>())}")
+  println("  pTypeDescriptorOf<Int>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int>())}")
+  println("  pTypeDescriptorOf<Boolean>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Boolean>())}")
   println()
 
   // Nullable types
   println("Nullable types:")
-  println("  typeInfo<Int?>(): ${formatTypeInfo(typeInfo<Int?>())}")
-  println("  typeInfo<String?>(): ${formatTypeInfo(typeInfo<String?>())}")
+  println("  pTypeDescriptorOf<Int?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int?>())}")
+  println("  pTypeDescriptorOf<String?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String?>())}")
   println()
 
   // Parameterized types
   println("Parameterized types:")
-  println("  typeInfo<List<String>>(): ${formatTypeInfo(typeInfo<List<String>>())}")
-  println("  typeInfo<Map<String, Int>>(): ${formatTypeInfo(typeInfo<Map<String, Int>>())}")
+  println("  pTypeDescriptorOf<List<String>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<String>>())}")
+  println("  pTypeDescriptorOf<Map<String, Int>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, Int>>())}")
   println()
 
   // Nested generics
   println("Nested generics:")
-  println("  typeInfo<Map<String, List<Int?>>>(): ${formatTypeInfo(typeInfo<Map<String, List<Int?>>>())}")
+  println("  pTypeDescriptorOf<Map<String, List<Int?>>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, List<Int?>>>())}")
   println()
 
   // Star projections
   println("Star projections:")
-  println("  typeInfo<List<*>>(): ${formatTypeInfo(typeInfo<List<*>>())}")
+  println("  pTypeDescriptorOf<List<*>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<*>>())}")
   println()
 
   // Class types
   println("Class types:")
-  println("  typeInfo<User>(): ${formatTypeInfo(typeInfo<User>())}")
-  println("  typeInfo<User?>(): ${formatTypeInfo(typeInfo<User?>())}")
+  println("  pTypeDescriptorOf<User>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User>())}")
+  println("  pTypeDescriptorOf<User?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User?>())}")
   println()
 
   // Inline proxy function test
-  println("Inline proxy function (typeInfo through inline function):")
-  println("  proxy<String>(): ${formatTypeInfo(proxy<String>())}")
-  println("  proxy<List<Int?>>(): ${formatTypeInfo(proxy<List<Int?>>())}")
+  println("Inline proxy function (pTypeDescriptorOf through inline function):")
+  println("  proxy<String>(): ${formatPTypeDescriptor(proxy<String>())}")
+  println("  proxy<List<Int?>>(): ${formatPTypeDescriptor(proxy<List<Int?>>())}")
   println()
 
   // Inline nested proxy function test
-  println("Inline nested proxy function (typeInfo through inline function):")
-  println("  proxy2<String>(): ${formatTypeInfo(proxy2<String>())}")
-  println("  proxy2<List<Int?>>(): ${formatTypeInfo(proxy2<List<Int?>>())}")
+  println("Inline nested proxy function (pTypeDescriptorOf through inline function):")
+  println("  proxy2<String>(): ${formatPTypeDescriptor(proxy2<String>())}")
+  println("  proxy2<List<Int?>>(): ${formatPTypeDescriptor(proxy2<List<Int?>>())}")
   println()
 
   // generic function test (non-reified - throws exception)
-  println("generic function (typeInfo through non-reified generic function):")
+  println("generic function (pTypeDescriptorOf through non-reified generic function):")
   try {
     generic<String>()
   } catch (e: IllegalStateException) {
     println("  generic<String>(): Throws: ${e.message}")
   }
+  println()
+
+  // Delegated properties test
+  println("=== Delegated Properties Test ===")
+  println()
+  val delegatedExample = DelegatedExample()
+  val delegatedData = pIntrospectionOf(delegatedExample)
+
+  for (prop in delegatedData.properties) {
+    println("  ${prop.name}:")
+    println("    isDelegated: ${prop.isDelegated}")
+    println("    hasBackingField: ${prop.hasBackingField}")
+    if (prop.isDelegated && prop.delegateGetter != null) {
+      val delegate = prop.delegateGetter!!(delegatedExample)
+      println("    delegate type: ${delegate?.let { it::class.simpleName }}")
+      if (delegate is Lazy<*>) {
+        println("    isInitialized: ${delegate.isInitialized()}")
+      }
+    }
+    println("    value: ${prop.getter(delegatedExample)}")
+    if (prop.isDelegated && prop.delegateGetter != null) {
+      val delegate = prop.delegateGetter!!(delegatedExample)
+      if (delegate is Lazy<*>) {
+        println("    isInitialized (after access): ${delegate.isInitialized()}")
+      }
+    }
+    println()
+  }
 }
 
 /**
- * Inline proxy function that calls typeInfo<T>().
- * This tests that typeInfo works correctly through inline functions.
+ * Inline proxy function that calls pTypeDescriptorOf<T>().
+ * This tests that pTypeDescriptorOf works correctly through inline functions.
  */
-inline fun <reified T> proxy(): TypeInfo = typeInfo<T>()
-inline fun <reified T> proxy2(): TypeInfo = proxy<T>()
+inline fun <reified T> proxy(): PTypeDescriptor = pTypeDescriptorOf<T>()
+inline fun <reified T> proxy2(): PTypeDescriptor = proxy<T>()
 
-fun <T> generic(): TypeInfo? = typeInfo<T>()
+fun <T> generic(): PTypeDescriptor = pTypeDescriptorOf<T>()
+
 /**
- * Helper function to format TypeInfo for display.
+ * Helper function to format PTypeDescriptor for display.
  */
-fun formatTypeInfo(info: TypeInfo?): String = when (info) {
+fun formatPTypeDescriptor(info: PTypeDescriptor?): String = when (info) {
   null -> "null"
-  is TypeInfo.Simple -> {
+  is PTypeDescriptor.Concrete.Parameterized -> {
     val nullable = if (info.isNullable) "?" else ""
-    "${info.typeName}$nullable"
+    val args = info.argumentsPTypes.joinToString(", ") { formatPTypeDescriptor(it) }
+    "${info.pType.kClass.qualifiedName}<$args>$nullable"
   }
 
-  is TypeInfo.Parameterized -> {
+  is PTypeDescriptor.Concrete -> {
     val nullable = if (info.isNullable) "?" else ""
-    val args = info.typeArguments.joinToString(", ") { formatTypeInfo(it) }
-    "${info.typeName}<$args>$nullable"
+    "${info.pType.kClass.qualifiedName}$nullable"
   }
 
-  is TypeInfo.Star -> "*"
+  is PTypeDescriptor.Star -> "*"
 }

@@ -11,40 +11,34 @@ FILE: typeInfoCustomClass.kt
 
     }
     public final fun box(): R|kotlin/String| {
-        lval personInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|test/Person|>()
+        lval personInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|test/Person|>()
         when () {
-            (R|<local>/personInfo| !is R|io/github/lukmccall/pika/TypeInfo.Simple|) ->  {
-                ^box String(FAIL: Person should be TypeInfo.Simple)
+            (R|<local>/personInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Person should be PTypeDescriptor.Concrete)
             }
         }
 
         when () {
-            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(test.Person)) ->  {
-                ^box <strcat>(String(FAIL: Person typeName expected test.Person but got ), R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|)
-            }
-        }
-
-        when () {
-            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.kClass|, <getClass>(Q|test/Person|)) ->  {
+            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|test/Person|)) ->  {
                 ^box String(FAIL: Person kClass)
             }
         }
 
         when () {
-            R|<local>/personInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.isNullable| ->  {
+            R|<local>/personInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable| ->  {
                 ^box String(FAIL: Person should not be nullable)
             }
         }
 
-        lval nullablePersonInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|test/Person?|>()
+        lval nullablePersonInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|test/Person?|>()
         when () {
-            (R|<local>/nullablePersonInfo| !is R|io/github/lukmccall/pika/TypeInfo.Simple|) ->  {
-                ^box String(FAIL: Person? should be TypeInfo.Simple)
+            (R|<local>/nullablePersonInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Person? should be PTypeDescriptor.Concrete)
             }
         }
 
         when () {
-            R|<local>/nullablePersonInfo|.R|io/github/lukmccall/pika/TypeInfo.Simple.isNullable|.R|kotlin/Boolean.not|() ->  {
+            R|<local>/nullablePersonInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable|.R|kotlin/Boolean.not|() ->  {
                 ^box String(FAIL: Person? should be nullable)
             }
         }

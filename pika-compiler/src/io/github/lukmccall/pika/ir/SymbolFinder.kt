@@ -15,20 +15,24 @@ class SymbolFinder(
   val pikaAPI = _PikaAPI()
 
   inner class _PikaAPI {
-    val typeInfo = _TypeInfo()
+    val pType by cachedReference(PikaAPI.PType)
+    val pTypeDescriptor = _PTypeDescriptor()
 
-    inner class _TypeInfo {
-      val root by cachedReference(PikaAPI.TypeInfo.Root)
+    inner class _PTypeDescriptor {
+      val root by cachedReference(PikaAPI.PTypeDescriptor.Root)
 
-      val simple by cachedReference(PikaAPI.TypeInfo.Simple)
-      val parameterized by cachedReference(PikaAPI.TypeInfo.Parameterized)
-      val star by cachedReference(PikaAPI.TypeInfo.Star)
+      val concrete by cachedReference(PikaAPI.PTypeDescriptor.Concrete)
+      val parameterized by cachedReference(PikaAPI.PTypeDescriptor.Parameterized)
+      val star by cachedReference(PikaAPI.PTypeDescriptor.Star)
     }
 
-    val fullTypedInfo by cachedReference(PikaAPI.FullTypeInfo)
-    val fullFieldInfo by cachedReference(PikaAPI.FullFieldInfo)
-    val annotationInfo by cachedReference(PikaAPI.AnnotationInfo)
-    val visibility by cachedReference(PikaAPI.Visibility)
+    // Introspectable types
+    val introspectable by cachedReference(PikaAPI.Introspectable)
+    val pVisibility by cachedReference(PikaAPI.PVisibility)
+    val pProperty by cachedReference(PikaAPI.PProperty)
+    val pFunction by cachedReference(PikaAPI.PFunction)
+    val pAnnotation by cachedReference(PikaAPI.PAnnotation)
+    val pIntrospectionData by cachedReference(PikaAPI.PIntrospectionData)
   }
 
   val kotlinStd = _KotlinStd()

@@ -6,13 +6,15 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
           ISTORE (1)
         LABEL (L1)
         LINENUMBER (17)
-          NEW (io/github/lukmccall/pika/TypeInfo$Simple)
+          NEW (io/github/lukmccall/pika/PTypeDescriptor$Concrete)
           DUP
-          LDC (kotlin.String)
+          NEW (io/github/lukmccall/pika/PType)
+          DUP
           LDC (Ljava/lang/String;)
           INVOKESTATIC (kotlin/jvm/internal/Reflection, getOrCreateKotlinClass, (Ljava/lang/Class;)Lkotlin/reflect/KClass;)
+          INVOKESPECIAL (io/github/lukmccall/pika/PType, <init>, (Lkotlin/reflect/KClass;)V)
           ICONST_0
-          INVOKESPECIAL (io/github/lukmccall/pika/TypeInfo$Simple, <init>, (Ljava/lang/String;Lkotlin/reflect/KClass;Z)V)
+          INVOKESPECIAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, <init>, (Lio/github/lukmccall/pika/PType;Z)V)
         LABEL (L2)
         LINENUMBER (11)
           ASTORE (0)
@@ -22,18 +24,21 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
         LABEL (L4)
         LINENUMBER (13)
           ALOAD (0)
-          INVOKEVIRTUAL (io/github/lukmccall/pika/TypeInfo$Simple, getTypeName, ()Ljava/lang/String;)
-          LDC (kotlin.String)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, getPType, ()Lio/github/lukmccall/pika/PType;)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getKClass, ()Lkotlin/reflect/KClass;)
+          LDC (Ljava/lang/String;)
+          INVOKESTATIC (kotlin/jvm/internal/Reflection, getOrCreateKotlinClass, (Ljava/lang/Class;)Lkotlin/reflect/KClass;)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, areEqual, (Ljava/lang/Object;Ljava/lang/Object;)Z)
           IFNE (L5)
           NEW (java/lang/StringBuilder)
           DUP
           INVOKESPECIAL (java/lang/StringBuilder, <init>, ()V)
-          LDC (FAIL: expected kotlin.String got )
+          LDC (FAIL: expected String::class got )
           INVOKEVIRTUAL (java/lang/StringBuilder, append, (Ljava/lang/String;)Ljava/lang/StringBuilder;)
           ALOAD (0)
-          INVOKEVIRTUAL (io/github/lukmccall/pika/TypeInfo$Simple, getTypeName, ()Ljava/lang/String;)
-          INVOKEVIRTUAL (java/lang/StringBuilder, append, (Ljava/lang/String;)Ljava/lang/StringBuilder;)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, getPType, ()Lio/github/lukmccall/pika/PType;)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getKClass, ()Lkotlin/reflect/KClass;)
+          INVOKEVIRTUAL (java/lang/StringBuilder, append, (Ljava/lang/Object;)Ljava/lang/StringBuilder;)
           INVOKEVIRTUAL (java/lang/StringBuilder, toString, ()Ljava/lang/String;)
           ARETURN
         LABEL (L5)
@@ -43,5 +48,5 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
         LABEL (L6)
     }
 
-    public final static io.github.lukmccall.pika.TypeInfo proxy()
+    public final static io.github.lukmccall.pika.PTypeDescriptor proxy()
 }

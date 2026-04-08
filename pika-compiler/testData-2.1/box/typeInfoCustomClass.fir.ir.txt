@@ -32,65 +32,52 @@ FILE fqName:test fileName:/typeInfoCustomClass.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:personInfo type:io.github.lukmccall.pika.TypeInfo [val]
-        CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-          typeName: CONST String type=kotlin.String value="test.Person"
-          kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+      VAR name:personInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
+        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+          pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
       WHEN type=kotlin.Unit origin=IF
         BRANCH
-          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-            GET_VAR 'val personInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+            GET_VAR 'val personInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Person should be TypeInfo.Simple"
+            CONST String type=kotlin.String value="FAIL: Person should be PTypeDescriptor.Concrete"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
-                $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-                  GET_VAR 'val personInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
-              arg1: CONST String type=kotlin.String value="test.Person"
-          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            STRING_CONCATENATION type=kotlin.String
-              CONST String type=kotlin.String value="FAIL: Person typeName expected test.Person but got "
-              CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
-                $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-                  GET_VAR 'val personInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
-      WHEN type=kotlin.Unit origin=IF
-        BRANCH
-          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
-            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
-                $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-                  GET_VAR 'val personInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
+                  $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+                    GET_VAR 'val personInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
               arg1: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Person kClass"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
-          if: CALL 'public final fun <get-isNullable> (): kotlin.Boolean declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.Boolean origin=GET_PROPERTY
-            $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-              GET_VAR 'val personInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+          if: CALL 'public final fun <get-isNullable> (): kotlin.Boolean declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+              GET_VAR 'val personInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Person should not be nullable"
-      VAR name:nullablePersonInfo type:io.github.lukmccall.pika.TypeInfo [val]
-        CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-          typeName: CONST String type=kotlin.String value="test.Person"
-          kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+      VAR name:nullablePersonInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
+        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+          pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
           isNullable: CONST Boolean type=kotlin.Boolean value=true
       WHEN type=kotlin.Unit origin=IF
         BRANCH
-          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-            GET_VAR 'val nullablePersonInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+            GET_VAR 'val nullablePersonInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Person? should be TypeInfo.Simple"
+            CONST String type=kotlin.String value="FAIL: Person? should be PTypeDescriptor.Concrete"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=null
-            $this: CALL 'public final fun <get-isNullable> (): kotlin.Boolean declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.Boolean origin=GET_PROPERTY
-              $this: TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-                GET_VAR 'val nullablePersonInfo: io.github.lukmccall.pika.TypeInfo declared in test.box' type=io.github.lukmccall.pika.TypeInfo origin=null
+            $this: CALL 'public final fun <get-isNullable> (): kotlin.Boolean declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=kotlin.Boolean origin=GET_PROPERTY
+              $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+                GET_VAR 'val nullablePersonInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Person? should be nullable"
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'

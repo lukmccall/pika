@@ -1,0 +1,284 @@
+FILE fqName:test fileName:/introspectableDelegated.kt
+  CLASS CLASS name:DelegatedProperties modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.DelegatedProperties
+    PROPERTY name:lazyValue visibility:public modality:FINAL [delegated,val]
+      FIELD PROPERTY_DELEGATE name:lazyValue$delegate type:kotlin.Lazy<kotlin.Int> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun lazy <T> (initializer: kotlin.Function0<T of kotlin.lazy>): kotlin.Lazy<T of kotlin.lazy> declared in kotlin' type=kotlin.Lazy<kotlin.Int> origin=null
+            <T>: kotlin.Int
+            initializer: FUN_EXPR type=kotlin.Function0<kotlin.Int> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Int declared in test.DelegatedProperties.lazyValue$delegate'
+                    CONST Int type=kotlin.Int value=42
+      FUN DELEGATED_PROPERTY_ACCESSOR name:<get-lazyValue> visibility:public modality:FINAL <> ($this:test.DelegatedProperties) returnType:kotlin.Int
+        correspondingProperty: PROPERTY name:lazyValue visibility:public modality:FINAL [delegated,val]
+        $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-lazyValue> (): kotlin.Int declared in test.DelegatedProperties'
+            CALL 'public final fun getValue <T> (thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>): T of kotlin.getValue declared in kotlin' type=kotlin.Int origin=null
+              <T>: kotlin.Int
+              $receiver: GET_FIELD 'FIELD PROPERTY_DELEGATE name:lazyValue$delegate type:kotlin.Lazy<kotlin.Int> visibility:private [final] declared in test.DelegatedProperties' type=kotlin.Lazy<kotlin.Int> origin=null
+                receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-lazyValue>' type=test.DelegatedProperties origin=null
+              thisRef: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-lazyValue>' type=test.DelegatedProperties origin=null
+              property: PROPERTY_REFERENCE 'public final lazyValue: kotlin.Int declared in test.DelegatedProperties' field=null getter='public final fun <get-lazyValue> (): kotlin.Int declared in test.DelegatedProperties' setter=null type=kotlin.reflect.KProperty1<test.DelegatedProperties, kotlin.Int> origin=PROPERTY_REFERENCE_FOR_DELEGATE
+    PROPERTY name:regularValue visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value="hello"
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-regularValue> visibility:public modality:FINAL <> ($this:test.DelegatedProperties) returnType:kotlin.String
+        correspondingProperty: PROPERTY name:regularValue visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-regularValue> (): kotlin.String declared in test.DelegatedProperties'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+              receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-regularValue>' type=test.DelegatedProperties origin=null
+    CONSTRUCTOR visibility:public <> () returnType:test.DelegatedProperties [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:DelegatedProperties modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.DelegatedProperties) returnType:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties>
+      $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.DelegatedProperties'
+          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
+            <OwnerType>: test.DelegatedProperties
+            kClass: CLASS_REFERENCE 'CLASS CLASS name:DelegatedProperties modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.DelegatedProperties>
+            annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PAnnotation
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+            properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Any?>> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Any?>
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Any?>
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Int> origin=null
+                  <OwnerType>: test.DelegatedProperties
+                  <Type>: kotlin.Int
+                  name: CONST String type=kotlin.String value="lazyValue"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.PAnnotation
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                    isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  getter: FUN_EXPR type=kotlin.Function1<test.DelegatedProperties, kotlin.Int> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Int
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.__PIntrospectionData'
+                          CALL 'public final fun <get-lazyValue> (): kotlin.Int declared in test.DelegatedProperties' type=kotlin.Int origin=GET_PROPERTY
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                  isMutable: CONST Boolean type=kotlin.Boolean value=false
+                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                  setter: FUN_EXPR type=kotlin.Function2<test.DelegatedProperties, kotlin.Lazy<kotlin.Int>, kotlin.Unit> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties, value:kotlin.Lazy<kotlin.Int>) returnType:kotlin.Unit
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      VALUE_PARAMETER name:value index:1 type:kotlin.Lazy<kotlin.Int>
+                      BLOCK_BODY
+                        SET_FIELD 'FIELD PROPERTY_DELEGATE name:lazyValue$delegate type:kotlin.Lazy<kotlin.Int> visibility:private [final] declared in test.DelegatedProperties' type=kotlin.Unit origin=null
+                          receiver: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                          value: GET_VAR 'value: kotlin.Lazy<kotlin.Int> declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=kotlin.Lazy<kotlin.Int> origin=null
+                  isDelegated: CONST Boolean type=kotlin.Boolean value=true
+                  delegateGetter: FUN_EXPR type=kotlin.Function1<test.DelegatedProperties, kotlin.Any?> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Any?
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Any? declared in test.DelegatedProperties.__PIntrospectionData'
+                          GET_FIELD 'FIELD PROPERTY_DELEGATE name:lazyValue$delegate type:kotlin.Lazy<kotlin.Int> visibility:private [final] declared in test.DelegatedProperties' type=kotlin.Lazy<kotlin.Int> origin=null
+                            receiver: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.String> origin=null
+                  <OwnerType>: test.DelegatedProperties
+                  <Type>: kotlin.String
+                  name: CONST String type=kotlin.String value="regularValue"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.PAnnotation
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                    isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  getter: FUN_EXPR type=kotlin.Function1<test.DelegatedProperties, kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.String
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.String declared in test.DelegatedProperties.__PIntrospectionData'
+                          CALL 'public final fun <get-regularValue> (): kotlin.String declared in test.DelegatedProperties' type=kotlin.String origin=GET_PROPERTY
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                  isMutable: CONST Boolean type=kotlin.Boolean value=false
+                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                  setter: FUN_EXPR type=kotlin.Function2<test.DelegatedProperties, kotlin.String, kotlin.Unit> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties, value:kotlin.String) returnType:kotlin.Unit
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      VALUE_PARAMETER name:value index:1 type:kotlin.String
+                      BLOCK_BODY
+                        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+                          receiver: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                  isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  delegateGetter: CONST Null type=kotlin.Nothing? value=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Int> origin=null
+                  <OwnerType>: test.DelegatedProperties
+                  <Type>: kotlin.Int
+                  name: CONST String type=kotlin.String value="computedValue"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.PAnnotation
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                    isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  getter: FUN_EXPR type=kotlin.Function1<test.DelegatedProperties, kotlin.Int> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Int
+                      VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.__PIntrospectionData'
+                          CALL 'public final fun <get-computedValue> (): kotlin.Int declared in test.DelegatedProperties' type=kotlin.Int origin=GET_PROPERTY
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.__PIntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                  isMutable: CONST Boolean type=kotlin.Boolean value=false
+                  hasBackingField: CONST Boolean type=kotlin.Boolean value=false
+                  setter: CONST Null type=kotlin.Nothing? value=null
+                  isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  delegateGetter: CONST Null type=kotlin.Nothing? value=null
+            functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PFunction
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+            baseClass: CONST Null type=kotlin.Nothing? value=null
+    PROPERTY name:computedValue visibility:public modality:FINAL [val]
+      FUN name:<get-computedValue> visibility:public modality:FINAL <> ($this:test.DelegatedProperties) returnType:kotlin.Int
+        correspondingProperty: PROPERTY name:computedValue visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-computedValue> (): kotlin.Int declared in test.DelegatedProperties'
+            CONST Int type=kotlin.Int value=100
+  FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:instance type:test.DelegatedProperties [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in test.DelegatedProperties' type=test.DelegatedProperties origin=null
+      VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> [val]
+        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.DelegatedProperties' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
+          $this: GET_VAR 'val instance: test.DelegatedProperties declared in test.box' type=test.DelegatedProperties origin=null
+      VAR name:lazyProp type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> [val]
+        BLOCK type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? origin=null
+              <T>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+              $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>> origin=GET_PROPERTY
+                $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PProperty' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+                        arg1: CONST String type=kotlin.String value="lazyValue"
+          WHEN type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_0: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: lazyValue not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_0: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+            $this: CALL 'public final fun <get-isDelegated> (): kotlin.Boolean declared in io.github.lukmccall.pika.PProperty' type=kotlin.Boolean origin=GET_PROPERTY
+              $this: GET_VAR 'val lazyProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: lazyValue should be delegated"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            arg0: CALL 'public final fun <get-delegateGetter> (): kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>? declared in io.github.lukmccall.pika.PProperty' type=kotlin.Function1<test.DelegatedProperties, kotlin.Any?>? origin=GET_PROPERTY
+              $this: GET_VAR 'val lazyProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+            arg1: CONST Null type=kotlin.Nothing? value=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: lazyValue should have delegateGetter"
+      VAR name:lazyDelegate type:kotlin.Any? [val]
+        CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.Any? origin=INVOKE
+          $this: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=kotlin.Function1<test.DelegatedProperties, kotlin.Any?> origin=EXCLEXCL
+            <T0>: kotlin.Function1<test.DelegatedProperties, kotlin.Any?>
+            arg0: CALL 'public final fun <get-delegateGetter> (): kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>? declared in io.github.lukmccall.pika.PProperty' type=kotlin.Function1<test.DelegatedProperties, kotlin.Any?>? origin=GET_PROPERTY
+              $this: GET_VAR 'val lazyProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+          p1: GET_VAR 'val instance: test.DelegatedProperties declared in test.box' type=test.DelegatedProperties origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=kotlin.Lazy<*>
+            GET_VAR 'val lazyDelegate: kotlin.Any? declared in test.box' type=kotlin.Any? origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: delegate should be Lazy"
+      VAR name:regularProp type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> [val]
+        CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=EXCLEXCL
+          <T0>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+          arg0: CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? origin=null
+            <T>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+            $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>> origin=GET_PROPERTY
+              $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
+            predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>, kotlin.Boolean> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>) returnType:kotlin.Boolean
+                VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>): kotlin.Boolean declared in test.box'
+                    CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                      arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PProperty' type=kotlin.String origin=GET_PROPERTY
+                        $this: GET_VAR 'it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+                      arg1: CONST String type=kotlin.String value="regularValue"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun <get-isDelegated> (): kotlin.Boolean declared in io.github.lukmccall.pika.PProperty' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: GET_VAR 'val regularProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: regularValue should not be delegated"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-delegateGetter> (): kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>? declared in io.github.lukmccall.pika.PProperty' type=kotlin.Function1<test.DelegatedProperties, kotlin.Any?>? origin=GET_PROPERTY
+                $this: GET_VAR 'val regularProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+              arg1: CONST Null type=kotlin.Nothing? value=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: regularValue delegateGetter should be null"
+      VAR name:computedProp type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> [val]
+        CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=EXCLEXCL
+          <T0>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+          arg0: CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? origin=null
+            <T>: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+            $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>> origin=GET_PROPERTY
+              $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
+            predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>, kotlin.Boolean> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>) returnType:kotlin.Boolean
+                VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>): kotlin.Boolean declared in test.box'
+                    CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                      arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PProperty' type=kotlin.String origin=GET_PROPERTY
+                        $this: GET_VAR 'it: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+                      arg1: CONST String type=kotlin.String value="computedValue"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun <get-isDelegated> (): kotlin.Boolean declared in io.github.lukmccall.pika.PProperty' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: GET_VAR 'val computedProp: io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: computedValue should not be delegated"
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+        CONST String type=kotlin.String value="OK"

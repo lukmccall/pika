@@ -2,6 +2,10 @@
 
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.Identifiers
+import io.github.lukmccall.pika.Identifiers.toFq
+import io.github.lukmccall.pika.Identifiers.withPackageName
+import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
@@ -109,6 +113,17 @@ private fun IrExpression?.constCopy(
     }
 
     else -> null
+  }
+}
 
+fun IrClass.implementsIntrospectable(): Boolean {
+  return superTypes.any { superType ->
+    val superClass = (superType as? IrSimpleType)?.classOrNull?.owner ?: return@any false
+
+    if (superClass.kotlinFqName == Identifiers.INTROSPECTABLE_INTERFACE_NAME.withPackageName().toFq()) {
+      return@any true
+    }
+
+    superClass.implementsIntrospectable()
   }
 }

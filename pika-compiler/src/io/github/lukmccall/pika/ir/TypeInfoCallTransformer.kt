@@ -2,20 +2,21 @@
 
 package io.github.lukmccall.pika.ir
 
-import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import io.github.lukmccall.pika.Identifiers
+import io.github.lukmccall.pika.Identifiers.toFq
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
-import org.jetbrains.kotlin.name.FqName
 
 /**
- * IR transformer that replaces calls to typeInfo<T>() and fullTypeInfo<T>() with constructed expressions.
+ * IR transformer that replaces calls to pTypeDescriptorOf<T>()
+ * and pIntrospectionOf(instance) with constructed expressions.
  *
  * Note: When the type argument is a type parameter (e.g., inside an inline function),
  * we skip transformation and leave the call intact. The JvmIrIntrinsicExtension will
@@ -23,15 +24,8 @@ import org.jetbrains.kotlin.name.FqName
  * parameters are substituted with concrete types.
  */
 class TypeInfoCallTransformer(
-  private val context: IrPluginContext,
   private val poet: IRPoet
 ) : IrTransformer<Nothing?>() {
-
-  companion object {
-    private val PLUGIN_PACKAGE = FqName("io.github.lukmccall.pika")
-    private const val TYPE_INFO_FUNCTION_NAME = "typeInfo"
-    private const val FULL_TYPE_INFO_FUNCTION_NAME = "fullTypeInfo"
-  }
 
   override fun visitCall(expression: IrCall, data: Nothing?): IrElement {
     expression.transformChildren(this, data)
@@ -43,18 +37,24 @@ class TypeInfoCallTransformer(
       return expression
     }
 
-    val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
-
-    // If the type argument is a type parameter, skip transformation.
-    // The JvmIrIntrinsicExtension will handle this call during codegen
-    // after inline functions are inlined and type parameters are substituted.
-    if (isTypeParameter(typeArg)) {
-      return expression
-    }
-
     return when (functionName) {
-      TYPE_INFO_FUNCTION_NAME -> poet.pika.typeInfo(typeArg)
-      FULL_TYPE_INFO_FUNCTION_NAME -> poet.pika.fullTypeInfo(typeArg, typeArg.isMarkedNullable())
+      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
+        val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
+
+        // If the type argument is a type parameter, skip transformation.
+        if (isTypeParameter(typeArg)) {
+          return expression
+        }
+
+        poet.pika.pTypeDescriptor(typeArg)
+      }
+
+      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
+        val instanceArg = expression.arguments[0]
+          ?: return expression
+        poet.pika.pIntrospectionOf(instanceArg, expression)
+      }
+
       else -> expression
     }
   }
@@ -67,12 +67,11 @@ class TypeInfoCallTransformer(
     return simpleType.classifier is IrTypeParameterSymbol
   }
 
-  private fun isPluginCall(function: org.jetbrains.kotlin.ir.declarations.IrSimpleFunction): Boolean {
+  private fun isPluginCall(function: IrSimpleFunction): Boolean {
     val functionName = function.name.asString()
-    if (functionName != TYPE_INFO_FUNCTION_NAME && functionName != FULL_TYPE_INFO_FUNCTION_NAME) {
-      return false
-    }
-    if (function.typeParameters.size != 1) {
+    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
+      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
+    ) {
       return false
     }
     val packageFqName = function.parent.let { parent ->
@@ -81,7 +80,7 @@ class TypeInfoCallTransformer(
         else -> null
       }
     }
-    return packageFqName == PLUGIN_PACKAGE
+    return packageFqName == Identifiers.PACKAGE_NAME.toFq()
   }
 
 }

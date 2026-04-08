@@ -21,27 +21,93 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
-  @TestMetadata("fullTypeInfoAnnotations.kt")
-  public void testFullTypeInfoAnnotations() {
-    runTest("pika-compiler/testData/box/fullTypeInfoAnnotations.kt");
+  @TestMetadata("introspectableAnnotations.kt")
+  public void testIntrospectableAnnotations() {
+    runTest("pika-compiler/testData/box/introspectableAnnotations.kt");
   }
 
   @Test
-  @TestMetadata("fullTypeInfoBasic.kt")
-  public void testFullTypeInfoBasic() {
-    runTest("pika-compiler/testData/box/fullTypeInfoBasic.kt");
+  @TestMetadata("introspectableBackingField.kt")
+  public void testIntrospectableBackingField() {
+    runTest("pika-compiler/testData/box/introspectableBackingField.kt");
   }
 
   @Test
-  @TestMetadata("fullTypeInfoFields.kt")
-  public void testFullTypeInfoFields() {
-    runTest("pika-compiler/testData/box/fullTypeInfoFields.kt");
+  @TestMetadata("introspectableBasic.kt")
+  public void testIntrospectableBasic() {
+    runTest("pika-compiler/testData/box/introspectableBasic.kt");
   }
 
   @Test
-  @TestMetadata("fullTypeInfoInheritance.kt")
-  public void testFullTypeInfoInheritance() {
-    runTest("pika-compiler/testData/box/fullTypeInfoInheritance.kt");
+  @TestMetadata("introspectableDataClass.kt")
+  public void testIntrospectableDataClass() {
+    runTest("pika-compiler/testData/box/introspectableDataClass.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableDelegated.kt")
+  public void testIntrospectableDelegated() {
+    runTest("pika-compiler/testData/box/introspectableDelegated.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableEmpty.kt")
+  public void testIntrospectableEmpty() {
+    runTest("pika-compiler/testData/box/introspectableEmpty.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableFunctions.kt")
+  public void testIntrospectableFunctions() {
+    runTest("pika-compiler/testData/box/introspectableFunctions.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableIndirectInheritance.kt")
+  public void testIntrospectableIndirectInheritance() {
+    runTest("pika-compiler/testData/box/introspectableIndirectInheritance.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableInheritance.kt")
+  public void testIntrospectableInheritance() {
+    runTest("pika-compiler/testData/box/introspectableInheritance.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableObject.kt")
+  public void testIntrospectableObject() {
+    runTest("pika-compiler/testData/box/introspectableObject.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableSetterComputed.kt")
+  public void testIntrospectableSetterComputed() {
+    runTest("pika-compiler/testData/box/introspectableSetterComputed.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableSetterVal.kt")
+  public void testIntrospectableSetterVal() {
+    runTest("pika-compiler/testData/box/introspectableSetterVal.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableValVsVar.kt")
+  public void testIntrospectableValVsVar() {
+    runTest("pika-compiler/testData/box/introspectableValVsVar.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableVisibility.kt")
+  public void testIntrospectableVisibility() {
+    runTest("pika-compiler/testData/box/introspectableVisibility.kt");
+  }
+
+  @Test
+  @TestMetadata("pIntrospectionOf.kt")
+  public void testPIntrospectionOf() {
+    runTest("pika-compiler/testData/box/pIntrospectionOf.kt");
   }
 
   @Test

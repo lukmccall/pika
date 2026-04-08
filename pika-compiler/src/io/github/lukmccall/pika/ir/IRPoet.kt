@@ -2,11 +2,17 @@
 
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.Identifiers
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
+import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
+import org.jetbrains.kotlin.ir.builders.declarations.buildFun
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
+import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -16,9 +22,8 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.defaultType
-import org.jetbrains.kotlin.ir.util.isInterface
-import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.primaryConstructor
+import org.jetbrains.kotlin.name.Name
 
 class IRPoet(
   context: IrPluginContext,
@@ -194,33 +199,6 @@ class IRPoet(
     }
 
     /**
-     * emptyList<{type}>()
-     */
-    fun emptyList(type: IrType): IrExpression {
-      val listType = irBuiltIns
-        .listClass
-        .typeWith(type)
-
-      val emptyList = symbolFinder
-        .kotlinStd
-        .collections
-        .emptyList
-        .single()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = listType,
-        symbol = emptyList,
-        typeArgumentsCount = 1,
-        origin = null,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = type
-      }
-    }
-
-    /**
      * KClass<{classSymbol}>
      */
     fun kClass(classSymbol: IrClassSymbol): IrExpression {
@@ -243,9 +221,127 @@ class IRPoet(
 
   inner class Pika {
     /**
-     * io.github.lukmccall.pika.Visibility.{value}
+     * io.github.lukmccall.pika.PTypeDescriptor.Star
      */
-    fun visibility(value: DescriptorVisibility): IrExpression {
+    fun star(): IrExpression {
+      val pTypeDescriptorStarClass = symbolFinder.pikaAPI.pTypeDescriptor.star
+
+      return IrGetObjectValueImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pTypeDescriptorStarClass.owner.defaultType,
+        symbol = pTypeDescriptorStarClass
+      )
+    }
+
+    /**
+     * io.github.lukmccall.pika.PType({KClass<{classSymbol}>})
+     */
+    fun pType(classSymbol: IrClassSymbol): IrExpression {
+      val pTypeClass = symbolFinder.pikaAPI.pType
+
+      val constructor = pTypeClass.owner.primaryConstructor
+        ?: error("PType must have a primary constructor")
+
+      return IrConstructorCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pTypeClass.owner.defaultType,
+        symbol = constructor.symbol,
+        typeArgumentsCount = 0,
+        constructorTypeArgumentsCount = 0,
+        origin = null
+      ).also { call ->
+        call.arguments[0] = kotlin.kClass(classSymbol)
+      }
+    }
+
+    /**
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable})
+     */
+    fun concrete(
+      classSymbol: IrClassSymbol,
+      isNullable: Boolean
+    ): IrExpression {
+      val pTypeDescriptorConcreteClass = symbolFinder.pikaAPI.pTypeDescriptor.concrete
+
+      val constructor = pTypeDescriptorConcreteClass.owner.primaryConstructor
+        ?: error("PTypeDescriptor.Concrete must have a primary constructor")
+
+      return IrConstructorCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pTypeDescriptorConcreteClass.owner.defaultType,
+        symbol = constructor.symbol,
+        typeArgumentsCount = 0,
+        constructorTypeArgumentsCount = 0,
+        origin = null
+      ).also { call ->
+        call.arguments[0] = pType(classSymbol)
+        call.arguments[1] = kotlin.bool(isNullable)
+      }
+    }
+
+    /**
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
+     *   {PType({classSymbol})},
+     *   {isNullable},
+     *   {listOf({argumentsPTypes})}
+     * )
+     */
+    fun parameterized(
+      classSymbol: IrClassSymbol,
+      isNullable: Boolean,
+      argumentsPTypes: List<IrExpression>
+    ): IrExpression {
+      val pTypeDescriptorParameterizedClass = symbolFinder.pikaAPI.pTypeDescriptor.parameterized
+      val pTypeDescriptorClass = symbolFinder.pikaAPI.pTypeDescriptor.root
+
+      val constructor = pTypeDescriptorParameterizedClass.owner.primaryConstructor
+        ?: error("PTypeDescriptor.Concrete.Parameterized must have a primary constructor")
+
+      return IrConstructorCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pTypeDescriptorParameterizedClass.owner.defaultType,
+        symbol = constructor.symbol,
+        typeArgumentsCount = 0,
+        constructorTypeArgumentsCount = 0,
+        origin = null
+      ).also { call ->
+        call.arguments[0] = pType(classSymbol)
+        call.arguments[1] = kotlin.bool(isNullable)
+        call.arguments[2] = kotlin.listOf(pTypeDescriptorClass.owner.defaultType, argumentsPTypes)
+      }
+    }
+
+    /**
+     * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
+     */
+    fun pTypeDescriptor(type: IrType): IrExpression {
+      val simpleType = type as? IrSimpleType
+        ?: return pika.concrete(irBuiltIns.anyClass, false)
+
+      val classifier = simpleType.classifier
+      val isNullable = simpleType.isMarkedNullable()
+
+      return if (simpleType.arguments.isEmpty()) {
+        pika.concrete(classifier as IrClassSymbol, isNullable)
+      } else {
+        val typeArgInfos = simpleType.arguments.map { arg ->
+          when (arg) {
+            is IrTypeProjection -> pTypeDescriptor(arg.type)
+            is IrStarProjection -> pika.star()
+          }
+        }
+        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos)
+      }
+    }
+
+    /**
+     * io.github.lukmccall.pika.PVisibility.{value}
+     */
+    fun pVisibility(value: DescriptorVisibility): IrExpression {
       val visibility = when (value) {
         DescriptorVisibilities.PUBLIC -> "PUBLIC"
         DescriptorVisibilities.PRIVATE -> "PRIVATE"
@@ -254,274 +350,417 @@ class IRPoet(
         else -> "PUBLIC"
       }
 
-      val visibilityEnumClass = symbolFinder.pikaAPI.visibility
+      val pVisibilityEnumClass = symbolFinder.pikaAPI.pVisibility
 
-      val enumEntry = visibilityEnumClass
+      val enumEntry = pVisibilityEnumClass
         .owner
         .declarations
         .filterIsInstance<org.jetbrains.kotlin.ir.declarations.IrEnumEntry>()
         .find { it.name.asString() == visibility }
-        ?: error("Cannot find Visibility.$value")
+        ?: error("Cannot find PVisibility.$value")
 
       return IrGetEnumValueImpl(
         startOffset = -1,
         endOffset = -1,
-        type = visibilityEnumClass.owner.defaultType,
+        type = pVisibilityEnumClass.owner.defaultType,
         symbol = enumEntry.symbol
       )
     }
 
     /**
-     * io.github.lukmccall.pika.TypeInfo.Star
+     * io.github.lukmccall.pika.PAnnotation({kClass}, mapOf({annotationArgs}))
      */
-    fun star(): IrExpression {
-      val typeInfoStarClass = symbolFinder.pikaAPI.typeInfo.star
-
-      return IrGetObjectValueImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = typeInfoStarClass.owner.defaultType,
-        symbol = typeInfoStarClass
-      )
-    }
-
-    /**
-     * io.github.lukmccall.pika.TypeInfo.Simple({typeName}, {KClass<{classSymbol}>}, {isNullable})
-     */
-    fun simple(
-      typeName: String,
-      classSymbol: IrClassSymbol,
-      isNullable: Boolean
-    ): IrExpression {
-      val typeInfoSimpleClass = symbolFinder.pikaAPI.typeInfo.simple
-
-      val constructor = typeInfoSimpleClass.owner.primaryConstructor
-        ?: error("TypeInfo.Simple must have a primary constructor")
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = typeInfoSimpleClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = kotlin.string(typeName)
-        call.arguments[1] = kotlin.kClass(classSymbol)
-        call.arguments[2] = kotlin.bool(isNullable)
-      }
-    }
-
-    /**
-     * io.github.lukmccall.pika.TypeInfo.Parameterized(
-     *   {typeName},
-     *   {KClass<{classSymbol}>},
-     *   {isNullable},
-     *   {listOf({typeArguments)}
-     * )
-     */
-    fun parameterized(
-      typeName: String,
-      classSymbol: IrClassSymbol,
-      isNullable: Boolean,
-      typeArguments: List<IrExpression>
-    ): IrExpression {
-      val typeInfoParameterizedClass = symbolFinder.pikaAPI.typeInfo.parameterized
-      val typeInfoClass = symbolFinder.pikaAPI.typeInfo.root
-
-      val constructor = typeInfoParameterizedClass.owner.primaryConstructor
-        ?: error("TypeInfo.Parameterized must have a primary constructor")
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = typeInfoParameterizedClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = kotlin.string(typeName)
-        call.arguments[1] = kotlin.kClass(classSymbol)
-        call.arguments[2] = kotlin.bool(isNullable)
-        call.arguments[3] = kotlin.listOf(typeInfoClass.owner.defaultType, typeArguments)
-      }
-    }
-
-    /**
-     * IrType -> io.github.lukmccall.pika.TypeInfo.*
-     */
-    fun typeInfo(type: IrType): IrExpression {
-      val simpleType = type as? IrSimpleType
-        ?: return pika.simple("Unknown", irBuiltIns.anyClass, false)
-
-      val classifier = simpleType.classifier
-      val irClass = classifier.owner as? IrClass
-      val typeName = irClass?.kotlinFqName?.asString() ?: "Unknown"
-      val isNullable = simpleType.isMarkedNullable()
-
-      return if (simpleType.arguments.isEmpty()) {
-        pika.simple(typeName, classifier as IrClassSymbol, isNullable)
-      } else {
-        val typeArgInfos = simpleType.arguments.map { arg ->
-          when (arg) {
-            is IrTypeProjection -> typeInfo(arg.type)
-            is IrStarProjection -> pika.star()
-          }
-        }
-        pika.parameterized(typeName, classifier as IrClassSymbol, isNullable, typeArgInfos)
-      }
-    }
-
-    /**
-     * example.Annotation -> io.github.lukmccall.pika.AnnotationInfo({annotationName}, KClass<{annotation}>, mapOf({annotationArgs})
-     */
-    fun annotationInfo(
-      annotation: IrConstructorCall
-    ): IrExpression {
+    fun pAnnotation(annotation: IrConstructorCall): IrExpression {
       val annotationClass = annotation.type.classOrNull?.owner
-      val className = annotationClass?.kotlinFqName?.asString() ?: "Unknown"
 
-      val annotationInfoClass = symbolFinder.pikaAPI.annotationInfo
+      val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
 
-      val constructor = annotationInfoClass.owner.primaryConstructor
-        ?: error("AnnotationInfo must have a primary constructor")
+      val constructor = pAnnotationClass.owner.primaryConstructor
+        ?: error("PAnnotation must have a primary constructor")
 
       val argumentsMap = annotation.toArgsMap(this@IRPoet)
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = annotationInfoClass.owner.defaultType,
+        type = pAnnotationClass.owner.defaultType,
         symbol = constructor.symbol,
         typeArgumentsCount = 0,
         constructorTypeArgumentsCount = 0,
         origin = null
       ).also { call ->
-        call.arguments[0] = kotlin.string(className)
-        call.arguments[1] = kotlin.kClass(
+        call.arguments[0] = kotlin.kClass(
           annotationClass?.symbol ?: irBuiltIns.anyClass
         )
-        call.arguments[2] = argumentsMap
+        call.arguments[1] = argumentsMap
       }
     }
 
     /**
-     * IrProperty -> io.github.lukmccall.pika.FullFieldInfo
+     * io.github.lukmccall.pika.PFunction({name}, {visibility})
      */
-    fun fullFieldInfo(
-      property: IrProperty
+    fun pFunction(function: IrSimpleFunction): IrExpression {
+      val pFunctionClass = symbolFinder.pikaAPI.pFunction
+
+      val constructor = pFunctionClass.owner.primaryConstructor
+        ?: error("PFunction must have a primary constructor")
+
+      return IrConstructorCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pFunctionClass.owner.defaultType,
+        symbol = constructor.symbol,
+        typeArgumentsCount = 0,
+        constructorTypeArgumentsCount = 0,
+        origin = null
+      ).also { call ->
+        call.arguments[0] = kotlin.string(function.name.asString())
+        call.arguments[1] = pika.pVisibility(function.visibility)
+      }
+    }
+
+    /**
+     * Creates a getter lambda: { owner -> owner.propertyName }
+     */
+    fun propertyGetterLambda(
+      property: IrProperty,
+      ownerClass: IrClass,
+      containingFunction: IrSimpleFunction,
+      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression {
-      val propertyType = property
-        .getter
-        ?.returnType
+      val propertyType = property.getter?.returnType
         ?: property.backingField?.type
         ?: irBuiltIns.anyNType
 
-      val fullFieldInfoClass = symbolFinder.pikaAPI.fullFieldInfo
-      val annotationInfoClass = symbolFinder.pikaAPI.annotationInfo
+      val ownerType = ownerClass.defaultType
 
-      val constructor = fullFieldInfoClass.owner.primaryConstructor
-        ?: error("FullFieldInfo must have a primary constructor")
+      // Create Function1<OwnerType, PropertyType>
+      val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, propertyType)
+
+      val lambdaFunction = irFactory.buildFun {
+        name = Name.special("<anonymous>")
+        returnType = propertyType
+        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        visibility = DescriptorVisibilities.LOCAL
+      }.apply {
+        parent = containingFunction
+        val ownerParam = addValueParameter("owner", ownerType)
+
+        val returnValue = if (property.getter != null) {
+          // Call the getter
+          IrCallImpl(
+            startOffset = -1,
+            endOffset = -1,
+            type = propertyType,
+            symbol = property.getter!!.symbol,
+            typeArgumentsCount = 0,
+            origin = IrStatementOrigin.GET_PROPERTY,
+            superQualifierSymbol = null
+          ).apply {
+            dispatchReceiver = IrGetValueImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = ownerType,
+              symbol = ownerParam.symbol
+            )
+          }
+        } else {
+          // Access backing field directly
+          IrGetFieldImpl(
+            startOffset = -1,
+            endOffset = -1,
+            symbol = property.backingField!!.symbol,
+            type = propertyType,
+            receiver = IrGetValueImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = ownerType,
+              symbol = ownerParam.symbol
+            )
+          )
+        }
+
+        body = irFactory.createBlockBody(-1, -1).apply {
+          statements.add(
+            IrReturnImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = irBuiltIns.nothingType,
+              returnTargetSymbol = symbol,
+              value = returnValue
+            )
+          )
+        }
+      }
+
+      return IrFunctionExpressionImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = function1Type,
+        function = lambdaFunction,
+        origin = IrStatementOrigin.LAMBDA
+      )
+    }
+
+    /**
+     * Creates a setter lambda: { owner, value -> owner.<backing-field> = value }
+     * Returns null if property has no backing field.
+     */
+    fun propertySetterLambda(
+      property: IrProperty,
+      ownerClass: IrClass,
+      containingFunction: IrSimpleFunction,
+      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+    ): IrExpression? {
+      val backingField = property.backingField ?: return null
+
+      val propertyType = backingField.type
+      val ownerType = ownerClass.defaultType
+
+      // Create Function2<OwnerType, PropertyType, Unit>
+      val function2Type = irBuiltIns.functionN(2).typeWith(ownerType, propertyType, irBuiltIns.unitType)
+
+      val lambdaFunction = irFactory.buildFun {
+        name = Name.special("<anonymous>")
+        returnType = irBuiltIns.unitType
+        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        visibility = DescriptorVisibilities.LOCAL
+      }.apply {
+        parent = containingFunction
+        val ownerParam = addValueParameter("owner", ownerType)
+        val valueParam = addValueParameter("value", propertyType)
+
+        body = irFactory.createBlockBody(-1, -1).apply {
+          statements.add(
+            IrSetFieldImpl(
+              startOffset = -1,
+              endOffset = -1,
+              symbol = backingField.symbol,
+              receiver = IrGetValueImpl(
+                startOffset = -1,
+                endOffset = -1,
+                type = ownerType,
+                symbol = ownerParam.symbol
+              ),
+              value = IrGetValueImpl(
+                startOffset = -1,
+                endOffset = -1,
+                type = propertyType,
+                symbol = valueParam.symbol
+              ),
+              type = irBuiltIns.unitType
+            )
+          )
+        }
+      }
+
+      return IrFunctionExpressionImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = function2Type,
+        function = lambdaFunction,
+        origin = IrStatementOrigin.LAMBDA
+      )
+    }
+
+    /**
+     * Creates a delegate getter lambda: { owner -> owner.<delegate_backing_field> }
+     * Returns null if property is not delegated.
+     */
+    fun delegateGetterLambda(
+      property: IrProperty,
+      ownerClass: IrClass,
+      containingFunction: IrSimpleFunction,
+      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+    ): IrExpression? {
+      if (!property.isDelegated) return null
+      val backingField = property.backingField ?: return null
+
+      val delegateType = backingField.type
+      val ownerType = ownerClass.defaultType
+
+      // Function1<OwnerType, Any?>
+      val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, irBuiltIns.anyNType)
+
+      val lambdaFunction = irFactory.buildFun {
+        name = Name.special("<anonymous>")
+        returnType = irBuiltIns.anyNType
+        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        visibility = DescriptorVisibilities.LOCAL
+      }.apply {
+        parent = containingFunction
+        val ownerParam = addValueParameter("owner", ownerType)
+
+        val returnValue = IrGetFieldImpl(
+          startOffset = -1,
+          endOffset = -1,
+          symbol = backingField.symbol,
+          type = delegateType,
+          receiver = IrGetValueImpl(
+            startOffset = -1,
+            endOffset = -1,
+            type = ownerType,
+            symbol = ownerParam.symbol
+          )
+        )
+
+        body = irFactory.createBlockBody(-1, -1).apply {
+          statements.add(
+            IrReturnImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = irBuiltIns.nothingType,
+              returnTargetSymbol = symbol,
+              value = returnValue
+            )
+          )
+        }
+      }
+
+      return IrFunctionExpressionImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = function1Type,
+        function = lambdaFunction,
+        origin = IrStatementOrigin.LAMBDA
+      )
+    }
+
+    /**
+     * io.github.lukmccall.pika.PProperty(...)
+     */
+    fun pProperty(
+      property: IrProperty,
+      ownerClass: IrClass,
+      containingFunction: IrSimpleFunction,
+      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+    ): IrExpression {
+      val propertyType = property.getter?.returnType
+        ?: property.backingField?.type
+        ?: irBuiltIns.anyNType
+
+      val pPropertyClass = symbolFinder.pikaAPI.pProperty
+      val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
+
+      val constructor = pPropertyClass.owner.primaryConstructor
+        ?: error("PProperty must have a primary constructor")
 
       val annotations = property.annotations.map { annotation ->
-        pika.annotationInfo(annotation)
+        pika.pAnnotation(annotation)
       }
+
+      val hasBackingField = property.backingField != null
+      val getterLambda = propertyGetterLambda(property, ownerClass, containingFunction, irFactory)
+      val setterLambda = propertySetterLambda(property, ownerClass, containingFunction, irFactory)
+      val isDelegated = property.isDelegated
+      val delegateLambda = delegateGetterLambda(property, ownerClass, containingFunction, irFactory)
+
+      val ownerType = ownerClass.defaultType
+
+      // PProperty<OwnerType, Type>
+      val pPropertyType = pPropertyClass.typeWith(ownerType, propertyType)
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = fullFieldInfoClass.owner.defaultType,
+        type = pPropertyType,
         symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
+        typeArgumentsCount = 2,
+        constructorTypeArgumentsCount = 2,
         origin = null
       ).also { call ->
+        call.typeArguments[0] = ownerType
+        call.typeArguments[1] = propertyType
         call.arguments[0] = kotlin.string(property.name.asString())
-        call.arguments[1] = pika.typeInfo(propertyType)
-        call.arguments[2] = kotlin.listOf(
-          type = annotationInfoClass.owner.defaultType,
-          elements = annotations
-        )
-        call.arguments[3] = pika.visibility(property.visibility)
-        call.arguments[4] = kotlin.bool(property.isVar)
+        call.arguments[1] = pika.pVisibility(property.visibility)
+        call.arguments[2] = kotlin.listOf(pAnnotationClass.owner.defaultType, annotations)
+        call.arguments[3] = pika.pTypeDescriptor(propertyType)
+        call.arguments[4] = getterLambda
+        call.arguments[5] = kotlin.bool(property.isVar)
+        call.arguments[6] = kotlin.bool(hasBackingField)
+        call.arguments[7] = setterLambda ?: kotlin.`null`()
+        call.arguments[8] = kotlin.bool(isDelegated)
+        call.arguments[9] = delegateLambda ?: kotlin.`null`()
       }
     }
 
     /**
-     * IrType -> io.github.lukmccall.pika.FullTypeInfo
+     * io.github.lukmccall.pika.PIntrospectionData(...)
      */
-    fun fullTypeInfo(type: IrType, isNullable: Boolean): IrExpression {
-      val simpleType = type as? IrSimpleType
-        ?: error("TypeInfo.Parameterized must have a simple type")
+    fun pIntrospectionData(
+      irClass: IrClass,
+      properties: List<IrExpression>,
+      functions: List<IrExpression>,
+      baseClassExpr: IrExpression?,
+    ): IrExpression {
+      val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
+      val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
+      val pPropertyClass = symbolFinder.pikaAPI.pProperty
+      val pFunctionClass = symbolFinder.pikaAPI.pFunction
 
-      val classifier = simpleType.classifier
-      val irClass = classifier.owner as? IrClass
-        ?: error("TypeInfo.Parameterized must have a class")
+      val constructor = pIntrospectionDataClass.owner.primaryConstructor
+        ?: error("PIntrospectionData must have a primary constructor")
 
-      val className = irClass.kotlinFqName.asString()
-
-      // Build field info only for properties declared directly on this class
-      val properties = irClass.declarations.filterIsInstance<IrProperty>()
-      val fieldInfoList = properties.map { property ->
-        pika.fullFieldInfo(property)
-      }
-
-      val interfaceKClasses = mutableListOf<IrExpression>()
-
-      val superTypes = irClass
-        .superTypes
-        .filterIsInstance<IrSimpleType>()
-
-      interfaceKClasses.addAll(
-        superTypes
-          .filter { it.isInterface() }
-          .mapNotNull { it.classOrNull?.owner }
-          .map { kotlin.kClass(it.symbol) }
-      )
-
-      val baseClass = superTypes
-        .singleOrNull { !it.isInterface() && !it.isAny() }
-
-      val baseClassInfo = if (baseClass != null) {
-        pika.fullTypeInfo(baseClass, false)
-      } else {
-        kotlin.`null`()
-      }
-
-      // Build class annotations
       val classAnnotations = irClass.annotations.map { annotation ->
-        pika.annotationInfo(annotation)
+        pika.pAnnotation(annotation)
       }
 
-      val fullTypeInfoClass = symbolFinder.pikaAPI.fullTypedInfo
-      val fullFieldInfoClass = symbolFinder.pikaAPI.fullFieldInfo
-      val annotationInfoClass = symbolFinder.pikaAPI.annotationInfo
+      val ownerType = irClass.defaultType
 
-      val constructor = fullTypeInfoClass.owner.primaryConstructor
-        ?: error("FullTypeInfo must have a primary constructor")
+      // PIntrospectionData<OwnerType>
+      val pIntrospectionDataType = pIntrospectionDataClass.typeWith(ownerType)
 
-      val kClassStarType = irBuiltIns.kClassClass.typeWith(irBuiltIns.anyNType)
+      // PProperty<OwnerType, *> (use star projection for the list)
+      val pPropertyStarType = pPropertyClass.typeWith(ownerType, irBuiltIns.anyNType)
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = fullTypeInfoClass.owner.defaultType,
+        type = pIntrospectionDataType,
         symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
+        typeArgumentsCount = 1,
+        constructorTypeArgumentsCount = 1,
         origin = null
       ).also { call ->
-        call.arguments[0] = kotlin.string(className)
-        call.arguments[1] = kotlin.kClass(classifier as IrClassSymbol)
-        call.arguments[2] = kotlin.listOf(fullFieldInfoClass.owner.defaultType, fieldInfoList)
-        call.arguments[3] = baseClassInfo
-        call.arguments[4] = kotlin.listOf(kClassStarType, interfaceKClasses)
-        call.arguments[5] = kotlin.listOf(annotationInfoClass.owner.defaultType, classAnnotations)
-        call.arguments[6] = kotlin.bool(isNullable)
+        call.typeArguments[0] = ownerType
+        call.arguments[0] = kotlin.kClass(irClass.symbol)
+        call.arguments[1] = kotlin.listOf(pAnnotationClass.owner.defaultType, classAnnotations)
+        call.arguments[2] = kotlin.listOf(pPropertyStarType, properties)
+        call.arguments[3] = kotlin.listOf(pFunctionClass.owner.defaultType, functions)
+        call.arguments[4] = baseClassExpr ?: kotlin.`null`()
       }
     }
+
+    fun pIntrospectionOf(instance: IrExpression, originalCall: IrCall): IrExpression {
+      val instanceType = instance.type as? IrSimpleType
+        ?: return originalCall
+
+      val irClass = instanceType.classOrNull?.owner
+        ?: return originalCall
+
+      // Find the __PIntrospectionData function on the class
+      val introspectionDataFunction = irClass.declarations
+        .filterIsInstance<IrSimpleFunction>()
+        .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        ?: return originalCall
+
+      // Build return type: PIntrospectionData<T>
+      val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
+      val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
+
+      return IrCallImpl(
+        startOffset = originalCall.startOffset,
+        endOffset = originalCall.endOffset,
+        type = returnType,
+        symbol = introspectionDataFunction.symbol,
+        typeArgumentsCount = 0,
+        origin = null,
+        superQualifierSymbol = null
+      ).apply {
+        dispatchReceiver = instance
+      }
+    }
+
+
   }
 }
-

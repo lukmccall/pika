@@ -1,0 +1,50 @@
+FILE: introspectableSetterComputed.kt
+    package test
+
+    public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(firstName: R|kotlin/String|, lastName: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val firstName: R|kotlin/String| = R|<local>/firstName|
+            public get(): R|kotlin/String|
+
+        public final val lastName: R|kotlin/String| = R|<local>/lastName|
+            public get(): R|kotlin/String|
+
+        public final val fullName: R|kotlin/String|
+            public get(): R|kotlin/String| {
+                ^ <strcat>(this@R|test/Person|.R|test/Person.firstName|, String( ), this@R|test/Person|.R|test/Person.lastName|)
+            }
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval person: R|test/Person| = R|test/Person.Person|(String(Alice), String(Smith))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        lval fullNameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(fullName))
+        }
+        ) ?: ^box String(FAIL: fullName not found)
+        when () {
+            R|<local>/fullNameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>| ->  {
+                ^box String(FAIL: fullName should not have backing field)
+            }
+        }
+
+        when () {
+            !=(R|<local>/fullNameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
+                ^box String(FAIL: computed property should not have setter)
+            }
+        }
+
+        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval getter: R|(test/Person) -> kotlin/String| = (R|<local>/fullNameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>| as R|(test/Person) -> kotlin/String|)
+        when () {
+            !=(R|<local>/getter|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/String|>|(R|<local>/person|), String(Alice Smith)) ->  {
+                ^box String(FAIL: fullName getter)
+            }
+        }
+
+        ^box String(OK)
+    }
