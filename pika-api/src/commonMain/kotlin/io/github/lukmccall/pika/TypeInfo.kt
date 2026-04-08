@@ -20,18 +20,6 @@ internal fun throwNonReifiedPTypeDescriptorError(): PTypeDescriptor =
   )
 
 /**
- * Returns full type information for the specified type parameter T.
- * The compiler plugin replaces calls to this function at compile time.
- *
- * This function provides comprehensive metadata including:
- * - All declared properties with their types, annotations, and visibility
- * - Class annotations
- * - Inheritance information
- */
-public fun <T> fullTypeInfo(): FullTypeInfo =
-  throw NotImplementedError("fullTypeInfo<T>() should be replaced by the compiler plugin")
-
-/**
  * Returns introspection data for the given Introspectable instance.
  * The compiler plugin replaces calls to this function at compile time
  * with a call to `instance.__PIntrospectionData()`.

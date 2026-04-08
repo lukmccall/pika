@@ -1,60 +1,3 @@
-public final class io/github/lukmccall/pika/AnnotationInfo {
-	public fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/Map;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lkotlin/reflect/KClass;
-	public final fun component3 ()Ljava/util/Map;
-	public final fun copy (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/Map;)Lio/github/lukmccall/pika/AnnotationInfo;
-	public static synthetic fun copy$default (Lio/github/lukmccall/pika/AnnotationInfo;Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/Map;ILjava/lang/Object;)Lio/github/lukmccall/pika/AnnotationInfo;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getArguments ()Ljava/util/Map;
-	public final fun getClassName ()Ljava/lang/String;
-	public final fun getKClass ()Lkotlin/reflect/KClass;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class io/github/lukmccall/pika/FullFieldInfo {
-	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PTypeDescriptor;Ljava/util/List;Lio/github/lukmccall/pika/Visibility;Z)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lio/github/lukmccall/pika/PTypeDescriptor;
-	public final fun component3 ()Ljava/util/List;
-	public final fun component4 ()Lio/github/lukmccall/pika/Visibility;
-	public final fun component5 ()Z
-	public final fun copy (Ljava/lang/String;Lio/github/lukmccall/pika/PTypeDescriptor;Ljava/util/List;Lio/github/lukmccall/pika/Visibility;Z)Lio/github/lukmccall/pika/FullFieldInfo;
-	public static synthetic fun copy$default (Lio/github/lukmccall/pika/FullFieldInfo;Ljava/lang/String;Lio/github/lukmccall/pika/PTypeDescriptor;Ljava/util/List;Lio/github/lukmccall/pika/Visibility;ZILjava/lang/Object;)Lio/github/lukmccall/pika/FullFieldInfo;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getAnnotations ()Ljava/util/List;
-	public final fun getName ()Ljava/lang/String;
-	public final fun getPTypeDescriptor ()Lio/github/lukmccall/pika/PTypeDescriptor;
-	public final fun getVisibility ()Lio/github/lukmccall/pika/Visibility;
-	public fun hashCode ()I
-	public final fun isMutable ()Z
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class io/github/lukmccall/pika/FullTypeInfo {
-	public fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/List;Lio/github/lukmccall/pika/FullTypeInfo;Ljava/util/List;Ljava/util/List;Z)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lkotlin/reflect/KClass;
-	public final fun component3 ()Ljava/util/List;
-	public final fun component4 ()Lio/github/lukmccall/pika/FullTypeInfo;
-	public final fun component5 ()Ljava/util/List;
-	public final fun component6 ()Ljava/util/List;
-	public final fun component7 ()Z
-	public final fun copy (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/List;Lio/github/lukmccall/pika/FullTypeInfo;Ljava/util/List;Ljava/util/List;Z)Lio/github/lukmccall/pika/FullTypeInfo;
-	public static synthetic fun copy$default (Lio/github/lukmccall/pika/FullTypeInfo;Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/util/List;Lio/github/lukmccall/pika/FullTypeInfo;Ljava/util/List;Ljava/util/List;ZILjava/lang/Object;)Lio/github/lukmccall/pika/FullTypeInfo;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getBaseClass ()Lio/github/lukmccall/pika/FullTypeInfo;
-	public final fun getClassAnnotations ()Ljava/util/List;
-	public final fun getClassName ()Ljava/lang/String;
-	public final fun getFields ()Ljava/util/List;
-	public final fun getInterfaces ()Ljava/util/List;
-	public final fun getKClass ()Lkotlin/reflect/KClass;
-	public fun hashCode ()I
-	public final fun isNullable ()Z
-	public fun toString ()Ljava/lang/String;
-}
-
 public final class io/github/lukmccall/pika/PType {
 	public fun <init> (Lkotlin/reflect/KClass;)V
 	public final fun getKClass ()Lkotlin/reflect/KClass;
@@ -82,18 +25,7 @@ public final class io/github/lukmccall/pika/PTypeDescriptor$Star : io/github/luk
 }
 
 public final class io/github/lukmccall/pika/TypeInfoKt {
-	public static final fun fullTypeInfo ()Lio/github/lukmccall/pika/FullTypeInfo;
 	public static final fun pTypeDescriptorOf ()Lio/github/lukmccall/pika/PTypeDescriptor;
 	public static final fun throwNonReifiedPTypeDescriptorError ()Lio/github/lukmccall/pika/PTypeDescriptor;
-}
-
-public final class io/github/lukmccall/pika/Visibility : java/lang/Enum {
-	public static final field INTERNAL Lio/github/lukmccall/pika/Visibility;
-	public static final field PRIVATE Lio/github/lukmccall/pika/Visibility;
-	public static final field PROTECTED Lio/github/lukmccall/pika/Visibility;
-	public static final field PUBLIC Lio/github/lukmccall/pika/Visibility;
-	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lio/github/lukmccall/pika/Visibility;
-	public static fun values ()[Lio/github/lukmccall/pika/Visibility;
 }
 

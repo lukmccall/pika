@@ -6,7 +6,7 @@ A Kotlin compiler plugin that generates complete type information at compile tim
 
 Pika operates as a Kotlin IR (Intermediate Representation) compiler plugin:
 
-1. During compilation, the plugin intercepts calls to `typeInfo<T>()` and `fullTypeInfo<T>()`
+1. During compilation, the plugin intercepts calls to `typeInfo<T>()`
 2. It analyzes the type argument `T` at compile time
 3. The call is replaced with IR code that constructs the appropriate `TypeInfo` or `FullTypeInfo` object
 4. At runtime, the function returns the pre-constructed type information with zero reflection overhead
@@ -63,50 +63,6 @@ val mapType = typeInfo<Map<String, List<Int?>>>()
 // Star projections
 val anyList = typeInfo<List<*>>()
 // Contains TypeInfo.Star for the type argument
-```
-
-### fullTypeInfo<T>()
-
-Returns comprehensive metadata including fields, inheritance, and annotations:
-
-```kotlin
-import io.github.lukmccall.pika.fullTypeInfo
-
-annotation class Serializable(val name: String)
-
-@Serializable(name = "user")
-open class Base(val id: Int)
-
-class User(
-    id: Int,
-    val name: String,
-    var email: String?
-) : Base(id)
-
-val info = fullTypeInfo<User>()
-
-// Access class information
-info.fqName        // "com.example.User"
-info.kClass        // User::class
-info.isNullable    // false
-
-// Access fields (declared on User, not inherited)
-info.fields.forEach { field ->
-    println("${field.name}: ${field.typeInfo}")
-    println("  visibility: ${field.visibility}")
-    println("  mutable: ${field.isMutable}")
-    println("  annotations: ${field.annotations}")
-}
-
-// Access inheritance
-info.baseClass     // FullTypeInfo for Base class
-info.interfaces    // List of implemented interfaces
-
-// Access annotations
-info.annotations.forEach { annotation ->
-    println("@${annotation.fqName}")
-    println("  arguments: ${annotation.arguments}")
-}
 ```
 
 ## Supported Kotlin Versions

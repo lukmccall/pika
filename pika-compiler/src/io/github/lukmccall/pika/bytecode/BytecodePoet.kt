@@ -13,7 +13,6 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.defaultType
-import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
@@ -229,7 +228,7 @@ class BytecodePoet(
     }
 
     val functionName = markerString.removePackageName()
-    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME && functionName != Identifiers.FULL_TYPE_INFO_FUNCTION_NAME) {
+    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME) {
       return null
     }
 

@@ -48,57 +48,6 @@ fun main() {
   }
   println()
 
-  println("=== fullTypeInfo<T>() Examples ===")
-  println()
-
-  // Get full type information for User class
-  val userInfo: FullTypeInfo = fullTypeInfo<User>()
-
-  println("Full Type Information for User:")
-  println("  Class: ${userInfo.className}")
-  println("  KClass: ${userInfo.kClass}")
-  println("  Is Nullable: ${userInfo.isNullable}")
-  println()
-
-  println("Class Annotations:")
-  if (userInfo.classAnnotations.isEmpty()) {
-    println("  (none)")
-  } else {
-    for (annotation in userInfo.classAnnotations) {
-      println("  - @${annotation.className}")
-      if (annotation.arguments.isNotEmpty()) {
-        println("    Arguments: ${annotation.arguments}")
-      }
-    }
-  }
-  println()
-
-  println("Inheritance:")
-  println("  Base Class: ${userInfo.baseClass?.className ?: "none"}")
-  if (userInfo.baseClass != null) {
-    println("    Base Class Fields: ${userInfo.baseClass!!.fields.map { it.name }}")
-  }
-  println("  Interfaces: ${userInfo.interfaces.map { it.simpleName }}")
-  println()
-
-  println("Fields (declared on User only):")
-  for (field in userInfo.fields) {
-    val visibilityStr = when (field.visibility) {
-      Visibility.PUBLIC -> "public"
-      Visibility.PRIVATE -> "private"
-      Visibility.PROTECTED -> "protected"
-      Visibility.INTERNAL -> "internal"
-    }
-    val mutabilityStr = if (field.isMutable) "var" else "val"
-    println("  - $visibilityStr $mutabilityStr ${field.name}: ${formatPTypeDescriptor(field.pTypeDescriptor)}")
-    if (field.annotations.isNotEmpty()) {
-      for (annotation in field.annotations) {
-        println("      @${annotation.className}")
-      }
-    }
-  }
-  println()
-
   println("=== pTypeDescriptorOf<T>() Examples (basic type info) ===")
   println()
 

@@ -20,7 +20,7 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 
 /**
- * JVM intrinsic support for pTypeDescriptorOf<T>() and fullTypeInfo<T>() functions.
+ * JVM intrinsic support for pTypeDescriptorOf<T>() function.
  *
  * This is necessary because IrGenerationExtension runs BEFORE inline functions are inlined.
  * When pTypeDescriptorOf<T>() is called through an inline proxy function like:
@@ -65,9 +65,7 @@ class PikaJvmIrIntrinsicSupport(
 
     return when (fqName) {
       Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      Identifiers.FULL_TYPE_INFO_FUNCTION_NAME.withPackageName() -> Identifiers.FULL_TYPE_INFO_FUNCTION_NAME
       "TypeInfoKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      "TypeInfoKt.${Identifiers.FULL_TYPE_INFO_FUNCTION_NAME}".withPackageName() -> Identifiers.FULL_TYPE_INFO_FUNCTION_NAME
       else -> null
     }
   }
@@ -109,7 +107,6 @@ class PikaJvmIrIntrinsicSupport(
     with(bytecodePoet) {
       when (functionName) {
         Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> initPTypeDescriptor(type)
-        Identifiers.FULL_TYPE_INFO_FUNCTION_NAME -> throwNotImplementedError("fullTypeInfo<T>() through inline functions is not yet supported")
       }
     }
   }

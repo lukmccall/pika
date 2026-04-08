@@ -14,14 +14,13 @@ import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classOrNull
-import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 import org.jetbrains.kotlin.name.FqName
 
 /**
- * IR transformer that replaces calls to pTypeDescriptorOf<T>(), fullTypeInfo<T>(),
+ * IR transformer that replaces calls to pTypeDescriptorOf<T>()
  * and pIntrospectionOf(instance) with constructed expressions.
  *
  * Note: When the type argument is a type parameter (e.g., inside an inline function),
@@ -38,7 +37,6 @@ class TypeInfoCallTransformer(
   companion object {
     private val PLUGIN_PACKAGE = FqName("io.github.lukmccall.pika")
     private const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
-    private const val FULL_TYPE_INFO_FUNCTION_NAME = "fullTypeInfo"
     private const val P_INTROSPECTION_OF_FUNCTION_NAME = "pIntrospectionOf"
     private const val INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
   }
@@ -54,7 +52,7 @@ class TypeInfoCallTransformer(
     }
 
     return when (functionName) {
-      P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME, FULL_TYPE_INFO_FUNCTION_NAME -> {
+      P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
 
         // If the type argument is a type parameter, skip transformation.
@@ -62,11 +60,7 @@ class TypeInfoCallTransformer(
           return expression
         }
 
-        when (functionName) {
-          P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> poet.pika.pTypeDescriptor(typeArg)
-          FULL_TYPE_INFO_FUNCTION_NAME -> poet.pika.fullTypeInfo(typeArg, typeArg.isMarkedNullable())
-          else -> expression
-        }
+        poet.pika.pTypeDescriptor(typeArg)
       }
       P_INTROSPECTION_OF_FUNCTION_NAME -> {
         val instanceArg = expression.arguments[0]
@@ -121,7 +115,6 @@ class TypeInfoCallTransformer(
   private fun isPluginCall(function: IrSimpleFunction): Boolean {
     val functionName = function.name.asString()
     if (functionName != P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
-        functionName != FULL_TYPE_INFO_FUNCTION_NAME &&
         functionName != P_INTROSPECTION_OF_FUNCTION_NAME) {
       return false
     }

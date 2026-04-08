@@ -17,11 +17,6 @@ object PikaAPI {
     val Star = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Star"), isLocal = false)
   }
 
-  val FullTypeInfo = ClassId(API_PACKAGE, Name.identifier("FullTypeInfo"))
-  val FullFieldInfo = ClassId(API_PACKAGE, Name.identifier("FullFieldInfo"))
-  val AnnotationInfo = ClassId(API_PACKAGE, Name.identifier("AnnotationInfo"))
-  val Visibility = ClassId(API_PACKAGE, Name.identifier("Visibility"))
-
   // Introspectable types
   val Introspectable = ClassId(API_PACKAGE, Name.identifier("Introspectable"))
   val PVisibility = ClassId(API_PACKAGE, Name.identifier("PVisibility"))

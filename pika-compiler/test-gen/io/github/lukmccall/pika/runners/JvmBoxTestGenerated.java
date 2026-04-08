@@ -21,30 +21,6 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
-  @TestMetadata("fullTypeInfoAnnotations.kt")
-  public void testFullTypeInfoAnnotations() {
-    runTest("pika-compiler/testData/box/fullTypeInfoAnnotations.kt");
-  }
-
-  @Test
-  @TestMetadata("fullTypeInfoBasic.kt")
-  public void testFullTypeInfoBasic() {
-    runTest("pika-compiler/testData/box/fullTypeInfoBasic.kt");
-  }
-
-  @Test
-  @TestMetadata("fullTypeInfoFields.kt")
-  public void testFullTypeInfoFields() {
-    runTest("pika-compiler/testData/box/fullTypeInfoFields.kt");
-  }
-
-  @Test
-  @TestMetadata("fullTypeInfoInheritance.kt")
-  public void testFullTypeInfoInheritance() {
-    runTest("pika-compiler/testData/box/fullTypeInfoInheritance.kt");
-  }
-
-  @Test
   @TestMetadata("introspectableAnnotations.kt")
   public void testIntrospectableAnnotations() {
     runTest("pika-compiler/testData/box/introspectableAnnotations.kt");

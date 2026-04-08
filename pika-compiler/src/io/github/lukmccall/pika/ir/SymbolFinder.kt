@@ -26,11 +26,6 @@ class SymbolFinder(
       val star by cachedReference(PikaAPI.PTypeDescriptor.Star)
     }
 
-    val fullTypedInfo by cachedReference(PikaAPI.FullTypeInfo)
-    val fullFieldInfo by cachedReference(PikaAPI.FullFieldInfo)
-    val annotationInfo by cachedReference(PikaAPI.AnnotationInfo)
-    val visibility by cachedReference(PikaAPI.Visibility)
-
     // Introspectable types
     val introspectable by cachedReference(PikaAPI.Introspectable)
     val pVisibility by cachedReference(PikaAPI.PVisibility)
