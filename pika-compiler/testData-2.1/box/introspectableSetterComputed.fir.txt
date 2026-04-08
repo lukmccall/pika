@@ -1,7 +1,7 @@
 FILE: introspectableSetterComputed.kt
     package test
 
-    public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any| {
         public constructor(firstName: R|kotlin/String|, lastName: R|kotlin/String|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
@@ -17,12 +17,27 @@ FILE: introspectableSetterComputed.kt
                 ^ <strcat>(this@R|test/Person|.R|test/Person.firstName|, String( ), this@R|test/Person|.R|test/Person.lastName|)
             }
 
-        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+        internal final fun __pika$get$firstName(): R|kotlin/String|
+
+        internal final fun __pika$get$lastName(): R|kotlin/String|
+
+        internal final fun __pika$set$firstName(value: R|kotlin/String|): R|kotlin/Unit|
+
+        internal final fun __pika$set$lastName(value: R|kotlin/String|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+            private constructor(): R|test/Person.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
 
     }
     public final fun box(): R|kotlin/String| {
         lval person: R|test/Person| = R|test/Person.Person|(String(Alice), String(Smith))
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = Q|test/Person|.R|test/Person.Companion.__PIntrospectionData|()
         lval fullNameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(fullName))
         }

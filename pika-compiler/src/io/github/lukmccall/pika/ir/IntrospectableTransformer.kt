@@ -7,19 +7,16 @@ import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
-import org.jetbrains.kotlin.ir.expressions.impl.IrGetValueImpl
-import org.jetbrains.kotlin.ir.expressions.impl.IrReturnImpl
+import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.typeWith
-import org.jetbrains.kotlin.ir.util.defaultType
-import org.jetbrains.kotlin.ir.util.isInterface
-import org.jetbrains.kotlin.ir.util.kotlinFqName
+import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 
 /**
@@ -35,30 +32,132 @@ class IntrospectableTransformer(
   override fun visitClass(declaration: IrClass, data: Nothing?): IrStatement {
     declaration.transformChildren(this, data)
 
-    if (shouldGenerate(declaration)) {
-      generateIntrospectionDataFunction(declaration)
+    if (declaration.isInterface || declaration.modality == Modality.ABSTRACT) {
+      return declaration
     }
 
-    return declaration
+    if (!declaration.hasIntrospectableAnnotation()) {
+      return declaration
+    }
+
+    if (declaration.isObject && !declaration.isCompanion) {
+      return handleObjectDeclaration(declaration)
+    }
+
+    return handleClassDeclaration(declaration)
   }
 
-  /**
-   * Check if we should generate introspection data for this class.
-   */
-  private fun shouldGenerate(irClass: IrClass): Boolean {
-    // Skip interfaces and abstract classes
-    if (irClass.isInterface || irClass.modality == Modality.ABSTRACT) {
-      return false
+  private fun handleObjectDeclaration(declaration: IrClass): IrStatement = declaration.apply {
+    val function = declaration
+      .find__PIntrospectionData()
+      ?.takeIfHasNoBody()
+      ?: return@apply
+
+    generateIntrospectionDataFunctionBody(
+      declaration,
+      function
+    )
+  }
+
+  private fun handleClassDeclaration(declaration: IrClass): IrStatement = declaration.apply {
+    // First, generate bodies for synthetic accessor functions on the main class
+    generateSyntheticAccessorBodies(declaration)
+
+    // Then generate the introspection function in the companion
+    val function = declaration
+      .companionObject()
+      ?.find__PIntrospectionData()
+      ?.takeIfHasNoBody()
+      ?: return@apply
+
+    generateIntrospectionDataFunctionBody(
+      declaration,
+      function
+    )
+  }
+
+  private fun generateSyntheticAccessorBodies(irClass: IrClass) {
+    val allProperties = irClass
+      .declarations
+      .filterIsInstance<IrProperty>()
+      .filter { it.backingField != null }
+      .associateBy { it.name.asString() }
+
+    val syntheticAccessors = irClass
+      .declarations
+      .asSequence()
+      .filterIsInstance<IrSimpleFunction>()
+      .filter { Identifiers.isSyntheticAccessor(it.name.asString()) && it.body == null }
+      .mapNotNull {
+        val propertyName = Identifiers.removeSyntheticAccessor(it.name.asString())
+        val property = allProperties[propertyName] ?: return@mapNotNull null
+        property to it
+      }
+
+    for ((originalProperty, syntheticAccessor) in syntheticAccessors) {
+      val isGetter = Identifiers.isSyntheticGetter(syntheticAccessor.name.asString())
+      val backingField = requireNotNull(originalProperty.backingField)
+
+      if (isGetter) {
+        // Generate: return this.<backingField>
+        syntheticAccessor.body = context
+          .irFactory
+          .createBlockBody(-1, -1)
+          .apply {
+            statements.add(
+              IrReturnImpl(
+                startOffset = -1,
+                endOffset = -1,
+                type = context.irBuiltIns.nothingType,
+                returnTargetSymbol = syntheticAccessor.symbol,
+                value = IrGetFieldImpl(
+                  startOffset = -1,
+                  endOffset = -1,
+                  symbol = backingField.symbol,
+                  type = backingField.type,
+                  receiver = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = irClass.defaultType,
+                    symbol = syntheticAccessor.dispatchReceiverParameter!!.symbol
+                  )
+                )
+              )
+            )
+          }
+      } else {
+        val valueParam = syntheticAccessor
+          .parameters
+          .first { it.kind == IrParameterKind.Regular }
+
+        // Generate: this.<backingField> = value
+        syntheticAccessor.body = context
+          .irFactory
+          .createBlockBody(-1, -1)
+          .apply {
+            statements.add(
+              IrSetFieldImpl(
+                startOffset = -1,
+                endOffset = -1,
+                symbol = backingField.symbol,
+                receiver = IrGetValueImpl(
+                  startOffset = -1,
+                  endOffset = -1,
+                  type = irClass.defaultType,
+                  symbol = syntheticAccessor.dispatchReceiverParameter!!.symbol
+                ),
+                value = IrGetValueImpl(
+                  startOffset = -1,
+                  endOffset = -1,
+                  type = valueParam.type,
+                  symbol = valueParam.symbol
+                ),
+                type = context.irBuiltIns.unitType
+              )
+            )
+          }
+      }
     }
-
-    val existingFunction = irClass.find__PIntrospectionData()
-
-    // If function already has a body, skip (already processed)
-    if (existingFunction?.body != null) {
-      return false
-    }
-
-    return irClass.implementsIntrospectable()
   }
 
   @Suppress("FunctionName")
@@ -68,14 +167,10 @@ class IntrospectableTransformer(
       .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
   }
 
-  /**
-   * Generate the __PIntrospectionData() function body for the class.
-   * The function declaration is created by the FIR extension.
-   */
-  private fun generateIntrospectionDataFunction(irClass: IrClass) {
-    val function = irClass.find__PIntrospectionData()
-      ?: error("Couldn't find __PIntrospectionData function in $irClass")
-
+  private fun generateIntrospectionDataFunctionBody(
+    irClass: IrClass,
+    function: IrSimpleFunction
+  ) {
     // Build properties list (only properties declared directly on this class)
     val properties = irClass.declarations
       .filterIsInstance<IrProperty>()
@@ -105,7 +200,7 @@ class IntrospectableTransformer(
       }
 
     // Build base class reference if parent implements Introspectable
-    val baseClassExpr = buildBaseClassReference(irClass, function)
+    val baseClassExpr = buildBaseClassReference(irClass)
 
     val introspectionData = poet.pika.pIntrospectionData(
       irClass = irClass,
@@ -128,10 +223,13 @@ class IntrospectableTransformer(
   }
 
   /**
-   * Build a call to the parent's __PIntrospectionData() function if the parent
-   * implements Introspectable, otherwise return null.
+   * Build a call to the parent's companion __PIntrospectionData() function if the parent
+   * has Introspectable annotation, otherwise return null.
+   *
+   * Since the function is now in the companion object, we call it directly:
+   * ParentClass.__PIntrospectionData() (no instance needed)
    */
-  private fun buildBaseClassReference(irClass: IrClass, containingFunction: IrSimpleFunction): IrExpression? {
+  private fun buildBaseClassReference(irClass: IrClass): IrExpression? {
     val superClass = irClass.superTypes
       .filterIsInstance<IrSimpleType>()
       .filter { !it.isInterface() }
@@ -140,43 +238,35 @@ class IntrospectableTransformer(
       ?: return null
 
     // Check if parent implements Introspectable
-    if (!superClass.implementsIntrospectable()) {
+    if (!superClass.hasIntrospectableAnnotation()) {
       return null
     }
 
-    // Find the __PIntrospectionData function on the parent
-    val parentFunction = superClass.declarations
-      .filterIsInstance<IrSimpleFunction>()
-      .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+    // Find the companion object of the parent class
+    val parentCompanion = superClass.companionObject() ?: return null
 
-    // If the parent is also being transformed, it may not have the function yet.
-    // In that case, we'll build a call assuming it will exist.
+    // Find the __PIntrospectionData function on the parent's companion
+    val parentFunction = superClass.companionObject()?.find__PIntrospectionData() ?: return null
+
     val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
     val parentReturnType = pIntrospectionDataClass.typeWith(superClass.defaultType)
 
-    if (parentFunction != null) {
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = parentReturnType,
-        symbol = parentFunction.symbol,
-        typeArgumentsCount = 0,
-        origin = null,
-        // Use superQualifierSymbol to make this a super call, avoiding infinite recursion
-        superQualifierSymbol = superClass.symbol
-      ).apply {
-        // The parent's __PIntrospectionData is called on 'this' (the dispatch receiver of the containing function)
-        dispatchReceiver = containingFunction.dispatchReceiverParameter?.let {
-          IrGetValueImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = irClass.defaultType,
-            symbol = it.symbol
-          )
+    return IrCallImpl(
+      startOffset = -1,
+      endOffset = -1,
+      type = parentReturnType,
+      symbol = parentFunction.symbol,
+      typeArgumentsCount = 0,
+      origin = null
+    ).apply {
+      // Dispatch receiver is the companion object instance
+      // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+      val dispatchReceiverValue = poet.kotlin.getObject(parentCompanion.symbol)
+      parentFunction.parameters.forEach { param ->
+        if (param.kind == IrParameterKind.DispatchReceiver) {
+          arguments[param.indexInParameters] = dispatchReceiverValue
         }
       }
     }
-
-    return null
   }
 }

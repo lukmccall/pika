@@ -1,7 +1,7 @@
 FILE: introspectableObject.kt
     package test
 
-    public final object Singleton : R|io/github/lukmccall/pika/Introspectable| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final object Singleton : R|kotlin/Any| {
         private constructor(): R|test/Singleton| {
             super<R|kotlin/Any|>()
         }

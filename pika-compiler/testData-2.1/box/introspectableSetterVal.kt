@@ -3,11 +3,12 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Person(val name: String, val age: Int) : Introspectable
+@Introspectable
+class Person(val name: String, val age: Int)
 
 fun box(): String {
   val person = Person("Alice", 30)
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   val nameProp = data.properties.find { it.name == "name" }
     ?: return "FAIL: name not found"

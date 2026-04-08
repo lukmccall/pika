@@ -3,11 +3,12 @@ package test
 
 import io.github.lukmccall.pika.*
 
-data class Person(val name: String, val age: Int) : Introspectable
+@Introspectable
+data class Person(val name: String, val age: Int)
 
 fun box(): String {
   val person = Person("Alice", 30)
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   // Data class properties
   if (data.properties.size != 2) return "FAIL: expected 2 properties"

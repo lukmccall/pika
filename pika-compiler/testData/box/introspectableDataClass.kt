@@ -3,11 +3,12 @@ package test
 
 import io.github.lukmccall.pika.*
 
-data class Person(val name: String, val age: Int) : Introspectable
+@Introspectable
+data class Person(val name: String, val age: Int)
 
 fun box(): String {
   val person = Person("Alice", 30)
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   // Data class properties
   if (data.properties.size != 2) return "FAIL: expected 2 properties"
@@ -22,7 +23,7 @@ fun box(): String {
   if (!nameProp.hasBackingField) return "FAIL: name should have backing field"
   if (!ageProp.hasBackingField) return "FAIL: age should have backing field"
 
-  // Both should have setters (even though they're val)
+  // Both should have setters (via synthetic accessors)
   if (nameProp.setter == null) return "FAIL: name should have setter"
   if (ageProp.setter == null) return "FAIL: age should have setter"
 

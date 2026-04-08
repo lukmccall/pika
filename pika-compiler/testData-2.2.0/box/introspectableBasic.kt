@@ -3,11 +3,12 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Person(val name: String) : Introspectable
+@Introspectable
+class Person(val name: String)
 
 fun box(): String {
   val person = Person("Alice")
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   // Test kClass
   if (data.kClass != Person::class) return "FAIL: kClass expected Person::class"

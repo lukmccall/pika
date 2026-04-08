@@ -3,16 +3,17 @@ package test
 
 import io.github.lukmccall.pika.*
 
+@Introspectable
 class Person(
   val publicProp: String,
   private val privateProp: String,
   protected val protectedProp: String,
   internal val internalProp: String
-) : Introspectable
+)
 
 fun box(): String {
   val person = Person("pub", "priv", "prot", "intern")
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   val publicProp = data.properties.find { it.name == "publicProp" }
     ?: return "FAIL: publicProp not found"

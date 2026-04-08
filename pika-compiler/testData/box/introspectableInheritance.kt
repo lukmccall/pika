@@ -3,13 +3,15 @@ package test
 
 import io.github.lukmccall.pika.*
 
-open class Animal(val species: String) : Introspectable
+@Introspectable
+open class Animal(val species: String)
 
+@Introspectable
 class Dog(species: String, val breed: String) : Animal(species)
 
 fun box(): String {
   val dog = Dog("Canine", "Labrador")
-  val data = dog.__PIntrospectionData()
+  val data = Dog.__PIntrospectionData()
 
   // Dog's own properties only
   if (data.properties.size != 1) return "FAIL: Dog should have 1 declared property, got ${data.properties.size}"

@@ -1,7 +1,7 @@
 FILE: introspectableInheritance.kt
     package test
 
-    public open class Animal : R|io/github/lukmccall/pika/Introspectable| {
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any| {
         public constructor(species: R|kotlin/String|): R|test/Animal| {
             super<R|kotlin/Any|>()
         }
@@ -9,10 +9,21 @@ FILE: introspectableInheritance.kt
         public final val species: R|kotlin/String| = R|<local>/species|
             public get(): R|kotlin/String|
 
-        public open fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Animal>|
+        internal final fun __pika$get$species(): R|kotlin/String|
+
+        internal final fun __pika$set$species(value: R|kotlin/String|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Animal>|
+
+            private constructor(): R|test/Animal.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
 
     }
-    public final class Dog : R|test/Animal| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Animal| {
         public constructor(species: R|kotlin/String|, breed: R|kotlin/String|): R|test/Dog| {
             super<R|test/Animal|>(R|<local>/species|)
         }
@@ -20,12 +31,23 @@ FILE: introspectableInheritance.kt
         public final val breed: R|kotlin/String| = R|<local>/breed|
             public get(): R|kotlin/String|
 
-        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>|
+        internal final fun __pika$set$breed(value: R|kotlin/String|): R|kotlin/Unit|
+
+        internal final fun __pika$get$breed(): R|kotlin/String|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>|
+
+            private constructor(): R|test/Dog.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
 
     }
     public final fun box(): R|kotlin/String| {
         lval dog: R|test/Dog| = R|test/Dog.Dog|(String(Canine), String(Labrador))
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>| = R|<local>/dog|.R|test/Dog.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>| = Q|test/Dog|.R|test/Dog.Companion.__PIntrospectionData|()
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Dog, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box <strcat>(String(FAIL: Dog should have 1 declared property, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Dog, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)

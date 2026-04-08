@@ -3,7 +3,8 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Person(val name: String, var age: Int) : Introspectable
+@Introspectable
+class Person(val name: String, var age: Int)
 
 fun box(): String {
   val person = Person("Alice", 30)

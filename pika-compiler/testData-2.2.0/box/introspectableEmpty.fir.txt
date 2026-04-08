@@ -1,17 +1,24 @@
 FILE: introspectableEmpty.kt
     package test
 
-    public final class Empty : R|io/github/lukmccall/pika/Introspectable| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Empty : R|kotlin/Any| {
         public constructor(): R|test/Empty| {
             super<R|kotlin/Any|>()
         }
 
-        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>|
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>|
+
+            private constructor(): R|test/Empty.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
 
     }
     public final fun box(): R|kotlin/String| {
         lval empty: R|test/Empty| = R|test/Empty.Empty|()
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>| = R|<local>/empty|.R|test/Empty.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>| = Q|test/Empty|.R|test/Empty.Companion.__PIntrospectionData|()
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Empty>|>|, <getClass>(Q|test/Empty|)) ->  {
                 ^box String(FAIL: kClass)
@@ -31,8 +38,14 @@ FILE: introspectableEmpty.kt
         }
 
         when () {
-            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PAnnotation|>() ->  {
-                ^box String(FAIL: should have no annotations)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: should have 1 annotation (@Introspectable))
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PAnnotation|>|(Int(0)).R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|io/github/lukmccall/pika/Introspectable|)) ->  {
+                ^box String(FAIL: annotation should be @Introspectable)
             }
         }
 

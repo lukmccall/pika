@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
 import org.jetbrains.kotlin.ir.builders.declarations.buildFun
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
@@ -21,7 +22,9 @@ import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.name.Name
 
@@ -213,6 +216,18 @@ class IRPoet(
         type = kClassType,
         symbol = classSymbol,
         classType = classType
+      )
+    }
+
+    /**
+     * Get reference to an object (companion object or singleton)
+     */
+    fun getObject(classSymbol: IrClassSymbol): IrExpression {
+      return IrGetObjectValueImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = classSymbol.owner.defaultType,
+        symbol = classSymbol
       )
     }
   }
@@ -421,6 +436,7 @@ class IRPoet(
 
     /**
      * Creates a getter lambda: { owner -> owner.propertyName }
+     * Uses the property getter if available, otherwise uses the synthetic accessor.
      */
     fun propertyGetterLambda(
       property: IrProperty,
@@ -448,36 +464,68 @@ class IRPoet(
 
         val returnValue = if (property.getter != null) {
           // Call the getter
+          val getter = property.getter!!
           IrCallImpl(
             startOffset = -1,
             endOffset = -1,
             type = propertyType,
-            symbol = property.getter!!.symbol,
+            symbol = getter.symbol,
             typeArgumentsCount = 0,
             origin = IrStatementOrigin.GET_PROPERTY,
             superQualifierSymbol = null
           ).apply {
-            dispatchReceiver = IrGetValueImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = ownerType,
-              symbol = ownerParam.symbol
-            )
+            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+            getter.parameters.forEach { param ->
+              if (param.kind == IrParameterKind.DispatchReceiver) {
+                arguments[param.indexInParameters] = IrGetValueImpl(
+                  startOffset = -1,
+                  endOffset = -1,
+                  type = ownerType,
+                  symbol = ownerParam.symbol
+                )
+              }
+            }
           }
         } else {
-          // Access backing field directly
-          IrGetFieldImpl(
-            startOffset = -1,
-            endOffset = -1,
-            symbol = property.backingField!!.symbol,
-            type = propertyType,
-            receiver = IrGetValueImpl(
+          // Use synthetic getter to access backing field
+          val syntheticGetter = ownerClass.findSyntheticGetter(property)
+          if (syntheticGetter != null) {
+            IrCallImpl(
               startOffset = -1,
               endOffset = -1,
-              type = ownerType,
-              symbol = ownerParam.symbol
+              type = propertyType,
+              symbol = syntheticGetter.symbol,
+              typeArgumentsCount = 0,
+              origin = null,
+              superQualifierSymbol = null
+            ).apply {
+              // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+              syntheticGetter.parameters.forEach { param ->
+                if (param.kind == IrParameterKind.DispatchReceiver) {
+                  arguments[param.indexInParameters] = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = ownerType,
+                    symbol = ownerParam.symbol
+                  )
+                }
+              }
+            }
+          } else {
+            // Fallback: direct field access (only works for instance methods)
+            IrGetFieldImpl(
+              startOffset = -1,
+              endOffset = -1,
+              symbol = property.backingField!!.symbol,
+              type = propertyType,
+              receiver = IrGetValueImpl(
+                startOffset = -1,
+                endOffset = -1,
+                type = ownerType,
+                symbol = ownerParam.symbol
+              )
             )
-          )
+          }
         }
 
         body = irFactory.createBlockBody(-1, -1).apply {
@@ -502,9 +550,24 @@ class IRPoet(
       )
     }
 
+    private fun IrClass.findSyntheticGetter(property: IrProperty): IrSimpleFunction? {
+      val name = Identifiers.syntheticGetterName(property.name.asString())
+      return declarations
+        .filterIsInstance<IrSimpleFunction>()
+        .find { it.name.asString() == name }
+    }
+
+    private fun IrClass.findSyntheticSetter(property: IrProperty): IrSimpleFunction? {
+      val name = Identifiers.syntheticSetterName(property.name.asString())
+      return declarations
+        .filterIsInstance<IrSimpleFunction>()
+        .find { it.name.asString() == name }
+    }
+
     /**
-     * Creates a setter lambda: { owner, value -> owner.<backing-field> = value }
-     * Returns null if property has no backing field.
+     * Creates a setter lambda: { owner, value -> owner.property = value }
+     * Uses the property setter if available, otherwise uses the synthetic accessor
+     * to access the backing field.
      */
     fun propertySetterLambda(
       property: IrProperty,
@@ -512,10 +575,17 @@ class IRPoet(
       containingFunction: IrSimpleFunction,
       irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression? {
-      val backingField = property.backingField ?: return null
-
-      val propertyType = backingField.type
+      val propertyType = property.getter?.returnType
+        ?: property.backingField?.type
+        ?: irBuiltIns.anyNType
       val ownerType = ownerClass.defaultType
+
+      // Find setter: either Kotlin setter or synthetic setter
+      val kotlinSetter = property.setter
+      val syntheticSetter = ownerClass.findSyntheticSetter(property)
+
+      // Need at least one way to set the value
+      if (kotlinSetter == null && syntheticSetter == null) return null
 
       // Create Function2<OwnerType, PropertyType, Unit>
       val function2Type = irBuiltIns.functionN(2).typeWith(ownerType, propertyType, irBuiltIns.unitType)
@@ -530,27 +600,79 @@ class IRPoet(
         val ownerParam = addValueParameter("owner", ownerType)
         val valueParam = addValueParameter("value", propertyType)
 
+        val setterCall = if (kotlinSetter != null) {
+          // Use Kotlin setter
+          IrCallImpl(
+            startOffset = -1,
+            endOffset = -1,
+            type = irBuiltIns.unitType,
+            symbol = kotlinSetter.symbol,
+            typeArgumentsCount = 0,
+            origin = IrStatementOrigin.EQ,
+            superQualifierSymbol = null
+          ).apply {
+            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+            kotlinSetter.parameters.forEach { param ->
+              when (param.kind) {
+                IrParameterKind.DispatchReceiver -> {
+                  arguments[param.indexInParameters] = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = ownerType,
+                    symbol = ownerParam.symbol
+                  )
+                }
+                IrParameterKind.Regular -> {
+                  arguments[param.indexInParameters] = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = propertyType,
+                    symbol = valueParam.symbol
+                  )
+                }
+                else -> {}
+              }
+            }
+          }
+        } else {
+          // Use synthetic setter
+          IrCallImpl(
+            startOffset = -1,
+            endOffset = -1,
+            type = irBuiltIns.unitType,
+            symbol = syntheticSetter!!.symbol,
+            typeArgumentsCount = 0,
+            origin = null,
+            superQualifierSymbol = null
+          ).apply {
+            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+            // Use indexInParameters to correctly map each parameter
+            syntheticSetter.parameters.forEach { param ->
+              when (param.kind) {
+                IrParameterKind.DispatchReceiver -> {
+                  arguments[param.indexInParameters] = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = ownerType,
+                    symbol = ownerParam.symbol
+                  )
+                }
+                IrParameterKind.Regular -> {
+                  arguments[param.indexInParameters] = IrGetValueImpl(
+                    startOffset = -1,
+                    endOffset = -1,
+                    type = propertyType,
+                    symbol = valueParam.symbol
+                  )
+                }
+                else -> {}
+              }
+            }
+          }
+        }
+
         body = irFactory.createBlockBody(-1, -1).apply {
-          statements.add(
-            IrSetFieldImpl(
-              startOffset = -1,
-              endOffset = -1,
-              symbol = backingField.symbol,
-              receiver = IrGetValueImpl(
-                startOffset = -1,
-                endOffset = -1,
-                type = ownerType,
-                symbol = ownerParam.symbol
-              ),
-              value = IrGetValueImpl(
-                startOffset = -1,
-                endOffset = -1,
-                type = propertyType,
-                symbol = valueParam.symbol
-              ),
-              type = irBuiltIns.unitType
-            )
-          )
+          statements.add(setterCall)
         }
       }
 
@@ -565,6 +687,7 @@ class IRPoet(
 
     /**
      * Creates a delegate getter lambda: { owner -> owner.<delegate_backing_field> }
+     * Uses synthetic accessor to access the delegate backing field.
      * Returns null if property is not delegated.
      */
     fun delegateGetterLambda(
@@ -582,6 +705,9 @@ class IRPoet(
       // Function1<OwnerType, Any?>
       val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, irBuiltIns.anyNType)
 
+      // Find synthetic getter for the delegate field
+      val syntheticGetter = ownerClass.findSyntheticGetter(property)
+
       val lambdaFunction = irFactory.buildFun {
         name = Name.special("<anonymous>")
         returnType = irBuiltIns.anyNType
@@ -591,18 +717,44 @@ class IRPoet(
         parent = containingFunction
         val ownerParam = addValueParameter("owner", ownerType)
 
-        val returnValue = IrGetFieldImpl(
-          startOffset = -1,
-          endOffset = -1,
-          symbol = backingField.symbol,
-          type = delegateType,
-          receiver = IrGetValueImpl(
+        val returnValue = if (syntheticGetter != null) {
+          // Use synthetic getter
+          IrCallImpl(
             startOffset = -1,
             endOffset = -1,
-            type = ownerType,
-            symbol = ownerParam.symbol
+            type = delegateType,
+            symbol = syntheticGetter.symbol,
+            typeArgumentsCount = 0,
+            origin = null,
+            superQualifierSymbol = null
+          ).apply {
+            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+            syntheticGetter.parameters.forEach { param ->
+              if (param.kind == IrParameterKind.DispatchReceiver) {
+                arguments[param.indexInParameters] = IrGetValueImpl(
+                  startOffset = -1,
+                  endOffset = -1,
+                  type = ownerType,
+                  symbol = ownerParam.symbol
+                )
+              }
+            }
+          }
+        } else {
+          // Fallback: direct field access
+          IrGetFieldImpl(
+            startOffset = -1,
+            endOffset = -1,
+            symbol = backingField.symbol,
+            type = delegateType,
+            receiver = IrGetValueImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = ownerType,
+              symbol = ownerParam.symbol
+            )
           )
-        )
+        }
 
         body = irFactory.createBlockBody(-1, -1).apply {
           statements.add(
@@ -738,11 +890,25 @@ class IRPoet(
       val irClass = instanceType.classOrNull?.owner
         ?: return originalCall
 
-      // Find the __PIntrospectionData function on the class
-      val introspectionDataFunction = irClass.declarations
-        .filterIsInstance<IrSimpleFunction>()
-        .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-        ?: return originalCall
+      // Find the __PIntrospectionData function
+      // For object declarations: look on the object itself
+      // For regular classes: look in the companion object
+      val (functionOwner, introspectionDataFunction) = if (irClass.isObject && !irClass.isCompanion) {
+        val function = irClass.declarations
+          .filterIsInstance<IrSimpleFunction>()
+          .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        irClass to function
+      } else {
+        val companion = irClass.companionObject()
+        val function = companion?.declarations
+          ?.filterIsInstance<IrSimpleFunction>()
+          ?.find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        companion to function
+      }
+
+      if (introspectionDataFunction == null || functionOwner == null) {
+        return originalCall
+      }
 
       // Build return type: PIntrospectionData<T>
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
@@ -757,7 +923,19 @@ class IRPoet(
         origin = null,
         superQualifierSymbol = null
       ).apply {
-        dispatchReceiver = instance
+        // For objects: dispatch receiver is the instance itself
+        // For regular classes: dispatch receiver is the companion object
+        val dispatchReceiverValue = if (irClass.isObject && !irClass.isCompanion) {
+          instance
+        } else {
+          kotlin.getObject(functionOwner.symbol)
+        }
+        // In K2 IR, arguments array contains ALL parameters including dispatch receiver
+        introspectionDataFunction.parameters.forEach { param ->
+          if (param.kind == IrParameterKind.DispatchReceiver) {
+            arguments[param.indexInParameters] = dispatchReceiverValue
+          }
+        }
       }
     }
 

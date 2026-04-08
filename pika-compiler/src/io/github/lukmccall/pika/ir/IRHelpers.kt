@@ -2,11 +2,10 @@
 
 package io.github.lukmccall.pika.ir
 
-import io.github.lukmccall.pika.Identifiers
-import io.github.lukmccall.pika.Identifiers.toFq
-import io.github.lukmccall.pika.Identifiers.withPackageName
+import io.github.lukmccall.pika.symbols.PikaAPI
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -17,6 +16,7 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.classOrNull
+import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 
 fun Collection<IrSimpleFunctionSymbol>.firstSingleVarargsArgument(): IrSimpleFunctionSymbol {
@@ -116,14 +116,11 @@ private fun IrExpression?.constCopy(
   }
 }
 
-fun IrClass.implementsIntrospectable(): Boolean {
-  return superTypes.any { superType ->
-    val superClass = (superType as? IrSimpleType)?.classOrNull?.owner ?: return@any false
+fun IrClass.hasIntrospectableAnnotation(): Boolean {
+  return hasAnnotation(PikaAPI.Introspectable) ||
+    superTypes.any { (it as? IrSimpleType)?.classOrNull?.owner?.hasIntrospectableAnnotation() == true }
+}
 
-    if (superClass.kotlinFqName == Identifiers.INTROSPECTABLE_INTERFACE_NAME.withPackageName().toFq()) {
-      return@any true
-    }
-
-    superClass.implementsIntrospectable()
-  }
+fun IrSimpleFunction.takeIfHasNoBody(): IrSimpleFunction? {
+  return takeIf { it.body == null }
 }

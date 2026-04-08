@@ -3,7 +3,8 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Calculator : Introspectable {
+@Introspectable
+class Calculator {
   val value: Int = 0
 
   fun add(a: Int, b: Int): Int = a + b
@@ -15,7 +16,7 @@ class Calculator : Introspectable {
 
 fun box(): String {
   val calc = Calculator()
-  val data = calc.__PIntrospectionData()
+  val data = Calculator.__PIntrospectionData()
 
   // Check functions
   if (data.functions.isEmpty()) return "FAIL: should have functions"

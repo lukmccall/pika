@@ -12,7 +12,8 @@ val kotlinMinorVersion = kotlinVersionStr.split(".").take(2).joinToString(".")
 val mainSourceDir = when {
   kotlinVersionStr >= "2.3.20" -> "src-2.3.20+"
   kotlinVersionStr >= "2.3.0" -> "src-2.3"
-  else -> "src-2.1"  // 2.1.x and 2.2.x have the same API
+  kotlinMinorVersion >= "2.2" -> "src-2.2"  // 2.2.x has DirectDeclarationsAccess but old getContainingClassSymbol location
+  else -> "src-2.1"  // 2.1.x only
 }
 
 val testFixturesSourceDir = when {
@@ -104,6 +105,11 @@ kotlin {
   jvmToolchain(11)
   compilerOptions {
     optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+    // DirectDeclarationsAccess is required for accessing FIR declarations directly in 2.2.x+
+    // The explicit @OptIn annotations in the code use the local FirCompat annotation for source compatibility
+    if (kotlinMinorVersion >= "2.2") {
+      optIn.add("org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess")
+    }
   }
 }
 

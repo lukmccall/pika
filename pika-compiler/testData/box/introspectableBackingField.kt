@@ -3,7 +3,8 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Person(val name: String) : Introspectable {
+@Introspectable
+class Person(val name: String) {
   // Computed property without backing field
   val greeting: String
     get() = "Hello, $name"
@@ -11,7 +12,7 @@ class Person(val name: String) : Introspectable {
 
 fun box(): String {
   val person = Person("Alice")
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
   val nameProp = data.properties.find { it.name == "name" }
     ?: return "FAIL: name not found"

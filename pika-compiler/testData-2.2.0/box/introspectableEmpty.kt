@@ -3,11 +3,12 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class Empty : Introspectable
+@Introspectable
+class Empty
 
 fun box(): String {
   val empty = Empty()
-  val data = empty.__PIntrospectionData()
+  val data = Empty.__PIntrospectionData()
 
   // Check kClass
   if (data.kClass != Empty::class) return "FAIL: kClass"
@@ -19,8 +20,9 @@ fun box(): String {
   // Note: we only include functions declared directly on the class
   if (data.functions.isNotEmpty()) return "FAIL: should have no functions"
 
-  // No annotations
-  if (data.annotations.isNotEmpty()) return "FAIL: should have no annotations"
+  // Only @Introspectable annotation
+  if (data.annotations.size != 1) return "FAIL: should have 1 annotation (@Introspectable)"
+  if (data.annotations[0].kClass != Introspectable::class) return "FAIL: annotation should be @Introspectable"
 
   // No base class (Any doesn't implement Introspectable)
   if (data.baseClass != null) return "FAIL: should have no baseClass"

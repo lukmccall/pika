@@ -3,7 +3,8 @@ package test
 
 import io.github.lukmccall.pika.*
 
-object Singleton : Introspectable {
+@Introspectable
+object Singleton {
   val version: String = "1.0"
   var counter: Int = 0
 

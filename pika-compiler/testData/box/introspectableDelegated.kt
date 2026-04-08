@@ -3,7 +3,8 @@ package test
 
 import io.github.lukmccall.pika.*
 
-class DelegatedProperties : Introspectable {
+@Introspectable
+class DelegatedProperties {
   val lazyValue by lazy { 42 }
   val regularValue: String = "hello"
   val computedValue: Int get() = 100
@@ -11,7 +12,7 @@ class DelegatedProperties : Introspectable {
 
 fun box(): String {
   val instance = DelegatedProperties()
-  val data = instance.__PIntrospectionData()
+  val data = DelegatedProperties.__PIntrospectionData()
 
   // Test lazy delegated property
   val lazyProp = data.properties.find { it.name == "lazyValue" }

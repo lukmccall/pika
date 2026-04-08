@@ -16,12 +16,14 @@ open class BaseEntity(open val id: String)
 /**
  * Simple test class for Introspectable.
  */
-open class SimplePerson(val name: String) : Introspectable
+@Introspectable
+open class SimplePerson(val name: String)
 
 /**
  * Test class with delegated properties.
  */
-class DelegatedExample : Introspectable {
+@Introspectable
+class DelegatedExample {
   val lazyValue by lazy { "computed lazily" }
   val regularValue: String = "regular"
   val computedValue: Int get() = 42

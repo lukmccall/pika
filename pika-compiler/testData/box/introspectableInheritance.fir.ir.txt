@@ -1,5 +1,7 @@
 FILE fqName:test fileName:/introspectableInheritance.kt
-  CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]
+  CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[kotlin.Any]
+    annotations:
+      Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Animal
     PROPERTY name:species visibility:public modality:FINAL [val]
       FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]
@@ -12,73 +14,118 @@ FILE fqName:test fileName:/introspectableInheritance.kt
           RETURN type=kotlin.Nothing from='public final fun <get-species> (): kotlin.String declared in test.Animal'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Animal declared in test.Animal.<get-species>' type=test.Animal origin=null
+    CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Animal.Companion
+      CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Animal.Companion [primary]
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=kotlin.Unit
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL returnType:io.github.lukmccall.pika.PIntrospectionData<test.Animal>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Animal.Companion
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal.Companion'
+            CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
+              TYPE_ARG OwnerType: test.Animal
+              ARG kClass: CLASS_REFERENCE 'CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Animal>
+              ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
+                    ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
+                    ARG arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
+                      TYPE_ARG K: kotlin.String
+                      TYPE_ARG V: kotlin.Any?
+              ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.String> origin=null
+                    TYPE_ARG OwnerType: test.Animal
+                    TYPE_ARG Type: kotlin.String
+                    ARG name: CONST String type=kotlin.String value="species"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                    ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                      TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+                      ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                    ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                      ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                        ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                      ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
+                    ARG getter: FUN_EXPR type=kotlin.Function1<test.Animal, kotlin.String> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
+                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Animal
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Animal): kotlin.String declared in test.Animal.Companion.__PIntrospectionData'
+                            CALL 'public final fun <get-species> (): kotlin.String declared in test.Animal' type=kotlin.String origin=GET_PROPERTY
+                              ARG <this>: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__PIntrospectionData.<anonymous>' type=test.Animal origin=null
+                    ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
+                    ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                    ARG setter: FUN_EXPR type=kotlin.Function2<test.Animal, kotlin.String, kotlin.Unit> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
+                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Animal
+                        VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.String
+                        BLOCK_BODY
+                          CALL 'internal final fun __pika$set$species (value: kotlin.String): kotlin.Unit declared in test.Animal' type=kotlin.Unit origin=null
+                            ARG <this>: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__PIntrospectionData.<anonymous>' type=test.Animal origin=null
+                            ARG value: GET_VAR 'value: kotlin.String declared in test.Animal.Companion.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                    ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                    ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
+              ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PFunction
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                    ARG name: CONST String type=kotlin.String value="__pika$get$species"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                    ARG name: CONST String type=kotlin.String value="__pika$set$species"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+              ARG baseClass: CONST Null type=kotlin.Nothing? value=null
     CONSTRUCTOR visibility:public returnType:test.Animal [primary]
       VALUE_PARAMETER kind:Regular name:species index:0 type:kotlin.String
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.Introspectable
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.Introspectable
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
-        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.Introspectable
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<test.Animal>
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$species visibility:internal modality:FINAL returnType:kotlin.String
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Animal
       BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public open fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal'
-          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
-            TYPE_ARG OwnerType: test.Animal
-            ARG kClass: CLASS_REFERENCE 'CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Animal>
-            ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-            ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.String> origin=null
-                  TYPE_ARG OwnerType: test.Animal
-                  TYPE_ARG Type: kotlin.String
-                  ARG name: CONST String type=kotlin.String value="species"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                  ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                    TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-                    ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-                      ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
-                    ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                  ARG getter: FUN_EXPR type=kotlin.Function1<test.Animal, kotlin.String> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
-                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Animal
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Animal): kotlin.String declared in test.Animal.__PIntrospectionData'
-                          CALL 'public final fun <get-species> (): kotlin.String declared in test.Animal' type=kotlin.String origin=GET_PROPERTY
-                            ARG <this>: GET_VAR 'owner: test.Animal declared in test.Animal.__PIntrospectionData.<anonymous>' type=test.Animal origin=null
-                  ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
-                  ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                  ARG setter: FUN_EXPR type=kotlin.Function2<test.Animal, kotlin.String, kotlin.Unit> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
-                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Animal
-                      VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.String
-                      BLOCK_BODY
-                        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
-                          receiver: GET_VAR 'owner: test.Animal declared in test.Animal.__PIntrospectionData.<anonymous>' type=test.Animal origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Animal.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
-                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
-                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
-            ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PFunction
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-            ARG baseClass: CONST Null type=kotlin.Nothing? value=null
+        RETURN type=kotlin.Nothing from='internal final fun __pika$get$species (): kotlin.String declared in test.Animal'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            receiver: GET_VAR '<this>: test.Animal declared in test.Animal.__pika$get$species' type=test.Animal origin=null
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$species visibility:internal modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Animal
+      VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] kind:Regular name:value index:1 type:kotlin.String
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: test.Animal declared in test.Animal.__pika$set$species' type=test.Animal origin=null
+          value: GET_VAR 'value: kotlin.String declared in test.Animal.__pika$set$species' type=kotlin.String origin=null
   CLASS CLASS name:Dog modality:FINAL visibility:public superTypes:[test.Animal]
+    annotations:
+      Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Dog
     PROPERTY name:breed visibility:public modality:FINAL [val]
       FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]
@@ -91,6 +138,85 @@ FILE fqName:test fileName:/introspectableInheritance.kt
           RETURN type=kotlin.Nothing from='public final fun <get-breed> (): kotlin.String declared in test.Dog'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Dog declared in test.Dog.<get-breed>' type=test.Dog origin=null
+    CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Dog.Companion
+      CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Dog.Companion [primary]
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=kotlin.Unit
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL returnType:io.github.lukmccall.pika.PIntrospectionData<test.Dog>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Dog.Companion
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog.Companion'
+            CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
+              TYPE_ARG OwnerType: test.Dog
+              ARG kClass: CLASS_REFERENCE 'CLASS CLASS name:Dog modality:FINAL visibility:public superTypes:[test.Animal]' type=kotlin.reflect.KClass<test.Dog>
+              ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
+                    ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
+                    ARG arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
+                      TYPE_ARG K: kotlin.String
+                      TYPE_ARG V: kotlin.Any?
+              ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.String> origin=null
+                    TYPE_ARG OwnerType: test.Dog
+                    TYPE_ARG Type: kotlin.String
+                    ARG name: CONST String type=kotlin.String value="breed"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                    ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                      TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+                      ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                    ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                      ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                        ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                      ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
+                    ARG getter: FUN_EXPR type=kotlin.Function1<test.Dog, kotlin.String> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
+                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Dog
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Dog): kotlin.String declared in test.Dog.Companion.__PIntrospectionData'
+                            CALL 'public final fun <get-breed> (): kotlin.String declared in test.Dog' type=kotlin.String origin=GET_PROPERTY
+                              ARG <this>: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__PIntrospectionData.<anonymous>' type=test.Dog origin=null
+                    ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
+                    ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                    ARG setter: FUN_EXPR type=kotlin.Function2<test.Dog, kotlin.String, kotlin.Unit> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
+                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Dog
+                        VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.String
+                        BLOCK_BODY
+                          CALL 'internal final fun __pika$set$breed (value: kotlin.String): kotlin.Unit declared in test.Dog' type=kotlin.Unit origin=null
+                            ARG <this>: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__PIntrospectionData.<anonymous>' type=test.Dog origin=null
+                            ARG value: GET_VAR 'value: kotlin.String declared in test.Dog.Companion.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                    ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                    ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
+              ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+                TYPE_ARG T: io.github.lukmccall.pika.PFunction
+                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                    ARG name: CONST String type=kotlin.String value="__pika$get$breed"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                    ARG name: CONST String type=kotlin.String value="__pika$set$breed"
+                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+              ARG baseClass: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
+                ARG <this>: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Animal.Companion
     CONSTRUCTOR visibility:public returnType:test.Dog [primary]
       VALUE_PARAMETER kind:Regular name:species index:0 type:kotlin.String
       VALUE_PARAMETER kind:Regular name:breed index:1 type:kotlin.String
@@ -98,6 +224,15 @@ FILE fqName:test fileName:/introspectableInheritance.kt
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (species: kotlin.String) declared in test.Animal'
           ARG species: GET_VAR 'species: kotlin.String declared in test.Dog.<init>' type=kotlin.String origin=null
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Dog modality:FINAL visibility:public superTypes:[test.Animal]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:__pika$get$species visibility:internal modality:FINAL returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Animal
+      overridden:
+        internal final fun __pika$get$species (): kotlin.String declared in test.Animal
+    FUN FAKE_OVERRIDE name:__pika$set$species visibility:internal modality:FINAL returnType:kotlin.Unit [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Animal
+      VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.String
+      overridden:
+        internal final fun __pika$set$species (value: kotlin.String): kotlin.Unit declared in test.Animal
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -111,57 +246,19 @@ FILE fqName:test fileName:/introspectableInheritance.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in test.Animal
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL returnType:io.github.lukmccall.pika.PIntrospectionData<test.Dog>
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$breed visibility:internal modality:FINAL returnType:kotlin.String
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Dog
-      overridden:
-        public open fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal
       BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog'
-          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
-            TYPE_ARG OwnerType: test.Dog
-            ARG kClass: CLASS_REFERENCE 'CLASS CLASS name:Dog modality:FINAL visibility:public superTypes:[test.Animal]' type=kotlin.reflect.KClass<test.Dog>
-            ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-            ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.String> origin=null
-                  TYPE_ARG OwnerType: test.Dog
-                  TYPE_ARG Type: kotlin.String
-                  ARG name: CONST String type=kotlin.String value="breed"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                  ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                    TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-                    ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-                      ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
-                    ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                  ARG getter: FUN_EXPR type=kotlin.Function1<test.Dog, kotlin.String> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
-                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Dog
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Dog): kotlin.String declared in test.Dog.__PIntrospectionData'
-                          CALL 'public final fun <get-breed> (): kotlin.String declared in test.Dog' type=kotlin.String origin=GET_PROPERTY
-                            ARG <this>: GET_VAR 'owner: test.Dog declared in test.Dog.__PIntrospectionData.<anonymous>' type=test.Dog origin=null
-                  ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
-                  ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                  ARG setter: FUN_EXPR type=kotlin.Function2<test.Dog, kotlin.String, kotlin.Unit> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
-                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Dog
-                      VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.String
-                      BLOCK_BODY
-                        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
-                          receiver: GET_VAR 'owner: test.Dog declared in test.Dog.__PIntrospectionData.<anonymous>' type=test.Dog origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Dog.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
-                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
-                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
-            ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
-              TYPE_ARG T: io.github.lukmccall.pika.PFunction
-              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-            ARG baseClass: CALL 'public open fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal' superQualifier='CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
-              ARG <this>: GET_VAR '<this>: test.Dog declared in test.Dog.__PIntrospectionData' type=test.Dog origin=null
+        RETURN type=kotlin.Nothing from='internal final fun __pika$get$breed (): kotlin.String declared in test.Dog'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            receiver: GET_VAR '<this>: test.Dog declared in test.Dog.__pika$get$breed' type=test.Dog origin=null
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$breed visibility:internal modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Dog
+      VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] kind:Regular name:value index:1 type:kotlin.String
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: test.Dog declared in test.Dog.__pika$set$breed' type=test.Dog origin=null
+          value: GET_VAR 'value: kotlin.String declared in test.Dog.__pika$set$breed' type=kotlin.String origin=null
     PROPERTY FAKE_OVERRIDE name:species visibility:public modality:FINAL [fake_override,val]
       overridden:
         public final species: kotlin.String declared in test.Animal
@@ -177,8 +274,8 @@ FILE fqName:test fileName:/introspectableInheritance.kt
           ARG species: CONST String type=kotlin.String value="Canine"
           ARG breed: CONST String type=kotlin.String value="Labrador"
       VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
-          ARG <this>: GET_VAR 'val dog: test.Dog declared in test.box' type=test.Dog origin=null
+        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
+          ARG <this>: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Dog.Companion
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
@@ -226,7 +323,7 @@ FILE fqName:test fileName:/introspectableInheritance.kt
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.reflect.KClass<out kotlin.Any> origin=GET_PROPERTY
                 ARG <this>: GET_VAR 'val baseData: io.github.lukmccall.pika.PIntrospectionData<*> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<*> origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Animal>
+              ARG arg1: CLASS_REFERENCE 'CLASS CLASS name:Animal modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Animal>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: baseClass should be Animal"
       WHEN type=kotlin.Unit origin=IF

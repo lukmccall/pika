@@ -9,21 +9,22 @@ annotation class MyAnnotation(val value: String)
 @Target(AnnotationTarget.PROPERTY)
 annotation class Deprecated(val reason: String)
 
+@Introspectable
 @MyAnnotation("class level")
 class Person(
   @MyAnnotation("property level")
   @Deprecated("use fullName instead")
   val name: String
-) : Introspectable
+)
 
 fun box(): String {
   val person = Person("Alice")
-  val data = person.__PIntrospectionData()
+  val data = Person.__PIntrospectionData()
 
-  // Class annotation
-  if (data.annotations.size != 1) return "FAIL: expected 1 class annotation"
-  val classAnnotation = data.annotations[0]
-  if (classAnnotation.kClass != MyAnnotation::class) return "FAIL: class annotation kClass"
+  // Class annotations (includes @Introspectable and @MyAnnotation)
+  if (data.annotations.size != 2) return "FAIL: expected 2 class annotations, got ${data.annotations.size}"
+  val classAnnotation = data.annotations.find { it.kClass == MyAnnotation::class }
+    ?: return "FAIL: MyAnnotation not found on class"
   if (classAnnotation.arguments["value"] != "class level") return "FAIL: class annotation value"
 
   // Property annotations
