@@ -2,6 +2,8 @@ package sample
 
 import io.github.lukmccall.pika.*
 import java.io.Serializable
+import kotlin.reflect.KClass
+import kotlin.reflect.typeOf
 
 /**
  * Example annotation for testing.
@@ -68,7 +70,7 @@ fun main() {
       Visibility.INTERNAL -> "internal"
     }
     val mutabilityStr = if (field.isMutable) "var" else "val"
-    println("  - $visibilityStr $mutabilityStr ${field.name}: ${formatTypeInfo(field.typeInfo)}")
+    println("  - $visibilityStr $mutabilityStr ${field.name}: ${formatPTypeDescriptor(field.pTypeDescriptor)}")
     if (field.annotations.isNotEmpty()) {
       for (annotation in field.annotations) {
         println("      @${annotation.className}")
@@ -77,58 +79,58 @@ fun main() {
   }
   println()
 
-  println("=== typeInfo<T>() Examples (basic type info) ===")
+  println("=== pTypeDescriptorOf<T>() Examples (basic type info) ===")
   println()
 
   // Simple types
   println("Simple types:")
-  println("  typeInfo<String>(): ${formatTypeInfo(typeInfo<String>())}")
-  println("  typeInfo<Int>(): ${formatTypeInfo(typeInfo<Int>())}")
-  println("  typeInfo<Boolean>(): ${formatTypeInfo(typeInfo<Boolean>())}")
+  println("  pTypeDescriptorOf<String>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String>())}")
+  println("  pTypeDescriptorOf<Int>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int>())}")
+  println("  pTypeDescriptorOf<Boolean>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Boolean>())}")
   println()
 
   // Nullable types
   println("Nullable types:")
-  println("  typeInfo<Int?>(): ${formatTypeInfo(typeInfo<Int?>())}")
-  println("  typeInfo<String?>(): ${formatTypeInfo(typeInfo<String?>())}")
+  println("  pTypeDescriptorOf<Int?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int?>())}")
+  println("  pTypeDescriptorOf<String?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String?>())}")
   println()
 
   // Parameterized types
   println("Parameterized types:")
-  println("  typeInfo<List<String>>(): ${formatTypeInfo(typeInfo<List<String>>())}")
-  println("  typeInfo<Map<String, Int>>(): ${formatTypeInfo(typeInfo<Map<String, Int>>())}")
+  println("  pTypeDescriptorOf<List<String>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<String>>())}")
+  println("  pTypeDescriptorOf<Map<String, Int>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, Int>>())}")
   println()
 
   // Nested generics
   println("Nested generics:")
-  println("  typeInfo<Map<String, List<Int?>>>(): ${formatTypeInfo(typeInfo<Map<String, List<Int?>>>())}")
+  println("  pTypeDescriptorOf<Map<String, List<Int?>>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, List<Int?>>>())}")
   println()
 
   // Star projections
   println("Star projections:")
-  println("  typeInfo<List<*>>(): ${formatTypeInfo(typeInfo<List<*>>())}")
+  println("  pTypeDescriptorOf<List<*>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<*>>())}")
   println()
 
   // Class types
   println("Class types:")
-  println("  typeInfo<User>(): ${formatTypeInfo(typeInfo<User>())}")
-  println("  typeInfo<User?>(): ${formatTypeInfo(typeInfo<User?>())}")
+  println("  pTypeDescriptorOf<User>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User>())}")
+  println("  pTypeDescriptorOf<User?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User?>())}")
   println()
 
   // Inline proxy function test
-  println("Inline proxy function (typeInfo through inline function):")
-  println("  proxy<String>(): ${formatTypeInfo(proxy<String>())}")
-  println("  proxy<List<Int?>>(): ${formatTypeInfo(proxy<List<Int?>>())}")
+  println("Inline proxy function (pTypeDescriptorOf through inline function):")
+  println("  proxy<String>(): ${formatPTypeDescriptor(proxy<String>())}")
+  println("  proxy<List<Int?>>(): ${formatPTypeDescriptor(proxy<List<Int?>>())}")
   println()
 
   // Inline nested proxy function test
-  println("Inline nested proxy function (typeInfo through inline function):")
-  println("  proxy2<String>(): ${formatTypeInfo(proxy2<String>())}")
-  println("  proxy2<List<Int?>>(): ${formatTypeInfo(proxy2<List<Int?>>())}")
+  println("Inline nested proxy function (pTypeDescriptorOf through inline function):")
+  println("  proxy2<String>(): ${formatPTypeDescriptor(proxy2<String>())}")
+  println("  proxy2<List<Int?>>(): ${formatPTypeDescriptor(proxy2<List<Int?>>())}")
   println()
 
   // generic function test (non-reified - throws exception)
-  println("generic function (typeInfo through non-reified generic function):")
+  println("generic function (pTypeDescriptorOf through non-reified generic function):")
   try {
     generic<String>()
   } catch (e: IllegalStateException) {
@@ -137,28 +139,26 @@ fun main() {
 }
 
 /**
- * Inline proxy function that calls typeInfo<T>().
- * This tests that typeInfo works correctly through inline functions.
+ * Inline proxy function that calls pTypeDescriptorOf<T>().
+ * This tests that pTypeDescriptorOf works correctly through inline functions.
  */
-inline fun <reified T> proxy(): TypeInfo = typeInfo<T>()
-inline fun <reified T> proxy2(): TypeInfo = proxy<T>()
+inline fun <reified T> proxy(): PTypeDescriptor = pTypeDescriptorOf<T>()
+inline fun <reified T> proxy2(): PTypeDescriptor = proxy<T>()
 
-fun <T> generic(): TypeInfo? = typeInfo<T>()
+fun <T> generic(): PTypeDescriptor = pTypeDescriptorOf<T>()
 /**
- * Helper function to format TypeInfo for display.
+ * Helper function to format PTypeDescriptor for display.
  */
-fun formatTypeInfo(info: TypeInfo?): String = when (info) {
+fun formatPTypeDescriptor(info: PTypeDescriptor?): String = when (info) {
   null -> "null"
-  is TypeInfo.Simple -> {
+  is PTypeDescriptor.Concrete.Parameterized -> {
     val nullable = if (info.isNullable) "?" else ""
-    "${info.typeName}$nullable"
+    val args = info.argumentsPTypes.joinToString(", ") { formatPTypeDescriptor(it) }
+    "${info.pType.kClass.qualifiedName}<$args>$nullable"
   }
-
-  is TypeInfo.Parameterized -> {
+  is PTypeDescriptor.Concrete -> {
     val nullable = if (info.isNullable) "?" else ""
-    val args = info.typeArguments.joinToString(", ") { formatTypeInfo(it) }
-    "${info.typeName}<$args>$nullable"
+    "${info.pType.kClass.qualifiedName}$nullable"
   }
-
-  is TypeInfo.Star -> "*"
+  is PTypeDescriptor.Star -> "*"
 }

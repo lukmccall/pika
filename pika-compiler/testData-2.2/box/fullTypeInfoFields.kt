@@ -20,27 +20,27 @@ fun box(): String {
     ?: return "FAIL: name not found"
   if (nameFieldInfo.visibility != Visibility.PUBLIC) return "FAIL: name should be PUBLIC"
   if (nameFieldInfo.isMutable) return "FAIL: name should not be mutable"
-  val nameFieldType = nameFieldInfo.typeInfo as? TypeInfo.Simple
-    ?: return "FAIL: name typeInfo should be Simple"
-  if (nameFieldType.typeName != "kotlin.String") return "FAIL: name typeName"
+  val nameFieldType = nameFieldInfo.pTypeDescriptor as? PTypeDescriptor.Concrete
+    ?: return "FAIL: name pTypeDescriptor should be Concrete"
+  if (nameFieldType.pType.kClass != String::class) return "FAIL: name kClass"
 
   // Test age field
   val ageFieldInfo = fullPersonInfo.fields.find { it.name == "age" }
     ?: return "FAIL: age not found"
   if (ageFieldInfo.visibility != Visibility.PRIVATE) return "FAIL: age should be PRIVATE but got ${ageFieldInfo.visibility}"
   if (!ageFieldInfo.isMutable) return "FAIL: age should be mutable"
-  val ageFieldType = ageFieldInfo.typeInfo as? TypeInfo.Simple
-    ?: return "FAIL: age typeInfo should be Simple"
-  if (ageFieldType.typeName != "kotlin.Int") return "FAIL: age typeName"
+  val ageFieldType = ageFieldInfo.pTypeDescriptor as? PTypeDescriptor.Concrete
+    ?: return "FAIL: age pTypeDescriptor should be Concrete"
+  if (ageFieldType.pType.kClass != Int::class) return "FAIL: age kClass"
 
   // Test tags field
   val tagsFieldInfo = fullPersonInfo.fields.find { it.name == "tags" }
     ?: return "FAIL: tags not found"
   if (tagsFieldInfo.visibility != Visibility.PUBLIC) return "FAIL: tags should be PUBLIC"
   if (tagsFieldInfo.isMutable) return "FAIL: tags should not be mutable"
-  val tagsFieldType = tagsFieldInfo.typeInfo as? TypeInfo.Parameterized
-    ?: return "FAIL: tags typeInfo should be Parameterized"
-  if (tagsFieldType.typeName != "kotlin.collections.List") return "FAIL: tags typeName"
+  val tagsFieldType = tagsFieldInfo.pTypeDescriptor as? PTypeDescriptor.Concrete.Parameterized
+    ?: return "FAIL: tags pTypeDescriptor should be Parameterized"
+  if (tagsFieldType.pType.kClass != List::class) return "FAIL: tags kClass"
 
   return "OK"
 }

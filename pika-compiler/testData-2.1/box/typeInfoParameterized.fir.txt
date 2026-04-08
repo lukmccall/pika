@@ -2,86 +2,68 @@ FILE: typeInfoParameterized.kt
     package test
 
     public final fun box(): R|kotlin/String| {
-        lval listStringInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|kotlin/collections/List<kotlin/String>|>()
+        lval listStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/List<kotlin/String>|>()
         when () {
-            (R|<local>/listStringInfo| !is R|io/github/lukmccall/pika/TypeInfo.Parameterized|) ->  {
+            (R|<local>/listStringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: List<String> should be Parameterized)
             }
         }
 
         when () {
-            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|, String(kotlin.collections.List)) ->  {
-                ^box <strcat>(String(FAIL: List<String> typeName expected kotlin.collections.List but got ), R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|)
-            }
-        }
-
-        when () {
-            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
+            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
                 ^box String(FAIL: List<String> kClass)
             }
         }
 
         when () {
-            R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.isNullable| ->  {
+            R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable| ->  {
                 ^box String(FAIL: List<String> should not be nullable)
             }
         }
 
         when () {
-            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: List<String> should have 1 type argument)
             }
         }
 
-        lval listArg: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/listStringInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(0)) as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: List<String> arg should be Simple)
+        lval listArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: List<String> arg should be Concrete)
         when () {
-            !=(R|<local>/listArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.String)) ->  {
-                ^box String(FAIL: List<String> arg typeName)
-            }
-        }
-
-        when () {
-            !=(R|<local>/listArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+            !=(R|<local>/listArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
                 ^box String(FAIL: List<String> arg kClass)
             }
         }
 
-        lval mapInfo: R|io/github/lukmccall/pika/TypeInfo| = R|io/github/lukmccall/pika/typeInfo|<R|kotlin/collections/Map<kotlin/String, kotlin/Int>|>()
+        lval mapInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/Map<kotlin/String, kotlin/Int>|>()
         when () {
-            (R|<local>/mapInfo| !is R|io/github/lukmccall/pika/TypeInfo.Parameterized|) ->  {
+            (R|<local>/mapInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: Map<String, Int> should be Parameterized)
             }
         }
 
         when () {
-            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|, String(kotlin.collections.Map)) ->  {
-                ^box <strcat>(String(FAIL: Map<String, Int> typeName expected kotlin.collections.Map but got ), R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|)
-            }
-        }
-
-        when () {
-            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.kClass|, <getClass>(Q|kotlin/collections/Map|)) ->  {
+            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/Map|)) ->  {
                 ^box String(FAIL: Map<String, Int> kClass)
             }
         }
 
         when () {
-            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box String(FAIL: Map<String, Int> should have 2 type arguments)
             }
         }
 
-        lval mapKeyArg: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(0)) as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: Map key should be Simple)
+        lval mapKeyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map key should be Concrete)
         when () {
-            !=(R|<local>/mapKeyArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.String)) ->  {
-                ^box String(FAIL: Map key typeName)
+            !=(R|<local>/mapKeyArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+                ^box String(FAIL: Map key kClass)
             }
         }
 
-        lval mapValueArg: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeArguments|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/TypeInfo|>|(Int(1)) as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: Map value should be Simple)
+        lval mapValueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map value should be Concrete)
         when () {
-            !=(R|<local>/mapValueArg|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.Int)) ->  {
-                ^box String(FAIL: Map value typeName)
+            !=(R|<local>/mapValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+                ^box String(FAIL: Map value kClass)
             }
         }
 

@@ -31,13 +31,16 @@ class BytecodePoet(
   // The multi dollar syntax isn't available in kotlin 2.1.20
   @Suppress("CanConvertToMultiDollarString")
   companion object {
-    private val typeInfoSimpleType: Type = Type.getObjectType("io/github/lukmccall/pika/TypeInfo\$Simple")
-    private val typeInfoParameterizedType: Type =
-      Type.getObjectType("io/github/lukmccall/pika/TypeInfo\$Parameterized")
-    private val typeInfoStarType: Type = Type.getObjectType("io/github/lukmccall/pika/TypeInfo\$Star")
+    private val pTypeType: Type = Type.getObjectType("io/github/lukmccall/pika/PType")
+    private val pTypeDescriptorConcreteType: Type =
+      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Concrete")
+    private val pTypeDescriptorParameterizedType: Type =
+      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Concrete\$Parameterized")
+    private val pTypeDescriptorStarType: Type =
+      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Star")
     private val listType: Type = Type.getObjectType("java/util/List")
 
-    val typeInfoType: Type = Type.getObjectType("io/github/lukmccall/pika/TypeInfo")
+    val pTypeDescriptorType: Type = Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor")
   }
 
   /**
@@ -60,58 +63,70 @@ class BytecodePoet(
   }
 
   /**
-   * new TypeInfo.Simple({typeName}, {kClass}, {isNullable})
+   * new PType({kClass})
    */
-  fun initSimpleTypeInfo(
-    typeName: String,
-    irClass: IrClass,
-    isNullable: Boolean
+  private fun initPType(
+    irClass: IrClass
   ) = adapter.apply {
-    anew(typeInfoSimpleType)
+    anew(pTypeType)
     dup()
-    aconst(typeName)
     aconst(irClass.toGeneric())
     AsmUtil.wrapJavaClassIntoKClass(this)
-    iconst(if (isNullable) 1 else 0)
     invokespecial(
-      typeInfoSimpleType.internalName,
+      pTypeType.internalName,
       "<init>",
-      "(Ljava/lang/String;${AsmTypes.K_CLASS_TYPE.descriptor}Z)V",
+      "(${AsmTypes.K_CLASS_TYPE.descriptor})V",
       false
     )
   }
 
   /**
-   * new TypeInfo.Parameterized({typeName}, {kClass}, {isNullable}, initTypeInfo(*{typeArguments}))
+   * new PTypeDescriptor.Concrete({PType}, {isNullable})
    */
-  fun initParameterizedTypeInfo(
-    typeName: String,
+  fun initConcretePTypeDescriptor(
+    irClass: IrClass,
+    isNullable: Boolean
+  ) = adapter.apply {
+    anew(pTypeDescriptorConcreteType)
+    dup()
+    initPType(irClass)
+    iconst(if (isNullable) 1 else 0)
+    invokespecial(
+      pTypeDescriptorConcreteType.internalName,
+      "<init>",
+      "(${pTypeType.descriptor}Z)V",
+      false
+    )
+  }
+
+  /**
+   * new PTypeDescriptor.Concrete.Parameterized({PType}, {isNullable}, initPTypeDescriptor(*{argumentsPTypes}))
+   */
+  fun initParameterizedPTypeDescriptor(
     irClass: IrClass,
     isNullable: Boolean,
-    typeArguments: List<IrTypeArgument>
+    argumentsPTypes: List<IrTypeArgument>
   ) = adapter.apply {
-    anew(typeInfoParameterizedType)
+    anew(pTypeDescriptorParameterizedType)
     dup()
-    aconst(typeName)
-    aconst(irClass.toGeneric())
-    AsmUtil.wrapJavaClassIntoKClass(this)
+    initPType(irClass)
     iconst(if (isNullable) 1 else 0)
 
     // Create list of type arguments
-    iconst(typeArguments.size)
-    newarray(typeInfoType)
+    iconst(argumentsPTypes.size)
+    newarray(pTypeDescriptorType)
 
-    typeArguments.forEachIndexed { index, arg ->
+    argumentsPTypes.forEachIndexed { index, arg ->
       dup()
       iconst(index)
       when (arg) {
-        is IrTypeProjection -> initTypeInfo(arg.type)
+        is IrTypeProjection -> initPTypeDescriptor(arg.type)
         is IrStarProjection -> {
-          // TypeInfo.Star is an object
-          getstatic(typeInfoStarType.internalName, "INSTANCE", typeInfoStarType.descriptor)
+          // PTypeDescriptor.Star is an object
+          getstatic(pTypeDescriptorStarType.internalName, "INSTANCE", pTypeDescriptorStarType.descriptor)
         }
       }
-      astore(typeInfoType)
+      astore(pTypeDescriptorType)
     }
 
     // Call kotlin.collections.ArraysKt.asList()
@@ -123,23 +138,22 @@ class BytecodePoet(
     )
 
     invokespecial(
-      typeInfoParameterizedType.internalName,
+      pTypeDescriptorParameterizedType.internalName,
       "<init>",
-      "(Ljava/lang/String;${AsmTypes.K_CLASS_TYPE.descriptor}Z${listType.descriptor})V",
+      "(${pTypeType.descriptor}Z${listType.descriptor})V",
       false
     )
   }
 
   /**
-   * new TypeInfo.Simple or TypeInfo.Parameterized
+   * new PTypeDescriptor.Concrete or PTypeDescriptor.Concrete.Parameterized
    */
-  fun initTypeInfo(
+  fun initPTypeDescriptor(
     type: IrType
   ) {
     val simpleType = type as? IrSimpleType
     if (simpleType == null) {
-      initSimpleTypeInfo(
-        "Unknown",
+      initConcretePTypeDescriptor(
         irPluginContext.irBuiltIns.anyClass.owner,
         false
       )
@@ -148,27 +162,22 @@ class BytecodePoet(
 
     val irClass = simpleType.classOrNull?.owner
     if (irClass == null) {
-      initSimpleTypeInfo(
-        "Unknown",
+      initConcretePTypeDescriptor(
         irPluginContext.irBuiltIns.anyClass.owner,
         false
       )
       return
     }
 
-    val typeName = irClass.kotlinFqName.asString()
     val isNullable = simpleType.isMarkedNullable()
 
     if (simpleType.arguments.isEmpty()) {
-
-      initSimpleTypeInfo(
-        typeName,
+      initConcretePTypeDescriptor(
         irClass,
         isNullable
       )
     } else {
-      initParameterizedTypeInfo(
-        typeName,
+      initParameterizedPTypeDescriptor(
         irClass,
         isNullable,
         simpleType.arguments
@@ -190,12 +199,12 @@ class BytecodePoet(
       adapter,
       typeSystem
     )
-    // Call throwNonReifiedTypeError() which throws at runtime if not inlined.
+    // Call throwNonReifiedPTypeDescriptorError() which throws at runtime if not inlined.
     // When inlined, removeReifyMarker() will remove this instruction.
     invokestatic(
       "io/github/lukmccall/pika/TypeInfoKt",
-      "throwNonReifiedTypeError",
-      "()Lio/github/lukmccall/pika/TypeInfo;",
+      "throwNonReifiedPTypeDescriptorError",
+      "()Lio/github/lukmccall/pika/PTypeDescriptor;",
       false
     )
     // Emit plugin-specific marker so rewritePluginDefinedOperationMarker knows to handle this
@@ -220,17 +229,17 @@ class BytecodePoet(
     }
 
     val functionName = markerString.removePackageName()
-    if (functionName != Identifiers.TYPE_INFO_FUNCTION_NAME && functionName != Identifiers.FULL_TYPE_INFO_FUNCTION_NAME) {
+    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME && functionName != Identifiers.FULL_TYPE_INFO_FUNCTION_NAME) {
       return null
     }
 
     // Remove the marker instructions: throw, marker string, voidMagicApiCall
-    val throwNonReifiedTypeInsn = reifiedInsn
+    val throwNonReifiedPTypeDescriptorInsn = reifiedInsn
     val voidMagicCallInsn = markerStringInsn.next
 
     instructions.remove(voidMagicCallInsn)
     instructions.remove(markerStringInsn)
-    instructions.remove(throwNonReifiedTypeInsn)
+    instructions.remove(throwNonReifiedPTypeDescriptorInsn)
 
     return functionName
   }

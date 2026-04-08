@@ -20,17 +20,17 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 
 /**
- * JVM intrinsic support for typeInfo<T>() and fullTypeInfo<T>() functions.
+ * JVM intrinsic support for pTypeDescriptorOf<T>() and fullTypeInfo<T>() functions.
  *
  * This is necessary because IrGenerationExtension runs BEFORE inline functions are inlined.
- * When typeInfo<T>() is called through an inline proxy function like:
+ * When pTypeDescriptorOf<T>() is called through an inline proxy function like:
  *
  * ```kotlin
- * inline fun <reified T> proxy() = typeInfo<T>()
+ * inline fun <reified T> proxy() = pTypeDescriptorOf<T>()
  * fun main() { println(proxy<String>()) }
  * ```
  *
- * At IR generation time, typeInfo<T>() inside proxy still has T as a type parameter.
+ * At IR generation time, pTypeDescriptorOf<T>() inside proxy still has T as a type parameter.
  * The intrinsic extension runs during codegen AFTER inlining, so it sees the concrete type String.
  */
 class PikaJvmIrIntrinsicSupport(
@@ -42,9 +42,8 @@ class PikaJvmIrIntrinsicSupport(
 
   override fun getIntrinsic(symbol: IrFunctionSymbol): IntrinsicMethod? {
     val functionName = isTargetMethod(symbol) ?: return null
-    return TypeInfoIntrinsicMethod(functionName)
+    return PTypeDescriptorIntrinsicMethod(functionName)
   }
-
 
   override fun rewritePluginDefinedOperationMarker(
     v: InstructionAdapter,
@@ -55,7 +54,7 @@ class PikaJvmIrIntrinsicSupport(
     val bytecodePoet = createBytecodePoet(adapter = v)
 
     val functionName = bytecodePoet.removeReifyMarker(reifiedInsn, instructions) ?: return false
-    generateTypeInfo(type, bytecodePoet, functionName)
+    generatePTypeDescriptor(type, bytecodePoet, functionName)
 
     return true
   }
@@ -65,15 +64,15 @@ class PikaJvmIrIntrinsicSupport(
     val fqName = function.fqNameWhenAvailable?.asString() ?: return null
 
     return when (fqName) {
-      Identifiers.TYPE_INFO_FUNCTION_NAME.withPackageName() -> Identifiers.TYPE_INFO_FUNCTION_NAME
+      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
       Identifiers.FULL_TYPE_INFO_FUNCTION_NAME.withPackageName() -> Identifiers.FULL_TYPE_INFO_FUNCTION_NAME
-      "TypeInfoKt.${Identifiers.TYPE_INFO_FUNCTION_NAME}".withPackageName() -> Identifiers.TYPE_INFO_FUNCTION_NAME
+      "TypeInfoKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
       "TypeInfoKt.${Identifiers.FULL_TYPE_INFO_FUNCTION_NAME}".withPackageName() -> Identifiers.FULL_TYPE_INFO_FUNCTION_NAME
       else -> null
     }
   }
 
-  inner class TypeInfoIntrinsicMethod(private val functionName: String) : IntrinsicMethod() {
+  inner class PTypeDescriptorIntrinsicMethod(private val functionName: String) : IntrinsicMethod() {
     override fun invoke(
       expression: IrFunctionAccessExpression,
       codegen: ExpressionCodegen,
@@ -86,18 +85,18 @@ class PikaJvmIrIntrinsicSupport(
       with(codegen) {
         expression.markLineNumber(startOffset = true)
 
-        generateTypeInfo(typeArgument, bytecodePoet, functionName)
+        generatePTypeDescriptor(typeArgument, bytecodePoet, functionName)
       }
 
       codegen.propagateChildReifiedTypeParametersUsages(
         codegen.typeMapper.typeSystem.extractUsedReifiedParameters(typeArgument)
       )
 
-      return MaterialValue(codegen, BytecodePoet.typeInfoType, expression.type)
+      return MaterialValue(codegen, BytecodePoet.pTypeDescriptorType, expression.type)
     }
   }
 
-  private fun generateTypeInfo(type: IrType, bytecodePoet: BytecodePoet, functionName: String) {
+  private fun generatePTypeDescriptor(type: IrType, bytecodePoet: BytecodePoet, functionName: String) {
     val typeDescriptor = with(typeSystemContext) {
       type.typeConstructor().getTypeParameterClassifier()
     }
@@ -109,7 +108,7 @@ class PikaJvmIrIntrinsicSupport(
 
     with(bytecodePoet) {
       when (functionName) {
-        Identifiers.TYPE_INFO_FUNCTION_NAME -> initTypeInfo(type)
+        Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> initPTypeDescriptor(type)
         Identifiers.FULL_TYPE_INFO_FUNCTION_NAME -> throwNotImplementedError("fullTypeInfo<T>() through inline functions is not yet supported")
       }
     }

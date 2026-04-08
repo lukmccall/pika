@@ -2,7 +2,7 @@ package io.github.lukmccall.pika
 
 object Identifiers {
   const val PACKAGE_NAME = "io.github.lukmccall.pika"
-  const val TYPE_INFO_FUNCTION_NAME = "typeInfo"
+  const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
   const val FULL_TYPE_INFO_FUNCTION_NAME = "fullTypeInfo"
 
   fun String.withPackageName(): String {
@@ -13,4 +13,3 @@ object Identifiers {
     return this.removePrefix("$PACKAGE_NAME.")
   }
 }
-

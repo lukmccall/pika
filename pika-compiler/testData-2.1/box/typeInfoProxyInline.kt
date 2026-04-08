@@ -5,11 +5,11 @@ package test
 
 import io.github.lukmccall.pika.*
 
-inline fun <reified T> proxy() = typeInfo<T>()
+inline fun <reified T> proxy() = pTypeDescriptorOf<T>()
 
 fun box(): String {
   val info = proxy<String>()
-  if (info !is TypeInfo.Simple) return "FAIL: should be Simple"
-  if (info.typeName != "kotlin.String") return "FAIL: expected kotlin.String got ${info.typeName}"
+  if (info !is PTypeDescriptor.Concrete) return "FAIL: should be Concrete"
+  if (info.pType.kClass != String::class) return "FAIL: expected String::class got ${info.pType.kClass}"
   return "OK"
 }

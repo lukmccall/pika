@@ -7,12 +7,14 @@ import org.jetbrains.kotlin.name.Name
 object PikaAPI {
   private val API_PACKAGE = FqName("io.github.lukmccall.pika")
 
-  object TypeInfo {
-    val Root = ClassId(API_PACKAGE, Name.identifier("TypeInfo"))
+  val PType = ClassId(API_PACKAGE, Name.identifier("PType"))
 
-    val Simple = ClassId(API_PACKAGE, FqName("TypeInfo.Simple"), isLocal = false)
-    val Parameterized = ClassId(API_PACKAGE, FqName("TypeInfo.Parameterized"), isLocal = false)
-    val Star = ClassId(API_PACKAGE, FqName("TypeInfo.Star"), isLocal = false)
+  object PTypeDescriptor {
+    val Root = ClassId(API_PACKAGE, Name.identifier("PTypeDescriptor"))
+
+    val Concrete = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Concrete"), isLocal = false)
+    val Parameterized = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Concrete.Parameterized"), isLocal = false)
+    val Star = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Star"), isLocal = false)
   }
 
   val FullTypeInfo = ClassId(API_PACKAGE, Name.identifier("FullTypeInfo"))

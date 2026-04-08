@@ -272,105 +272,120 @@ class IRPoet(
     }
 
     /**
-     * io.github.lukmccall.pika.TypeInfo.Star
+     * io.github.lukmccall.pika.PTypeDescriptor.Star
      */
     fun star(): IrExpression {
-      val typeInfoStarClass = symbolFinder.pikaAPI.typeInfo.star
+      val pTypeDescriptorStarClass = symbolFinder.pikaAPI.pTypeDescriptor.star
 
       return IrGetObjectValueImpl(
         startOffset = -1,
         endOffset = -1,
-        type = typeInfoStarClass.owner.defaultType,
-        symbol = typeInfoStarClass
+        type = pTypeDescriptorStarClass.owner.defaultType,
+        symbol = pTypeDescriptorStarClass
       )
     }
 
     /**
-     * io.github.lukmccall.pika.TypeInfo.Simple({typeName}, {KClass<{classSymbol}>}, {isNullable})
+     * io.github.lukmccall.pika.PType({KClass<{classSymbol}>})
      */
-    fun simple(
-      typeName: String,
+    fun pType(classSymbol: IrClassSymbol): IrExpression {
+      val pTypeClass = symbolFinder.pikaAPI.pType
+
+      val constructor = pTypeClass.owner.primaryConstructor
+        ?: error("PType must have a primary constructor")
+
+      return IrConstructorCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = pTypeClass.owner.defaultType,
+        symbol = constructor.symbol,
+        typeArgumentsCount = 0,
+        constructorTypeArgumentsCount = 0,
+        origin = null
+      ).also { call ->
+        call.arguments[0] = kotlin.kClass(classSymbol)
+      }
+    }
+
+    /**
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable})
+     */
+    fun concrete(
       classSymbol: IrClassSymbol,
       isNullable: Boolean
     ): IrExpression {
-      val typeInfoSimpleClass = symbolFinder.pikaAPI.typeInfo.simple
+      val pTypeDescriptorConcreteClass = symbolFinder.pikaAPI.pTypeDescriptor.concrete
 
-      val constructor = typeInfoSimpleClass.owner.primaryConstructor
-        ?: error("TypeInfo.Simple must have a primary constructor")
+      val constructor = pTypeDescriptorConcreteClass.owner.primaryConstructor
+        ?: error("PTypeDescriptor.Concrete must have a primary constructor")
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = typeInfoSimpleClass.owner.defaultType,
+        type = pTypeDescriptorConcreteClass.owner.defaultType,
         symbol = constructor.symbol,
         typeArgumentsCount = 0,
         constructorTypeArgumentsCount = 0,
         origin = null
       ).also { call ->
-        call.arguments[0] = kotlin.string(typeName)
-        call.arguments[1] = kotlin.kClass(classSymbol)
-        call.arguments[2] = kotlin.bool(isNullable)
+        call.arguments[0] = pType(classSymbol)
+        call.arguments[1] = kotlin.bool(isNullable)
       }
     }
 
     /**
-     * io.github.lukmccall.pika.TypeInfo.Parameterized(
-     *   {typeName},
-     *   {KClass<{classSymbol}>},
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
+     *   {PType({classSymbol})},
      *   {isNullable},
-     *   {listOf({typeArguments)}
+     *   {listOf({argumentsPTypes})}
      * )
      */
     fun parameterized(
-      typeName: String,
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
-      typeArguments: List<IrExpression>
+      argumentsPTypes: List<IrExpression>
     ): IrExpression {
-      val typeInfoParameterizedClass = symbolFinder.pikaAPI.typeInfo.parameterized
-      val typeInfoClass = symbolFinder.pikaAPI.typeInfo.root
+      val pTypeDescriptorParameterizedClass = symbolFinder.pikaAPI.pTypeDescriptor.parameterized
+      val pTypeDescriptorClass = symbolFinder.pikaAPI.pTypeDescriptor.root
 
-      val constructor = typeInfoParameterizedClass.owner.primaryConstructor
-        ?: error("TypeInfo.Parameterized must have a primary constructor")
+      val constructor = pTypeDescriptorParameterizedClass.owner.primaryConstructor
+        ?: error("PTypeDescriptor.Concrete.Parameterized must have a primary constructor")
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = typeInfoParameterizedClass.owner.defaultType,
+        type = pTypeDescriptorParameterizedClass.owner.defaultType,
         symbol = constructor.symbol,
         typeArgumentsCount = 0,
         constructorTypeArgumentsCount = 0,
         origin = null
       ).also { call ->
-        call.arguments[0] = kotlin.string(typeName)
-        call.arguments[1] = kotlin.kClass(classSymbol)
-        call.arguments[2] = kotlin.bool(isNullable)
-        call.arguments[3] = kotlin.listOf(typeInfoClass.owner.defaultType, typeArguments)
+        call.arguments[0] = pType(classSymbol)
+        call.arguments[1] = kotlin.bool(isNullable)
+        call.arguments[2] = kotlin.listOf(pTypeDescriptorClass.owner.defaultType, argumentsPTypes)
       }
     }
 
     /**
-     * IrType -> io.github.lukmccall.pika.TypeInfo.*
+     * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
      */
-    fun typeInfo(type: IrType): IrExpression {
+    fun pTypeDescriptor(type: IrType): IrExpression {
       val simpleType = type as? IrSimpleType
-        ?: return pika.simple("Unknown", irBuiltIns.anyClass, false)
+        ?: return pika.concrete(irBuiltIns.anyClass, false)
 
       val classifier = simpleType.classifier
-      val irClass = classifier.owner as? IrClass
-      val typeName = irClass?.kotlinFqName?.asString() ?: "Unknown"
       val isNullable = simpleType.isMarkedNullable()
 
       return if (simpleType.arguments.isEmpty()) {
-        pika.simple(typeName, classifier as IrClassSymbol, isNullable)
+        pika.concrete(classifier as IrClassSymbol, isNullable)
       } else {
         val typeArgInfos = simpleType.arguments.map { arg ->
           when (arg) {
-            is IrTypeProjection -> typeInfo(arg.type)
+            is IrTypeProjection -> pTypeDescriptor(arg.type)
             is IrStarProjection -> pika.star()
           }
         }
-        pika.parameterized(typeName, classifier as IrClassSymbol, isNullable, typeArgInfos)
+        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos)
       }
     }
 
@@ -439,7 +454,7 @@ class IRPoet(
         origin = null
       ).also { call ->
         call.arguments[0] = kotlin.string(property.name.asString())
-        call.arguments[1] = pika.typeInfo(propertyType)
+        call.arguments[1] = pika.pTypeDescriptor(propertyType)
         call.arguments[2] = kotlin.listOf(
           type = annotationInfoClass.owner.defaultType,
           elements = annotations
@@ -454,11 +469,11 @@ class IRPoet(
      */
     fun fullTypeInfo(type: IrType, isNullable: Boolean): IrExpression {
       val simpleType = type as? IrSimpleType
-        ?: error("TypeInfo.Parameterized must have a simple type")
+        ?: error("FullTypeInfo must have a simple type")
 
       val classifier = simpleType.classifier
       val irClass = classifier.owner as? IrClass
-        ?: error("TypeInfo.Parameterized must have a class")
+        ?: error("FullTypeInfo must have a class")
 
       val className = irClass.kotlinFqName.asString()
 
@@ -524,4 +539,3 @@ class IRPoet(
     }
   }
 }
-

@@ -41,10 +41,10 @@ FILE: fullTypeInfoFields.kt
             }
         }
 
-        lval nameFieldType: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/nameFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.typeInfo| as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: name typeInfo should be Simple)
+        lval nameFieldType: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nameFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.pTypeDescriptor| as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: name pTypeDescriptor should be Concrete)
         when () {
-            !=(R|<local>/nameFieldType|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.String)) ->  {
-                ^box String(FAIL: name typeName)
+            !=(R|<local>/nameFieldType|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+                ^box String(FAIL: name kClass)
             }
         }
 
@@ -64,10 +64,10 @@ FILE: fullTypeInfoFields.kt
             }
         }
 
-        lval ageFieldType: R|io/github/lukmccall/pika/TypeInfo.Simple| = (R|<local>/ageFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.typeInfo| as? R|io/github/lukmccall/pika/TypeInfo.Simple|) ?: ^box String(FAIL: age typeInfo should be Simple)
+        lval ageFieldType: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/ageFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.pTypeDescriptor| as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: age pTypeDescriptor should be Concrete)
         when () {
-            !=(R|<local>/ageFieldType|.R|io/github/lukmccall/pika/TypeInfo.Simple.typeName|, String(kotlin.Int)) ->  {
-                ^box String(FAIL: age typeName)
+            !=(R|<local>/ageFieldType|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+                ^box String(FAIL: age kClass)
             }
         }
 
@@ -87,10 +87,10 @@ FILE: fullTypeInfoFields.kt
             }
         }
 
-        lval tagsFieldType: R|io/github/lukmccall/pika/TypeInfo.Parameterized| = (R|<local>/tagsFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.typeInfo| as? R|io/github/lukmccall/pika/TypeInfo.Parameterized|) ?: ^box String(FAIL: tags typeInfo should be Parameterized)
+        lval tagsFieldType: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized| = (R|<local>/tagsFieldInfo|.R|io/github/lukmccall/pika/FullFieldInfo.pTypeDescriptor| as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ?: ^box String(FAIL: tags pTypeDescriptor should be Parameterized)
         when () {
-            !=(R|<local>/tagsFieldType|.R|io/github/lukmccall/pika/TypeInfo.Parameterized.typeName|, String(kotlin.collections.List)) ->  {
-                ^box String(FAIL: tags typeName)
+            !=(R|<local>/tagsFieldType|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
+                ^box String(FAIL: tags kClass)
             }
         }
 

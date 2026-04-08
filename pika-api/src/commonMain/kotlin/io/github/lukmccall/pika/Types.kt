@@ -24,14 +24,14 @@ public data class AnnotationInfo(
  * Full information about a class field/property.
  *
  * @property name The property name
- * @property typeInfo Type information for the property
+ * @property pTypeDescriptor Type descriptor for the property
  * @property annotations List of annotations applied to this property
  * @property visibility The visibility level of this property
  * @property isMutable Whether this is a var (true) or val (false)
  */
 public data class FullFieldInfo(
   val name: String,
-  val typeInfo: TypeInfo,
+  val pTypeDescriptor: PTypeDescriptor,
   val annotations: List<AnnotationInfo>,
   val visibility: Visibility,
   val isMutable: Boolean
@@ -59,39 +59,42 @@ public data class FullTypeInfo(
 )
 
 /**
- * Sealed class hierarchy representing type information for properties.
+ * Represents a runtime type with its KClass reference.
+ *
+ * @property kClass Runtime class reference
  */
-public sealed class TypeInfo {
-  /**
-   * Represents a simple (non-generic) type.
-   *
-   * @property typeName Fully qualified type name, e.g., "kotlin.String"
-   * @property kClass Runtime class reference
-   * @property isNullable Whether the type is nullable
-   */
-  public data class Simple(
-    val typeName: String,
-    val kClass: KClass<*>,
-    val isNullable: Boolean
-  ) : TypeInfo()
+public class PType(public val kClass: KClass<*>)
 
+/**
+ * Sealed interface hierarchy representing type descriptors for properties.
+ */
+public sealed interface PTypeDescriptor {
   /**
-   * Represents a parameterized (generic) type.
+   * Represents a concrete (non-star) type.
    *
-   * @property typeName Fully qualified type name of the raw type, e.g., "kotlin.collections.List"
-   * @property kClass Runtime class reference for the raw type
+   * @property pType The runtime type reference
    * @property isNullable Whether the type is nullable
-   * @property typeArguments List of type arguments
    */
-  public data class Parameterized(
-    val typeName: String,
-    val kClass: KClass<*>,
-    val isNullable: Boolean,
-    val typeArguments: List<TypeInfo>
-  ) : TypeInfo()
+  public open class Concrete(
+    public val pType: PType,
+    public val isNullable: Boolean
+  ) : PTypeDescriptor {
+    /**
+     * Represents a parameterized (generic) type.
+     *
+     * @property pType The runtime type reference for the raw type
+     * @property isNullable Whether the type is nullable
+     * @property argumentsPTypes List of type argument descriptors
+     */
+    public class Parameterized(
+      pType: PType,
+      isNullable: Boolean,
+      public val argumentsPTypes: List<PTypeDescriptor>
+    ) : Concrete(pType, isNullable)
+  }
 
   /**
    * Represents a star projection (*) in generic types.
    */
-  public data object Star : TypeInfo()
+  public data object Star : PTypeDescriptor
 }

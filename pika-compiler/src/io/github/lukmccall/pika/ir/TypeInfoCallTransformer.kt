@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.ir.visitors.IrTransformer
 import org.jetbrains.kotlin.name.FqName
 
 /**
- * IR transformer that replaces calls to typeInfo<T>() and fullTypeInfo<T>() with constructed expressions.
+ * IR transformer that replaces calls to pTypeDescriptorOf<T>() and fullTypeInfo<T>() with constructed expressions.
  *
  * Note: When the type argument is a type parameter (e.g., inside an inline function),
  * we skip transformation and leave the call intact. The JvmIrIntrinsicExtension will
@@ -29,7 +29,7 @@ class TypeInfoCallTransformer(
 
   companion object {
     private val PLUGIN_PACKAGE = FqName("io.github.lukmccall.pika")
-    private const val TYPE_INFO_FUNCTION_NAME = "typeInfo"
+    private const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
     private const val FULL_TYPE_INFO_FUNCTION_NAME = "fullTypeInfo"
   }
 
@@ -53,7 +53,7 @@ class TypeInfoCallTransformer(
     }
 
     return when (functionName) {
-      TYPE_INFO_FUNCTION_NAME -> poet.pika.typeInfo(typeArg)
+      P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> poet.pika.pTypeDescriptor(typeArg)
       FULL_TYPE_INFO_FUNCTION_NAME -> poet.pika.fullTypeInfo(typeArg, typeArg.isMarkedNullable())
       else -> expression
     }
@@ -69,7 +69,7 @@ class TypeInfoCallTransformer(
 
   private fun isPluginCall(function: org.jetbrains.kotlin.ir.declarations.IrSimpleFunction): Boolean {
     val functionName = function.name.asString()
-    if (functionName != TYPE_INFO_FUNCTION_NAME && functionName != FULL_TYPE_INFO_FUNCTION_NAME) {
+    if (functionName != P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME && functionName != FULL_TYPE_INFO_FUNCTION_NAME) {
       return false
     }
     if (function.typeParameters.size != 1) {

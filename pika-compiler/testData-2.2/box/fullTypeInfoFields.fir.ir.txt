@@ -71,40 +71,40 @@ FILE fqName:test fileName:/fullTypeInfoFields.kt
           ARG fields: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.FullFieldInfo> origin=INVOKE
             TYPE_ARG T: io.github.lukmccall.pika.FullFieldInfo
             ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.FullFieldInfo> varargElementType=io.github.lukmccall.pika.FullFieldInfo
-              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, pTypeDescriptor: io.github.lukmccall.pika.PTypeDescriptor, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
                 ARG name: CONST String type=kotlin.String value="name"
-                ARG typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-                  ARG typeName: CONST String type=kotlin.String value="kotlin.String"
-                  ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                ARG pTypeDescriptor: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                  ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                    ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
                   ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                 ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
                   TYPE_ARG T: io.github.lukmccall.pika.AnnotationInfo
                   ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
                 ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.Visibility
                 ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
-              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, pTypeDescriptor: io.github.lukmccall.pika.PTypeDescriptor, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
                 ARG name: CONST String type=kotlin.String value="age"
-                ARG typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-                  ARG typeName: CONST String type=kotlin.String value="kotlin.Int"
-                  ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                ARG pTypeDescriptor: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                  ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                    ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
                   ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                 ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
                   TYPE_ARG T: io.github.lukmccall.pika.AnnotationInfo
                   ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.AnnotationInfo> varargElementType=io.github.lukmccall.pika.AnnotationInfo
                 ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PRIVATE' type=io.github.lukmccall.pika.Visibility
                 ARG isMutable: CONST Boolean type=kotlin.Boolean value=true
-              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, typeInfo: io.github.lukmccall.pika.TypeInfo, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, pTypeDescriptor: io.github.lukmccall.pika.PTypeDescriptor, annotations: kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo>, visibility: io.github.lukmccall.pika.Visibility, isMutable: kotlin.Boolean) declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.FullFieldInfo origin=null
                 ARG name: CONST String type=kotlin.String value="tags"
-                ARG typeInfo: CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean, typeArguments: kotlin.collections.List<io.github.lukmccall.pika.TypeInfo>) declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
-                  ARG typeName: CONST String type=kotlin.String value="kotlin.collections.List"
-                  ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<E of kotlin.collections.List>>
+                ARG pTypeDescriptor: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, argumentsPTypes: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
+                  ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                    ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<E of kotlin.collections.List>>
                   ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                  ARG typeArguments: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.TypeInfo> origin=INVOKE
-                    TYPE_ARG T: io.github.lukmccall.pika.TypeInfo
-                    ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.TypeInfo> varargElementType=io.github.lukmccall.pika.TypeInfo
-                      CONSTRUCTOR_CALL 'public constructor <init> (typeName: kotlin.String, kClass: kotlin.reflect.KClass<*>, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.TypeInfo.Simple' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-                        ARG typeName: CONST String type=kotlin.String value="kotlin.String"
-                        ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                  ARG argumentsPTypes: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
+                    TYPE_ARG T: io.github.lukmccall.pika.PTypeDescriptor
+                    ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PTypeDescriptor> varargElementType=io.github.lukmccall.pika.PTypeDescriptor
+                      CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                        ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                          ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
                         ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                 ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.AnnotationInfo> origin=INVOKE
                   TYPE_ARG T: io.github.lukmccall.pika.AnnotationInfo
@@ -174,31 +174,32 @@ FILE fqName:test fileName:/fullTypeInfoFields.kt
             ARG <this>: GET_VAR 'val nameFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: name should not be mutable"
-      VAR name:nameFieldType type:io.github.lukmccall.pika.TypeInfo.Simple [val]
-        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
-          VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
-            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+      VAR name:nameFieldType type:io.github.lukmccall.pika.PTypeDescriptor.Concrete [val]
+        BLOCK type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete? [val]
+            TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+              CALL 'public final fun <get-pTypeDescriptor> (): io.github.lukmccall.pika.PTypeDescriptor declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_PROPERTY
                 ARG <this>: GET_VAR 'val nameFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
-          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+          WHEN type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                ARG arg0: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                ARG arg0: GET_VAR 'val tmp_1: io.github.lukmccall.pika.PTypeDescriptor.Concrete? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=null
                 ARG arg1: CONST Null type=kotlin.Nothing? value=null
               then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-                CONST String type=kotlin.String value="FAIL: name typeInfo should be Simple"
+                CONST String type=kotlin.String value="FAIL: name pTypeDescriptor should be Concrete"
             BRANCH
               if: CONST Boolean type=kotlin.Boolean value=true
-              then: GET_VAR 'val tmp_1: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+              then: GET_VAR 'val tmp_1: io.github.lukmccall.pika.PTypeDescriptor.Concrete? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
-                ARG <this>: GET_VAR 'val nameFieldType: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-              ARG arg1: CONST String type=kotlin.String value="kotlin.String"
+              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+                ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
+                  ARG <this>: GET_VAR 'val nameFieldType: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: name typeName"
+            CONST String type=kotlin.String value="FAIL: name kClass"
       VAR name:ageFieldInfo type:io.github.lukmccall.pika.FullFieldInfo [val]
         BLOCK type=io.github.lukmccall.pika.FullFieldInfo origin=ELVIS
           VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:io.github.lukmccall.pika.FullFieldInfo? [val]
@@ -244,31 +245,32 @@ FILE fqName:test fileName:/fullTypeInfoFields.kt
               ARG <this>: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: age should be mutable"
-      VAR name:ageFieldType type:io.github.lukmccall.pika.TypeInfo.Simple [val]
-        BLOCK type=io.github.lukmccall.pika.TypeInfo.Simple origin=ELVIS
-          VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:io.github.lukmccall.pika.TypeInfo.Simple? [val]
-            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Simple? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Simple
-              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+      VAR name:ageFieldType type:io.github.lukmccall.pika.PTypeDescriptor.Concrete [val]
+        BLOCK type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete? [val]
+            TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
+              CALL 'public final fun <get-pTypeDescriptor> (): io.github.lukmccall.pika.PTypeDescriptor declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_PROPERTY
                 ARG <this>: GET_VAR 'val ageFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
-          WHEN type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
+          WHEN type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                ARG arg0: GET_VAR 'val tmp_3: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+                ARG arg0: GET_VAR 'val tmp_3: io.github.lukmccall.pika.PTypeDescriptor.Concrete? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=null
                 ARG arg1: CONST Null type=kotlin.Nothing? value=null
               then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-                CONST String type=kotlin.String value="FAIL: age typeInfo should be Simple"
+                CONST String type=kotlin.String value="FAIL: age pTypeDescriptor should be Concrete"
             BRANCH
               if: CONST Boolean type=kotlin.Boolean value=true
-              then: GET_VAR 'val tmp_3: io.github.lukmccall.pika.TypeInfo.Simple? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple? origin=null
+              then: GET_VAR 'val tmp_3: io.github.lukmccall.pika.PTypeDescriptor.Concrete? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Simple' type=kotlin.String origin=GET_PROPERTY
-                ARG <this>: GET_VAR 'val ageFieldType: io.github.lukmccall.pika.TypeInfo.Simple declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Simple origin=null
-              ARG arg1: CONST String type=kotlin.String value="kotlin.Int"
+              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+                ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
+                  ARG <this>: GET_VAR 'val ageFieldType: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: age typeName"
+            CONST String type=kotlin.String value="FAIL: age kClass"
       VAR name:tagsFieldInfo type:io.github.lukmccall.pika.FullFieldInfo [val]
         BLOCK type=io.github.lukmccall.pika.FullFieldInfo origin=ELVIS
           VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:io.github.lukmccall.pika.FullFieldInfo? [val]
@@ -310,30 +312,31 @@ FILE fqName:test fileName:/fullTypeInfoFields.kt
             ARG <this>: GET_VAR 'val tagsFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: tags should not be mutable"
-      VAR name:tagsFieldType type:io.github.lukmccall.pika.TypeInfo.Parameterized [val]
-        BLOCK type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=ELVIS
-          VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:io.github.lukmccall.pika.TypeInfo.Parameterized? [val]
-            TYPE_OP type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.TypeInfo.Parameterized
-              CALL 'public final fun <get-typeInfo> (): io.github.lukmccall.pika.TypeInfo declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.TypeInfo origin=GET_PROPERTY
+      VAR name:tagsFieldType type:io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized [val]
+        BLOCK type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? [val]
+            TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
+              CALL 'public final fun <get-pTypeDescriptor> (): io.github.lukmccall.pika.PTypeDescriptor declared in io.github.lukmccall.pika.FullFieldInfo' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_PROPERTY
                 ARG <this>: GET_VAR 'val tagsFieldInfo: io.github.lukmccall.pika.FullFieldInfo declared in test.box' type=io.github.lukmccall.pika.FullFieldInfo origin=null
-          WHEN type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
+          WHEN type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                ARG arg0: GET_VAR 'val tmp_5: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+                ARG arg0: GET_VAR 'val tmp_5: io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? origin=null
                 ARG arg1: CONST Null type=kotlin.Nothing? value=null
               then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-                CONST String type=kotlin.String value="FAIL: tags typeInfo should be Parameterized"
+                CONST String type=kotlin.String value="FAIL: tags pTypeDescriptor should be Parameterized"
             BRANCH
               if: CONST Boolean type=kotlin.Boolean value=true
-              then: GET_VAR 'val tmp_5: io.github.lukmccall.pika.TypeInfo.Parameterized? declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized? origin=null
+              then: GET_VAR 'val tmp_5: io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized? origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-typeName> (): kotlin.String declared in io.github.lukmccall.pika.TypeInfo.Parameterized' type=kotlin.String origin=GET_PROPERTY
-                ARG <this>: GET_VAR 'val tagsFieldType: io.github.lukmccall.pika.TypeInfo.Parameterized declared in test.box' type=io.github.lukmccall.pika.TypeInfo.Parameterized origin=null
-              ARG arg1: CONST String type=kotlin.String value="kotlin.collections.List"
+              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+                ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
+                  ARG <this>: GET_VAR 'val tagsFieldType: io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
+              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: tags typeName"
+            CONST String type=kotlin.String value="FAIL: tags kClass"
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
         CONST String type=kotlin.String value="OK"

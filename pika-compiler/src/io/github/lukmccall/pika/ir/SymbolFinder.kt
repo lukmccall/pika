@@ -15,14 +15,15 @@ class SymbolFinder(
   val pikaAPI = _PikaAPI()
 
   inner class _PikaAPI {
-    val typeInfo = _TypeInfo()
+    val pType by cachedReference(PikaAPI.PType)
+    val pTypeDescriptor = _PTypeDescriptor()
 
-    inner class _TypeInfo {
-      val root by cachedReference(PikaAPI.TypeInfo.Root)
+    inner class _PTypeDescriptor {
+      val root by cachedReference(PikaAPI.PTypeDescriptor.Root)
 
-      val simple by cachedReference(PikaAPI.TypeInfo.Simple)
-      val parameterized by cachedReference(PikaAPI.TypeInfo.Parameterized)
-      val star by cachedReference(PikaAPI.TypeInfo.Star)
+      val concrete by cachedReference(PikaAPI.PTypeDescriptor.Concrete)
+      val parameterized by cachedReference(PikaAPI.PTypeDescriptor.Parameterized)
+      val star by cachedReference(PikaAPI.PTypeDescriptor.Star)
     }
 
     val fullTypedInfo by cachedReference(PikaAPI.FullTypeInfo)
