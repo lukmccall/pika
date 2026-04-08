@@ -45,6 +45,12 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("introspectableDelegated.kt")
+  public void testIntrospectableDelegated() {
+    runTest("pika-compiler/testData/box/introspectableDelegated.kt");
+  }
+
+  @Test
   @TestMetadata("introspectableEmpty.kt")
   public void testIntrospectableEmpty() {
     runTest("pika-compiler/testData/box/introspectableEmpty.kt");

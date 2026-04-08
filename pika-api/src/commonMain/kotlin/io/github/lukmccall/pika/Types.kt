@@ -77,6 +77,8 @@ public class PAnnotation(
  * @property isMutable Whether this is a var (true) or val (false)
  * @property hasBackingField Whether this property has a backing field
  * @property setter Lambda to set the property value on an owner instance, or null if no backing field
+ * @property isDelegated Whether this property is delegated (e.g., `val x by lazy { ... }`)
+ * @property delegateGetter Lambda to get the delegate object from an owner instance, or null if not delegated
  */
 public class PProperty<OwnerType, Type>(
   public val name: String,
@@ -86,7 +88,9 @@ public class PProperty<OwnerType, Type>(
   public val getter: (OwnerType) -> Type,
   public val isMutable: Boolean,
   public val hasBackingField: Boolean,
-  public val setter: ((OwnerType, Type) -> Unit)?
+  public val setter: ((OwnerType, Type) -> Unit)?,
+  public val isDelegated: Boolean,
+  public val delegateGetter: ((OwnerType) -> Any?)?
 )
 
 /**

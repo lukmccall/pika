@@ -19,6 +19,15 @@ open class BaseEntity(open val id: String)
 open class SimplePerson(val name: String) : Introspectable
 
 /**
+ * Test class with delegated properties.
+ */
+class DelegatedExample : Introspectable {
+  val lazyValue by lazy { "computed lazily" }
+  val regularValue: String = "regular"
+  val computedValue: Int get() = 42
+}
+
+/**
  * Example class with various field types, annotations, and inheritance.
  */
 @MyAnnotation("user-class")
@@ -104,6 +113,34 @@ fun main() {
     generic<String>()
   } catch (e: IllegalStateException) {
     println("  generic<String>(): Throws: ${e.message}")
+  }
+  println()
+
+  // Delegated properties test
+  println("=== Delegated Properties Test ===")
+  println()
+  val delegatedExample = DelegatedExample()
+  val delegatedData = pIntrospectionOf(delegatedExample)
+
+  for (prop in delegatedData.properties) {
+    println("  ${prop.name}:")
+    println("    isDelegated: ${prop.isDelegated}")
+    println("    hasBackingField: ${prop.hasBackingField}")
+    if (prop.isDelegated && prop.delegateGetter != null) {
+      val delegate = prop.delegateGetter!!(delegatedExample)
+      println("    delegate type: ${delegate?.let { it::class.simpleName }}")
+      if (delegate is Lazy<*>) {
+        println("    isInitialized: ${delegate.isInitialized()}")
+      }
+    }
+    println("    value: ${prop.getter(delegatedExample)}")
+    if (prop.isDelegated && prop.delegateGetter != null) {
+      val delegate = prop.delegateGetter!!(delegatedExample)
+      if (delegate is Lazy<*>) {
+        println("    isInitialized (after access): ${delegate.isInitialized()}")
+      }
+    }
+    println()
   }
 }
 

@@ -20,8 +20,6 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.defaultType
-import org.jetbrains.kotlin.ir.util.isInterface
-import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.name.Name
 
@@ -591,6 +589,69 @@ class IRPoet(
     }
 
     /**
+     * Creates a delegate getter lambda: { owner -> owner.<delegate_backing_field> }
+     * Returns null if property is not delegated.
+     */
+    fun delegateGetterLambda(
+      property: IrProperty,
+      ownerClass: IrClass,
+      containingFunction: IrSimpleFunction,
+      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+    ): IrExpression? {
+      if (!property.isDelegated) return null
+      val backingField = property.backingField ?: return null
+
+      val delegateType = backingField.type
+      val ownerType = ownerClass.defaultType
+
+      // Function1<OwnerType, Any?>
+      val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, irBuiltIns.anyNType)
+
+      val lambdaFunction = irFactory.buildFun {
+        name = Name.special("<anonymous>")
+        returnType = irBuiltIns.anyNType
+        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        visibility = DescriptorVisibilities.LOCAL
+      }.apply {
+        parent = containingFunction
+        val ownerParam = addValueParameter("owner", ownerType)
+
+        val returnValue = IrGetFieldImpl(
+          startOffset = -1,
+          endOffset = -1,
+          symbol = backingField.symbol,
+          type = delegateType,
+          receiver = IrGetValueImpl(
+            startOffset = -1,
+            endOffset = -1,
+            type = ownerType,
+            symbol = ownerParam.symbol
+          )
+        )
+
+        body = irFactory.createBlockBody(-1, -1).apply {
+          statements.add(
+            IrReturnImpl(
+              startOffset = -1,
+              endOffset = -1,
+              type = irBuiltIns.nothingType,
+              returnTargetSymbol = symbol,
+              value = returnValue
+            )
+          )
+        }
+      }
+
+      return IrFunctionExpressionImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = function1Type,
+        function = lambdaFunction,
+        origin = IrStatementOrigin.LAMBDA
+      )
+    }
+
+    /**
      * io.github.lukmccall.pika.PProperty(...)
      */
     fun pProperty(
@@ -616,6 +677,8 @@ class IRPoet(
       val hasBackingField = property.backingField != null
       val getterLambda = propertyGetterLambda(property, ownerClass, containingFunction, irFactory)
       val setterLambda = propertySetterLambda(property, ownerClass, containingFunction, irFactory)
+      val isDelegated = property.isDelegated
+      val delegateLambda = delegateGetterLambda(property, ownerClass, containingFunction, irFactory)
 
       val ownerType = ownerClass.defaultType
 
@@ -641,6 +704,8 @@ class IRPoet(
         call.arguments[5] = kotlin.bool(property.isVar)
         call.arguments[6] = kotlin.bool(hasBackingField)
         call.arguments[7] = setterLambda ?: kotlin.`null`()
+        call.arguments[8] = kotlin.bool(isDelegated)
+        call.arguments[9] = delegateLambda ?: kotlin.`null`()
       }
     }
 

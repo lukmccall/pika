@@ -43,7 +43,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
             ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.String> origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Animal, kotlin.String> origin=null
                   TYPE_ARG OwnerType: test.Animal
                   TYPE_ARG Type: kotlin.String
                   ARG name: CONST String type=kotlin.String value="species"
@@ -72,6 +72,8 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                         SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
                           receiver: GET_VAR 'owner: test.Animal declared in test.Animal.__PIntrospectionData.<anonymous>' type=test.Animal origin=null
                           value: GET_VAR 'value: kotlin.String declared in test.Animal.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
             ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PFunction
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
@@ -126,7 +128,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
             ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.String> origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Dog, kotlin.String> origin=null
                   TYPE_ARG OwnerType: test.Dog
                   TYPE_ARG Type: kotlin.String
                   ARG name: CONST String type=kotlin.String value="breed"
@@ -155,6 +157,8 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                         SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
                           receiver: GET_VAR 'owner: test.Dog declared in test.Dog.__PIntrospectionData.<anonymous>' type=test.Dog origin=null
                           value: GET_VAR 'value: kotlin.String declared in test.Dog.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
             ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PFunction
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
@@ -224,7 +228,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
             ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Any?>> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Any?>
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Boolean> origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Mammal, kotlin.Boolean> origin=null
                   TYPE_ARG OwnerType: test.Mammal
                   TYPE_ARG Type: kotlin.Boolean
                   ARG name: CONST String type=kotlin.String value="warmBlooded"
@@ -253,6 +257,8 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                         SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private [final]' type=kotlin.Unit origin=null
                           receiver: GET_VAR 'owner: test.Mammal declared in test.Mammal.__PIntrospectionData.<anonymous>' type=test.Mammal origin=null
                           value: GET_VAR 'value: kotlin.Boolean declared in test.Mammal.__PIntrospectionData.<anonymous>' type=kotlin.Boolean origin=null
+                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
             ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PFunction
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
