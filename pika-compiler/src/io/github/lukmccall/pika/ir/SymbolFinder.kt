@@ -30,6 +30,14 @@ class SymbolFinder(
     val fullFieldInfo by cachedReference(PikaAPI.FullFieldInfo)
     val annotationInfo by cachedReference(PikaAPI.AnnotationInfo)
     val visibility by cachedReference(PikaAPI.Visibility)
+
+    // Introspectable types
+    val introspectable by cachedReference(PikaAPI.Introspectable)
+    val pVisibility by cachedReference(PikaAPI.PVisibility)
+    val pProperty by cachedReference(PikaAPI.PProperty)
+    val pFunction by cachedReference(PikaAPI.PFunction)
+    val pAnnotation by cachedReference(PikaAPI.PAnnotation)
+    val pIntrospectionData by cachedReference(PikaAPI.PIntrospectionData)
   }
 
   val kotlinStd = _KotlinStd()

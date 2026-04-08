@@ -1,0 +1,41 @@
+FILE: introspectableBasic.kt
+    package test
+
+    public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(name: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val name: R|kotlin/String| = R|<local>/name|
+            public get(): R|kotlin/String|
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval person: R|test/Person| = R|test/Person.Person|(String(Alice))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Person>|>|, <getClass>(Q|test/Person|)) ->  {
+                ^box String(FAIL: kClass expected Person::class)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box <strcat>(String(FAIL: expected 1 property but got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval nameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(name))
+        }
+        ) ?: ^box String(FAIL: name property not found)
+        when () {
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
+                ^box <strcat>(String(FAIL: getter expected Alice but got ), R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|))
+            }
+        }
+
+        ^box String(OK)
+    }

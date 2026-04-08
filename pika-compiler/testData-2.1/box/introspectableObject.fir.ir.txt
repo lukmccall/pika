@@ -1,0 +1,274 @@
+FILE fqName:test fileName:/introspectableObject.kt
+  CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Singleton
+    PROPERTY name:version visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:version type:kotlin.String visibility:private [final]
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value="1.0"
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-version> visibility:public modality:FINAL <> ($this:test.Singleton) returnType:kotlin.String
+        correspondingProperty: PROPERTY name:version visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:test.Singleton
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-version> (): kotlin.String declared in test.Singleton'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:version type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+              receiver: GET_VAR '<this>: test.Singleton declared in test.Singleton.<get-version>' type=test.Singleton origin=null
+    PROPERTY name:counter visibility:public modality:FINAL [var]
+      FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-counter> visibility:public modality:FINAL <> ($this:test.Singleton) returnType:kotlin.Int
+        correspondingProperty: PROPERTY name:counter visibility:public modality:FINAL [var]
+        $this: VALUE_PARAMETER name:<this> type:test.Singleton
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-counter> (): kotlin.Int declared in test.Singleton'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+              receiver: GET_VAR '<this>: test.Singleton declared in test.Singleton.<get-counter>' type=test.Singleton origin=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<set-counter> visibility:public modality:FINAL <> ($this:test.Singleton, <set-?>:kotlin.Int) returnType:kotlin.Unit
+        correspondingProperty: PROPERTY name:counter visibility:public modality:FINAL [var]
+        $this: VALUE_PARAMETER name:<this> type:test.Singleton
+        VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+        BLOCK_BODY
+          SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+            receiver: GET_VAR '<this>: test.Singleton declared in test.Singleton.<set-counter>' type=test.Singleton origin=null
+            value: GET_VAR '<set-?>: kotlin.Int declared in test.Singleton.<set-counter>' type=kotlin.Int origin=null
+    CONSTRUCTOR visibility:private <> () returnType:test.Singleton [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.Introspectable
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Singleton) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Singleton>
+      $this: VALUE_PARAMETER name:<this> type:test.Singleton
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton'
+          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+            <OwnerType>: test.Singleton
+            kClass: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Singleton>
+            annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PAnnotation
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+            properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Any?>> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Any?>
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Any?>
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.String> origin=null
+                  <OwnerType>: test.Singleton
+                  <Type>: kotlin.String
+                  name: CONST String type=kotlin.String value="version"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.PAnnotation
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                    isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  getter: FUN_EXPR type=kotlin.Function1<test.Singleton, kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton) returnType:kotlin.String
+                      VALUE_PARAMETER name:owner index:0 type:test.Singleton
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Singleton): kotlin.String declared in test.Singleton.__PIntrospectionData'
+                          CALL 'public final fun <get-version> (): kotlin.String declared in test.Singleton' type=kotlin.String origin=GET_PROPERTY
+                            $this: GET_VAR 'owner: test.Singleton declared in test.Singleton.__PIntrospectionData.<anonymous>' type=test.Singleton origin=null
+                  isMutable: CONST Boolean type=kotlin.Boolean value=false
+                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                  setter: FUN_EXPR type=kotlin.Function2<test.Singleton, kotlin.String, kotlin.Unit> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton, value:kotlin.String) returnType:kotlin.Unit
+                      VALUE_PARAMETER name:owner index:0 type:test.Singleton
+                      VALUE_PARAMETER name:value index:1 type:kotlin.String
+                      BLOCK_BODY
+                        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:version type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+                          receiver: GET_VAR 'owner: test.Singleton declared in test.Singleton.__PIntrospectionData.<anonymous>' type=test.Singleton origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Singleton.__PIntrospectionData.<anonymous>' type=kotlin.String origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Int> origin=null
+                  <OwnerType>: test.Singleton
+                  <Type>: kotlin.Int
+                  name: CONST String type=kotlin.String value="counter"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    <T>: io.github.lukmccall.pika.PAnnotation
+                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                    isNullable: CONST Boolean type=kotlin.Boolean value=false
+                  getter: FUN_EXPR type=kotlin.Function1<test.Singleton, kotlin.Int> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton) returnType:kotlin.Int
+                      VALUE_PARAMETER name:owner index:0 type:test.Singleton
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Singleton): kotlin.Int declared in test.Singleton.__PIntrospectionData'
+                          CALL 'public final fun <get-counter> (): kotlin.Int declared in test.Singleton' type=kotlin.Int origin=GET_PROPERTY
+                            $this: GET_VAR 'owner: test.Singleton declared in test.Singleton.__PIntrospectionData.<anonymous>' type=test.Singleton origin=null
+                  isMutable: CONST Boolean type=kotlin.Boolean value=true
+                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                  setter: FUN_EXPR type=kotlin.Function2<test.Singleton, kotlin.Int, kotlin.Unit> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton, value:kotlin.Int) returnType:kotlin.Unit
+                      VALUE_PARAMETER name:owner index:0 type:test.Singleton
+                      VALUE_PARAMETER name:value index:1 type:kotlin.Int
+                      BLOCK_BODY
+                        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+                          receiver: GET_VAR 'owner: test.Singleton declared in test.Singleton.__PIntrospectionData.<anonymous>' type=test.Singleton origin=null
+                          value: GET_VAR 'value: kotlin.Int declared in test.Singleton.__PIntrospectionData.<anonymous>' type=kotlin.Int origin=null
+            functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+              <T>: io.github.lukmccall.pika.PFunction
+              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  name: CONST String type=kotlin.String value="increment"
+                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+            baseClass: CONST Null type=kotlin.Nothing? value=null
+    FUN name:increment visibility:public modality:FINAL <> ($this:test.Singleton) returnType:kotlin.Unit
+      $this: VALUE_PARAMETER name:<this> type:test.Singleton
+      BLOCK_BODY
+        TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
+          BLOCK type=kotlin.Int origin=POSTFIX_INCR
+            VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.Int [val]
+              CALL 'public final fun <get-counter> (): kotlin.Int declared in test.Singleton' type=kotlin.Int origin=POSTFIX_INCR
+                $this: GET_VAR '<this>: test.Singleton declared in test.Singleton.increment' type=test.Singleton origin=null
+            CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in test.Singleton' type=kotlin.Unit origin=POSTFIX_INCR
+              $this: GET_VAR '<this>: test.Singleton declared in test.Singleton.increment' type=test.Singleton origin=null
+              <set-?>: CALL 'public final fun inc (): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=POSTFIX_INCR
+                $this: GET_VAR 'val tmp_0: kotlin.Int declared in test.Singleton.increment' type=kotlin.Int origin=null
+            GET_VAR 'val tmp_0: kotlin.Int declared in test.Singleton.increment' type=kotlin.Int origin=null
+  FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> [val]
+        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+          $this: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=test.Singleton
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.reflect.KClass<test.Singleton> origin=GET_PROPERTY
+                $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+              arg1: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Singleton>
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: kClass"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Singleton, *>> origin=GET_PROPERTY
+                  $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+              arg1: CONST Int type=kotlin.Int value=2
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: expected 2 properties"
+      VAR name:versionProp type:io.github.lukmccall.pika.PProperty<test.Singleton, *> [val]
+        BLOCK type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.PProperty<test.Singleton, *>? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+              <T>: io.github.lukmccall.pika.PProperty<test.Singleton, *>
+              $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Singleton, *>> origin=GET_PROPERTY
+                $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.Singleton, *>, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.Singleton, *>) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PProperty<test.Singleton, *>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PProperty<test.Singleton, *>): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PProperty' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.PProperty<test.Singleton, *> declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+                        arg1: CONST String type=kotlin.String value="version"
+          WHEN type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_1: io.github.lukmccall.pika.PProperty<test.Singleton, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: version not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_1: io.github.lukmccall.pika.PProperty<test.Singleton, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun <get-isMutable> (): kotlin.Boolean declared in io.github.lukmccall.pika.PProperty' type=kotlin.Boolean origin=GET_PROPERTY
+            $this: GET_VAR 'val versionProp: io.github.lukmccall.pika.PProperty<test.Singleton, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: version should be val"
+      VAR name:counterProp type:io.github.lukmccall.pika.PProperty<test.Singleton, *> [val]
+        BLOCK type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:io.github.lukmccall.pika.PProperty<test.Singleton, *>? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+              <T>: io.github.lukmccall.pika.PProperty<test.Singleton, *>
+              $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Singleton, *>> origin=GET_PROPERTY
+                $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.Singleton, *>, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.Singleton, *>) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PProperty<test.Singleton, *>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PProperty<test.Singleton, *>): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PProperty' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.PProperty<test.Singleton, *> declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+                        arg1: CONST String type=kotlin.String value="counter"
+          WHEN type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_2: io.github.lukmccall.pika.PProperty<test.Singleton, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: counter not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_2: io.github.lukmccall.pika.PProperty<test.Singleton, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *>? origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+            $this: CALL 'public final fun <get-isMutable> (): kotlin.Boolean declared in io.github.lukmccall.pika.PProperty' type=kotlin.Boolean origin=GET_PROPERTY
+              $this: GET_VAR 'val counterProp: io.github.lukmccall.pika.PProperty<test.Singleton, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: counter should be var"
+      VAR name:incrementFunc type:io.github.lukmccall.pika.PFunction [val]
+        BLOCK type=io.github.lukmccall.pika.PFunction origin=ELVIS
+          VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:io.github.lukmccall.pika.PFunction? [val]
+            CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PFunction? origin=null
+              <T>: io.github.lukmccall.pika.PFunction
+              $receiver: CALL 'public final fun <get-functions> (): kotlin.collections.List<io.github.lukmccall.pika.PFunction> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=GET_PROPERTY
+                $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+              predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PFunction, kotlin.Boolean> origin=LAMBDA
+                FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PFunction) returnType:kotlin.Boolean
+                  VALUE_PARAMETER name:it index:0 type:io.github.lukmccall.pika.PFunction
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.lukmccall.pika.PFunction): kotlin.Boolean declared in test.box'
+                      CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                        arg0: CALL 'public final fun <get-name> (): kotlin.String declared in io.github.lukmccall.pika.PFunction' type=kotlin.String origin=GET_PROPERTY
+                          $this: GET_VAR 'it: io.github.lukmccall.pika.PFunction declared in test.box.<anonymous>' type=io.github.lukmccall.pika.PFunction origin=null
+                        arg1: CONST String type=kotlin.String value="increment"
+          WHEN type=io.github.lukmccall.pika.PFunction origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp_3: io.github.lukmccall.pika.PFunction? declared in test.box' type=io.github.lukmccall.pika.PFunction? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+                CONST String type=kotlin.String value="FAIL: increment not found"
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: GET_VAR 'val tmp_3: io.github.lukmccall.pika.PFunction? declared in test.box' type=io.github.lukmccall.pika.PFunction? origin=null
+      VAR name:versionGetter type:kotlin.Function1<kotlin.Any, kotlin.String> [val]
+        annotations:
+          Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+        TYPE_OP type=kotlin.Function1<kotlin.Any, kotlin.String> origin=CAST typeOperand=kotlin.Function1<kotlin.Any, kotlin.String>
+          CALL 'public final fun <get-getter> (): kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty> declared in io.github.lukmccall.pika.PProperty' type=kotlin.Function1<test.Singleton, kotlin.Any?> origin=GET_PROPERTY
+            $this: GET_VAR 'val versionProp: io.github.lukmccall.pika.PProperty<test.Singleton, *> declared in test.box' type=io.github.lukmccall.pika.PProperty<test.Singleton, *> origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.String origin=INVOKE
+                $this: GET_VAR 'val versionGetter: kotlin.Function1<kotlin.Any, kotlin.String> declared in test.box' type=kotlin.Function1<kotlin.Any, kotlin.String> origin=VARIABLE_AS_FUNCTION
+                p1: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=test.Singleton
+              arg1: CONST String type=kotlin.String value="1.0"
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: version getter"
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+        CONST String type=kotlin.String value="OK"

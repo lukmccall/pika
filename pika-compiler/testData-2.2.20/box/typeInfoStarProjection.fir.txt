@@ -1,0 +1,31 @@
+FILE: typeInfoStarProjection.kt
+    package test
+
+    public final fun box(): R|kotlin/String| {
+        lval starInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/List<*>|>()
+        when () {
+            (R|<local>/starInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
+                ^box String(FAIL: List<*> should be Parameterized)
+            }
+        }
+
+        when () {
+            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
+                ^box String(FAIL: List<*> kClass)
+            }
+        }
+
+        when () {
+            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: List<*> should have 1 type argument)
+            }
+        }
+
+        when () {
+            (R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) !is R|io/github/lukmccall/pika/PTypeDescriptor.Star|) ->  {
+                ^box String(FAIL: List<*> arg should be Star)
+            }
+        }
+
+        ^box String(OK)
+    }

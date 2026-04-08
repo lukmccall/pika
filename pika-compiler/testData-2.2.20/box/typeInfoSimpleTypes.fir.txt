@@ -1,0 +1,95 @@
+FILE: typeInfoSimpleTypes.kt
+    package test
+
+    public final fun box(): R|kotlin/String| {
+        lval stringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/String|>()
+        when () {
+            (R|<local>/stringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: String should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/stringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+                ^box String(FAIL: String kClass)
+            }
+        }
+
+        when () {
+            R|<local>/stringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable| ->  {
+                ^box String(FAIL: String should not be nullable)
+            }
+        }
+
+        lval intInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Int|>()
+        when () {
+            (R|<local>/intInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Int should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/intInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+                ^box String(FAIL: Int kClass)
+            }
+        }
+
+        when () {
+            R|<local>/intInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable| ->  {
+                ^box String(FAIL: Int should not be nullable)
+            }
+        }
+
+        lval boolInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Boolean|>()
+        when () {
+            (R|<local>/boolInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Boolean should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/boolInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Boolean|)) ->  {
+                ^box String(FAIL: Boolean kClass)
+            }
+        }
+
+        lval nullableIntInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Int?|>()
+        when () {
+            (R|<local>/nullableIntInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Int? should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nullableIntInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+                ^box String(FAIL: Int? kClass)
+            }
+        }
+
+        when () {
+            R|<local>/nullableIntInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: Int? should be nullable)
+            }
+        }
+
+        lval nullableStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/String?|>()
+        when () {
+            (R|<local>/nullableStringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: String? should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nullableStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+                ^box String(FAIL: String? kClass)
+            }
+        }
+
+        when () {
+            R|<local>/nullableStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.isNullable|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: String? should be nullable)
+            }
+        }
+
+        ^box String(OK)
+    }

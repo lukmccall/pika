@@ -1,0 +1,88 @@
+FILE fqName:test fileName:/introspectableEmpty.kt
+  CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Empty
+    CONSTRUCTOR visibility:public returnType:test.Empty [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.Introspectable
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.Introspectable
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.Introspectable
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL returnType:io.github.lukmccall.pika.PIntrospectionData<test.Empty>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Empty
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.Empty'
+          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+            TYPE_ARG OwnerType: test.Empty
+            ARG kClass: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Empty>
+            ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+            ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Empty, kotlin.Any?>> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Empty, kotlin.Any?>
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Empty, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Empty, kotlin.Any?>
+            ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PFunction
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+            ARG baseClass: CONST Null type=kotlin.Nothing? value=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:empty type:test.Empty [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in test.Empty' type=test.Empty origin=null
+      VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Empty> [val]
+        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.Empty' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+          ARG <this>: GET_VAR 'val empty: test.Empty declared in test.box' type=test.Empty origin=null
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.reflect.KClass<test.Empty> origin=GET_PROPERTY
+                ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+              ARG arg1: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[io.github.lukmccall.pika.Introspectable]' type=kotlin.reflect.KClass<test.Empty>
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: kClass"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun isNotEmpty <T> (<this>: kotlin.collections.Collection<T of kotlin.collections.isNotEmpty>): kotlin.Boolean declared in kotlin.collections' type=kotlin.Boolean origin=null
+            TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Empty, *>
+            ARG <this>: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Empty, *>> origin=GET_PROPERTY
+              ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: should have no properties"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun isNotEmpty <T> (<this>: kotlin.collections.Collection<T of kotlin.collections.isNotEmpty>): kotlin.Boolean declared in kotlin.collections' type=kotlin.Boolean origin=null
+            TYPE_ARG T: io.github.lukmccall.pika.PFunction
+            ARG <this>: CALL 'public final fun <get-functions> (): kotlin.collections.List<io.github.lukmccall.pika.PFunction> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=GET_PROPERTY
+              ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: should have no functions"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun isNotEmpty <T> (<this>: kotlin.collections.Collection<T of kotlin.collections.isNotEmpty>): kotlin.Boolean declared in kotlin.collections' type=kotlin.Boolean origin=null
+            TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+            ARG <this>: CALL 'public final fun <get-annotations> (): kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=GET_PROPERTY
+              ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: should have no annotations"
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+            ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              ARG arg0: CALL 'public final fun <get-baseClass> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+                ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+              ARG arg1: CONST Null type=kotlin.Nothing? value=null
+          then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+            CONST String type=kotlin.String value="FAIL: should have no baseClass"
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
+        CONST String type=kotlin.String value="OK"

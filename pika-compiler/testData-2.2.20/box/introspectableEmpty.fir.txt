@@ -1,0 +1,46 @@
+FILE: introspectableEmpty.kt
+    package test
+
+    public final class Empty : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(): R|test/Empty| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval empty: R|test/Empty| = R|test/Empty.Empty|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Empty>| = R|<local>/empty|.R|test/Empty.__PIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Empty>|>|, <getClass>(Q|test/Empty|)) ->  {
+                ^box String(FAIL: kClass)
+            }
+        }
+
+        when () {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Empty, *>>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PProperty<test/Empty, *>|>() ->  {
+                ^box String(FAIL: should have no properties)
+            }
+        }
+
+        when () {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PFunction|>() ->  {
+                ^box String(FAIL: should have no functions)
+            }
+        }
+
+        when () {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PAnnotation|>() ->  {
+                ^box String(FAIL: should have no annotations)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>|, Null(null)) ->  {
+                ^box String(FAIL: should have no baseClass)
+            }
+        }
+
+        ^box String(OK)
+    }

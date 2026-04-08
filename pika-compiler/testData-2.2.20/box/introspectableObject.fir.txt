@@ -1,0 +1,74 @@
+FILE: introspectableObject.kt
+    package test
+
+    public final object Singleton : R|io/github/lukmccall/pika/Introspectable| {
+        private constructor(): R|test/Singleton| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val version: R|kotlin/String| = String(1.0)
+            public get(): R|kotlin/String|
+
+        public final var counter: R|kotlin/Int| = Int(0)
+            public get(): R|kotlin/Int|
+            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public final fun increment(): R|kotlin/Unit| {
+             {
+                lval <unary>: R|kotlin/Int| = this@R|test/Singleton|.R|test/Singleton.counter|
+                this@R|test/Singleton|.R|test/Singleton.counter| = R|<local>/<unary>|.R|kotlin/Int.inc|()
+                R|<local>/<unary>|
+            }
+
+        }
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Singleton>|>|, <getClass>(Q|test/Singleton|)) ->  {
+                ^box String(FAIL: kClass)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box String(FAIL: expected 2 properties)
+            }
+        }
+
+        lval versionProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(version))
+        }
+        ) ?: ^box String(FAIL: version not found)
+        when () {
+            R|<local>/versionProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.isMutable: R|kotlin/Boolean|>| ->  {
+                ^box String(FAIL: version should be val)
+            }
+        }
+
+        lval counterProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(counter))
+        }
+        ) ?: ^box String(FAIL: counter not found)
+        when () {
+            R|<local>/counterProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.isMutable: R|kotlin/Boolean|>|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: counter should be var)
+            }
+        }
+
+        lval incrementFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(increment))
+        }
+        ) ?: ^box String(FAIL: increment not found)
+        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval versionGetter: R|(kotlin/Any) -> kotlin/String| = (R|<local>/versionProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Singleton) -> CapturedType(*)|>| as R|(kotlin/Any) -> kotlin/String|)
+        when () {
+            !=(R|<local>/versionGetter|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/String|>|(Q|test/Singleton|), String(1.0)) ->  {
+                ^box String(FAIL: version getter)
+            }
+        }
+
+        ^box String(OK)
+    }

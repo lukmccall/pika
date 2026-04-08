@@ -1,0 +1,68 @@
+FILE: introspectableVisibility.kt
+    package test
+
+    public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(publicProp: R|kotlin/String|, privateProp: R|kotlin/String|, protectedProp: R|kotlin/String|, internalProp: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val publicProp: R|kotlin/String| = R|<local>/publicProp|
+            public get(): R|kotlin/String|
+
+        private final val privateProp: R|kotlin/String| = R|<local>/privateProp|
+            private get(): R|kotlin/String|
+
+        protected final val protectedProp: R|kotlin/String| = R|<local>/protectedProp|
+            protected get(): R|kotlin/String|
+
+        internal final val internalProp: R|kotlin/String| = R|<local>/internalProp|
+            internal get(): R|kotlin/String|
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval person: R|test/Person| = R|test/Person.Person|(String(pub), String(priv), String(prot), String(intern))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        lval publicProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(publicProp))
+        }
+        ) ?: ^box String(FAIL: publicProp not found)
+        when () {
+            !=(R|<local>/publicProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.visibility: R|io/github/lukmccall/pika/PVisibility|>|, Q|io/github/lukmccall/pika/PVisibility|.R|io/github/lukmccall/pika/PVisibility.PUBLIC|) ->  {
+                ^box String(FAIL: publicProp visibility)
+            }
+        }
+
+        lval privateProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(privateProp))
+        }
+        ) ?: ^box String(FAIL: privateProp not found)
+        when () {
+            !=(R|<local>/privateProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.visibility: R|io/github/lukmccall/pika/PVisibility|>|, Q|io/github/lukmccall/pika/PVisibility|.R|io/github/lukmccall/pika/PVisibility.PRIVATE|) ->  {
+                ^box String(FAIL: privateProp visibility)
+            }
+        }
+
+        lval protectedProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(protectedProp))
+        }
+        ) ?: ^box String(FAIL: protectedProp not found)
+        when () {
+            !=(R|<local>/protectedProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.visibility: R|io/github/lukmccall/pika/PVisibility|>|, Q|io/github/lukmccall/pika/PVisibility|.R|io/github/lukmccall/pika/PVisibility.PROTECTED|) ->  {
+                ^box String(FAIL: protectedProp visibility)
+            }
+        }
+
+        lval internalProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(internalProp))
+        }
+        ) ?: ^box String(FAIL: internalProp not found)
+        when () {
+            !=(R|<local>/internalProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.visibility: R|io/github/lukmccall/pika/PVisibility|>|, Q|io/github/lukmccall/pika/PVisibility|.R|io/github/lukmccall/pika/PVisibility.INTERNAL|) ->  {
+                ^box String(FAIL: internalProp visibility)
+            }
+        }
+
+        ^box String(OK)
+    }

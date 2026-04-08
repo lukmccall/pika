@@ -1,0 +1,47 @@
+FILE: fullTypeInfoBasic.kt
+    package test
+
+    public final class Person : R|kotlin/Any| {
+        public constructor(name: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val name: R|kotlin/String| = R|<local>/name|
+            public get(): R|kotlin/String|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval fullPersonInfo: R|io/github/lukmccall/pika/FullTypeInfo| = R|io/github/lukmccall/pika/fullTypeInfo|<R|test/Person|>()
+        when () {
+            !=(R|<local>/fullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.className|, String(test.Person)) ->  {
+                ^box <strcat>(String(FAIL: fullTypeInfo className expected test.Person but got ), R|<local>/fullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.className|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/fullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.kClass|, <getClass>(Q|test/Person|)) ->  {
+                ^box String(FAIL: fullTypeInfo kClass)
+            }
+        }
+
+        when () {
+            R|<local>/fullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.isNullable| ->  {
+                ^box String(FAIL: fullTypeInfo should not be nullable)
+            }
+        }
+
+        lval nullableFullPersonInfo: R|io/github/lukmccall/pika/FullTypeInfo| = R|io/github/lukmccall/pika/fullTypeInfo|<R|test/Person?|>()
+        when () {
+            R|<local>/nullableFullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.isNullable|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: fullTypeInfo<Person?> should be nullable)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nullableFullPersonInfo|.R|io/github/lukmccall/pika/FullTypeInfo.className|, String(test.Person)) ->  {
+                ^box String(FAIL: nullable fullTypeInfo className)
+            }
+        }
+
+        ^box String(OK)
+    }

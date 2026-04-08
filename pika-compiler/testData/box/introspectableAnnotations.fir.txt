@@ -1,0 +1,86 @@
+FILE: introspectableAnnotations.kt
+    package test
+
+    @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.CLASS|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|)) public final annotation class MyAnnotation : R|kotlin/Annotation| {
+        public constructor(value: R|kotlin/String|): R|test/MyAnnotation| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val value: R|kotlin/String| = R|<local>/value|
+            public get(): R|kotlin/String|
+
+    }
+    @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|)) public final annotation class Deprecated : R|kotlin/Annotation| {
+        public constructor(reason: R|kotlin/String|): R|test/Deprecated| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val reason: R|kotlin/String| = R|<local>/reason|
+            public get(): R|kotlin/String|
+
+    }
+    @R|test/MyAnnotation|(value = String(class level)) public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(name: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|test/MyAnnotation|(value = String(property level)) @R|test/Deprecated|(reason = String(use fullName instead)) public final val name: R|kotlin/String| = R|<local>/name|
+            public get(): R|kotlin/String|
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval person: R|test/Person| = R|test/Person.Person|(String(Alice))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: expected 1 class annotation)
+            }
+        }
+
+        lval classAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PAnnotation|>|(Int(0))
+        when () {
+            !=(R|<local>/classAnnotation|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/MyAnnotation|)) ->  {
+                ^box String(FAIL: class annotation kClass)
+            }
+        }
+
+        when () {
+            !=(R|<local>/classAnnotation|.R|io/github/lukmccall/pika/PAnnotation.arguments|.R|SubstitutionOverride<kotlin/collections/Map.get: R|kotlin/Any?|>|(String(value)), String(class level)) ->  {
+                ^box String(FAIL: class annotation value)
+            }
+        }
+
+        lval nameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(name))
+        }
+        ) ?: ^box String(FAIL: name not found)
+        when () {
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box String(FAIL: expected 2 property annotations)
+            }
+        }
+
+        lval myAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PAnnotation|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PAnnotation|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/MyAnnotation|))
+        }
+        ) ?: ^box String(FAIL: MyAnnotation not found on property)
+        when () {
+            !=(R|<local>/myAnnotation|.R|io/github/lukmccall/pika/PAnnotation.arguments|.R|SubstitutionOverride<kotlin/collections/Map.get: R|kotlin/Any?|>|(String(value)), String(property level)) ->  {
+                ^box String(FAIL: property MyAnnotation value)
+            }
+        }
+
+        lval deprecatedAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PAnnotation|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PAnnotation|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/Deprecated|))
+        }
+        ) ?: ^box String(FAIL: Deprecated not found on property)
+        when () {
+            !=(R|<local>/deprecatedAnnotation|.R|io/github/lukmccall/pika/PAnnotation.arguments|.R|SubstitutionOverride<kotlin/collections/Map.get: R|kotlin/Any?|>|(String(reason)), String(use fullName instead)) ->  {
+                ^box String(FAIL: Deprecated reason)
+            }
+        }
+
+        ^box String(OK)
+    }

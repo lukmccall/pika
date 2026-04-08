@@ -21,4 +21,12 @@ object PikaAPI {
   val FullFieldInfo = ClassId(API_PACKAGE, Name.identifier("FullFieldInfo"))
   val AnnotationInfo = ClassId(API_PACKAGE, Name.identifier("AnnotationInfo"))
   val Visibility = ClassId(API_PACKAGE, Name.identifier("Visibility"))
+
+  // Introspectable types
+  val Introspectable = ClassId(API_PACKAGE, Name.identifier("Introspectable"))
+  val PVisibility = ClassId(API_PACKAGE, Name.identifier("PVisibility"))
+  val PProperty = ClassId(API_PACKAGE, Name.identifier("PProperty"))
+  val PFunction = ClassId(API_PACKAGE, Name.identifier("PFunction"))
+  val PAnnotation = ClassId(API_PACKAGE, Name.identifier("PAnnotation"))
+  val PIntrospectionData = ClassId(API_PACKAGE, Name.identifier("PIntrospectionData"))
 }

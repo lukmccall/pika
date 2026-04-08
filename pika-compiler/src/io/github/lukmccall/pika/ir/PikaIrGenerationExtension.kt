@@ -12,12 +12,15 @@ class PikaIrGenerationExtension : IrGenerationExtension {
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
     val symbolFinder = createSymbolFinder(pluginContext)
     val poet = IRPoet(pluginContext, symbolFinder)
-    val typeInfoCallTransformer = TypeInfoCallTransformer(pluginContext, poet)
 
-    moduleFragment.transform(
-      typeInfoCallTransformer,
-      null
-    )
+    // Generate __PIntrospectionData() for Introspectable classes first
+    // (must run before TypeInfoCallTransformer so pIntrospectionOf can find the function)
+    val introspectableTransformer = IntrospectableTransformer(pluginContext, poet, symbolFinder)
+    moduleFragment.transform(introspectableTransformer, null)
+
+    // Transform typeInfo calls (including pIntrospectionOf)
+    val typeInfoCallTransformer = TypeInfoCallTransformer(pluginContext, poet, symbolFinder)
+    moduleFragment.transform(typeInfoCallTransformer, null)
   }
 
   override fun getPlatformIntrinsicExtension(loweringContext: LoweringContext): IrIntrinsicExtension? {

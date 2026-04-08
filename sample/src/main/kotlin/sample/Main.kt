@@ -2,8 +2,6 @@ package sample
 
 import io.github.lukmccall.pika.*
 import java.io.Serializable
-import kotlin.reflect.KClass
-import kotlin.reflect.typeOf
 
 /**
  * Example annotation for testing.
@@ -14,6 +12,11 @@ annotation class MyAnnotation(val value: String)
  * Example base class.
  */
 open class BaseEntity(open val id: String)
+
+/**
+ * Simple test class for Introspectable.
+ */
+open class SimplePerson(val name: String) : Introspectable
 
 /**
  * Example class with various field types, annotations, and inheritance.
@@ -28,6 +31,23 @@ class User(
 ) : BaseEntity(id), Serializable
 
 fun main() {
+  println("=== Introspectable Test ===")
+  println()
+  val person = SimplePerson("Alice")
+
+  // Two equivalent ways to get introspection data:
+  // 1. Using the helper function (recommended)
+  val data = pIntrospectionOf(person)
+  // 2. Or directly: person.__PIntrospectionData()
+
+  println("kClass: ${data.kClass}")
+  println("properties: ${data.properties.size}")
+
+  for (prop in data.properties) {
+    println("  - ${prop.name}: getter(person)=${prop.getter(person)}")
+  }
+  println()
+
   println("=== fullTypeInfo<T>() Examples ===")
   println()
 
@@ -146,6 +166,7 @@ inline fun <reified T> proxy(): PTypeDescriptor = pTypeDescriptorOf<T>()
 inline fun <reified T> proxy2(): PTypeDescriptor = proxy<T>()
 
 fun <T> generic(): PTypeDescriptor = pTypeDescriptorOf<T>()
+
 /**
  * Helper function to format PTypeDescriptor for display.
  */
@@ -156,9 +177,11 @@ fun formatPTypeDescriptor(info: PTypeDescriptor?): String = when (info) {
     val args = info.argumentsPTypes.joinToString(", ") { formatPTypeDescriptor(it) }
     "${info.pType.kClass.qualifiedName}<$args>$nullable"
   }
+
   is PTypeDescriptor.Concrete -> {
     val nullable = if (info.isNullable) "?" else ""
     "${info.pType.kClass.qualifiedName}$nullable"
   }
+
   is PTypeDescriptor.Star -> "*"
 }

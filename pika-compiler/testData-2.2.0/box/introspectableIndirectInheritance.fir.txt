@@ -1,0 +1,97 @@
+FILE: introspectableIndirectInheritance.kt
+    package test
+
+    public open class Animal : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(species: R|kotlin/String|): R|test/Animal| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val species: R|kotlin/String| = R|<local>/species|
+            public get(): R|kotlin/String|
+
+        public open fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Animal>|
+
+    }
+    public open class Mammal : R|test/Animal| {
+        public constructor(species: R|kotlin/String|, warmBlooded: R|kotlin/Boolean|): R|test/Mammal| {
+            super<R|test/Animal|>(R|<local>/species|)
+        }
+
+        public final val warmBlooded: R|kotlin/Boolean| = R|<local>/warmBlooded|
+            public get(): R|kotlin/Boolean|
+
+        public open fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Mammal>|
+
+    }
+    public final class Dog : R|test/Mammal| {
+        public constructor(species: R|kotlin/String|, warmBlooded: R|kotlin/Boolean|, breed: R|kotlin/String|): R|test/Dog| {
+            super<R|test/Mammal|>(R|<local>/species|, R|<local>/warmBlooded|)
+        }
+
+        public final val breed: R|kotlin/String| = R|<local>/breed|
+            public get(): R|kotlin/String|
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval dog: R|test/Dog| = R|test/Dog.Dog|(String(Canine), Boolean(true), String(Labrador))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>| = R|<local>/dog|.R|test/Dog.__PIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Dog, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: Dog should have 1 property)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Dog, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PProperty<test/Dog, *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(breed)) ->  {
+                ^box String(FAIL: Dog property should be breed)
+            }
+        }
+
+        lval mammalData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>| ?: ^box String(FAIL: Dog should have baseClass)
+        when () {
+            !=(R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Mammal|)) ->  {
+                ^box String(FAIL: baseClass should be Mammal)
+            }
+        }
+
+        when () {
+            !=(R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: Mammal should have 1 property)
+            }
+        }
+
+        when () {
+            !=(R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PProperty<CapturedType(*), *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(warmBlooded)) ->  {
+                ^box String(FAIL: Mammal property should be warmBlooded)
+            }
+        }
+
+        lval animalData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>| ?: ^box String(FAIL: Mammal should have baseClass)
+        when () {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Animal|)) ->  {
+                ^box String(FAIL: grandparent should be Animal)
+            }
+        }
+
+        when () {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box String(FAIL: Animal should have 1 property)
+            }
+        }
+
+        when () {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PProperty<CapturedType(*), *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(species)) ->  {
+                ^box String(FAIL: Animal property should be species)
+            }
+        }
+
+        when () {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>|, Null(null)) ->  {
+                ^box String(FAIL: Animal should not have baseClass)
+            }
+        }
+
+        ^box String(OK)
+    }

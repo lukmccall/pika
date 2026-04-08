@@ -1,0 +1,68 @@
+FILE: introspectableBackingField.kt
+    package test
+
+    public final class Person : R|io/github/lukmccall/pika/Introspectable| {
+        public constructor(name: R|kotlin/String|): R|test/Person| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val name: R|kotlin/String| = R|<local>/name|
+            public get(): R|kotlin/String|
+
+        public final val greeting: R|kotlin/String|
+            public get(): R|kotlin/String| {
+                ^ <strcat>(String(Hello, ), this@R|test/Person|.R|test/Person.name|)
+            }
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval person: R|test/Person| = R|test/Person.Person|(String(Alice))
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|<local>/person|.R|test/Person.__PIntrospectionData|()
+        lval nameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(name))
+        }
+        ) ?: ^box String(FAIL: name not found)
+        lval greetingProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(greeting))
+        }
+        ) ?: ^box String(FAIL: greeting not found)
+        when () {
+            R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: name should have backing field)
+            }
+        }
+
+        when () {
+            R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>| ->  {
+                ^box String(FAIL: greeting should not have backing field)
+            }
+        }
+
+        when () {
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
+                ^box String(FAIL: name getter)
+            }
+        }
+
+        when () {
+            !=(R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Hello, Alice)) ->  {
+                ^box String(FAIL: greeting getter)
+            }
+        }
+
+        when () {
+            ==(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
+                ^box String(FAIL: name should have setter)
+            }
+        }
+
+        when () {
+            !=(R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
+                ^box String(FAIL: greeting should not have setter)
+            }
+        }
+
+        ^box String(OK)
+    }
