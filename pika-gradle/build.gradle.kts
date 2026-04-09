@@ -64,7 +64,7 @@ gradlePlugin {
 }
 
 mavenPublishing {
-  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
 
   // Only sign when signing credentials are available (CI environment)
   if (project.findProperty("signingInMemoryKey") != null) {
