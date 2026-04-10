@@ -9,6 +9,7 @@ object Identifiers {
 
   const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
   const val P_INTROSPECTION_OF_FUNCTION_NAME = "pIntrospectionOf"
+  const val P_IS_INTROSPECTABLE_FUNCTION_NAME = "pIsIntrospectable"
 
   const val P_INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
   const val INTROSPECTABLE_INTERFACE_NAME = "Introspectable"

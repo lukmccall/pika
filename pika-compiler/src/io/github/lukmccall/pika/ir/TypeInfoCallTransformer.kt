@@ -55,6 +55,17 @@ class TypeInfoCallTransformer(
         poet.pika.pIntrospectionOf(instanceArg, expression)
       }
 
+      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> {
+        val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
+
+        // If the type argument is a type parameter, skip transformation.
+        if (isTypeParameter(typeArg)) {
+          return expression
+        }
+
+        poet.pika.pIsIntrospectable(typeArg)
+      }
+
       else -> expression
     }
   }
@@ -70,7 +81,8 @@ class TypeInfoCallTransformer(
   private fun isPluginCall(function: IrSimpleFunction): Boolean {
     val functionName = function.name.asString()
     if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
-      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
+      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME &&
+      functionName != Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
     ) {
       return false
     }

@@ -1,0 +1,49 @@
+FILE: pIsIntrospectable.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Foo : R|kotlin/Any| {
+        public constructor(x: R|kotlin/Int|): R|test/Foo| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val x: R|kotlin/Int| = R|<local>/x|
+            public get(): R|kotlin/Int|
+
+        internal final fun __pika$get$x(): R|kotlin/Int|
+
+        internal final fun __pika$set$x(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>|
+
+            private constructor(): R|test/Foo.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    public final class Bar : R|kotlin/Any| {
+        public constructor(x: R|kotlin/Int|): R|test/Bar| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val x: R|kotlin/Int| = R|<local>/x|
+            public get(): R|kotlin/Int|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        when () {
+            R|io/github/lukmccall/pika/pIsIntrospectable|<R|test/Foo|>().R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: expected true for @Introspectable class)
+            }
+        }
+
+        when () {
+            R|io/github/lukmccall/pika/pIsIntrospectable|<R|test/Bar|>() ->  {
+                ^box String(FAIL: expected false for non-@Introspectable class)
+            }
+        }
+
+        ^box String(OK)
+    }

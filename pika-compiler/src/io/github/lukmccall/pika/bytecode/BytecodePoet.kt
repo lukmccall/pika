@@ -188,7 +188,10 @@ class BytecodePoet(
     typeSystem: IrTypeSystemContext,
     type: IrType,
     functionName: String,
-    typeDescriptor: TypeParameterMarker
+    typeDescriptor: TypeParameterMarker,
+    throwOwner: String,
+    throwMethod: String,
+    throwDescriptor: String
   ) = adapter.apply {
     // Type is a type parameter - need to emit reified operation marker
     ReifiedTypeInliner.putReifiedOperationMarkerIfNeeded(
@@ -198,14 +201,9 @@ class BytecodePoet(
       adapter,
       typeSystem
     )
-    // Call throwNonReifiedPTypeDescriptorError() which throws at runtime if not inlined.
+    // Call the throw function which throws at runtime if not inlined.
     // When inlined, removeReifyMarker() will remove this instruction.
-    invokestatic(
-      "io/github/lukmccall/pika/PTypeDescriptorOfKt",
-      "throwNonReifiedPTypeDescriptorError",
-      "()Lio/github/lukmccall/pika/PTypeDescriptor;",
-      false
-    )
+    invokestatic(throwOwner, throwMethod, throwDescriptor, false)
     // Emit plugin-specific marker so rewritePluginDefinedOperationMarker knows to handle this
     // (this is dead code if not inlined, but the inliner uses it to find our marker)
     aconst(functionName.withPackageName())
@@ -228,7 +226,9 @@ class BytecodePoet(
     }
 
     val functionName = markerString.removePackageName()
-    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME) {
+    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
+      functionName != Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
+    ) {
       return null
     }
 

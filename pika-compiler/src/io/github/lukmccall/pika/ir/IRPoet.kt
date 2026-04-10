@@ -883,6 +883,14 @@ class IRPoet(
       }
     }
 
+    fun pIsIntrospectable(type: IrType): IrExpression {
+      val simpleType = type as? IrSimpleType
+        ?: return kotlin.bool(false)
+      val irClass = simpleType.classOrNull?.owner
+        ?: return kotlin.bool(false)
+      return kotlin.bool(irClass.hasIntrospectableAnnotation())
+    }
+
     fun pIntrospectionOf(instance: IrExpression, originalCall: IrCall): IrExpression {
       val instanceType = instance.type as? IrSimpleType
         ?: return originalCall
