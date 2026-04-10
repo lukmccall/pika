@@ -30,16 +30,16 @@ class BytecodePoet(
   // The multi dollar syntax isn't available in kotlin 2.1.20
   @Suppress("CanConvertToMultiDollarString")
   companion object {
-    private val pTypeType: Type = Type.getObjectType("io/github/lukmccall/pika/PType")
+    private val pTypeType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PType")
     private val pTypeDescriptorConcreteType: Type =
-      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Concrete")
+      Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Concrete")
     private val pTypeDescriptorParameterizedType: Type =
-      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Concrete\$Parameterized")
+      Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Concrete\$Parameterized")
     private val pTypeDescriptorStarType: Type =
-      Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor\$Star")
+      Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Star")
     private val listType: Type = Type.getObjectType("java/util/List")
 
-    val pTypeDescriptorType: Type = Type.getObjectType("io/github/lukmccall/pika/PTypeDescriptor")
+    val pTypeDescriptorType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor")
   }
 
   /**
@@ -144,6 +144,9 @@ class BytecodePoet(
     )
   }
 
+  private fun initFallbackPTypeDescriptor() =
+    initConcretePTypeDescriptor(irPluginContext.irBuiltIns.anyClass.owner, false)
+
   /**
    * new PTypeDescriptor.Concrete or PTypeDescriptor.Concrete.Parameterized
    */
@@ -152,19 +155,13 @@ class BytecodePoet(
   ) {
     val simpleType = type as? IrSimpleType
     if (simpleType == null) {
-      initConcretePTypeDescriptor(
-        irPluginContext.irBuiltIns.anyClass.owner,
-        false
-      )
+      initFallbackPTypeDescriptor()
       return
     }
 
     val irClass = simpleType.classOrNull?.owner
     if (irClass == null) {
-      initConcretePTypeDescriptor(
-        irPluginContext.irBuiltIns.anyClass.owner,
-        false
-      )
+      initFallbackPTypeDescriptor()
       return
     }
 

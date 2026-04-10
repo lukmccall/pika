@@ -8,18 +8,11 @@ import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
 import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
 import org.jetbrains.kotlin.ir.builders.declarations.buildFun
-import org.jetbrains.kotlin.ir.declarations.IrClass
-import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
-import org.jetbrains.kotlin.ir.declarations.IrParameterKind
-import org.jetbrains.kotlin.ir.declarations.IrProperty
-import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
-import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrConstKind
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
+import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
+import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.companionObject
@@ -34,6 +27,22 @@ class IRPoet(
 ) {
   val irBuiltIns = context.irBuiltIns
   val kotlin = Kotlin()
+
+  fun createReturnBody(
+    irFactory: IrFactory,
+    returnTarget: IrSimpleFunction,
+    value: IrExpression
+  ): IrBlockBody = irFactory.createBlockBody(-1, -1).apply {
+    statements.add(
+      IrReturnImpl(
+        -1,
+        -1,
+        irBuiltIns.nothingType,
+        returnTarget.symbol,
+        value
+      )
+    )
+  }
 
   inner class Kotlin {
     fun string(value: String) =
@@ -60,33 +69,33 @@ class IRPoet(
       value = null
     )
 
+    private fun buildIrCall(
+      type: IrType,
+      symbol: IrSimpleFunctionSymbol,
+      typeArgumentsCount: Int = 0,
+      origin: IrStatementOrigin? = null,
+      setup: IrCallImpl.() -> Unit = {}
+    ): IrExpression =
+      IrCallImpl(
+        -1,
+        -1,
+        type,
+        symbol,
+        typeArgumentsCount,
+        origin,
+        null
+      ).also { it.setup() }
+
     /**
      * {key} to {value} -> Pair<{keyType}, {valueType}>
      */
     fun pair(keyType: IrType, key: IrExpression, valueType: IrType, value: IrExpression): IrExpression {
-      val pairType = symbolFinder
-        .kotlinStd
-        .pair
-        .typeWith(
-          keyType,
-          valueType
-        )
-
-      val to = symbolFinder.kotlinStd.to.first()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = pairType,
-        symbol = to,
-        typeArgumentsCount = 2,
-        origin = null,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = keyType
-        call.typeArguments[1] = valueType
-        call.arguments[0] = key
-        call.arguments[1] = value
+      val pairType = symbolFinder.kotlinStd.pair.typeWith(keyType, valueType)
+      return buildIrCall(pairType, symbolFinder.kotlinStd.to.first(), typeArgumentsCount = 2) {
+        typeArguments[0] = keyType
+        typeArguments[1] = valueType
+        arguments[0] = key
+        arguments[1] = value
       }
     }
 
@@ -94,41 +103,14 @@ class IRPoet(
      * mapOf<{keyType}, {valueType}>({pairs})
      */
     fun mapOf(keyType: IrType, valueType: IrType, pairs: List<IrExpression>): IrExpression {
-      val mapType = irBuiltIns
-        .mapClass
-        .typeWith(
-          keyType,
-          valueType
-        )
-
-      val pairType = symbolFinder
-        .kotlinStd
-        .pair
-        .typeWith(
-          keyType,
-          valueType
-        )
-
-      val mapOf = symbolFinder
-        .kotlinStd
-        .collections
-        .mapOf
-        .firstSingleVarargsArgument()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = mapType,
-        symbol = mapOf,
-        typeArgumentsCount = 2,
-        origin = IrStatementOrigin.INVOKE,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = keyType
-        call.typeArguments[1] = valueType
-        call.arguments[0] = IrVarargImpl(
-          startOffset = -1,
-          endOffset = -1,
+      val mapType = irBuiltIns.mapClass.typeWith(keyType, valueType)
+      val pairType = symbolFinder.kotlinStd.pair.typeWith(keyType, valueType)
+      val mapOf = symbolFinder.kotlinStd.collections.mapOf.firstSingleVarargsArgument()
+      return buildIrCall(mapType, mapOf, typeArgumentsCount = 2, origin = IrStatementOrigin.INVOKE) {
+        typeArguments[0] = keyType
+        typeArguments[1] = valueType
+        arguments[0] = IrVarargImpl(
+          startOffset = -1, endOffset = -1,
           type = irBuiltIns.arrayClass.typeWith(pairType),
           varargElementType = pairType,
           elements = pairs
@@ -140,30 +122,11 @@ class IRPoet(
      * emptyMap<{keyType}, {valueType}>()
      */
     fun emptyMap(keyType: IrType, valueType: IrType): IrExpression {
-      val mapType = irBuiltIns
-        .mapClass
-        .typeWith(
-          keyType,
-          valueType
-        )
-
-      val emptyMap = symbolFinder
-        .kotlinStd
-        .collections
-        .emptyMap
-        .single()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = mapType,
-        symbol = emptyMap,
-        typeArgumentsCount = 2,
-        origin = null,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = keyType
-        call.typeArguments[1] = valueType
+      val mapType = irBuiltIns.mapClass.typeWith(keyType, valueType)
+      val emptyMap = symbolFinder.kotlinStd.collections.emptyMap.single()
+      return buildIrCall(mapType, emptyMap, typeArgumentsCount = 2) {
+        typeArguments[0] = keyType
+        typeArguments[1] = valueType
       }
     }
 
@@ -171,29 +134,12 @@ class IRPoet(
      * listOf<{type}>({elements})
      */
     fun listOf(type: IrType, elements: List<IrExpression>): IrExpression {
-      val listType = irBuiltIns
-        .listClass
-        .typeWith(type)
-
-      val listOf = symbolFinder
-        .kotlinStd
-        .collections
-        .listOf
-        .firstSingleVarargsArgument()
-
-      return IrCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = listType,
-        symbol = listOf,
-        typeArgumentsCount = 1,
-        origin = IrStatementOrigin.INVOKE,
-        superQualifierSymbol = null
-      ).also { call ->
-        call.typeArguments[0] = type
-        call.arguments[0] = IrVarargImpl(
-          startOffset = -1,
-          endOffset = -1,
+      val listType = irBuiltIns.listClass.typeWith(type)
+      val listOf = symbolFinder.kotlinStd.collections.listOf.firstSingleVarargsArgument()
+      return buildIrCall(listType, listOf, typeArgumentsCount = 1, origin = IrStatementOrigin.INVOKE) {
+        typeArguments[0] = type
+        arguments[0] = IrVarargImpl(
+          startOffset = -1, endOffset = -1,
           type = irBuiltIns.arrayClass.typeWith(type),
           varargElementType = type,
           elements = elements
@@ -235,6 +181,9 @@ class IRPoet(
   val pika = Pika()
 
   inner class Pika {
+    private val IrProperty.resolvedType: IrType
+      get() = getter?.returnType ?: backingField?.type ?: irBuiltIns.anyNType
+
     /**
      * io.github.lukmccall.pika.PTypeDescriptor.Star
      */
@@ -249,53 +198,46 @@ class IRPoet(
       )
     }
 
-    /**
-     * io.github.lukmccall.pika.PType({KClass<{classSymbol}>})
-     */
-    fun pType(classSymbol: IrClassSymbol): IrExpression {
-      val pTypeClass = symbolFinder.pikaAPI.pType
-
-      val constructor = pTypeClass.owner.primaryConstructor
-        ?: error("PType must have a primary constructor")
-
+    private fun IrClassSymbol.buildConstructorCall(
+      errorName: String,
+      setup: IrConstructorCall.() -> Unit
+    ): IrExpression {
+      val constructor = owner.primaryConstructor
+        ?: error("$errorName must have a primary constructor")
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
-        type = pTypeClass.owner.defaultType,
+        type = owner.defaultType,
         symbol = constructor.symbol,
         typeArgumentsCount = 0,
         constructorTypeArgumentsCount = 0,
         origin = null
-      ).also { call ->
-        call.arguments[0] = kotlin.kClass(classSymbol)
-      }
+      ).also { it.setup() }
     }
+
+    /**
+     * io.github.lukmccall.pika.PType({KClass<{classSymbol}>})
+     */
+    fun pType(classSymbol: IrClassSymbol): IrExpression =
+      symbolFinder
+        .pikaAPI
+        .pType
+        .buildConstructorCall("PType") {
+          arguments[0] = kotlin.kClass(classSymbol)
+        }
 
     /**
      * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable})
      */
-    fun concrete(
-      classSymbol: IrClassSymbol,
-      isNullable: Boolean
-    ): IrExpression {
-      val pTypeDescriptorConcreteClass = symbolFinder.pikaAPI.pTypeDescriptor.concrete
-
-      val constructor = pTypeDescriptorConcreteClass.owner.primaryConstructor
-        ?: error("PTypeDescriptor.Concrete must have a primary constructor")
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = pTypeDescriptorConcreteClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = pType(classSymbol)
-        call.arguments[1] = kotlin.bool(isNullable)
-      }
-    }
+    fun concrete(classSymbol: IrClassSymbol, isNullable: Boolean): IrExpression =
+      symbolFinder
+        .pikaAPI
+        .pTypeDescriptor
+        .concrete
+        .buildConstructorCall("PTypeDescriptor.Concrete") {
+          arguments[0] = pType(classSymbol)
+          arguments[1] = kotlin.bool(isNullable)
+        }
 
     /**
      * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
@@ -308,27 +250,16 @@ class IRPoet(
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
       argumentsPTypes: List<IrExpression>
-    ): IrExpression {
-      val pTypeDescriptorParameterizedClass = symbolFinder.pikaAPI.pTypeDescriptor.parameterized
-      val pTypeDescriptorClass = symbolFinder.pikaAPI.pTypeDescriptor.root
-
-      val constructor = pTypeDescriptorParameterizedClass.owner.primaryConstructor
-        ?: error("PTypeDescriptor.Concrete.Parameterized must have a primary constructor")
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = pTypeDescriptorParameterizedClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = pType(classSymbol)
-        call.arguments[1] = kotlin.bool(isNullable)
-        call.arguments[2] = kotlin.listOf(pTypeDescriptorClass.owner.defaultType, argumentsPTypes)
-      }
-    }
+    ): IrExpression =
+      symbolFinder
+        .pikaAPI
+        .pTypeDescriptor
+        .parameterized
+        .buildConstructorCall("PTypeDescriptor.Concrete.Parameterized") {
+          arguments[0] = pType(classSymbol)
+          arguments[1] = kotlin.bool(isNullable)
+          arguments[2] = kotlin.listOf(symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType, argumentsPTypes)
+        }
 
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
@@ -370,7 +301,7 @@ class IRPoet(
       val enumEntry = pVisibilityEnumClass
         .owner
         .declarations
-        .filterIsInstance<org.jetbrains.kotlin.ir.declarations.IrEnumEntry>()
+        .filterIsInstance<IrEnumEntry>()
         .find { it.name.asString() == visibility }
         ?: error("Cannot find PVisibility.$value")
 
@@ -387,52 +318,27 @@ class IRPoet(
      */
     fun pAnnotation(annotation: IrConstructorCall): IrExpression {
       val annotationClass = annotation.type.classOrNull?.owner
-
-      val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
-
-      val constructor = pAnnotationClass.owner.primaryConstructor
-        ?: error("PAnnotation must have a primary constructor")
-
       val argumentsMap = annotation.toArgsMap(this@IRPoet)
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = pAnnotationClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = kotlin.kClass(
-          annotationClass?.symbol ?: irBuiltIns.anyClass
-        )
-        call.arguments[1] = argumentsMap
-      }
+      return symbolFinder
+        .pikaAPI
+        .pAnnotation
+        .buildConstructorCall("PAnnotation") {
+          arguments[0] = kotlin.kClass(annotationClass?.symbol ?: irBuiltIns.anyClass)
+          arguments[1] = argumentsMap
+        }
     }
 
     /**
      * io.github.lukmccall.pika.PFunction({name}, {visibility})
      */
-    fun pFunction(function: IrSimpleFunction): IrExpression {
-      val pFunctionClass = symbolFinder.pikaAPI.pFunction
-
-      val constructor = pFunctionClass.owner.primaryConstructor
-        ?: error("PFunction must have a primary constructor")
-
-      return IrConstructorCallImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = pFunctionClass.owner.defaultType,
-        symbol = constructor.symbol,
-        typeArgumentsCount = 0,
-        constructorTypeArgumentsCount = 0,
-        origin = null
-      ).also { call ->
-        call.arguments[0] = kotlin.string(function.name.asString())
-        call.arguments[1] = pika.pVisibility(function.visibility)
-      }
-    }
+    fun pFunction(function: IrSimpleFunction): IrExpression =
+      symbolFinder
+        .pikaAPI
+        .pFunction
+        .buildConstructorCall("PFunction") {
+          arguments[0] = kotlin.string(function.name.asString())
+          arguments[1] = pika.pVisibility(function.visibility)
+        }
 
     /**
      * Creates a getter lambda: { owner -> owner.propertyName }
@@ -444,9 +350,7 @@ class IRPoet(
       containingFunction: IrSimpleFunction,
       irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression {
-      val propertyType = property.getter?.returnType
-        ?: property.backingField?.type
-        ?: irBuiltIns.anyNType
+      val propertyType = property.resolvedType
 
       val ownerType = ownerClass.defaultType
 
@@ -466,51 +370,41 @@ class IRPoet(
           // Call the getter
           val getter = property.getter!!
           IrCallImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = propertyType,
-            symbol = getter.symbol,
-            typeArgumentsCount = 0,
-            origin = IrStatementOrigin.GET_PROPERTY,
-            superQualifierSymbol = null
-          ).apply {
-            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-            getter.parameters.forEach { param ->
-              if (param.kind == IrParameterKind.DispatchReceiver) {
-                arguments[param.indexInParameters] = IrGetValueImpl(
-                  startOffset = -1,
-                  endOffset = -1,
-                  type = ownerType,
-                  symbol = ownerParam.symbol
-                )
-              }
+            -1,
+            -1,
+            propertyType,
+            getter.symbol,
+            0,
+            IrStatementOrigin.GET_PROPERTY,
+            null
+          )
+            .apply {
+              bindFunctionParameters(
+                getter,
+                ownerParam,
+                ownerType
+              )
             }
-          }
         } else {
           // Use synthetic getter to access backing field
           val syntheticGetter = ownerClass.findSyntheticGetter(property)
           if (syntheticGetter != null) {
             IrCallImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = propertyType,
-              symbol = syntheticGetter.symbol,
-              typeArgumentsCount = 0,
-              origin = null,
-              superQualifierSymbol = null
-            ).apply {
-              // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-              syntheticGetter.parameters.forEach { param ->
-                if (param.kind == IrParameterKind.DispatchReceiver) {
-                  arguments[param.indexInParameters] = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = ownerType,
-                    symbol = ownerParam.symbol
-                  )
-                }
+              -1,
+              -1,
+              propertyType,
+              syntheticGetter.symbol,
+              0,
+              null,
+              null
+            )
+              .apply {
+                bindFunctionParameters(
+                  syntheticGetter,
+                  ownerParam,
+                  ownerType
+                )
               }
-            }
           } else {
             // Fallback: direct field access (only works for instance methods)
             IrGetFieldImpl(
@@ -528,17 +422,7 @@ class IRPoet(
           }
         }
 
-        body = irFactory.createBlockBody(-1, -1).apply {
-          statements.add(
-            IrReturnImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = irBuiltIns.nothingType,
-              returnTargetSymbol = symbol,
-              value = returnValue
-            )
-          )
-        }
+        body = createReturnBody(irFactory, this, returnValue)
       }
 
       return IrFunctionExpressionImpl(
@@ -550,19 +434,56 @@ class IRPoet(
       )
     }
 
-    private fun IrClass.findSyntheticGetter(property: IrProperty): IrSimpleFunction? {
-      val name = Identifiers.syntheticGetterName(property.name.asString())
+    /**
+     * Sets arguments for dispatch receiver (and optionally a regular/value parameter)
+     * on a function call, using K2 IR's unified `arguments` array indexed by `indexInParameters`.
+     */
+    private fun IrCallImpl.bindFunctionParameters(
+      function: IrSimpleFunction,
+      dispatchParam: IrValueParameter,
+      dispatchType: IrType,
+      regularParam: IrValueParameter? = null,
+      regularType: IrType? = null
+    ) {
+      function.parameters.forEach { param ->
+        when (param.kind) {
+          IrParameterKind.DispatchReceiver ->
+            arguments[param.indexInParameters] = IrGetValueImpl(
+              -1,
+              -1,
+              dispatchType,
+              dispatchParam.symbol
+            )
+
+          IrParameterKind.Regular -> if (regularParam != null) {
+            arguments[param.indexInParameters] = IrGetValueImpl(
+              -1,
+              -1,
+              regularType!!,
+              regularParam.symbol
+            )
+          }
+
+          else -> {}
+        }
+      }
+    }
+
+    private fun IrClass.findSyntheticAccessor(
+      property: IrProperty,
+      nameTransform: (String) -> String
+    ): IrSimpleFunction? {
+      val name = nameTransform(property.name.asString())
       return declarations
         .filterIsInstance<IrSimpleFunction>()
         .find { it.name.asString() == name }
     }
 
-    private fun IrClass.findSyntheticSetter(property: IrProperty): IrSimpleFunction? {
-      val name = Identifiers.syntheticSetterName(property.name.asString())
-      return declarations
-        .filterIsInstance<IrSimpleFunction>()
-        .find { it.name.asString() == name }
-    }
+    private fun IrClass.findSyntheticGetter(property: IrProperty) =
+      findSyntheticAccessor(property, Identifiers::syntheticGetterName)
+
+    private fun IrClass.findSyntheticSetter(property: IrProperty) =
+      findSyntheticAccessor(property, Identifiers::syntheticSetterName)
 
     /**
      * Creates a setter lambda: { owner, value -> owner.property = value }
@@ -575,9 +496,7 @@ class IRPoet(
       containingFunction: IrSimpleFunction,
       irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression? {
-      val propertyType = property.getter?.returnType
-        ?: property.backingField?.type
-        ?: irBuiltIns.anyNType
+      val propertyType = property.resolvedType
       val ownerType = ownerClass.defaultType
 
       // Find setter: either Kotlin setter or synthetic setter
@@ -601,74 +520,43 @@ class IRPoet(
         val valueParam = addValueParameter("value", propertyType)
 
         val setterCall = if (kotlinSetter != null) {
-          // Use Kotlin setter
           IrCallImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = irBuiltIns.unitType,
-            symbol = kotlinSetter.symbol,
-            typeArgumentsCount = 0,
-            origin = IrStatementOrigin.EQ,
-            superQualifierSymbol = null
-          ).apply {
-            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-            kotlinSetter.parameters.forEach { param ->
-              when (param.kind) {
-                IrParameterKind.DispatchReceiver -> {
-                  arguments[param.indexInParameters] = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = ownerType,
-                    symbol = ownerParam.symbol
-                  )
-                }
-                IrParameterKind.Regular -> {
-                  arguments[param.indexInParameters] = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = propertyType,
-                    symbol = valueParam.symbol
-                  )
-                }
-                else -> {}
-              }
+            -1,
+            -1,
+            irBuiltIns.unitType,
+            kotlinSetter.symbol,
+            0,
+            IrStatementOrigin.EQ,
+            null
+          )
+            .apply {
+              bindFunctionParameters(
+                kotlinSetter,
+                ownerParam,
+                ownerType,
+                valueParam,
+                propertyType
+              )
             }
-          }
         } else {
-          // Use synthetic setter
           IrCallImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = irBuiltIns.unitType,
-            symbol = syntheticSetter!!.symbol,
-            typeArgumentsCount = 0,
-            origin = null,
-            superQualifierSymbol = null
-          ).apply {
-            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-            // Use indexInParameters to correctly map each parameter
-            syntheticSetter.parameters.forEach { param ->
-              when (param.kind) {
-                IrParameterKind.DispatchReceiver -> {
-                  arguments[param.indexInParameters] = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = ownerType,
-                    symbol = ownerParam.symbol
-                  )
-                }
-                IrParameterKind.Regular -> {
-                  arguments[param.indexInParameters] = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = propertyType,
-                    symbol = valueParam.symbol
-                  )
-                }
-                else -> {}
-              }
+            -1,
+            -1,
+            irBuiltIns.unitType,
+            syntheticSetter!!.symbol,
+            0,
+            null,
+            null
+          )
+            .apply {
+              bindFunctionParameters(
+                syntheticSetter,
+                ownerParam,
+                ownerType,
+                valueParam,
+                propertyType
+              )
             }
-          }
         }
 
         body = irFactory.createBlockBody(-1, -1).apply {
@@ -718,28 +606,22 @@ class IRPoet(
         val ownerParam = addValueParameter("owner", ownerType)
 
         val returnValue = if (syntheticGetter != null) {
-          // Use synthetic getter
           IrCallImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = delegateType,
-            symbol = syntheticGetter.symbol,
-            typeArgumentsCount = 0,
-            origin = null,
-            superQualifierSymbol = null
-          ).apply {
-            // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-            syntheticGetter.parameters.forEach { param ->
-              if (param.kind == IrParameterKind.DispatchReceiver) {
-                arguments[param.indexInParameters] = IrGetValueImpl(
-                  startOffset = -1,
-                  endOffset = -1,
-                  type = ownerType,
-                  symbol = ownerParam.symbol
-                )
-              }
+            -1,
+            -1,
+            delegateType,
+            syntheticGetter.symbol,
+            0,
+            null,
+            null
+          )
+            .apply {
+              bindFunctionParameters(
+                syntheticGetter,
+                ownerParam,
+                ownerType
+              )
             }
-          }
         } else {
           // Fallback: direct field access
           IrGetFieldImpl(
@@ -756,17 +638,7 @@ class IRPoet(
           )
         }
 
-        body = irFactory.createBlockBody(-1, -1).apply {
-          statements.add(
-            IrReturnImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = irBuiltIns.nothingType,
-              returnTargetSymbol = symbol,
-              value = returnValue
-            )
-          )
-        }
+        body = createReturnBody(irFactory, this, returnValue)
       }
 
       return IrFunctionExpressionImpl(
@@ -787,9 +659,7 @@ class IRPoet(
       containingFunction: IrSimpleFunction,
       irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
     ): IrExpression {
-      val propertyType = property.getter?.returnType
-        ?: property.backingField?.type
-        ?: irBuiltIns.anyNType
+      val propertyType = property.resolvedType
 
       val pPropertyClass = symbolFinder.pikaAPI.pProperty
       val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation

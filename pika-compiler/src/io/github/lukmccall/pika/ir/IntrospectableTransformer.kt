@@ -98,64 +98,33 @@ class IntrospectableTransformer(
       val isGetter = Identifiers.isSyntheticGetter(syntheticAccessor.name.asString())
       val backingField = requireNotNull(originalProperty.backingField)
 
+      val dispatchReceiver = syntheticAccessor.parameters
+        .first { it.kind == IrParameterKind.DispatchReceiver }
+
       if (isGetter) {
         // Generate: return this.<backingField>
-        syntheticAccessor.body = context
-          .irFactory
-          .createBlockBody(-1, -1)
-          .apply {
-            statements.add(
-              IrReturnImpl(
-                startOffset = -1,
-                endOffset = -1,
-                type = context.irBuiltIns.nothingType,
-                returnTargetSymbol = syntheticAccessor.symbol,
-                value = IrGetFieldImpl(
-                  startOffset = -1,
-                  endOffset = -1,
-                  symbol = backingField.symbol,
-                  type = backingField.type,
-                  receiver = IrGetValueImpl(
-                    startOffset = -1,
-                    endOffset = -1,
-                    type = irClass.defaultType,
-                    symbol = syntheticAccessor.dispatchReceiverParameter!!.symbol
-                  )
-                )
-              )
-            )
-          }
+        val getField = IrGetFieldImpl(
+          startOffset = -1, endOffset = -1,
+          symbol = backingField.symbol,
+          type = backingField.type,
+          receiver = IrGetValueImpl(-1, -1, irClass.defaultType, dispatchReceiver.symbol)
+        )
+        syntheticAccessor.body = poet.createReturnBody(context.irFactory, syntheticAccessor, getField)
       } else {
-        val valueParam = syntheticAccessor
-          .parameters
-          .first { it.kind == IrParameterKind.Regular }
+        val valueParam = syntheticAccessor.parameters.first { it.kind == IrParameterKind.Regular }
 
         // Generate: this.<backingField> = value
-        syntheticAccessor.body = context
-          .irFactory
-          .createBlockBody(-1, -1)
-          .apply {
-            statements.add(
-              IrSetFieldImpl(
-                startOffset = -1,
-                endOffset = -1,
-                symbol = backingField.symbol,
-                receiver = IrGetValueImpl(
-                  startOffset = -1,
-                  endOffset = -1,
-                  type = irClass.defaultType,
-                  symbol = syntheticAccessor.dispatchReceiverParameter!!.symbol
-                ),
-                value = IrGetValueImpl(
-                  startOffset = -1,
-                  endOffset = -1,
-                  type = valueParam.type,
-                  symbol = valueParam.symbol
-                ),
-                type = context.irBuiltIns.unitType
-              )
+        syntheticAccessor.body = context.irFactory.createBlockBody(-1, -1).apply {
+          statements.add(
+            IrSetFieldImpl(
+              startOffset = -1, endOffset = -1,
+              symbol = backingField.symbol,
+              receiver = IrGetValueImpl(-1, -1, irClass.defaultType, dispatchReceiver.symbol),
+              value = IrGetValueImpl(-1, -1, valueParam.type, valueParam.symbol),
+              type = context.irBuiltIns.unitType
             )
-          }
+          )
+        }
       }
     }
   }
@@ -209,17 +178,7 @@ class IntrospectableTransformer(
       baseClassExpr = baseClassExpr
     )
 
-    function.body = context.irFactory.createBlockBody(-1, -1).apply {
-      statements.add(
-        IrReturnImpl(
-          startOffset = -1,
-          endOffset = -1,
-          type = context.irBuiltIns.nothingType,
-          returnTargetSymbol = function.symbol,
-          value = introspectionData
-        )
-      )
-    }
+    function.body = poet.createReturnBody(context.irFactory, function, introspectionData)
   }
 
   /**

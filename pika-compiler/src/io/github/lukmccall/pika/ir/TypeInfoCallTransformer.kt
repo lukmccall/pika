@@ -79,20 +79,18 @@ class TypeInfoCallTransformer(
   }
 
   private fun isPluginCall(function: IrSimpleFunction): Boolean {
-    val functionName = function.name.asString()
-    if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
-      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME &&
-      functionName != Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
-    ) {
+    if (function.name.asString() !in PLUGIN_FUNCTION_NAMES) {
       return false
     }
-    val packageFqName = function.parent.let { parent ->
-      when (parent) {
-        is IrPackageFragment -> parent.packageFqName
-        else -> null
-      }
-    }
+    val packageFqName = (function.parent as? IrPackageFragment)?.packageFqName
     return packageFqName == Identifiers.PACKAGE_NAME.toFq()
   }
 
+  companion object {
+    private val PLUGIN_FUNCTION_NAMES = setOf(
+      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME,
+      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME,
+      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
+    )
+  }
 }

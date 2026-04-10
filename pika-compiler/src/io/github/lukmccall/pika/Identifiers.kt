@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.name.FqName
 @Suppress("CanConvertToMultiDollarString", "CanUnescapeDollarLiteral")
 object Identifiers {
   const val PACKAGE_NAME = "io.github.lukmccall.pika"
+  val PACKAGE_NAME_JAVE_NOTATION = PACKAGE_NAME.replace(".", "/")
 
   const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
   const val P_INTROSPECTION_OF_FUNCTION_NAME = "pIntrospectionOf"

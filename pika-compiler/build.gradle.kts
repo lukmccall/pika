@@ -9,6 +9,15 @@ plugins {
 val kotlinVersionStr: String = libs.versions.kotlin.asProvider().get()
 val kotlinMinorVersion = kotlinVersionStr.split(".").take(2).joinToString(".")
 
+// Classify into a single tier used by testFixtures and testData directories.
+// mainSourceDir has a different split (2.1 vs 2.2 vs 2.3 vs 2.3.20+).
+val fixturesTier = when {
+  kotlinMinorVersion >= "2.3" -> "2.3+"
+  kotlinVersionStr >= "2.2.20" -> "2.2.20"
+  kotlinMinorVersion >= "2.2" -> "2.2.0"
+  else -> "2.1"
+}
+
 val mainSourceDir = when {
   kotlinVersionStr >= "2.3.20" -> "src-2.3.20+"
   kotlinVersionStr >= "2.3.0" -> "src-2.3"
@@ -16,18 +25,12 @@ val mainSourceDir = when {
   else -> "src-2.1"  // 2.1.x only
 }
 
-val testFixturesSourceDir = when {
-  kotlinMinorVersion >= "2.3" -> "test-fixtures-2.3+"
-  kotlinVersionStr >= "2.2.20" -> "test-fixtures-2.2.20"
-  kotlinMinorVersion >= "2.2" -> "test-fixtures-2.2.0"
-  else -> "test-fixtures-2.1"
-}
+val testFixturesSourceDir = "test-fixtures-$fixturesTier"
 
-val testDataDir = when {
-  kotlinMinorVersion >= "2.3" -> "testData"
-  kotlinVersionStr >= "2.2.20" -> "testData-2.2.20"
-  kotlinMinorVersion >= "2.2" -> "testData-2.2.0"
-  else -> "testData-2.1"
+val testDataDir = if (fixturesTier == "2.3+") {
+  "testData"
+} else {
+  "testData-$fixturesTier"
 }
 
 sourceSets {
