@@ -11,7 +11,7 @@ FILE: typeInfoCustomClass.kt
 
     }
     public final fun box(): R|kotlin/String| {
-        lval personInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|test/Person|>()
+        lval personInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|test/Person|>()
         when () {
             (R|<local>/personInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: Person should be PTypeDescriptor.Concrete)
@@ -30,7 +30,7 @@ FILE: typeInfoCustomClass.kt
             }
         }
 
-        lval nullablePersonInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|test/Person?|>()
+        lval nullablePersonInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|test/Person?|>()
         when () {
             (R|<local>/nullablePersonInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: Person? should be PTypeDescriptor.Concrete)

@@ -2,7 +2,7 @@ FILE: typeInfoNestedGenerics.kt
     package test
 
     public final fun box(): R|kotlin/String| {
-        lval nestedInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/Map<kotlin/String, kotlin/collections/List<kotlin/Int?>>|>()
+        lval nestedInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/collections/Map<kotlin/String, kotlin/collections/List<kotlin/Int?>>|>()
         when () {
             (R|<local>/nestedInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: nested should be Parameterized)

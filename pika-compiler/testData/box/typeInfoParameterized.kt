@@ -5,7 +5,7 @@ import io.github.lukmccall.pika.*
 
 fun box(): String {
   // Test List<String>
-  val listStringInfo = pTypeDescriptorOf<List<String>>()
+  val listStringInfo = typeDescriptorOf<List<String>>()
   if (listStringInfo !is PTypeDescriptor.Concrete.Parameterized) return "FAIL: List<String> should be Parameterized"
   if (listStringInfo.pType.kClass != List::class) return "FAIL: List<String> kClass"
   if (listStringInfo.isNullable) return "FAIL: List<String> should not be nullable"
@@ -16,7 +16,7 @@ fun box(): String {
   if (listArg.pType.kClass != String::class) return "FAIL: List<String> arg kClass"
 
   // Test Map<String, Int>
-  val mapInfo = pTypeDescriptorOf<Map<String, Int>>()
+  val mapInfo = typeDescriptorOf<Map<String, Int>>()
   if (mapInfo !is PTypeDescriptor.Concrete.Parameterized) return "FAIL: Map<String, Int> should be Parameterized"
   if (mapInfo.pType.kClass != Map::class) return "FAIL: Map<String, Int> kClass"
   if (mapInfo.argumentsPTypes.size != 2) return "FAIL: Map<String, Int> should have 2 type arguments"

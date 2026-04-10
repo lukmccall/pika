@@ -5,7 +5,7 @@ import io.github.lukmccall.pika.*
 
 fun box(): String {
   // Test nested generics: Map<String, List<Int?>>
-  val nestedInfo = pTypeDescriptorOf<Map<String, List<Int?>>>()
+  val nestedInfo = typeDescriptorOf<Map<String, List<Int?>>>()
   if (nestedInfo !is PTypeDescriptor.Concrete.Parameterized) return "FAIL: nested should be Parameterized"
   if (nestedInfo.pType.kClass != Map::class) return "FAIL: nested kClass"
   if (nestedInfo.argumentsPTypes.size != 2) return "FAIL: nested should have 2 type arguments"

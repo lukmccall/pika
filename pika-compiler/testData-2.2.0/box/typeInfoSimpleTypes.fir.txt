@@ -2,7 +2,7 @@ FILE: typeInfoSimpleTypes.kt
     package test
 
     public final fun box(): R|kotlin/String| {
-        lval stringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/String|>()
+        lval stringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/String|>()
         when () {
             (R|<local>/stringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: String should be Concrete)
@@ -21,7 +21,7 @@ FILE: typeInfoSimpleTypes.kt
             }
         }
 
-        lval intInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Int|>()
+        lval intInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/Int|>()
         when () {
             (R|<local>/intInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: Int should be Concrete)
@@ -40,7 +40,7 @@ FILE: typeInfoSimpleTypes.kt
             }
         }
 
-        lval boolInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Boolean|>()
+        lval boolInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/Boolean|>()
         when () {
             (R|<local>/boolInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: Boolean should be Concrete)
@@ -53,7 +53,7 @@ FILE: typeInfoSimpleTypes.kt
             }
         }
 
-        lval nullableIntInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/Int?|>()
+        lval nullableIntInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/Int?|>()
         when () {
             (R|<local>/nullableIntInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: Int? should be Concrete)
@@ -72,7 +72,7 @@ FILE: typeInfoSimpleTypes.kt
             }
         }
 
-        lval nullableStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/String?|>()
+        lval nullableStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/String?|>()
         when () {
             (R|<local>/nullableStringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
                 ^box String(FAIL: String? should be Concrete)

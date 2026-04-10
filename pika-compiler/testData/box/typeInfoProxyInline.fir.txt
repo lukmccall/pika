@@ -2,7 +2,7 @@ FILE: typeInfoProxyInline.kt
     package test
 
     public final inline fun <reified T> proxy(): R|io/github/lukmccall/pika/PTypeDescriptor| {
-        ^proxy R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|T|>()
+        ^proxy R|io/github/lukmccall/pika/typeDescriptorOf|<R|T|>()
     }
     public final fun box(): R|kotlin/String| {
         lval info: R|io/github/lukmccall/pika/PTypeDescriptor| = R|test/proxy|<R|kotlin/String|>()

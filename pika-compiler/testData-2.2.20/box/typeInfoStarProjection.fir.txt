@@ -2,7 +2,7 @@ FILE: typeInfoStarProjection.kt
     package test
 
     public final fun box(): R|kotlin/String| {
-        lval starInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/List<*>|>()
+        lval starInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/collections/List<*>|>()
         when () {
             (R|<local>/starInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: List<*> should be Parameterized)

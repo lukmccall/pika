@@ -5,7 +5,7 @@ package test
 
 import io.github.lukmccall.pika.*
 
-inline fun <reified T> proxy() = pTypeDescriptorOf<T>()
+inline fun <reified T> proxy() = typeDescriptorOf<T>()
 
 fun box(): String {
   val info = proxy<String>()

@@ -24,14 +24,14 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 
 /**
- * JVM intrinsic support for pTypeDescriptorOf<T>() and pIsIntrospectable(instance) functions.
+ * JVM intrinsic support for typeDescriptorOf<T>() and isIntrospectable(instance) functions.
  *
  * This is necessary because IrGenerationExtension runs BEFORE inline functions are inlined.
  * When these functions are called through a reified inline proxy like:
  *
  * ```kotlin
- * inline fun <reified T> proxy() = pTypeDescriptorOf<T>()
- * inline fun <reified T: Any> proxyCheck(instance: T) = pIsIntrospectable(instance)
+ * inline fun <reified T> proxy() = typeDescriptorOf<T>()
+ * inline fun <reified T: Any> proxyCheck(instance: T) = isIntrospectable(instance)
  * ```
  *
  * At IR generation time, the type argument inside the proxy still has T as a type parameter.
@@ -86,9 +86,9 @@ class PikaJvmIrIntrinsicSupport(
 
     return when (fqName) {
       Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      "PTypeDescriptorOfKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
+      "TypeDescriptorOfKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
       Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME.withPackageName() -> Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
-      "PIsIntrospectableKt.${Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME}".withPackageName() -> Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
+      "IsIntrospectableKt.${Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME}".withPackageName() -> Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
       else -> null
     }
   }
@@ -120,8 +120,8 @@ class PikaJvmIrIntrinsicSupport(
           typeArg,
           Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME,
           typeDescriptor,
-          "io/github/lukmccall/pika/PIsIntrospectableKt",
-          "throwNonReifiedPIsIntrospectableError",
+          "io/github/lukmccall/pika/IsIntrospectableKt",
+          "throwNonReifiedIsIntrospectableError",
           "()Z"
         )
         codegen.propagateChildReifiedTypeParametersUsages(
@@ -173,8 +173,8 @@ class PikaJvmIrIntrinsicSupport(
         type,
         functionName,
         typeDescriptor,
-        "io/github/lukmccall/pika/PTypeDescriptorOfKt",
-        "throwNonReifiedPTypeDescriptorError",
+        "io/github/lukmccall/pika/TypeDescriptorOfKt",
+        "throwNonReifiedTypeDescriptorError",
         "()Lio/github/lukmccall/pika/PTypeDescriptor;"
       )
       return

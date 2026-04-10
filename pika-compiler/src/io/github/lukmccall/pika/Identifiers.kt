@@ -8,9 +8,9 @@ object Identifiers {
   const val PACKAGE_NAME = "io.github.lukmccall.pika"
   val PACKAGE_NAME_JAVE_NOTATION = PACKAGE_NAME.replace(".", "/")
 
-  const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "pTypeDescriptorOf"
-  const val P_INTROSPECTION_OF_FUNCTION_NAME = "pIntrospectionOf"
-  const val P_IS_INTROSPECTABLE_FUNCTION_NAME = "pIsIntrospectable"
+  const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "typeDescriptorOf"
+  const val P_INTROSPECTION_OF_FUNCTION_NAME = "introspectionOf"
+  const val P_IS_INTROSPECTABLE_FUNCTION_NAME = "isIntrospectable"
 
   const val P_INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
   const val INTROSPECTABLE_INTERFACE_NAME = "Introspectable"

@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 
 /**
- * IR transformer that replaces calls to pTypeDescriptorOf<T>()
- * and pIntrospectionOf(instance) with constructed expressions.
+ * IR transformer that replaces calls to typeDescriptorOf<T>()
+ * and introspectionOf(instance) with constructed expressions.
  *
  * Note: When the type argument is a type parameter (e.g., inside an inline function),
  * we skip transformation and leave the call intact. The JvmIrIntrinsicExtension will

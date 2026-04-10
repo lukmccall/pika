@@ -23,7 +23,7 @@ class PikaIrGenerationExtension : IrGenerationExtension {
       symbolFinder
     )
 
-    // Transform typeInfo calls (including pIntrospectionOf)
+    // Transform typeInfo calls (including introspectionOf)
     val typeInfoCallTransformer = TypeInfoCallTransformer(poet)
 
     with(moduleFragment) {

@@ -32,5 +32,5 @@ FILE fqName:test fileName:/typeInfoProxyInline.kt
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:true
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun proxy <T> (): io.github.lukmccall.pika.PTypeDescriptor declared in test'
-        CALL 'public final fun pTypeDescriptorOf <T> (): io.github.lukmccall.pika.PTypeDescriptor declared in io.github.lukmccall.pika' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
+        CALL 'public final fun typeDescriptorOf <T> (): io.github.lukmccall.pika.PTypeDescriptor declared in io.github.lukmccall.pika' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
           TYPE_ARG T: T of test.proxy

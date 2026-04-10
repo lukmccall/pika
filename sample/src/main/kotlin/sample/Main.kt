@@ -48,7 +48,7 @@ fun main() {
 
   // Two equivalent ways to get introspection data:
   // 1. Using the helper function (recommended)
-  val data = pIntrospectionOf(person)
+  val data = introspectionOf(person)
   // 2. Or directly: person.__PIntrospectionData()
 
   println("kClass: ${data.kClass}")
@@ -59,58 +59,58 @@ fun main() {
   }
   println()
 
-  println("=== pTypeDescriptorOf<T>() Examples (basic type info) ===")
+  println("=== typeDescriptorOf<T>() Examples (basic type info) ===")
   println()
 
   // Simple types
   println("Simple types:")
-  println("  pTypeDescriptorOf<String>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String>())}")
-  println("  pTypeDescriptorOf<Int>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int>())}")
-  println("  pTypeDescriptorOf<Boolean>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Boolean>())}")
+  println("  typeDescriptorOf<String>(): ${formatPTypeDescriptor(typeDescriptorOf<String>())}")
+  println("  typeDescriptorOf<Int>(): ${formatPTypeDescriptor(typeDescriptorOf<Int>())}")
+  println("  typeDescriptorOf<Boolean>(): ${formatPTypeDescriptor(typeDescriptorOf<Boolean>())}")
   println()
 
   // Nullable types
   println("Nullable types:")
-  println("  pTypeDescriptorOf<Int?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Int?>())}")
-  println("  pTypeDescriptorOf<String?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<String?>())}")
+  println("  typeDescriptorOf<Int?>(): ${formatPTypeDescriptor(typeDescriptorOf<Int?>())}")
+  println("  typeDescriptorOf<String?>(): ${formatPTypeDescriptor(typeDescriptorOf<String?>())}")
   println()
 
   // Parameterized types
   println("Parameterized types:")
-  println("  pTypeDescriptorOf<List<String>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<String>>())}")
-  println("  pTypeDescriptorOf<Map<String, Int>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, Int>>())}")
+  println("  typeDescriptorOf<List<String>>(): ${formatPTypeDescriptor(typeDescriptorOf<List<String>>())}")
+  println("  typeDescriptorOf<Map<String, Int>>(): ${formatPTypeDescriptor(typeDescriptorOf<Map<String, Int>>())}")
   println()
 
   // Nested generics
   println("Nested generics:")
-  println("  pTypeDescriptorOf<Map<String, List<Int?>>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<Map<String, List<Int?>>>())}")
+  println("  typeDescriptorOf<Map<String, List<Int?>>>(): ${formatPTypeDescriptor(typeDescriptorOf<Map<String, List<Int?>>>())}")
   println()
 
   // Star projections
   println("Star projections:")
-  println("  pTypeDescriptorOf<List<*>>(): ${formatPTypeDescriptor(pTypeDescriptorOf<List<*>>())}")
+  println("  typeDescriptorOf<List<*>>(): ${formatPTypeDescriptor(typeDescriptorOf<List<*>>())}")
   println()
 
   // Class types
   println("Class types:")
-  println("  pTypeDescriptorOf<User>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User>())}")
-  println("  pTypeDescriptorOf<User?>(): ${formatPTypeDescriptor(pTypeDescriptorOf<User?>())}")
+  println("  typeDescriptorOf<User>(): ${formatPTypeDescriptor(typeDescriptorOf<User>())}")
+  println("  typeDescriptorOf<User?>(): ${formatPTypeDescriptor(typeDescriptorOf<User?>())}")
   println()
 
   // Inline proxy function test
-  println("Inline proxy function (pTypeDescriptorOf through inline function):")
+  println("Inline proxy function (typeDescriptorOf through inline function):")
   println("  proxy<String>(): ${formatPTypeDescriptor(proxy<String>())}")
   println("  proxy<List<Int?>>(): ${formatPTypeDescriptor(proxy<List<Int?>>())}")
   println()
 
   // Inline nested proxy function test
-  println("Inline nested proxy function (pTypeDescriptorOf through inline function):")
+  println("Inline nested proxy function (typeDescriptorOf through inline function):")
   println("  proxy2<String>(): ${formatPTypeDescriptor(proxy2<String>())}")
   println("  proxy2<List<Int?>>(): ${formatPTypeDescriptor(proxy2<List<Int?>>())}")
   println()
 
   // generic function test (non-reified - throws exception)
-  println("generic function (pTypeDescriptorOf through non-reified generic function):")
+  println("generic function (typeDescriptorOf through non-reified generic function):")
   try {
     generic<String>()
   } catch (e: IllegalStateException) {
@@ -122,7 +122,7 @@ fun main() {
   println("=== Delegated Properties Test ===")
   println()
   val delegatedExample = DelegatedExample()
-  val delegatedData = pIntrospectionOf(delegatedExample)
+  val delegatedData = introspectionOf(delegatedExample)
 
   for (prop in delegatedData.properties) {
     println("  ${prop.name}:")
@@ -147,13 +147,13 @@ fun main() {
 }
 
 /**
- * Inline proxy function that calls pTypeDescriptorOf<T>().
- * This tests that pTypeDescriptorOf works correctly through inline functions.
+ * Inline proxy function that calls typeDescriptorOf<T>().
+ * This tests that typeDescriptorOf works correctly through inline functions.
  */
-inline fun <reified T> proxy(): PTypeDescriptor = pTypeDescriptorOf<T>()
+inline fun <reified T> proxy(): PTypeDescriptor = typeDescriptorOf<T>()
 inline fun <reified T> proxy2(): PTypeDescriptor = proxy<T>()
 
-fun <T> generic(): PTypeDescriptor = pTypeDescriptorOf<T>()
+fun <T> generic(): PTypeDescriptor = typeDescriptorOf<T>()
 
 /**
  * Helper function to format PTypeDescriptor for display.

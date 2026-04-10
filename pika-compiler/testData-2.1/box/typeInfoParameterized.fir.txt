@@ -2,7 +2,7 @@ FILE: typeInfoParameterized.kt
     package test
 
     public final fun box(): R|kotlin/String| {
-        lval listStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/List<kotlin/String>|>()
+        lval listStringInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/collections/List<kotlin/String>|>()
         when () {
             (R|<local>/listStringInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: List<String> should be Parameterized)
@@ -34,7 +34,7 @@ FILE: typeInfoParameterized.kt
             }
         }
 
-        lval mapInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/pTypeDescriptorOf|<R|kotlin/collections/Map<kotlin/String, kotlin/Int>|>()
+        lval mapInfo: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|kotlin/collections/Map<kotlin/String, kotlin/Int>|>()
         when () {
             (R|<local>/mapInfo| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ->  {
                 ^box String(FAIL: Map<String, Int> should be Parameterized)
