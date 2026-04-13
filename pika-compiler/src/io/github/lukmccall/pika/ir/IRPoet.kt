@@ -264,7 +264,7 @@ class IRPoet(
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
      */
-    fun pTypeDescriptor(type: IrType): IrExpression {
+    fun typeDescriptor(type: IrType): IrExpression {
       val simpleType = type as? IrSimpleType
         ?: return pika.concrete(irBuiltIns.anyClass, false)
 
@@ -276,7 +276,7 @@ class IRPoet(
       } else {
         val typeArgInfos = simpleType.arguments.map { arg ->
           when (arg) {
-            is IrTypeProjection -> pTypeDescriptor(arg.type)
+            is IrTypeProjection -> typeDescriptor(arg.type)
             is IrStarProjection -> pika.star()
           }
         }
@@ -696,7 +696,7 @@ class IRPoet(
         call.arguments[0] = kotlin.string(property.name.asString())
         call.arguments[1] = pika.pVisibility(property.visibility)
         call.arguments[2] = kotlin.listOf(pAnnotationClass.owner.defaultType, annotations)
-        call.arguments[3] = pika.pTypeDescriptor(propertyType)
+        call.arguments[3] = pika.typeDescriptor(propertyType)
         call.arguments[4] = getterLambda
         call.arguments[5] = kotlin.bool(property.isVar)
         call.arguments[6] = kotlin.bool(hasBackingField)
@@ -753,7 +753,7 @@ class IRPoet(
       }
     }
 
-    fun pIsIntrospectable(type: IrType): IrExpression {
+    fun isIntrospectable(type: IrType): IrExpression {
       val simpleType = type as? IrSimpleType
         ?: return kotlin.bool(false)
       val irClass = simpleType.classOrNull?.owner
@@ -761,11 +761,11 @@ class IRPoet(
       return kotlin.bool(irClass.hasIntrospectableAnnotation())
     }
 
-    fun pIntrospectionOf(instance: IrExpression, originalCall: IrCall): IrExpression {
-      val instanceType = instance.type as? IrSimpleType
+    fun introspectionOf(type: IrType, originalCall: IrCall): IrExpression {
+      val simpleType = type as? IrSimpleType
         ?: return originalCall
 
-      val irClass = instanceType.classOrNull?.owner
+      val irClass = simpleType.classOrNull?.owner
         ?: return originalCall
 
       // Find the __PIntrospectionData function
@@ -801,13 +801,8 @@ class IRPoet(
         origin = null,
         superQualifierSymbol = null
       ).apply {
-        // For objects: dispatch receiver is the instance itself
-        // For regular classes: dispatch receiver is the companion object
-        val dispatchReceiverValue = if (irClass.isObject && !irClass.isCompanion) {
-          instance
-        } else {
-          kotlin.getObject(functionOwner.symbol)
-        }
+        // Dispatch receiver is always the singleton: the object itself or the companion object
+        val dispatchReceiverValue = kotlin.getObject(functionOwner.symbol)
         // In K2 IR, arguments array contains ALL parameters including dispatch receiver
         introspectionDataFunction.parameters.forEach { param ->
           if (param.kind == IrParameterKind.DispatchReceiver) {

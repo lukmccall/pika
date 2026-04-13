@@ -48,8 +48,8 @@ fun main() {
 
   // Two equivalent ways to get introspection data:
   // 1. Using the helper function (recommended)
-  val data = introspectionOf(person)
-  // 2. Or directly: person.__PIntrospectionData()
+  val data = introspectionOf<SimplePerson>()
+  // 2. Or directly: SimplePerson.Companion.__PIntrospectionData()
 
   println("kClass: ${data.kClass}")
   println("properties: ${data.properties.size}")
@@ -122,7 +122,7 @@ fun main() {
   println("=== Delegated Properties Test ===")
   println()
   val delegatedExample = DelegatedExample()
-  val delegatedData = introspectionOf(delegatedExample)
+  val delegatedData = introspectionOf<DelegatedExample>()
 
   for (prop in delegatedData.properties) {
     println("  ${prop.name}:")

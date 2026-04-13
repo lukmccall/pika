@@ -1,0 +1,66 @@
+FILE: introspectionOfProxyNonIntrospectable.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Foo : R|kotlin/Any| {
+        public constructor(x: R|kotlin/Int|): R|test/Foo| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val x: R|kotlin/Int| = R|<local>/x|
+            public get(): R|kotlin/Int|
+
+        internal final fun __pika$get$x(): R|kotlin/Int|
+
+        internal final fun __pika$set$x(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>|
+
+            private constructor(): R|test/Foo.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    public final class Bar : R|kotlin/Any| {
+        public constructor(y: R|kotlin/String|): R|test/Bar| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val y: R|kotlin/String| = R|<local>/y|
+            public get(): R|kotlin/String|
+
+    }
+    public final inline fun <reified T> proxy(): R|io/github/lukmccall/pika/PIntrospectionData<T & Any>?| {
+        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) ^proxy (R|io/github/lukmccall/pika/introspectionOf|<R|T|>() as? R|io/github/lukmccall/pika/PIntrospectionData<T & Any>|)
+    }
+    public final fun box(): R|kotlin/String| {
+        lval fooData: R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>?| = R|test/proxy|<R|test/Foo|>()
+        when () {
+            ==(R|<local>/fooData|, Null(null)) ->  {
+                ^box String(FAIL: introspectable class returned null)
+            }
+        }
+
+        when () {
+            !=(R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|, <getClass>(Q|test/Foo|)) ->  {
+                ^box <strcat>(String(FAIL: wrong kClass for Foo, got ), R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box <strcat>(String(FAIL: wrong property count, got ), R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval barData: R|io/github/lukmccall/pika/PIntrospectionData<test/Bar>?| = R|test/proxy|<R|test/Bar|>()
+        when () {
+            !=(R|<local>/barData|, Null(null)) ->  {
+                ^box <strcat>(String(FAIL: non-introspectable class should return null, got ), R|<local>/barData|)
+            }
+        }
+
+        ^box String(OK)
+    }

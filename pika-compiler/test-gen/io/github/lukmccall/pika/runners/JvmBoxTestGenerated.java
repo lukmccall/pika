@@ -111,6 +111,18 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("introspectionOfProxy.kt")
+  public void testIntrospectionOfProxy() {
+    runTest("pika-compiler/testData/box/introspectionOfProxy.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectionOfProxyNonIntrospectable.kt")
+  public void testIntrospectionOfProxyNonIntrospectable() {
+    runTest("pika-compiler/testData/box/introspectionOfProxyNonIntrospectable.kt");
+  }
+
+  @Test
   @TestMetadata("isIntrospectable.kt")
   public void testIsIntrospectable() {
     runTest("pika-compiler/testData/box/isIntrospectable.kt");

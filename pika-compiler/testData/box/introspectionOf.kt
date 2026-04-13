@@ -10,7 +10,7 @@ fun box(): String {
   val person = Person("Alice", 30)
 
   // Use introspectionOf helper function
-  val data = introspectionOf(person)
+  val data = introspectionOf<Person>()
 
   // Verify kClass
   if (data.kClass != Person::class) return "FAIL: kClass should be Person"

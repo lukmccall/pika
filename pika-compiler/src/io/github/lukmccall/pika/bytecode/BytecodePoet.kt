@@ -12,7 +12,9 @@ import org.jetbrains.kotlin.codegen.inline.ReifiedTypeInliner
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
@@ -40,25 +42,7 @@ class BytecodePoet(
     private val listType: Type = Type.getObjectType("java/util/List")
 
     val pTypeDescriptorType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor")
-  }
-
-  /**
-   * throw NotImplementedError({message})
-   */
-  fun throwNotImplementedError(
-    message: String,
-  ) = adapter.apply {
-    anew(Type.getObjectType("kotlin/NotImplementedError"))
-    dup()
-    aconst(message)
-    invokespecial(
-      "kotlin/NotImplementedError",
-      "<init>",
-      "(Ljava/lang/String;)V",
-      false
-    )
-    checkcast(Type.getObjectType("java/lang/Throwable"))
-    athrow()
+    val pIntrospectionDataType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PIntrospectionData")
   }
 
   /**
@@ -144,6 +128,38 @@ class BytecodePoet(
     )
   }
 
+  /**
+   * Emits a call to `__PIntrospectionData()` on the appropriate singleton:
+   * the object itself (for Kotlin objects) or the companion object (for regular classes).
+   * Returns false if no suitable owner is found (class is not @Introspectable).
+   */
+  fun initPIntrospectionData(irClass: IrClass): Boolean {
+    val methodDescriptor = "()${pIntrospectionDataType.descriptor}"
+    return if (irClass.isObject && !irClass.isCompanion) {
+      val classType = typeMapper.mapTypeCommon(irClass.defaultType, TypeMappingMode.DEFAULT)
+      adapter.getstatic(classType.internalName, "INSTANCE", classType.descriptor)
+      adapter.invokevirtual(
+        classType.internalName,
+        Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME,
+        methodDescriptor,
+        false
+      )
+      true
+    } else {
+      val companion = irClass.companionObject() ?: return false
+      val ownerType = typeMapper.mapTypeCommon(irClass.defaultType, TypeMappingMode.DEFAULT)
+      val companionType = typeMapper.mapTypeCommon(companion.defaultType, TypeMappingMode.DEFAULT)
+      adapter.getstatic(ownerType.internalName, companion.name.asString(), companionType.descriptor)
+      adapter.invokevirtual(
+        companionType.internalName,
+        Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME,
+        methodDescriptor,
+        false
+      )
+      true
+    }
+  }
+
   private fun initFallbackPTypeDescriptor() =
     initConcretePTypeDescriptor(irPluginContext.irBuiltIns.anyClass.owner, false)
 
@@ -224,7 +240,8 @@ class BytecodePoet(
 
     val functionName = markerString.removePackageName()
     if (functionName != Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME &&
-      functionName != Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
+      functionName != Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME &&
+      functionName != Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
     ) {
       return null
     }

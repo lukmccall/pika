@@ -1,19 +1,31 @@
 package io.github.lukmccall.pika
 
 /**
- * Returns introspection data for the given @Introspectable instance.
+ * Returns introspection data for the @Introspectable type T.
  * The compiler plugin replaces calls to this function at compile time
- * with a call to `instance.__PIntrospectionData()`.
+ * with a call to `T.__PIntrospectionData()`.
  *
  * Example:
  * ```kotlin
  * @Introspectable
  * class Person(val name: String)
  *
+ * val data = introspectionOf<Person>()
  * val person = Person("Alice")
- * val data = introspectionOf(person)
  * val name = data.properties[0].getter(person) // "Alice"
  * ```
  */
-public fun <T : Any> introspectionOf(instance: T): PIntrospectionData<T> =
-  throw NotImplementedError("introspectionOf(instance) should be replaced by the compiler plugin")
+public fun <T> introspectionOf(): PIntrospectionData<T & Any> =
+  throw NotImplementedError("introspectionOf<T>() should be replaced by the compiler plugin")
+
+/**
+ * Called at runtime when introspectionOf is used inside an inline function whose
+ * type parameter is not reified. This always throws — the compiler plugin must replace
+ * introspectionOf at the inlined call site.
+ */
+@PublishedApi
+internal fun throwNonReifiedIntrospectionOfError(): PIntrospectionData<Any> =
+  throw UnsupportedOperationException(
+    "introspectionOf<T>() requires a reified type parameter. " +
+      "Use 'inline fun <reified T>' or call introspectionOf<T>() with a concrete type."
+  )

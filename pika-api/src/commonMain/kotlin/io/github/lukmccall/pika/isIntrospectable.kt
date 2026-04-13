@@ -17,7 +17,7 @@ package io.github.lukmccall.pika
  * isIntrospectable<NotIntrospectable>()  // false
  * ```
  */
-public fun <T : Any> isIntrospectable(): Boolean =
+public fun <T> isIntrospectable(): Boolean =
   throw NotImplementedError("isIntrospectable<T>() should be replaced by the compiler plugin")
 
 /**

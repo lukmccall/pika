@@ -46,13 +46,18 @@ class TypeInfoCallTransformer(
           return expression
         }
 
-        poet.pika.pTypeDescriptor(typeArg)
+        poet.pika.typeDescriptor(typeArg)
       }
 
       Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
-        val instanceArg = expression.arguments[0]
-          ?: return expression
-        poet.pika.pIntrospectionOf(instanceArg, expression)
+        val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
+
+        // If the type argument is a type parameter, skip transformation.
+        if (isTypeParameter(typeArg)) {
+          return expression
+        }
+
+        poet.pika.introspectionOf(typeArg, expression)
       }
 
       Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> {
@@ -63,7 +68,7 @@ class TypeInfoCallTransformer(
           return expression
         }
 
-        poet.pika.pIsIntrospectable(typeArg)
+        poet.pika.isIntrospectable(typeArg)
       }
 
       else -> expression
