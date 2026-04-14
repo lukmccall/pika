@@ -5,6 +5,7 @@ package io.github.lukmccall.pika.bytecode
 import io.github.lukmccall.pika.Identifiers
 import io.github.lukmccall.pika.Identifiers.removePackageName
 import io.github.lukmccall.pika.Identifiers.withPackageName
+import io.github.lukmccall.pika.ir.hasIntrospectableAnnotation
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.mapping.IrTypeMapper
 import org.jetbrains.kotlin.codegen.AsmUtil
@@ -64,7 +65,7 @@ class BytecodePoet(
   }
 
   /**
-   * new PTypeDescriptor.Concrete({PType}, {isNullable})
+   * new PTypeDescriptor.Concrete({PType}, {isNullable}, {introspectionData})
    */
   fun initConcretePTypeDescriptor(
     irClass: IrClass,
@@ -74,10 +75,12 @@ class BytecodePoet(
     dup()
     initPType(irClass)
     iconst(if (isNullable) 1 else 0)
+    val pushed = irClass.hasIntrospectableAnnotation() && initPIntrospectionData(irClass)
+    if (!pushed) aconst(null)
     invokespecial(
       pTypeDescriptorConcreteType.internalName,
       "<init>",
-      "(${pTypeType.descriptor}Z)V",
+      "(${pTypeType.descriptor}Z${pIntrospectionDataType.descriptor})V",
       false
     )
   }
@@ -120,10 +123,15 @@ class BytecodePoet(
       false
     )
 
+    val pushed = irClass.hasIntrospectableAnnotation() && initPIntrospectionData(irClass)
+    if (!pushed) {
+      aconst(null)
+    }
+
     invokespecial(
       pTypeDescriptorParameterizedType.internalName,
       "<init>",
-      "(${pTypeType.descriptor}Z${listType.descriptor})V",
+      "(${pTypeType.descriptor}Z${listType.descriptor}${pIntrospectionDataType.descriptor})V",
       false
     )
   }

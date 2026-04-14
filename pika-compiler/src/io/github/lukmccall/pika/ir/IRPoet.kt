@@ -227,9 +227,13 @@ class IRPoet(
         }
 
     /**
-     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable})
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable}, {introspectionData})
      */
-    fun concrete(classSymbol: IrClassSymbol, isNullable: Boolean): IrExpression =
+    fun concrete(
+      classSymbol: IrClassSymbol,
+      isNullable: Boolean,
+      introspectionData: IrExpression? = null
+    ): IrExpression =
       symbolFinder
         .pikaAPI
         .pTypeDescriptor
@@ -237,19 +241,22 @@ class IRPoet(
         .buildConstructorCall("PTypeDescriptor.Concrete") {
           arguments[0] = pType(classSymbol)
           arguments[1] = kotlin.bool(isNullable)
+          arguments[2] = introspectionData ?: kotlin.`null`()
         }
 
     /**
      * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
      *   {PType({classSymbol})},
      *   {isNullable},
-     *   {listOf({argumentsPTypes})}
+     *   {listOf({argumentsPTypes})},
+     *   {introspectionData}
      * )
      */
     fun parameterized(
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
-      argumentsPTypes: List<IrExpression>
+      argumentsPTypes: List<IrExpression>,
+      introspectionData: IrExpression? = null
     ): IrExpression =
       symbolFinder
         .pikaAPI
@@ -259,6 +266,7 @@ class IRPoet(
           arguments[0] = pType(classSymbol)
           arguments[1] = kotlin.bool(isNullable)
           arguments[2] = kotlin.listOf(symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType, argumentsPTypes)
+          arguments[3] = introspectionData ?: kotlin.`null`()
         }
 
     /**
@@ -270,9 +278,11 @@ class IRPoet(
 
       val classifier = simpleType.classifier
       val isNullable = simpleType.isMarkedNullable()
+      val irClass = (classifier as? IrClassSymbol)?.owner
+      val introspectionData = irClass?.let { buildIntrospectionCallFor(it) }
 
       return if (simpleType.arguments.isEmpty()) {
-        pika.concrete(classifier as IrClassSymbol, isNullable)
+        pika.concrete(classifier as IrClassSymbol, isNullable, introspectionData)
       } else {
         val typeArgInfos = simpleType.arguments.map { arg ->
           when (arg) {
@@ -280,7 +290,61 @@ class IRPoet(
             is IrStarProjection -> pika.star()
           }
         }
-        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos)
+        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos, introspectionData)
+      }
+    }
+
+    /**
+     * Builds an IR call to `__PIntrospectionData()` on the appropriate singleton
+     * (the object itself or its companion) if the class has the @Introspectable annotation.
+     * Returns null if the class is not introspectable or the function cannot be found.
+     */
+    private fun buildIntrospectionCallFor(
+      irClass: IrClass,
+      startOffset: Int = -1,
+      endOffset: Int = -1
+    ): IrExpression? {
+      if (!irClass.hasIntrospectableAnnotation()) {
+        return null
+      }
+
+      val (functionOwner, introspectionDataFunction) = if (irClass.isObject && !irClass.isCompanion) {
+        val function = irClass
+          .declarations
+          .filterIsInstance<IrSimpleFunction>()
+          .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        irClass to function
+      } else {
+        val companion = irClass.companionObject()
+        val function = companion
+          ?.declarations
+          ?.filterIsInstance<IrSimpleFunction>()
+          ?.find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
+        companion to function
+      }
+
+      if (introspectionDataFunction == null || functionOwner == null) {
+        return null
+      }
+
+      val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
+      val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
+
+      return IrCallImpl(
+        startOffset = startOffset,
+        endOffset = endOffset,
+        type = returnType,
+        symbol = introspectionDataFunction.symbol,
+        typeArgumentsCount = 0,
+        origin = null,
+        superQualifierSymbol = null
+      ).apply {
+        val dispatchReceiverValue = kotlin.getObject(functionOwner.symbol)
+        introspectionDataFunction.parameters.forEach { param ->
+          if (param.kind == IrParameterKind.DispatchReceiver) {
+            arguments[param.indexInParameters] = dispatchReceiverValue
+          }
+        }
       }
     }
 
@@ -762,54 +826,9 @@ class IRPoet(
     }
 
     fun introspectionOf(type: IrType, originalCall: IrCall): IrExpression {
-      val simpleType = type as? IrSimpleType
-        ?: return originalCall
-
-      val irClass = simpleType.classOrNull?.owner
-        ?: return originalCall
-
-      // Find the __PIntrospectionData function
-      // For object declarations: look on the object itself
-      // For regular classes: look in the companion object
-      val (functionOwner, introspectionDataFunction) = if (irClass.isObject && !irClass.isCompanion) {
-        val function = irClass.declarations
-          .filterIsInstance<IrSimpleFunction>()
-          .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-        irClass to function
-      } else {
-        val companion = irClass.companionObject()
-        val function = companion?.declarations
-          ?.filterIsInstance<IrSimpleFunction>()
-          ?.find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-        companion to function
-      }
-
-      if (introspectionDataFunction == null || functionOwner == null) {
-        return originalCall
-      }
-
-      // Build return type: PIntrospectionData<T>
-      val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
-      val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
-
-      return IrCallImpl(
-        startOffset = originalCall.startOffset,
-        endOffset = originalCall.endOffset,
-        type = returnType,
-        symbol = introspectionDataFunction.symbol,
-        typeArgumentsCount = 0,
-        origin = null,
-        superQualifierSymbol = null
-      ).apply {
-        // Dispatch receiver is always the singleton: the object itself or the companion object
-        val dispatchReceiverValue = kotlin.getObject(functionOwner.symbol)
-        // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-        introspectionDataFunction.parameters.forEach { param ->
-          if (param.kind == IrParameterKind.DispatchReceiver) {
-            arguments[param.indexInParameters] = dispatchReceiverValue
-          }
-        }
-      }
+      val irClass = (type as? IrSimpleType)?.classOrNull?.owner ?: return originalCall
+      return buildIntrospectionCallFor(irClass, originalCall.startOffset, originalCall.endOffset)
+        ?: originalCall
     }
 
 

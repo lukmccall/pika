@@ -1,0 +1,83 @@
+FILE: typeInfoIntrospectableProxy.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Foo : R|kotlin/Any| {
+        public constructor(x: R|kotlin/Int|): R|test/Foo| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val x: R|kotlin/Int| = R|<local>/x|
+            public get(): R|kotlin/Int|
+
+        internal final fun __pika$get$x(): R|kotlin/Int|
+
+        internal final fun __pika$set$x(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>|
+
+            private constructor(): R|test/Foo.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    public final inline fun <reified T> descriptor(): R|io/github/lukmccall/pika/PTypeDescriptor| {
+        ^descriptor R|io/github/lukmccall/pika/typeDescriptorOf|<R|T|>()
+    }
+    public final fun box(): R|kotlin/String| {
+        lval fooDescriptor: R|io/github/lukmccall/pika/PTypeDescriptor| = R|test/descriptor|<R|test/Foo|>()
+        when () {
+            (R|<local>/fooDescriptor| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: Foo should be Concrete)
+            }
+        }
+
+        when () {
+            ==(R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
+                ^box String(FAIL: Foo introspectionData should not be null)
+            }
+        }
+
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Foo|)) ->  {
+                ^box String(FAIL: introspectionData.kClass should be Foo)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box <strcat>(String(FAIL: should have 1 property, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval direct: R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Foo|>()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|) ->  {
+                ^box String(FAIL: kClass mismatch)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|) ->  {
+                ^box String(FAIL: properties size mismatch)
+            }
+        }
+
+        lval stringDescriptor: R|io/github/lukmccall/pika/PTypeDescriptor| = R|test/descriptor|<R|kotlin/String|>()
+        when () {
+            (R|<local>/stringDescriptor| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: String should be Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/stringDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
+                ^box String(FAIL: String introspectionData should be null)
+            }
+        }
+
+        ^box String(OK)
+    }

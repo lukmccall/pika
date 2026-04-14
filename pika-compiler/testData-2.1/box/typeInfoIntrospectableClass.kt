@@ -1,0 +1,1 @@
+../../testData/box/typeInfoIntrospectableClass.kt

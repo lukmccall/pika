@@ -14,7 +14,8 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
           INVOKESTATIC (kotlin/jvm/internal/Reflection, getOrCreateKotlinClass, (Ljava/lang/Class;)Lkotlin/reflect/KClass;)
           INVOKESPECIAL (io/github/lukmccall/pika/PType, <init>, (Lkotlin/reflect/KClass;)V)
           ICONST_0
-          INVOKESPECIAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, <init>, (Lio/github/lukmccall/pika/PType;Z)V)
+          ACONST_NULL
+          INVOKESPECIAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, <init>, (Lio/github/lukmccall/pika/PType;ZLio/github/lukmccall/pika/PIntrospectionData;)V)
         LABEL (L2)
         LINENUMBER (11)
           ASTORE (0)

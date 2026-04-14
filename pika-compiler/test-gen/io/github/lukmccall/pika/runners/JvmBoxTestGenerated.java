@@ -141,9 +141,33 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("typeInfoIntrospectableClass.kt")
+  public void testTypeInfoIntrospectableClass() {
+    runTest("pika-compiler/testData/box/typeInfoIntrospectableClass.kt");
+  }
+
+  @Test
+  @TestMetadata("typeInfoIntrospectableParameterized.kt")
+  public void testTypeInfoIntrospectableParameterized() {
+    runTest("pika-compiler/testData/box/typeInfoIntrospectableParameterized.kt");
+  }
+
+  @Test
+  @TestMetadata("typeInfoIntrospectableProxy.kt")
+  public void testTypeInfoIntrospectableProxy() {
+    runTest("pika-compiler/testData/box/typeInfoIntrospectableProxy.kt");
+  }
+
+  @Test
   @TestMetadata("typeInfoNestedGenerics.kt")
   public void testTypeInfoNestedGenerics() {
     runTest("pika-compiler/testData/box/typeInfoNestedGenerics.kt");
+  }
+
+  @Test
+  @TestMetadata("typeInfoNestedIntrospectable.kt")
+  public void testTypeInfoNestedIntrospectable() {
+    runTest("pika-compiler/testData/box/typeInfoNestedIntrospectable.kt");
   }
 
   @Test

@@ -14,10 +14,16 @@ annotation class MyAnnotation(val value: String)
 open class BaseEntity(open val id: String)
 
 /**
+ * Example nested introspectable class.
+ */
+@Introspectable
+class Address(val city: String, val country: String)
+
+/**
  * Simple test class for Introspectable.
  */
 @Introspectable
-open class SimplePerson(val name: String)
+open class SimplePerson(val name: String, val address: Address)
 
 /**
  * Test class with delegated properties.
@@ -44,7 +50,7 @@ class User(
 fun main() {
   println("=== Introspectable Test ===")
   println()
-  val person = SimplePerson("Alice")
+  val person = SimplePerson("Alice", Address("Paris", "France"))
 
   // Two equivalent ways to get introspection data:
   // 1. Using the helper function (recommended)
@@ -116,6 +122,45 @@ fun main() {
   } catch (e: IllegalStateException) {
     println("  generic<String>(): Throws: ${e.message}")
   }
+  println()
+
+  // introspectionData embedded in type descriptors
+  println("=== introspectionData in typeDescriptorOf<T>() ===")
+  println()
+
+  // Introspectable type: introspectionData is populated
+  val personDescriptor = typeDescriptorOf<SimplePerson>()
+  val personIntrospectionData = (personDescriptor as? PTypeDescriptor.Concrete)?.introspectionData
+  println("typeDescriptorOf<SimplePerson>().introspectionData: $personIntrospectionData")
+  println("  kClass: ${personIntrospectionData?.kClass}")
+  println("  properties: ${personIntrospectionData?.properties?.map { it.name }}")
+  println()
+
+  // Non-introspectable type: introspectionData is null
+  val userDescriptor = typeDescriptorOf<User>()
+  println("typeDescriptorOf<User>().introspectionData: ${(userDescriptor as? PTypeDescriptor.Concrete)?.introspectionData}")
+  println()
+
+  // Property type descriptor also carries introspectionData for introspectable types
+  println("Property type descriptors:")
+  for (prop in personIntrospectionData!!.properties) {
+    val propConcreteType = prop.type as? PTypeDescriptor.Concrete
+    println("  ${prop.name}: ${prop.type::class.simpleName}, introspectionData=${propConcreteType?.introspectionData?.kClass}")
+  }
+  println()
+
+  // Nested introspectable: List<SimplePerson> — List has null, SimplePerson arg has data
+  val listPersonDescriptor = typeDescriptorOf<List<SimplePerson>>() as PTypeDescriptor.Concrete.Parameterized
+  val listIntrospectionData = listPersonDescriptor.introspectionData
+  val personArgDescriptor = listPersonDescriptor.argumentsPTypes[0] as? PTypeDescriptor.Concrete
+  println("typeDescriptorOf<List<SimplePerson>>():")
+  println("  List introspectionData: $listIntrospectionData")
+  println("  SimplePerson arg introspectionData.kClass: ${personArgDescriptor?.introspectionData?.kClass}")
+  println()
+
+  // Through inline proxy
+  val proxyDescriptor = proxy<SimplePerson>() as? PTypeDescriptor.Concrete
+  println("proxy<SimplePerson>().introspectionData.kClass: ${proxyDescriptor?.introspectionData?.kClass}")
   println()
 
   // Delegated properties test
