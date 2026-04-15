@@ -13,6 +13,7 @@ object Identifiers {
   const val P_IS_INTROSPECTABLE_FUNCTION_NAME = "isIntrospectable"
 
   const val P_INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
+  const val P_INTROSPECTION_DATA_CACHE_FIELD_NAME = "__pIntrospectionData\$cache"
   const val INTROSPECTABLE_INTERFACE_NAME = "Introspectable"
 
   // Synthetic accessor function name prefixes for backing field access

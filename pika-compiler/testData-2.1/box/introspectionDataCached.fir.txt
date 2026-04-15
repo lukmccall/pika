@@ -1,0 +1,113 @@
+FILE: introspectionDataCached.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Parent : R|kotlin/Any| {
+        public constructor(a: R|kotlin/Int|): R|test/Parent| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val a: R|kotlin/Int| = R|<local>/a|
+            public get(): R|kotlin/Int|
+
+        internal final fun __pika$set$a(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        internal final fun __pika$get$a(): R|kotlin/Int|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>|
+
+            private constructor(): R|test/Parent.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Child : R|test/Parent| {
+        public constructor(b: R|kotlin/Int|): R|test/Child| {
+            super<R|test/Parent|>(Int(0))
+        }
+
+        public final val b: R|kotlin/Int| = R|<local>/b|
+            public get(): R|kotlin/Int|
+
+        internal final fun __pika$get$b(): R|kotlin/Int|
+
+        internal final fun __pika$set$b(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public final companion object Companion : R|kotlin/Any| {
+            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Child>|
+
+            private constructor(): R|test/Child.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    @R|io/github/lukmccall/pika/Introspectable|() public final object Singleton : R|kotlin/Any| {
+        private constructor(): R|test/Singleton| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val version: R|kotlin/String| = String(1.0)
+            public get(): R|kotlin/String|
+
+        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval a1: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Parent|>()
+        lval a2: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Parent|>()
+        when () {
+            !==(R|<local>/a1|, R|<local>/a2|) ->  {
+                ^box String(FAIL: introspectionOf<Parent>() not cached)
+            }
+        }
+
+        lval c1: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = Q|test/Parent|.R|test/Parent.Companion.__PIntrospectionData|()
+        lval c2: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = Q|test/Parent|.R|test/Parent.Companion.__PIntrospectionData|()
+        when () {
+            !==(R|<local>/c1|, R|<local>/c2|) ->  {
+                ^box String(FAIL: Parent.__PIntrospectionData() not cached)
+            }
+        }
+
+        when () {
+            !==(R|<local>/a1|, R|<local>/c1|) ->  {
+                ^box String(FAIL: introspectionOf<Parent>() and Parent.__PIntrospectionData() differ)
+            }
+        }
+
+        lval s1: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
+        lval s2: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
+        when () {
+            !==(R|<local>/s1|, R|<local>/s2|) ->  {
+                ^box String(FAIL: Singleton.__PIntrospectionData() not cached)
+            }
+        }
+
+        lval ch1: R|io/github/lukmccall/pika/PIntrospectionData<test/Child>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Child|>()
+        lval ch2: R|io/github/lukmccall/pika/PIntrospectionData<test/Child>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Child|>()
+        when () {
+            !==(R|<local>/ch1|, R|<local>/ch2|) ->  {
+                ^box String(FAIL: introspectionOf<Child>() not cached)
+            }
+        }
+
+        lval base1: R|io/github/lukmccall/pika/PIntrospectionData<*>?| = R|<local>/ch1|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>|
+        lval base2: R|io/github/lukmccall/pika/PIntrospectionData<*>?| = R|<local>/ch2|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>|
+        when () {
+            !==(R|<local>/base1|, R|<local>/base2|) ->  {
+                ^box String(FAIL: Child.baseClass not stable across calls)
+            }
+        }
+
+        when () {
+            !==(R|<local>/base1|, R|<local>/a1|) ->  {
+                ^box String(FAIL: Child.baseClass is not the cached Parent instance)
+            }
+        }
+
+        ^box String(OK)
+    }

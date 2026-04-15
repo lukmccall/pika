@@ -4,9 +4,12 @@ package io.github.lukmccall.pika.ir
 
 import io.github.lukmccall.pika.Identifiers
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.IrStatement
+import org.jetbrains.kotlin.ir.builders.declarations.buildField
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
@@ -18,6 +21,7 @@ import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
+import org.jetbrains.kotlin.name.Name
 
 /**
  * IR transformer that generates `__PIntrospectionData()` functions for classes
@@ -178,7 +182,47 @@ class IntrospectableTransformer(
       baseClassExpr = baseClassExpr
     )
 
-    function.body = poet.createReturnBody(context.irFactory, function, introspectionData)
+    val cacheOwner = function.parentAsClass
+    val cacheField = createIntrospectionDataCacheField(
+      owner = cacheOwner,
+      type = introspectionData.type,
+      initializer = introspectionData
+    )
+
+    val dispatchReceiver = function.parameters
+      .first { it.kind == IrParameterKind.DispatchReceiver }
+
+    val getCachedField = IrGetFieldImpl(
+      startOffset = -1, endOffset = -1,
+      symbol = cacheField.symbol,
+      type = cacheField.type,
+      receiver = IrGetValueImpl(-1, -1, cacheOwner.defaultType, dispatchReceiver.symbol)
+    )
+
+    function.body = poet.createReturnBody(context.irFactory, function, getCachedField)
+  }
+
+  private fun createIntrospectionDataCacheField(
+    owner: IrClass,
+    type: org.jetbrains.kotlin.ir.types.IrType,
+    initializer: IrExpression
+  ): IrField {
+    val field = context.irFactory.buildField {
+      startOffset = -1
+      endOffset = -1
+      name = Name.identifier(Identifiers.P_INTROSPECTION_DATA_CACHE_FIELD_NAME)
+      this.type = type
+      visibility = DescriptorVisibilities.PRIVATE
+      isFinal = true
+      isStatic = false
+    }.apply {
+      parent = owner
+      this.initializer = context.irFactory.createExpressionBody(-1, -1, initializer).also { body ->
+        body.patchDeclarationParents(this)
+      }
+    }
+    owner.declarations.add(field)
+    return field
   }
 
   /**

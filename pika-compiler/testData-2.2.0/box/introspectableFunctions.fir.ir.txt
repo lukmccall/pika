@@ -16,6 +16,76 @@ FILE fqName:test fileName:/introspectableFunctions.kt
               receiver: GET_VAR '<this>: test.Calculator declared in test.Calculator.<get-value>' type=test.Calculator origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Calculator.Companion
+      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> visibility:private [final]
+        EXPRESSION_BODY
+          CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
+            TYPE_ARG OwnerType: test.Calculator
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Calculator> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Calculator modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+            ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
+                  ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<io.github.lukmccall.pika.Introspectable> origin=null
+                    ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<*>
+                  ARG arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
+                    TYPE_ARG K: kotlin.String
+                    TYPE_ARG V: kotlin.Any?
+            ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Int> origin=null
+                  TYPE_ARG OwnerType: test.Calculator
+                  TYPE_ARG Type: kotlin.Int
+                  ARG name: CONST String type=kotlin.String value="value"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                  ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+                    TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
+                    ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
+                  ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
+                        ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
+                    ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
+                    ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
+                  ARG getter: FUN_EXPR type=kotlin.Function1<test.Calculator, kotlin.Int> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Int
+                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Calculator): kotlin.Int declared in test.Calculator.Companion.__pIntrospectionData$cache'
+                          CALL 'public final fun <get-value> (): kotlin.Int declared in test.Calculator' type=kotlin.Int origin=GET_PROPERTY
+                            ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Calculator origin=null
+                  ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
+                  ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                  ARG setter: FUN_EXPR type=kotlin.Function2<test.Calculator, kotlin.Int, kotlin.Unit> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
+                      VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
+                      VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.Int
+                      BLOCK_BODY
+                        CALL 'internal final fun __pika$set$value (value: kotlin.Int): kotlin.Unit declared in test.Calculator' type=kotlin.Unit origin=null
+                          ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Calculator origin=null
+                          ARG value: GET_VAR 'value: kotlin.Int declared in test.Calculator.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.Int origin=null
+                  ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                  ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
+            ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
+              TYPE_ARG T: io.github.lukmccall.pika.PFunction
+              ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  ARG name: CONST String type=kotlin.String value="add"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  ARG name: CONST String type=kotlin.String value="multiply"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PRIVATE' type=io.github.lukmccall.pika.PVisibility
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  ARG name: CONST String type=kotlin.String value="subtract"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  ARG name: CONST String type=kotlin.String value="__pika$get$value"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
+                  ARG name: CONST String type=kotlin.String value="__pika$set$value"
+                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
+            ARG baseClass: CONST Null type=kotlin.Nothing? value=null
       CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Calculator.Companion [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -37,74 +107,8 @@ FILE fqName:test fileName:/introspectableFunctions.kt
         VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Calculator.Companion
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Calculator> declared in test.Calculator.Companion'
-            CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
-              TYPE_ARG OwnerType: test.Calculator
-              ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Calculator> origin=null
-                ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Calculator modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
-              ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
-                    ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<io.github.lukmccall.pika.Introspectable> origin=null
-                      ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<*>
-                    ARG arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
-                      TYPE_ARG K: kotlin.String
-                      TYPE_ARG V: kotlin.Any?
-              ARG properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> origin=INVOKE
-                TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
-                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Int> origin=null
-                    TYPE_ARG OwnerType: test.Calculator
-                    TYPE_ARG Type: kotlin.Int
-                    ARG name: CONST String type=kotlin.String value="value"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                    ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                      TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
-                      ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                    ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                      ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-                        ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
-                          ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-                      ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                      ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
-                    ARG getter: FUN_EXPR type=kotlin.Function1<test.Calculator, kotlin.Int> origin=LAMBDA
-                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Int
-                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
-                        BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Calculator): kotlin.Int declared in test.Calculator.Companion.__PIntrospectionData'
-                            CALL 'public final fun <get-value> (): kotlin.Int declared in test.Calculator' type=kotlin.Int origin=GET_PROPERTY
-                              ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__PIntrospectionData.<anonymous>' type=test.Calculator origin=null
-                    ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
-                    ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                    ARG setter: FUN_EXPR type=kotlin.Function2<test.Calculator, kotlin.Int, kotlin.Unit> origin=LAMBDA
-                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
-                        VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
-                        VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.Int
-                        BLOCK_BODY
-                          CALL 'internal final fun __pika$set$value (value: kotlin.Int): kotlin.Unit declared in test.Calculator' type=kotlin.Unit origin=null
-                            ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__PIntrospectionData.<anonymous>' type=test.Calculator origin=null
-                            ARG value: GET_VAR 'value: kotlin.Int declared in test.Calculator.Companion.__PIntrospectionData.<anonymous>' type=kotlin.Int origin=null
-                    ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
-                    ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
-              ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
-                TYPE_ARG T: io.github.lukmccall.pika.PFunction
-                ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                    ARG name: CONST String type=kotlin.String value="add"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                    ARG name: CONST String type=kotlin.String value="multiply"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PRIVATE' type=io.github.lukmccall.pika.PVisibility
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                    ARG name: CONST String type=kotlin.String value="subtract"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                    ARG name: CONST String type=kotlin.String value="__pika$get$value"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-                  CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                    ARG name: CONST String type=kotlin.String value="__pika$set$value"
-                    ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-              ARG baseClass: CONST Null type=kotlin.Nothing? value=null
+            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> visibility:private [final] declared in test.Calculator.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
+              receiver: GET_VAR '<this>: test.Calculator.Companion declared in test.Calculator.Companion.__PIntrospectionData' type=test.Calculator.Companion origin=null
     CONSTRUCTOR visibility:public returnType:test.Calculator [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
