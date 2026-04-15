@@ -1,4 +1,4 @@
-# Pika
+![Pika](assets/banner.png)
 
 A Kotlin compiler plugin that generates complete type information at compile time, providing runtime access to generics, nullability, annotations, properties and more — without reflection.
 
