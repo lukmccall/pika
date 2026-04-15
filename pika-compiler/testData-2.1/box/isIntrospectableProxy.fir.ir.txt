@@ -35,7 +35,7 @@ FILE fqName:test fileName:/isIntrospectableProxy.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Foo
     PROPERTY name:x visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in test.Foo.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:test.Foo) returnType:kotlin.Int
@@ -43,7 +43,7 @@ FILE fqName:test fileName:/isIntrospectableProxy.kt
         $this: VALUE_PARAMETER name:<this> type:test.Foo
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in test.Foo'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private' type=kotlin.Int origin=null
               receiver: GET_VAR '<this>: test.Foo declared in test.Foo.<get-x>' type=test.Foo origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Foo.Companion
@@ -153,13 +153,13 @@ FILE fqName:test fileName:/isIntrospectableProxy.kt
       $this: VALUE_PARAMETER name:<this> type:test.Foo
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$x (): kotlin.Int declared in test.Foo'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private' type=kotlin.Int origin=null
             receiver: GET_VAR '<this>: test.Foo declared in test.Foo.__pika$get$x' type=test.Foo origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$x visibility:internal modality:FINAL <> ($this:test.Foo, value:kotlin.Int) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Foo
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.Int
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Foo declared in test.Foo.__pika$set$x' type=test.Foo origin=null
           value: GET_VAR 'value: kotlin.Int declared in test.Foo.__pika$set$x' type=kotlin.Int origin=null
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String

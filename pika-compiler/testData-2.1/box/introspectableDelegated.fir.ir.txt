@@ -25,7 +25,7 @@ FILE fqName:test fileName:/introspectableDelegated.kt
               thisRef: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-lazyValue>' type=test.DelegatedProperties origin=null
               property: PROPERTY_REFERENCE 'public final lazyValue: kotlin.Int declared in test.DelegatedProperties' field=null getter='public final fun <get-lazyValue> (): kotlin.Int declared in test.DelegatedProperties' setter=null type=kotlin.reflect.KProperty1<test.DelegatedProperties, kotlin.Int> origin=PROPERTY_REFERENCE_FOR_DELEGATE
     PROPERTY name:regularValue visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private
         EXPRESSION_BODY
           CONST String type=kotlin.String value="hello"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-regularValue> visibility:public modality:FINAL <> ($this:test.DelegatedProperties) returnType:kotlin.String
@@ -33,7 +33,7 @@ FILE fqName:test fileName:/introspectableDelegated.kt
         $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-regularValue> (): kotlin.String declared in test.DelegatedProperties'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-regularValue>' type=test.DelegatedProperties origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.DelegatedProperties.Companion
@@ -200,13 +200,13 @@ FILE fqName:test fileName:/introspectableDelegated.kt
       $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$regularValue (): kotlin.String declared in test.DelegatedProperties'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.__pika$get$regularValue' type=test.DelegatedProperties origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$regularValue visibility:internal modality:FINAL <> ($this:test.DelegatedProperties, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regularValue type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.__pika$set$regularValue' type=test.DelegatedProperties origin=null
           value: GET_VAR 'value: kotlin.String declared in test.DelegatedProperties.__pika$set$regularValue' type=kotlin.String origin=null
     PROPERTY name:computedValue visibility:public modality:FINAL [val]

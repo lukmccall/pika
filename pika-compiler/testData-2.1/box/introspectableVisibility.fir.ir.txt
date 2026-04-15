@@ -4,7 +4,7 @@ FILE fqName:test fileName:/introspectableVisibility.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Person
     PROPERTY name:publicProp visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'publicProp: kotlin.String declared in test.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-publicProp> visibility:public modality:FINAL <> ($this:test.Person) returnType:kotlin.String
@@ -12,10 +12,10 @@ FILE fqName:test fileName:/introspectableVisibility.kt
         $this: VALUE_PARAMETER name:<this> type:test.Person
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-publicProp> (): kotlin.String declared in test.Person'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-publicProp>' type=test.Person origin=null
     PROPERTY name:privateProp visibility:private modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'privateProp: kotlin.String declared in test.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-privateProp> visibility:private modality:FINAL <> ($this:test.Person) returnType:kotlin.String
@@ -23,10 +23,10 @@ FILE fqName:test fileName:/introspectableVisibility.kt
         $this: VALUE_PARAMETER name:<this> type:test.Person
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='private final fun <get-privateProp> (): kotlin.String declared in test.Person'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-privateProp>' type=test.Person origin=null
     PROPERTY name:protectedProp visibility:protected modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'protectedProp: kotlin.String declared in test.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-protectedProp> visibility:protected modality:FINAL <> ($this:test.Person) returnType:kotlin.String
@@ -34,10 +34,10 @@ FILE fqName:test fileName:/introspectableVisibility.kt
         $this: VALUE_PARAMETER name:<this> type:test.Person
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='protected final fun <get-protectedProp> (): kotlin.String declared in test.Person'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-protectedProp>' type=test.Person origin=null
     PROPERTY name:internalProp visibility:internal modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'internalProp: kotlin.String declared in test.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-internalProp> visibility:internal modality:FINAL <> ($this:test.Person) returnType:kotlin.String
@@ -45,7 +45,7 @@ FILE fqName:test fileName:/introspectableVisibility.kt
         $this: VALUE_PARAMETER name:<this> type:test.Person
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='internal final fun <get-internalProp> (): kotlin.String declared in test.Person'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-internalProp>' type=test.Person origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Person.Companion
@@ -275,52 +275,52 @@ FILE fqName:test fileName:/introspectableVisibility.kt
       $this: VALUE_PARAMETER name:<this> type:test.Person
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$internalProp (): kotlin.String declared in test.Person'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$get$internalProp' type=test.Person origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$privateProp visibility:internal modality:FINAL <> ($this:test.Person) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:test.Person
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$privateProp (): kotlin.String declared in test.Person'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$get$privateProp' type=test.Person origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$protectedProp visibility:internal modality:FINAL <> ($this:test.Person) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:test.Person
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$protectedProp (): kotlin.String declared in test.Person'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$get$protectedProp' type=test.Person origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$publicProp visibility:internal modality:FINAL <> ($this:test.Person) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:test.Person
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$publicProp (): kotlin.String declared in test.Person'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$get$publicProp' type=test.Person origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$internalProp visibility:internal modality:FINAL <> ($this:test.Person, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Person
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:internalProp type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$set$internalProp' type=test.Person origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Person.__pika$set$internalProp' type=kotlin.String origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$privateProp visibility:internal modality:FINAL <> ($this:test.Person, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Person
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:privateProp type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$set$privateProp' type=test.Person origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Person.__pika$set$privateProp' type=kotlin.String origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$protectedProp visibility:internal modality:FINAL <> ($this:test.Person, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Person
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:protectedProp type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$set$protectedProp' type=test.Person origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Person.__pika$set$protectedProp' type=kotlin.String origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$publicProp visibility:internal modality:FINAL <> ($this:test.Person, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Person
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:publicProp type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Person declared in test.Person.__pika$set$publicProp' type=test.Person origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Person.__pika$set$publicProp' type=kotlin.String origin=null
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String

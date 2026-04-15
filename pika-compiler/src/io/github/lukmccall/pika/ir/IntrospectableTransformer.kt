@@ -117,6 +117,11 @@ class IntrospectableTransformer(
       } else {
         val valueParam = syntheticAccessor.parameters.first { it.kind == IrParameterKind.Regular }
 
+        // Strip ACC_FINAL so PUTFIELD from the synthetic setter (non-<init>) does not
+        // throw java.lang.IllegalAccessError: Update to non-static final field ...
+        // attempted from a different method (__pika$set$...) than the initializer method <init>
+        backingField.isFinal = false
+
         // Generate: this.<backingField> = value
         syntheticAccessor.body = context.irFactory.createBlockBody(-1, -1).apply {
           statements.add(

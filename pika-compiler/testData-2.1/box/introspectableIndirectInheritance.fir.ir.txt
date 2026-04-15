@@ -4,7 +4,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Animal
     PROPERTY name:species visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'species: kotlin.String declared in test.Animal.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-species> visibility:public modality:FINAL <> ($this:test.Animal) returnType:kotlin.String
@@ -12,7 +12,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         $this: VALUE_PARAMETER name:<this> type:test.Animal
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-species> (): kotlin.String declared in test.Animal'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Animal declared in test.Animal.<get-species>' type=test.Animal origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Animal.Companion
@@ -122,13 +122,13 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       $this: VALUE_PARAMETER name:<this> type:test.Animal
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$species (): kotlin.String declared in test.Animal'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Animal declared in test.Animal.__pika$get$species' type=test.Animal origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$species visibility:internal modality:FINAL <> ($this:test.Animal, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Animal
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:species type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Animal declared in test.Animal.__pika$set$species' type=test.Animal origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Animal.__pika$set$species' type=kotlin.String origin=null
   CLASS CLASS name:Dog modality:FINAL visibility:public superTypes:[test.Mammal]
@@ -136,7 +136,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Dog
     PROPERTY name:breed visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private
         EXPRESSION_BODY
           GET_VAR 'breed: kotlin.String declared in test.Dog.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-breed> visibility:public modality:FINAL <> ($this:test.Dog) returnType:kotlin.String
@@ -144,7 +144,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         $this: VALUE_PARAMETER name:<this> type:test.Dog
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-breed> (): kotlin.String declared in test.Dog'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Dog declared in test.Dog.<get-breed>' type=test.Dog origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Dog.Companion
@@ -277,13 +277,13 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       $this: VALUE_PARAMETER name:<this> type:test.Dog
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$breed (): kotlin.String declared in test.Dog'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private' type=kotlin.String origin=null
             receiver: GET_VAR '<this>: test.Dog declared in test.Dog.__pika$get$breed' type=test.Dog origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$breed visibility:internal modality:FINAL <> ($this:test.Dog, value:kotlin.String) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Dog
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:breed type:kotlin.String visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Dog declared in test.Dog.__pika$set$breed' type=test.Dog origin=null
           value: GET_VAR 'value: kotlin.String declared in test.Dog.__pika$set$breed' type=kotlin.String origin=null
     PROPERTY FAKE_OVERRIDE name:species visibility:public modality:FINAL [fake_override,val]
@@ -307,7 +307,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Mammal
     PROPERTY name:warmBlooded visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private [final]
+      FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private
         EXPRESSION_BODY
           GET_VAR 'warmBlooded: kotlin.Boolean declared in test.Mammal.<init>' type=kotlin.Boolean origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-warmBlooded> visibility:public modality:FINAL <> ($this:test.Mammal) returnType:kotlin.Boolean
@@ -315,7 +315,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         $this: VALUE_PARAMETER name:<this> type:test.Mammal
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-warmBlooded> (): kotlin.Boolean declared in test.Mammal'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private [final]' type=kotlin.Boolean origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private' type=kotlin.Boolean origin=null
               receiver: GET_VAR '<this>: test.Mammal declared in test.Mammal.<get-warmBlooded>' type=test.Mammal origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Mammal.Companion
@@ -437,13 +437,13 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
       $this: VALUE_PARAMETER name:<this> type:test.Mammal
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal final fun __pika$get$warmBlooded (): kotlin.Boolean declared in test.Mammal'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private [final]' type=kotlin.Boolean origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private' type=kotlin.Boolean origin=null
             receiver: GET_VAR '<this>: test.Mammal declared in test.Mammal.__pika$get$warmBlooded' type=test.Mammal origin=null
     FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$warmBlooded visibility:internal modality:FINAL <> ($this:test.Mammal, value:kotlin.Boolean) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:test.Mammal
       VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.Boolean
       BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private [final]' type=kotlin.Unit origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:warmBlooded type:kotlin.Boolean visibility:private' type=kotlin.Unit origin=null
           receiver: GET_VAR '<this>: test.Mammal declared in test.Mammal.__pika$set$warmBlooded' type=test.Mammal origin=null
           value: GET_VAR 'value: kotlin.Boolean declared in test.Mammal.__pika$set$warmBlooded' type=kotlin.Boolean origin=null
     PROPERTY FAKE_OVERRIDE name:species visibility:public modality:FINAL [fake_override,val]
