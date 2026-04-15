@@ -105,6 +105,12 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("introspectionDataCached.kt")
+  public void testIntrospectionDataCached() {
+    runTest("pika-compiler/testData/box/introspectionDataCached.kt");
+  }
+
+  @Test
   @TestMetadata("introspectionOf.kt")
   public void testIntrospectionOf() {
     runTest("pika-compiler/testData/box/introspectionOf.kt");
