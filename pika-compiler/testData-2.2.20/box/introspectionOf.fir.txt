@@ -35,7 +35,7 @@ FILE: introspectionOf.kt
         lval person: R|test/Person| = R|test/Person.Person|(String(Alice), Int(30))
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Person|>()
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Person>|>|, <getClass>(Q|test/Person|)) ->  {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Person>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
                 ^box String(FAIL: kClass should be Person)
             }
         }

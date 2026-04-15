@@ -4,29 +4,57 @@ package io.github.lukmccall.pika.ir
 
 import io.github.lukmccall.pika.Identifiers
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.common.ir.createExtensionReceiver
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
+import org.jetbrains.kotlin.ir.builders.declarations.addGetter
 import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
 import org.jetbrains.kotlin.ir.builders.declarations.buildFun
+import org.jetbrains.kotlin.ir.builders.declarations.buildProperty
 import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.declarations.impl.IrFactoryImpl
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.declarations.createEmptyExternalPackageFragment
 import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.primaryConstructor
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class IRPoet(
   context: IrPluginContext,
-  private val symbolFinder: SymbolFinder
+  private val symbolFinder: SymbolFinder,
+  moduleFragment: IrModuleFragment
 ) {
   val irBuiltIns = context.irBuiltIns
   val kotlin = Kotlin()
+
+  /**
+   * Synthetic symbol for the `kotlin.jvm.<get-java>` extension property on `KClass<*>`.
+   * The JVM backend matches this by (package, receiver, name) and codegens a bare
+   * `LDC LType;` without the `Reflection.getOrCreateKotlinClass` wrap.
+   */
+  private val kClassJavaGetter: IrSimpleFunctionSymbol = run {
+    val kotlinJvmPackage = createEmptyExternalPackageFragment(
+      moduleFragment.descriptor,
+      FqName("kotlin.jvm")
+    )
+    IrFactoryImpl.buildProperty {
+      name = Name.identifier("java")
+    }.apply {
+      parent = kotlinJvmPackage
+      addGetter().apply {
+        parameters += createExtensionReceiver(irBuiltIns.kClassClass.starProjectedType)
+        returnType = symbolFinder.javaLangClass.defaultType
+      }
+    }.getter!!.symbol
+  }
 
   fun createReturnBody(
     irFactory: IrFactory,
@@ -148,21 +176,29 @@ class IRPoet(
     }
 
     /**
-     * KClass<{classSymbol}>
+     * Class<{classSymbol}> — emits `KClass<{classSymbol}>.java` so the JVM backend's
+     * KClassJavaProperty intrinsic strips the KClass wrap, leaving a bare LDC.
      */
-    fun kClass(classSymbol: IrClassSymbol): IrExpression {
+    fun javaClass(classSymbol: IrClassSymbol): IrExpression {
       val classType = classSymbol.owner.defaultType
-      val kClassType = irBuiltIns
-        .kClassClass
-        .typeWith(classType)
-
-      return IrClassReferenceImpl(
+      val kClassReference = IrClassReferenceImpl(
         startOffset = -1,
         endOffset = -1,
-        type = kClassType,
+        type = irBuiltIns.kClassClass.starProjectedType,
         symbol = classSymbol,
         classType = classType
       )
+      return IrCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = symbolFinder.javaLangClass.typeWith(classType),
+        symbol = kClassJavaGetter,
+        typeArgumentsCount = 0,
+        origin = null,
+        superQualifierSymbol = null
+      ).apply {
+        arguments[0] = kClassReference
+      }
     }
 
     /**
@@ -216,14 +252,14 @@ class IRPoet(
     }
 
     /**
-     * io.github.lukmccall.pika.PType({KClass<{classSymbol}>})
+     * io.github.lukmccall.pika.PType({Class<{classSymbol}>})
      */
     fun pType(classSymbol: IrClassSymbol): IrExpression =
       symbolFinder
         .pikaAPI
         .pType
         .buildConstructorCall("PType") {
-          arguments[0] = kotlin.kClass(classSymbol)
+          arguments[0] = kotlin.javaClass(classSymbol)
         }
 
     /**
@@ -378,7 +414,7 @@ class IRPoet(
     }
 
     /**
-     * io.github.lukmccall.pika.PAnnotation({kClass}, mapOf({annotationArgs}))
+     * io.github.lukmccall.pika.PAnnotation({jClass}, mapOf({annotationArgs}))
      */
     fun pAnnotation(annotation: IrConstructorCall): IrExpression {
       val annotationClass = annotation.type.classOrNull?.owner
@@ -387,7 +423,7 @@ class IRPoet(
         .pikaAPI
         .pAnnotation
         .buildConstructorCall("PAnnotation") {
-          arguments[0] = kotlin.kClass(annotationClass?.symbol ?: irBuiltIns.anyClass)
+          arguments[0] = kotlin.javaClass(annotationClass?.symbol ?: irBuiltIns.anyClass)
           arguments[1] = argumentsMap
         }
     }
@@ -809,7 +845,7 @@ class IRPoet(
         origin = null
       ).also { call ->
         call.typeArguments[0] = ownerType
-        call.arguments[0] = kotlin.kClass(irClass.symbol)
+        call.arguments[0] = kotlin.javaClass(irClass.symbol)
         call.arguments[1] = kotlin.listOf(pAnnotationClass.owner.defaultType, classAnnotations)
         call.arguments[2] = kotlin.listOf(pPropertyStarType, properties)
         call.arguments[3] = kotlin.listOf(pFunctionClass.owner.defaultType, functions)

@@ -51,7 +51,7 @@ FILE: introspectableAnnotations.kt
         }
 
         lval classAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PAnnotation|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PAnnotation|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
-            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/MyAnnotation|))
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.jClass|, <getClass>(Q|test/MyAnnotation|).R|kotlin/jvm/java|<R|test/MyAnnotation|>)
         }
         ) ?: ^box String(FAIL: MyAnnotation not found on class)
         when () {
@@ -71,7 +71,7 @@ FILE: introspectableAnnotations.kt
         }
 
         lval myAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PAnnotation|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PAnnotation|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
-            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/MyAnnotation|))
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.jClass|, <getClass>(Q|test/MyAnnotation|).R|kotlin/jvm/java|<R|test/MyAnnotation|>)
         }
         ) ?: ^box String(FAIL: MyAnnotation not found on property)
         when () {
@@ -81,7 +81,7 @@ FILE: introspectableAnnotations.kt
         }
 
         lval deprecatedAnnotation: R|io/github/lukmccall/pika/PAnnotation| = R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PAnnotation|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PAnnotation|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
-            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.kClass|, <getClass>(Q|test/Deprecated|))
+            ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PAnnotation.jClass|, <getClass>(Q|test/Deprecated|).R|kotlin/jvm/java|<R|test/Deprecated|>)
         }
         ) ?: ^box String(FAIL: Deprecated not found on property)
         when () {

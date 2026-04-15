@@ -3,8 +3,9 @@ FILE fqName:test fileName:/typeInfoStarProjection.kt
     BLOCK_BODY
       VAR name:starInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, argumentsPTypes: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<E of kotlin.collections.List>>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.collections.List<E of kotlin.collections.List>> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
           ARG argumentsPTypes: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
             TYPE_ARG T: io.github.lukmccall.pika.PTypeDescriptor
@@ -21,11 +22,13 @@ FILE fqName:test fileName:/typeInfoStarProjection.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val starInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.collections.List<*>> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.collections.List<*>
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: List<*> kClass"
       WHEN type=kotlin.Unit origin=IF

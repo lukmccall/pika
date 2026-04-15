@@ -23,7 +23,7 @@ fun box(): String {
 
   // Class annotations (includes @Introspectable and @MyAnnotation)
   if (data.annotations.size != 2) return "FAIL: expected 2 class annotations, got ${data.annotations.size}"
-  val classAnnotation = data.annotations.find { it.kClass == MyAnnotation::class }
+  val classAnnotation = data.annotations.find { it.jClass == MyAnnotation::class.java }
     ?: return "FAIL: MyAnnotation not found on class"
   if (classAnnotation.arguments["value"] != "class level") return "FAIL: class annotation value"
 
@@ -32,11 +32,11 @@ fun box(): String {
     ?: return "FAIL: name not found"
   if (nameProp.annotations.size != 2) return "FAIL: expected 2 property annotations"
 
-  val myAnnotation = nameProp.annotations.find { it.kClass == MyAnnotation::class }
+  val myAnnotation = nameProp.annotations.find { it.jClass == MyAnnotation::class.java }
     ?: return "FAIL: MyAnnotation not found on property"
   if (myAnnotation.arguments["value"] != "property level") return "FAIL: property MyAnnotation value"
 
-  val deprecatedAnnotation = nameProp.annotations.find { it.kClass == Deprecated::class }
+  val deprecatedAnnotation = nameProp.annotations.find { it.jClass == Deprecated::class.java }
     ?: return "FAIL: Deprecated not found on property"
   if (deprecatedAnnotation.arguments["reason"] != "use fullName instead") return "FAIL: Deprecated reason"
 

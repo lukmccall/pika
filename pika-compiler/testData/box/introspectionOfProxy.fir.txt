@@ -29,8 +29,8 @@ FILE: introspectionOfProxy.kt
     public final fun box(): R|kotlin/String| {
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Foo>| = R|test/proxy|<R|test/Foo|>()
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|, <getClass>(Q|test/Foo|)) ->  {
-                ^box <strcat>(String(FAIL: wrong kClass, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Foo>|>|, <getClass>(Q|test/Foo|).R|kotlin/jvm/java|<R|test/Foo|>) ->  {
+                ^box <strcat>(String(FAIL: wrong kClass, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Foo>|>|)
             }
         }
 

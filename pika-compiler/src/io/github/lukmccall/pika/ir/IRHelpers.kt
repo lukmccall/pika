@@ -84,7 +84,7 @@ fun IrConstructorCall.toArgsMap(
 }
 
 /**
- * Duplicates expression. Works only for const, enums and KClass<*>
+ * Duplicates expression. Works only for const, enums and Class<*>
  */
 private fun IrExpression?.constCopy(
   poet: IRPoet
@@ -109,7 +109,7 @@ private fun IrExpression?.constCopy(
     }
 
     is IrClassReferenceImpl -> {
-      poet.kotlin.kClass(symbol as IrClassSymbol)
+      poet.kotlin.javaClass(symbol as IrClassSymbol)
     }
 
     else -> null

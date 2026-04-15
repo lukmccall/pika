@@ -11,7 +11,7 @@ fun box(): String {
   val data = Empty.__PIntrospectionData()
 
   // Check kClass
-  if (data.kClass != Empty::class) return "FAIL: kClass"
+  if (data.jClass != Empty::class.java) return "FAIL: kClass"
 
   // No properties
   if (data.properties.isNotEmpty()) return "FAIL: should have no properties"
@@ -22,7 +22,7 @@ fun box(): String {
 
   // Only @Introspectable annotation
   if (data.annotations.size != 1) return "FAIL: should have 1 annotation (@Introspectable)"
-  if (data.annotations[0].kClass != Introspectable::class) return "FAIL: annotation should be @Introspectable"
+  if (data.annotations[0].jClass != Introspectable::class.java) return "FAIL: annotation should be @Introspectable"
 
   // No base class (Any doesn't implement Introspectable)
   if (data.baseClass != null) return "FAIL: should have no baseClass"

@@ -19,7 +19,7 @@ FILE: typeInfoCustomClass.kt
         }
 
         when () {
-            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|test/Person|)) ->  {
+            !=(R|<local>/personInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
                 ^box String(FAIL: Person kClass)
             }
         }

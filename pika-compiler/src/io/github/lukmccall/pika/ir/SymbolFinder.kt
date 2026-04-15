@@ -6,6 +6,8 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
+import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 
 @Suppress("ClassName")
 class SymbolFinder(
@@ -50,6 +52,8 @@ class SymbolFinder(
     val pair by cachedReference(KotlinStd.pair)
     val to by cachedFunction(KotlinStd.to)
   }
+
+  val javaLangClass by cachedReference(ClassId(FqName("java.lang"), Name.identifier("Class")))
 
   private fun cachedReference(classId: ClassId) = lazy {
     classResolver(classId) ?: error("Class $classId not found")

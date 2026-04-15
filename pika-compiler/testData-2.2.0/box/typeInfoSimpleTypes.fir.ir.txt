@@ -3,8 +3,9 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
     BLOCK_BODY
       VAR name:stringInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
           ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -17,11 +18,13 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val stringInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.String
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: String kClass"
       WHEN type=kotlin.Unit origin=IF
@@ -33,8 +36,9 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
             CONST String type=kotlin.String value="FAIL: String should not be nullable"
       VAR name:intInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
           ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -47,11 +51,13 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val intInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.Int
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Int kClass"
       WHEN type=kotlin.Unit origin=IF
@@ -63,8 +69,9 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
             CONST String type=kotlin.String value="FAIL: Int should not be nullable"
       VAR name:boolInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Boolean modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.Boolean>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Boolean>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Boolean> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Boolean modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.Boolean>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
           ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -77,17 +84,20 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val boolInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Boolean modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.Boolean>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Boolean>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.Boolean> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.Boolean
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Boolean modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.Boolean>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Boolean>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Boolean kClass"
       VAR name:nullableIntInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=true
           ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -100,11 +110,13 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val nullableIntInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.Int
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Int? kClass"
       WHEN type=kotlin.Unit origin=IF
@@ -117,8 +129,9 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
             CONST String type=kotlin.String value="FAIL: Int? should be nullable"
       VAR name:nullableStringInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+          ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=true
           ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -131,11 +144,13 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val nullableStringInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.String
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: String? kClass"
       WHEN type=kotlin.Unit origin=IF

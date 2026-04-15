@@ -32,7 +32,7 @@ FILE: typeInfoIntrospectableParameterized.kt
         }
 
         when () {
-            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
+            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/collections/List|).R|kotlin/jvm/java|<R|kotlin/collections/List<*>|>) ->  {
                 ^box String(FAIL: List<Person> kClass)
             }
         }
@@ -57,8 +57,8 @@ FILE: typeInfoIntrospectableParameterized.kt
         }
 
         when () {
-            !=(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Person|)) ->  {
-                ^box String(FAIL: Person arg introspectionData.kClass)
+            !=(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
+                ^box String(FAIL: Person arg introspectionData.jClass)
             }
         }
 

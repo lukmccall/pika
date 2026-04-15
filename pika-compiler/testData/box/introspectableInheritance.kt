@@ -21,7 +21,7 @@ fun box(): String {
   val baseData = data.baseClass
     ?: return "FAIL: Dog should have baseClass reference"
 
-  if (baseData.kClass != Animal::class) return "FAIL: baseClass should be Animal"
+  if (baseData.jClass != Animal::class.java) return "FAIL: baseClass should be Animal"
   if (baseData.properties.size != 1) return "FAIL: Animal should have 1 property"
   if (baseData.properties[0].name != "species") return "FAIL: Animal property should be species"
 

@@ -17,7 +17,7 @@ fun box(): String {
   val data = Singleton.__PIntrospectionData()
 
   // Check kClass
-  if (data.kClass != Singleton::class) return "FAIL: kClass"
+  if (data.jClass != Singleton::class.java) return "FAIL: kClass"
 
   // Check properties
   if (data.properties.size != 2) return "FAIL: expected 2 properties"

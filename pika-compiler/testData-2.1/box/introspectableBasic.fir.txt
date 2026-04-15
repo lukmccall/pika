@@ -27,8 +27,8 @@ FILE: introspectableBasic.kt
         lval person: R|test/Person| = R|test/Person.Person|(String(Alice))
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = Q|test/Person|.R|test/Person.Companion.__PIntrospectionData|()
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Person>|>|, <getClass>(Q|test/Person|)) ->  {
-                ^box String(FAIL: kClass expected Person::class)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Person>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
+                ^box String(FAIL: kClass expected Person::class.java)
             }
         }
 

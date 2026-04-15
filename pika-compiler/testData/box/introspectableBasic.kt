@@ -11,7 +11,7 @@ fun box(): String {
   val data = Person.__PIntrospectionData()
 
   // Test kClass
-  if (data.kClass != Person::class) return "FAIL: kClass expected Person::class"
+  if (data.jClass != Person::class.java) return "FAIL: kClass expected Person::class.java"
 
   // Test properties count
   if (data.properties.size != 1) return "FAIL: expected 1 property but got ${data.properties.size}"

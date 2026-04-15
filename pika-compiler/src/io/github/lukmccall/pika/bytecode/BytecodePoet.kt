@@ -8,7 +8,6 @@ import io.github.lukmccall.pika.Identifiers.withPackageName
 import io.github.lukmccall.pika.ir.hasIntrospectableAnnotation
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.mapping.IrTypeMapper
-import org.jetbrains.kotlin.codegen.AsmUtil
 import org.jetbrains.kotlin.codegen.inline.ReifiedTypeInliner
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
@@ -17,7 +16,6 @@ import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
-import org.jetbrains.kotlin.resolve.jvm.AsmTypes
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
@@ -47,7 +45,7 @@ class BytecodePoet(
   }
 
   /**
-   * new PType({kClass})
+   * new PType({jClass})
    */
   private fun initPType(
     irClass: IrClass
@@ -55,11 +53,10 @@ class BytecodePoet(
     anew(pTypeType)
     dup()
     aconst(irClass.toGeneric())
-    AsmUtil.wrapJavaClassIntoKClass(this)
     invokespecial(
       pTypeType.internalName,
       "<init>",
-      "(${AsmTypes.K_CLASS_TYPE.descriptor})V",
+      "(Ljava/lang/Class;)V",
       false
     )
   }

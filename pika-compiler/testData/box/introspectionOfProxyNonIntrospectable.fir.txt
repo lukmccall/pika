@@ -44,8 +44,8 @@ FILE: introspectionOfProxyNonIntrospectable.kt
         }
 
         when () {
-            !=(R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|, <getClass>(Q|test/Foo|)) ->  {
-                ^box <strcat>(String(FAIL: wrong kClass for Foo, got ), R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Foo>|>|)
+            !=(R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Foo>|>|, <getClass>(Q|test/Foo|).R|kotlin/jvm/java|<R|test/Foo|>) ->  {
+                ^box <strcat>(String(FAIL: wrong kClass for Foo, got ), R|<local>/fooData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Foo>|>|)
             }
         }
 

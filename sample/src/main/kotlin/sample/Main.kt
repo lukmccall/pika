@@ -57,7 +57,7 @@ fun main() {
   val data = introspectionOf<SimplePerson>()
   // 2. Or directly: SimplePerson.Companion.__PIntrospectionData()
 
-  println("kClass: ${data.kClass}")
+  println("kClass: ${data.jClass}")
   println("properties: ${data.properties.size}")
 
   for (prop in data.properties) {
@@ -132,7 +132,7 @@ fun main() {
   val personDescriptor = typeDescriptorOf<SimplePerson>()
   val personIntrospectionData = (personDescriptor as? PTypeDescriptor.Concrete)?.introspectionData
   println("typeDescriptorOf<SimplePerson>().introspectionData: $personIntrospectionData")
-  println("  kClass: ${personIntrospectionData?.kClass}")
+  println("  kClass: ${personIntrospectionData?.jClass}")
   println("  properties: ${personIntrospectionData?.properties?.map { it.name }}")
   println()
 
@@ -145,7 +145,7 @@ fun main() {
   println("Property type descriptors:")
   for (prop in personIntrospectionData!!.properties) {
     val propConcreteType = prop.type as? PTypeDescriptor.Concrete
-    println("  ${prop.name}: ${prop.type::class.simpleName}, introspectionData=${propConcreteType?.introspectionData?.kClass}")
+    println("  ${prop.name}: ${prop.type::class.simpleName}, introspectionData=${propConcreteType?.introspectionData?.jClass}")
   }
   println()
 
@@ -155,12 +155,12 @@ fun main() {
   val personArgDescriptor = listPersonDescriptor.argumentsPTypes[0] as? PTypeDescriptor.Concrete
   println("typeDescriptorOf<List<SimplePerson>>():")
   println("  List introspectionData: $listIntrospectionData")
-  println("  SimplePerson arg introspectionData.kClass: ${personArgDescriptor?.introspectionData?.kClass}")
+  println("  SimplePerson arg introspectionData.jClass: ${personArgDescriptor?.introspectionData?.jClass}")
   println()
 
   // Through inline proxy
   val proxyDescriptor = proxy<SimplePerson>() as? PTypeDescriptor.Concrete
-  println("proxy<SimplePerson>().introspectionData.kClass: ${proxyDescriptor?.introspectionData?.kClass}")
+  println("proxy<SimplePerson>().introspectionData.jClass: ${proxyDescriptor?.introspectionData?.jClass}")
   println()
 
   // Delegated properties test
@@ -208,12 +208,12 @@ fun formatPTypeDescriptor(info: PTypeDescriptor?): String = when (info) {
   is PTypeDescriptor.Concrete.Parameterized -> {
     val nullable = if (info.isNullable) "?" else ""
     val args = info.argumentsPTypes.joinToString(", ") { formatPTypeDescriptor(it) }
-    "${info.pType.kClass.qualifiedName}<$args>$nullable"
+    "${info.pType.jClass.canonicalName}<$args>$nullable"
   }
 
   is PTypeDescriptor.Concrete -> {
     val nullable = if (info.isNullable) "?" else ""
-    "${info.pType.kClass.qualifiedName}$nullable"
+    "${info.pType.jClass.canonicalName}$nullable"
   }
 
   is PTypeDescriptor.Star -> "*"

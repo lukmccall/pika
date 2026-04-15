@@ -10,7 +10,7 @@ FILE: typeInfoStarProjection.kt
         }
 
         when () {
-            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/collections/List|)) ->  {
+            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/collections/List|).R|kotlin/jvm/java|<R|kotlin/collections/List<*>|>) ->  {
                 ^box String(FAIL: List<*> kClass)
             }
         }

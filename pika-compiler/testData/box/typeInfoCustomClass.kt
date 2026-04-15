@@ -9,7 +9,7 @@ fun box(): String {
   // Test class types
   val personInfo = typeDescriptorOf<Person>()
   if (personInfo !is PTypeDescriptor.Concrete) return "FAIL: Person should be PTypeDescriptor.Concrete"
-  if (personInfo.pType.kClass != Person::class) return "FAIL: Person kClass"
+  if (personInfo.pType.jClass != Person::class.java) return "FAIL: Person kClass"
   if (personInfo.isNullable) return "FAIL: Person should not be nullable"
 
   // Test nullable class

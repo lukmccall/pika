@@ -26,14 +26,16 @@ FILE fqName:test fileName:/introspectableEmpty.kt
         $this: VALUE_PARAMETER name:<this> type:test.Empty.Companion
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.Empty.Companion'
-            CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
+            CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
               <OwnerType>: test.Empty
-              kClass: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Empty>
+              jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Empty> origin=null
+                $receiver: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
               annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
                 <T>: io.github.lukmccall.pika.PAnnotation
                 elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
-                    kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
+                  CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
+                    jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<io.github.lukmccall.pika.Introspectable> origin=null
+                      $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<*>
                     arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
                       <K>: kotlin.String
                       <V>: kotlin.Any?
@@ -72,9 +74,11 @@ FILE fqName:test fileName:/introspectableEmpty.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.reflect.KClass<test.Empty> origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=java.lang.Class<test.Empty> origin=GET_PROPERTY
                 $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
-              arg1: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Empty>
+              arg1: CALL 'public final fun <get-java> <T> (): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Empty> origin=GET_PROPERTY
+                <T>: test.Empty
+                $receiver: CLASS_REFERENCE 'CLASS CLASS name:Empty modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Empty>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: kClass"
       WHEN type=kotlin.Unit origin=IF
@@ -107,12 +111,14 @@ FILE fqName:test fileName:/introspectableEmpty.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PAnnotation' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PAnnotation' type=java.lang.Class<*> origin=GET_PROPERTY
                 $this: CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.PAnnotation origin=GET_ARRAY_ELEMENT
                   $this: CALL 'public final fun <get-annotations> (): kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=GET_PROPERTY
                     $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Empty> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Empty> origin=null
                   index: CONST Int type=kotlin.Int value=0
-              arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
+              arg1: CALL 'public final fun <get-java> <T> (): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<io.github.lukmccall.pika.Introspectable> origin=GET_PROPERTY
+                <T>: io.github.lukmccall.pika.Introspectable
+                $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: annotation should be @Introspectable"
       WHEN type=kotlin.Unit origin=IF

@@ -11,8 +11,7 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
           NEW (io/github/lukmccall/pika/PType)
           DUP
           LDC (Ljava/lang/String;)
-          INVOKESTATIC (kotlin/jvm/internal/Reflection, getOrCreateKotlinClass, (Ljava/lang/Class;)Lkotlin/reflect/KClass;)
-          INVOKESPECIAL (io/github/lukmccall/pika/PType, <init>, (Lkotlin/reflect/KClass;)V)
+          INVOKESPECIAL (io/github/lukmccall/pika/PType, <init>, (Ljava/lang/Class;)V)
           ICONST_0
           ACONST_NULL
           INVOKESPECIAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, <init>, (Lio/github/lukmccall/pika/PType;ZLio/github/lukmccall/pika/PIntrospectionData;)V)
@@ -26,19 +25,18 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
         LINENUMBER (13)
           ALOAD (0)
           INVOKEVIRTUAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, getPType, ()Lio/github/lukmccall/pika/PType;)
-          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getKClass, ()Lkotlin/reflect/KClass;)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getJClass, ()Ljava/lang/Class;)
           LDC (Ljava/lang/String;)
-          INVOKESTATIC (kotlin/jvm/internal/Reflection, getOrCreateKotlinClass, (Ljava/lang/Class;)Lkotlin/reflect/KClass;)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, areEqual, (Ljava/lang/Object;Ljava/lang/Object;)Z)
           IFNE (L5)
           NEW (java/lang/StringBuilder)
           DUP
           INVOKESPECIAL (java/lang/StringBuilder, <init>, ()V)
-          LDC (FAIL: expected String::class got )
+          LDC (FAIL: expected String::class.java got )
           INVOKEVIRTUAL (java/lang/StringBuilder, append, (Ljava/lang/String;)Ljava/lang/StringBuilder;)
           ALOAD (0)
           INVOKEVIRTUAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, getPType, ()Lio/github/lukmccall/pika/PType;)
-          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getKClass, ()Lkotlin/reflect/KClass;)
+          INVOKEVIRTUAL (io/github/lukmccall/pika/PType, getJClass, ()Ljava/lang/Class;)
           INVOKEVIRTUAL (java/lang/StringBuilder, append, (Ljava/lang/Object;)Ljava/lang/StringBuilder;)
           INVOKEVIRTUAL (java/lang/StringBuilder, toString, ()Ljava/lang/String;)
           ARETURN

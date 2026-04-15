@@ -25,14 +25,14 @@ fun box(): String {
   val addressTypeDescriptor = addressProp.type as? PTypeDescriptor.Concrete
     ?: return "FAIL: address property type should be Concrete"
 
-  if (addressTypeDescriptor.pType.kClass != Address::class)
+  if (addressTypeDescriptor.pType.jClass != Address::class.java)
     return "FAIL: address type kClass should be Address"
 
   val addressData = addressTypeDescriptor.introspectionData
     ?: return "FAIL: address property type introspectionData should not be null"
 
-  if (addressData.kClass != Address::class)
-    return "FAIL: nested introspectionData.kClass should be Address"
+  if (addressData.jClass != Address::class.java)
+    return "FAIL: nested introspectionData.jClass should be Address"
 
   if (addressData.properties.size != 2)
     return "FAIL: Address should have 2 properties, got ${addressData.properties.size}"
@@ -42,7 +42,7 @@ fun box(): String {
 
   // Cross-check: nested introspectionData matches introspectionOf<Address>()
   val directAddressData = introspectionOf<Address>()
-  if (addressData.kClass != directAddressData.kClass)
+  if (addressData.jClass != directAddressData.jClass)
     return "FAIL: nested kClass mismatch with introspectionOf"
   if (addressData.properties.size != directAddressData.properties.size)
     return "FAIL: nested properties size mismatch with introspectionOf"

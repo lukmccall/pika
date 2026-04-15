@@ -10,7 +10,7 @@ FILE: typeInfoSimpleTypes.kt
         }
 
         when () {
-            !=(R|<local>/stringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+            !=(R|<local>/stringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/String|).R|kotlin/jvm/java|<R|kotlin/String|>) ->  {
                 ^box String(FAIL: String kClass)
             }
         }
@@ -29,7 +29,7 @@ FILE: typeInfoSimpleTypes.kt
         }
 
         when () {
-            !=(R|<local>/intInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+            !=(R|<local>/intInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/Int|).R|kotlin/jvm/java|<R|kotlin/Int|>) ->  {
                 ^box String(FAIL: Int kClass)
             }
         }
@@ -48,7 +48,7 @@ FILE: typeInfoSimpleTypes.kt
         }
 
         when () {
-            !=(R|<local>/boolInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Boolean|)) ->  {
+            !=(R|<local>/boolInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/Boolean|).R|kotlin/jvm/java|<R|kotlin/Boolean|>) ->  {
                 ^box String(FAIL: Boolean kClass)
             }
         }
@@ -61,7 +61,7 @@ FILE: typeInfoSimpleTypes.kt
         }
 
         when () {
-            !=(R|<local>/nullableIntInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/Int|)) ->  {
+            !=(R|<local>/nullableIntInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/Int|).R|kotlin/jvm/java|<R|kotlin/Int|>) ->  {
                 ^box String(FAIL: Int? kClass)
             }
         }
@@ -80,7 +80,7 @@ FILE: typeInfoSimpleTypes.kt
         }
 
         when () {
-            !=(R|<local>/nullableStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|kotlin/String|)) ->  {
+            !=(R|<local>/nullableStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/String|).R|kotlin/jvm/java|<R|kotlin/String|>) ->  {
                 ^box String(FAIL: String? kClass)
             }
         }

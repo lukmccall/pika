@@ -54,14 +54,16 @@ FILE fqName:test fileName:/introspectableObject.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Singleton
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton'
-          CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
+          CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
             TYPE_ARG OwnerType: test.Singleton
-            ARG kClass: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Singleton>
+            ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Singleton> origin=null
+              ARG $receiver: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
-                  ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<io.github.lukmccall.pika.Introspectable>
+                CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
+                  ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<io.github.lukmccall.pika.Introspectable> origin=null
+                    ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:Introspectable modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<*>
                   ARG arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
                     TYPE_ARG K: kotlin.String
                     TYPE_ARG V: kotlin.Any?
@@ -77,8 +79,9 @@ FILE fqName:test fileName:/introspectableObject.kt
                     TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
                     ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
                   ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-                      ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
+                        ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
                     ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                     ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
                   ARG getter: FUN_EXPR type=kotlin.Function1<test.Singleton, kotlin.String> origin=LAMBDA
@@ -102,8 +105,9 @@ FILE fqName:test fileName:/introspectableObject.kt
                     TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
                     ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
                   ARG type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-                      ARG kClass: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.Int>
+                    ARG pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+                      ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
+                        ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
                     ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                     ARG introspectionData: CONST Null type=kotlin.Nothing? value=null
                   ARG getter: FUN_EXPR type=kotlin.Function1<test.Singleton, kotlin.Int> origin=LAMBDA
@@ -154,9 +158,11 @@ FILE fqName:test fileName:/introspectableObject.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.reflect.KClass<test.Singleton> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=java.lang.Class<test.Singleton> origin=GET_PROPERTY
                 ARG <this>: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Singleton>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Singleton> origin=GET_PROPERTY
+                TYPE_ARG T: test.Singleton
+                ARG <this>: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Singleton>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: kClass"
       WHEN type=kotlin.Unit origin=IF

@@ -13,7 +13,7 @@ fun box(): String {
   val data = introspectionOf<Person>()
 
   // Verify kClass
-  if (data.kClass != Person::class) return "FAIL: kClass should be Person"
+  if (data.jClass != Person::class.java) return "FAIL: kClass should be Person"
 
   // Verify properties
   if (data.properties.size != 2) return "FAIL: should have 2 properties, got ${data.properties.size}"

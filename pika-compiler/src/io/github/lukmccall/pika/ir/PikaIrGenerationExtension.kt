@@ -14,7 +14,7 @@ class PikaIrGenerationExtension : IrGenerationExtension {
     pluginContext: IrPluginContext
   ) {
     val symbolFinder = createSymbolFinder(pluginContext)
-    val poet = IRPoet(pluginContext, symbolFinder)
+    val poet = IRPoet(pluginContext, symbolFinder, moduleFragment)
 
     // Generate __PIntrospectionData() for Introspectable classes
     val introspectableTransformer = IntrospectableTransformer(

@@ -84,7 +84,7 @@ FILE: introspectableIndirectInheritance.kt
 
         lval mammalData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>| ?: ^box String(FAIL: Dog should have baseClass)
         when () {
-            !=(R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Mammal|)) ->  {
+            !=(R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Mammal|).R|kotlin/jvm/java|<R|test/Mammal|>) ->  {
                 ^box String(FAIL: baseClass should be Mammal)
             }
         }
@@ -103,7 +103,7 @@ FILE: introspectableIndirectInheritance.kt
 
         lval animalData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/mammalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>| ?: ^box String(FAIL: Mammal should have baseClass)
         when () {
-            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Animal|)) ->  {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Animal|).R|kotlin/jvm/java|<R|test/Animal|>) ->  {
                 ^box String(FAIL: grandparent should be Animal)
             }
         }

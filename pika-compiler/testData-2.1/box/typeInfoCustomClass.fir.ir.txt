@@ -34,8 +34,9 @@ FILE fqName:test fileName:/typeInfoCustomClass.kt
     BLOCK_BODY
       VAR name:personInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+          pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
+              $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
           introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
@@ -48,11 +49,13 @@ FILE fqName:test fileName:/typeInfoCustomClass.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 $this: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val personInfo: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              arg1: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+              arg1: CALL 'public final fun <get-java> <T> (): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=GET_PROPERTY
+                <T>: test.Person
+                $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Person kClass"
       WHEN type=kotlin.Unit origin=IF
@@ -64,8 +67,9 @@ FILE fqName:test fileName:/typeInfoCustomClass.kt
             CONST String type=kotlin.String value="FAIL: Person should not be nullable"
       VAR name:nullablePersonInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          pType: CONSTRUCTOR_CALL 'public constructor <init> (kClass: kotlin.reflect.KClass<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
-            kClass: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
+          pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
+            jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
+              $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=true
           introspectionData: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF

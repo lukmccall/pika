@@ -23,14 +23,14 @@ fun box(): String {
   // Mammal base class
   val mammalData = data.baseClass
     ?: return "FAIL: Dog should have baseClass"
-  if (mammalData.kClass != Mammal::class) return "FAIL: baseClass should be Mammal"
+  if (mammalData.jClass != Mammal::class.java) return "FAIL: baseClass should be Mammal"
   if (mammalData.properties.size != 1) return "FAIL: Mammal should have 1 property"
   if (mammalData.properties[0].name != "warmBlooded") return "FAIL: Mammal property should be warmBlooded"
 
   // Animal base class (grandparent)
   val animalData = mammalData.baseClass
     ?: return "FAIL: Mammal should have baseClass"
-  if (animalData.kClass != Animal::class) return "FAIL: grandparent should be Animal"
+  if (animalData.jClass != Animal::class.java) return "FAIL: grandparent should be Animal"
   if (animalData.properties.size != 1) return "FAIL: Animal should have 1 property"
   if (animalData.properties[0].name != "species") return "FAIL: Animal property should be species"
 

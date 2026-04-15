@@ -62,7 +62,7 @@ FILE: introspectableInheritance.kt
 
         lval baseData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.baseClass: R|io/github/lukmccall/pika/PIntrospectionData<*>?|>| ?: ^box String(FAIL: Dog should have baseClass reference)
         when () {
-            !=(R|<local>/baseData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Animal|)) ->  {
+            !=(R|<local>/baseData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Animal|).R|kotlin/jvm/java|<R|test/Animal|>) ->  {
                 ^box String(FAIL: baseClass should be Animal)
             }
         }

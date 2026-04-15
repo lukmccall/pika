@@ -10,6 +10,6 @@ inline fun <reified T> proxy() = typeDescriptorOf<T>()
 fun box(): String {
   val info = proxy<String>()
   if (info !is PTypeDescriptor.Concrete) return "FAIL: should be Concrete"
-  if (info.pType.kClass != String::class) return "FAIL: expected String::class got ${info.pType.kClass}"
+  if (info.pType.jClass != String::class.java) return "FAIL: expected String::class.java got ${info.pType.jClass}"
   return "OK"
 }

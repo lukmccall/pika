@@ -80,15 +80,15 @@ FILE: typeInfoNestedIntrospectable.kt
         ) ?: ^box String(FAIL: address property not found)
         lval addressTypeDescriptor: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/addressProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.type: R|io/github/lukmccall/pika/PTypeDescriptor|>| as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: address property type should be Concrete)
         when () {
-            !=(R|<local>/addressTypeDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.kClass|, <getClass>(Q|test/Address|)) ->  {
+            !=(R|<local>/addressTypeDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|test/Address|).R|kotlin/jvm/java|<R|test/Address|>) ->  {
                 ^box String(FAIL: address type kClass should be Address)
             }
         }
 
         lval addressData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/addressTypeDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData| ?: ^box String(FAIL: address property type introspectionData should not be null)
         when () {
-            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Address|)) ->  {
-                ^box String(FAIL: nested introspectionData.kClass should be Address)
+            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Address|).R|kotlin/jvm/java|<R|test/Address|>) ->  {
+                ^box String(FAIL: nested introspectionData.jClass should be Address)
             }
         }
 
@@ -104,7 +104,7 @@ FILE: typeInfoNestedIntrospectable.kt
         ) ?: ^box String(FAIL: city property not found in nested introspectionData)
         lval directAddressData: R|io/github/lukmccall/pika/PIntrospectionData<test/Address>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Address|>()
         when () {
-            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, R|<local>/directAddressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Address>|>|) ->  {
+            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, R|<local>/directAddressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Address>|>|) ->  {
                 ^box String(FAIL: nested kClass mismatch with introspectionOf)
             }
         }

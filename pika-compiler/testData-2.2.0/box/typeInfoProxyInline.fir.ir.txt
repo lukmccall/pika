@@ -14,15 +14,17 @@ FILE fqName:test fileName:/typeInfoProxyInline.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              ARG arg0: CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              ARG arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val info: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
-              ARG arg1: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
+              ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=GET_PROPERTY
+                TYPE_ARG T: kotlin.String
+                ARG <this>: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<kotlin.String>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             STRING_CONCATENATION type=kotlin.String
-              CONST String type=kotlin.String value="FAIL: expected String::class got "
-              CALL 'public final fun <get-kClass> (): kotlin.reflect.KClass<*> declared in io.github.lukmccall.pika.PType' type=kotlin.reflect.KClass<*> origin=GET_PROPERTY
+              CONST String type=kotlin.String value="FAIL: expected String::class.java got "
+              CALL 'public final fun <get-jClass> (): java.lang.Class<*> declared in io.github.lukmccall.pika.PType' type=java.lang.Class<*> origin=GET_PROPERTY
                 ARG <this>: CALL 'public final fun <get-pType> (): io.github.lukmccall.pika.PType declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PType origin=GET_PROPERTY
                   ARG <this>: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
                     GET_VAR 'val info: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null

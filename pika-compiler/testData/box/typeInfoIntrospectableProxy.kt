@@ -15,12 +15,12 @@ fun box(): String {
   if (fooDescriptor.introspectionData == null) return "FAIL: Foo introspectionData should not be null"
 
   val data = fooDescriptor.introspectionData!!
-  if (data.kClass != Foo::class) return "FAIL: introspectionData.kClass should be Foo"
+  if (data.jClass != Foo::class.java) return "FAIL: introspectionData.jClass should be Foo"
   if (data.properties.size != 1) return "FAIL: should have 1 property, got ${data.properties.size}"
 
   // Cross-check with introspectionOf
   val direct = introspectionOf<Foo>()
-  if (data.kClass != direct.kClass) return "FAIL: kClass mismatch"
+  if (data.jClass != direct.jClass) return "FAIL: kClass mismatch"
   if (data.properties.size != direct.properties.size) return "FAIL: properties size mismatch"
 
   // Reified inline proxy with non-introspectable type

@@ -16,12 +16,12 @@ fun box(): String {
 
   // introspectionData should match introspectionOf<Person>()
   val data = personDescriptor.introspectionData!!
-  if (data.kClass != Person::class) return "FAIL: introspectionData.kClass should be Person"
+  if (data.jClass != Person::class.java) return "FAIL: introspectionData.jClass should be Person"
   if (data.properties.size != 2) return "FAIL: should have 2 properties, got ${data.properties.size}"
 
   // Cross-check with introspectionOf — should be the same data
   val direct = introspectionOf<Person>()
-  if (data.kClass != direct.kClass) return "FAIL: kClass mismatch"
+  if (data.jClass != direct.jClass) return "FAIL: jClass mismatch"
   if (data.properties.size != direct.properties.size) return "FAIL: properties size mismatch"
 
   // Nullable introspectable class should also have introspectionData

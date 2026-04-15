@@ -56,8 +56,8 @@ FILE: typeInfoIntrospectableClass.kt
 
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, <getClass>(Q|test/Person|)) ->  {
-                ^box String(FAIL: introspectionData.kClass should be Person)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
+                ^box String(FAIL: introspectionData.jClass should be Person)
             }
         }
 
@@ -69,8 +69,8 @@ FILE: typeInfoIntrospectableClass.kt
 
         lval direct: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Person|>()
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<CapturedType(*)>|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.kClass: R|kotlin/reflect/KClass<test/Person>|>|) ->  {
-                ^box String(FAIL: kClass mismatch)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Person>|>|) ->  {
+                ^box String(FAIL: jClass mismatch)
             }
         }
 

@@ -19,7 +19,7 @@ inline fun <reified T> proxy(): PIntrospectionData<T & Any>? {
 fun box(): String {
   val fooData = proxy<Foo>()
   if (fooData == null) return "FAIL: introspectable class returned null"
-  if (fooData.kClass != Foo::class) return "FAIL: wrong kClass for Foo, got ${fooData.kClass}"
+  if (fooData.jClass != Foo::class.java) return "FAIL: wrong kClass for Foo, got ${fooData.jClass}"
   if (fooData.properties.size != 1) return "FAIL: wrong property count, got ${fooData.properties.size}"
 
   val barData = proxy<Bar>()
