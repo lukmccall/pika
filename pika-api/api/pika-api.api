@@ -49,6 +49,7 @@ public final class io/github/lukmccall/pika/PProperty {
 public final class io/github/lukmccall/pika/PType {
 	public fun <init> (Ljava/lang/Class;)V
 	public final fun getJClass ()Ljava/lang/Class;
+	public final fun getKClass ()Lkotlin/reflect/KClass;
 }
 
 public abstract interface class io/github/lukmccall/pika/PTypeDescriptor {
