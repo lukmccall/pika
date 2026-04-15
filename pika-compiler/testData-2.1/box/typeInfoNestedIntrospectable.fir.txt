@@ -67,7 +67,7 @@ FILE: typeInfoNestedIntrospectable.kt
             }
         }
 
-        lval personData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData| ?: ^box String(FAIL: Person introspectionData should not be null)
+        lval personData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection| ?: ^box String(FAIL: Person introspection should not be null)
         when () {
             !=(R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box <strcat>(String(FAIL: should have 2 properties, got ), R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
@@ -85,10 +85,10 @@ FILE: typeInfoNestedIntrospectable.kt
             }
         }
 
-        lval addressData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/addressTypeDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData| ?: ^box String(FAIL: address property type introspectionData should not be null)
+        lval addressData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/addressTypeDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection| ?: ^box String(FAIL: address property type introspection should not be null)
         when () {
             !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Address|).R|kotlin/jvm/java|<R|test/Address|>) ->  {
-                ^box String(FAIL: nested introspectionData.jClass should be Address)
+                ^box String(FAIL: nested introspection.jClass should be Address)
             }
         }
 
@@ -101,7 +101,7 @@ FILE: typeInfoNestedIntrospectable.kt
         lval cityProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(city))
         }
-        ) ?: ^box String(FAIL: city property not found in nested introspectionData)
+        ) ?: ^box String(FAIL: city property not found in nested introspection)
         lval directAddressData: R|io/github/lukmccall/pika/PIntrospectionData<test/Address>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Address|>()
         when () {
             !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, R|<local>/directAddressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Address>|>|) ->  {
@@ -121,8 +121,8 @@ FILE: typeInfoNestedIntrospectable.kt
         ) ?: ^box String(FAIL: name property not found)
         lval nameType: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.type: R|io/github/lukmccall/pika/PTypeDescriptor|>| as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: name property type should be Concrete)
         when () {
-            !=(R|<local>/nameType|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: String property type introspectionData should be null)
+            !=(R|<local>/nameType|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: String property type introspection should be null)
             }
         }
 

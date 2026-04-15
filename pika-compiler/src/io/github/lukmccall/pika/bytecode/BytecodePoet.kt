@@ -62,7 +62,7 @@ class BytecodePoet(
   }
 
   /**
-   * new PTypeDescriptor.Concrete({PType}, {isNullable}, {introspectionData})
+   * new PTypeDescriptor.Concrete({PType}, {isNullable}, {introspection})
    */
   fun initConcretePTypeDescriptor(
     irClass: IrClass,
@@ -83,12 +83,12 @@ class BytecodePoet(
   }
 
   /**
-   * new PTypeDescriptor.Concrete.Parameterized({PType}, {isNullable}, initPTypeDescriptor(*{argumentsPTypes}))
+   * new PTypeDescriptor.Concrete.Parameterized({PType}, {isNullable}, initPTypeDescriptor(*{parameters}))
    */
   fun initParameterizedPTypeDescriptor(
     irClass: IrClass,
     isNullable: Boolean,
-    argumentsPTypes: List<IrTypeArgument>
+    parameters: List<IrTypeArgument>
   ) = adapter.apply {
     anew(pTypeDescriptorParameterizedType)
     dup()
@@ -96,10 +96,10 @@ class BytecodePoet(
     iconst(if (isNullable) 1 else 0)
 
     // Create list of type arguments
-    iconst(argumentsPTypes.size)
+    iconst(parameters.size)
     newarray(pTypeDescriptorType)
 
-    argumentsPTypes.forEachIndexed { index, arg ->
+    parameters.forEachIndexed { index, arg ->
       dup()
       iconst(index)
       when (arg) {

@@ -9,14 +9,14 @@ class Person(val name: String, var age: Int)
 class NonIntrospectable(val value: Int)
 
 fun box(): String {
-  // Introspectable class should have non-null introspectionData
+  // Introspectable class should have non-null introspection
   val personDescriptor = typeDescriptorOf<Person>()
   if (personDescriptor !is PTypeDescriptor.Concrete) return "FAIL: Person should be Concrete"
-  if (personDescriptor.introspectionData == null) return "FAIL: Person introspectionData should not be null"
+  if (personDescriptor.introspection == null) return "FAIL: Person introspection should not be null"
 
-  // introspectionData should match introspectionOf<Person>()
-  val data = personDescriptor.introspectionData!!
-  if (data.jClass != Person::class.java) return "FAIL: introspectionData.jClass should be Person"
+  // introspection should match introspectionOf<Person>()
+  val data = personDescriptor.introspection!!
+  if (data.jClass != Person::class.java) return "FAIL: introspection.jClass should be Person"
   if (data.properties.size != 2) return "FAIL: should have 2 properties, got ${data.properties.size}"
 
   // Cross-check with introspectionOf — should be the same data
@@ -24,21 +24,21 @@ fun box(): String {
   if (data.jClass != direct.jClass) return "FAIL: jClass mismatch"
   if (data.properties.size != direct.properties.size) return "FAIL: properties size mismatch"
 
-  // Nullable introspectable class should also have introspectionData
+  // Nullable introspectable class should also have introspection
   val nullableDescriptor = typeDescriptorOf<Person?>()
   if (nullableDescriptor !is PTypeDescriptor.Concrete) return "FAIL: Person? should be Concrete"
   if (!nullableDescriptor.isNullable) return "FAIL: Person? should be nullable"
-  if (nullableDescriptor.introspectionData == null) return "FAIL: Person? introspectionData should not be null"
+  if (nullableDescriptor.introspection == null) return "FAIL: Person? introspection should not be null"
 
-  // Non-introspectable class should have null introspectionData
+  // Non-introspectable class should have null introspection
   val nonDescriptor = typeDescriptorOf<NonIntrospectable>()
   if (nonDescriptor !is PTypeDescriptor.Concrete) return "FAIL: NonIntrospectable should be Concrete"
-  if (nonDescriptor.introspectionData != null) return "FAIL: NonIntrospectable introspectionData should be null"
+  if (nonDescriptor.introspection != null) return "FAIL: NonIntrospectable introspection should be null"
 
-  // Standard library types should have null introspectionData
+  // Standard library types should have null introspection
   val stringDescriptor = typeDescriptorOf<String>()
   if (stringDescriptor !is PTypeDescriptor.Concrete) return "FAIL: String should be Concrete"
-  if (stringDescriptor.introspectionData != null) return "FAIL: String introspectionData should be null"
+  if (stringDescriptor.introspection != null) return "FAIL: String introspection should be null"
 
   return "OK"
 }

@@ -35,15 +35,15 @@ FILE: typeInfoIntrospectableProxy.kt
         }
 
         when () {
-            ==(R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Foo introspectionData should not be null)
+            ==(R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Foo introspection should not be null)
             }
         }
 
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/fooDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|!!
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Foo|).R|kotlin/jvm/java|<R|test/Foo|>) ->  {
-                ^box String(FAIL: introspectionData.jClass should be Foo)
+                ^box String(FAIL: introspection.jClass should be Foo)
             }
         }
 
@@ -74,8 +74,8 @@ FILE: typeInfoIntrospectableProxy.kt
         }
 
         when () {
-            !=(R|<local>/stringDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: String introspectionData should be null)
+            !=(R|<local>/stringDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: String introspection should be null)
             }
         }
 

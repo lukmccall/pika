@@ -263,12 +263,12 @@ class IRPoet(
         }
 
     /**
-     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable}, {introspectionData})
+     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable}, {introspection})
      */
     fun concrete(
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
-      introspectionData: IrExpression? = null
+      introspection: IrExpression? = null
     ): IrExpression =
       symbolFinder
         .pikaAPI
@@ -277,22 +277,22 @@ class IRPoet(
         .buildConstructorCall("PTypeDescriptor.Concrete") {
           arguments[0] = pType(classSymbol)
           arguments[1] = kotlin.bool(isNullable)
-          arguments[2] = introspectionData ?: kotlin.`null`()
+          arguments[2] = introspection ?: kotlin.`null`()
         }
 
     /**
      * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
      *   {PType({classSymbol})},
      *   {isNullable},
-     *   {listOf({argumentsPTypes})},
-     *   {introspectionData}
+     *   {listOf({parameters})},
+     *   {introspection}
      * )
      */
     fun parameterized(
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
-      argumentsPTypes: List<IrExpression>,
-      introspectionData: IrExpression? = null
+      parameters: List<IrExpression>,
+      introspection: IrExpression? = null
     ): IrExpression =
       symbolFinder
         .pikaAPI
@@ -301,8 +301,8 @@ class IRPoet(
         .buildConstructorCall("PTypeDescriptor.Concrete.Parameterized") {
           arguments[0] = pType(classSymbol)
           arguments[1] = kotlin.bool(isNullable)
-          arguments[2] = kotlin.listOf(symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType, argumentsPTypes)
-          arguments[3] = introspectionData ?: kotlin.`null`()
+          arguments[2] = kotlin.listOf(symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType, parameters)
+          arguments[3] = introspection ?: kotlin.`null`()
         }
 
     /**
@@ -315,10 +315,10 @@ class IRPoet(
       val classifier = simpleType.classifier
       val isNullable = simpleType.isMarkedNullable()
       val irClass = (classifier as? IrClassSymbol)?.owner
-      val introspectionData = irClass?.let { buildIntrospectionCallFor(it) }
+      val introspection = irClass?.let { buildIntrospectionCallFor(it) }
 
       return if (simpleType.arguments.isEmpty()) {
-        pika.concrete(classifier as IrClassSymbol, isNullable, introspectionData)
+        pika.concrete(classifier as IrClassSymbol, isNullable, introspection)
       } else {
         val typeArgInfos = simpleType.arguments.map { arg ->
           when (arg) {
@@ -326,7 +326,7 @@ class IRPoet(
             is IrStarProjection -> pika.star()
           }
         }
-        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos, introspectionData)
+        pika.parameterized(classifier as IrClassSymbol, isNullable, typeArgInfos, introspection)
       }
     }
 

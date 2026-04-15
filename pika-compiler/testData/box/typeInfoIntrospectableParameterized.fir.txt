@@ -38,27 +38,27 @@ FILE: typeInfoIntrospectableParameterized.kt
         }
 
         when () {
-            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: List introspectionData should be null)
+            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: List introspection should be null)
             }
         }
 
         when () {
-            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: List<Person> should have 1 type arg)
             }
         }
 
-        lval personArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Person arg should be Concrete)
+        lval personArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/listDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Person arg should be Concrete)
         when () {
-            ==(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Person arg introspectionData should not be null)
+            ==(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Person arg introspection should not be null)
             }
         }
 
         when () {
-            !=(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
-                ^box String(FAIL: Person arg introspectionData.jClass)
+            !=(R|<local>/personArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|!!.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
+                ^box String(FAIL: Person arg introspection.jClass)
             }
         }
 
@@ -70,28 +70,28 @@ FILE: typeInfoIntrospectableParameterized.kt
         }
 
         when () {
-            !=(R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Map introspectionData should be null)
+            !=(R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Map introspection should be null)
             }
         }
 
         when () {
-            !=(R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+            !=(R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box String(FAIL: Map should have 2 type args)
             }
         }
 
-        lval keyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: key arg should be Concrete)
+        lval keyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: key arg should be Concrete)
         when () {
-            !=(R|<local>/keyArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: String key arg introspectionData should be null)
+            !=(R|<local>/keyArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: String key arg introspection should be null)
             }
         }
 
-        lval valueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: value arg should be Concrete)
+        lval valueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: value arg should be Concrete)
         when () {
-            ==(R|<local>/valueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Person value arg introspectionData should not be null)
+            ==(R|<local>/valueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Person value arg introspection should not be null)
             }
         }
 

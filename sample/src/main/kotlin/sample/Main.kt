@@ -124,43 +124,43 @@ fun main() {
   }
   println()
 
-  // introspectionData embedded in type descriptors
-  println("=== introspectionData in typeDescriptorOf<T>() ===")
+  // introspection embedded in type descriptors
+  println("=== introspection in typeDescriptorOf<T>() ===")
   println()
 
-  // Introspectable type: introspectionData is populated
+  // Introspectable type: introspection is populated
   val personDescriptor = typeDescriptorOf<SimplePerson>()
-  val personIntrospectionData = (personDescriptor as? PTypeDescriptor.Concrete)?.introspectionData
-  println("typeDescriptorOf<SimplePerson>().introspectionData: $personIntrospectionData")
-  println("  kClass: ${personIntrospectionData?.jClass}")
-  println("  properties: ${personIntrospectionData?.properties?.map { it.name }}")
+  val personIntrospection = (personDescriptor as? PTypeDescriptor.Concrete)?.introspection
+  println("typeDescriptorOf<SimplePerson>().introspection: $personIntrospection")
+  println("  kClass: ${personIntrospection?.jClass}")
+  println("  properties: ${personIntrospection?.properties?.map { it.name }}")
   println()
 
-  // Non-introspectable type: introspectionData is null
+  // Non-introspectable type: introspection is null
   val userDescriptor = typeDescriptorOf<User>()
-  println("typeDescriptorOf<User>().introspectionData: ${(userDescriptor as? PTypeDescriptor.Concrete)?.introspectionData}")
+  println("typeDescriptorOf<User>().introspection: ${(userDescriptor as? PTypeDescriptor.Concrete)?.introspection}")
   println()
 
-  // Property type descriptor also carries introspectionData for introspectable types
+  // Property type descriptor also carries introspection for introspectable types
   println("Property type descriptors:")
-  for (prop in personIntrospectionData!!.properties) {
+  for (prop in personIntrospection!!.properties) {
     val propConcreteType = prop.type as? PTypeDescriptor.Concrete
-    println("  ${prop.name}: ${prop.type::class.simpleName}, introspectionData=${propConcreteType?.introspectionData?.jClass}")
+    println("  ${prop.name}: ${prop.type::class.simpleName}, introspection=${propConcreteType?.introspection?.jClass}")
   }
   println()
 
   // Nested introspectable: List<SimplePerson> — List has null, SimplePerson arg has data
   val listPersonDescriptor = typeDescriptorOf<List<SimplePerson>>() as PTypeDescriptor.Concrete.Parameterized
-  val listIntrospectionData = listPersonDescriptor.introspectionData
-  val personArgDescriptor = listPersonDescriptor.argumentsPTypes[0] as? PTypeDescriptor.Concrete
+  val listIntrospection = listPersonDescriptor.introspection
+  val personArgDescriptor = listPersonDescriptor.parameters[0] as? PTypeDescriptor.Concrete
   println("typeDescriptorOf<List<SimplePerson>>():")
-  println("  List introspectionData: $listIntrospectionData")
-  println("  SimplePerson arg introspectionData.jClass: ${personArgDescriptor?.introspectionData?.jClass}")
+  println("  List introspection: $listIntrospection")
+  println("  SimplePerson arg introspection.jClass: ${personArgDescriptor?.introspection?.jClass}")
   println()
 
   // Through inline proxy
   val proxyDescriptor = proxy<SimplePerson>() as? PTypeDescriptor.Concrete
-  println("proxy<SimplePerson>().introspectionData.jClass: ${proxyDescriptor?.introspectionData?.jClass}")
+  println("proxy<SimplePerson>().introspection.jClass: ${proxyDescriptor?.introspection?.jClass}")
   println()
 
   // Delegated properties test
@@ -207,7 +207,7 @@ fun formatPTypeDescriptor(info: PTypeDescriptor?): String = when (info) {
   null -> "null"
   is PTypeDescriptor.Concrete.Parameterized -> {
     val nullable = if (info.isNullable) "?" else ""
-    val args = info.argumentsPTypes.joinToString(", ") { formatPTypeDescriptor(it) }
+    val args = info.parameters.joinToString(", ") { formatPTypeDescriptor(it) }
     "${info.pType.jClass.canonicalName}<$args>$nullable"
   }
 

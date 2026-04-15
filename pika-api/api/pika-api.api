@@ -58,7 +58,7 @@ public abstract interface class io/github/lukmccall/pika/PTypeDescriptor {
 public class io/github/lukmccall/pika/PTypeDescriptor$Concrete : io/github/lukmccall/pika/PTypeDescriptor {
 	public fun <init> (Lio/github/lukmccall/pika/PType;ZLio/github/lukmccall/pika/PIntrospectionData;)V
 	public synthetic fun <init> (Lio/github/lukmccall/pika/PType;ZLio/github/lukmccall/pika/PIntrospectionData;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getIntrospectionData ()Lio/github/lukmccall/pika/PIntrospectionData;
+	public final fun getIntrospection ()Lio/github/lukmccall/pika/PIntrospectionData;
 	public final fun getPType ()Lio/github/lukmccall/pika/PType;
 	public final fun isNullable ()Z
 }
@@ -66,7 +66,7 @@ public class io/github/lukmccall/pika/PTypeDescriptor$Concrete : io/github/lukmc
 public final class io/github/lukmccall/pika/PTypeDescriptor$Concrete$Parameterized : io/github/lukmccall/pika/PTypeDescriptor$Concrete {
 	public fun <init> (Lio/github/lukmccall/pika/PType;ZLjava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;)V
 	public synthetic fun <init> (Lio/github/lukmccall/pika/PType;ZLjava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getArgumentsPTypes ()Ljava/util/List;
+	public final fun getParameters ()Ljava/util/List;
 }
 
 public final class io/github/lukmccall/pika/PTypeDescriptor$Star : io/github/lukmccall/pika/PTypeDescriptor {

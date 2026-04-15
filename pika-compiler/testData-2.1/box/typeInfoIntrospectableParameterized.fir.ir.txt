@@ -42,12 +42,12 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
                   annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
                     <T>: io.github.lukmccall.pika.PAnnotation
                     elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                  type: CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                     pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
                       jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
                         $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
                     isNullable: CONST Boolean type=kotlin.Boolean value=false
-                    introspectionData: CONST Null type=kotlin.Nothing? value=null
+                    introspection: CONST Null type=kotlin.Nothing? value=null
                   getter: FUN_EXPR type=kotlin.Function1<test.Person, kotlin.String> origin=LAMBDA
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Person) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Person
@@ -134,22 +134,22 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       VAR name:listDescriptor type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, argumentsPTypes: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
+        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, parameters: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
           pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
             jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.collections.List<E of kotlin.collections.List>> origin=null
               $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:List modality:ABSTRACT visibility:public superTypes:[kotlin.collections.Collection<E of kotlin.collections.List>]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
-          argumentsPTypes: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
+          parameters: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
             <T>: io.github.lukmccall.pika.PTypeDescriptor
             elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PTypeDescriptor> varargElementType=io.github.lukmccall.pika.PTypeDescriptor
-              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                 pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
                   jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
                     $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
                 isNullable: CONST Boolean type=kotlin.Boolean value=false
-                introspectionData: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
+                introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
                   $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Person.Companion
-          introspectionData: CONST Null type=kotlin.Nothing? value=null
+          introspection: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
@@ -173,18 +173,18 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
                 $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                   GET_VAR 'val listDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
               arg1: CONST Null type=kotlin.Nothing? value=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: List introspectionData should be null"
+            CONST String type=kotlin.String value="FAIL: List introspection should be null"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
-                $this: CALL 'public final fun <get-argumentsPTypes> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-parameters> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val listDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
               arg1: CONST Int type=kotlin.Int value=1
@@ -195,7 +195,7 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
           VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete? [val]
             TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
               CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_ARRAY_ELEMENT
-                $this: CALL 'public final fun <get-argumentsPTypes> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-parameters> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val listDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
                 index: CONST Int type=kotlin.Int value=0
@@ -212,11 +212,11 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-            arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+            arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
               $this: GET_VAR 'val personArg: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
             arg1: CONST Null type=kotlin.Nothing? value=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Person arg introspectionData should not be null"
+            CONST String type=kotlin.String value="FAIL: Person arg introspection should not be null"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
@@ -224,36 +224,36 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
               arg0: CALL 'public final fun <get-jClass> (): java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData> declared in io.github.lukmccall.pika.PIntrospectionData' type=java.lang.Class<out kotlin.Any> origin=GET_PROPERTY
                 $this: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=io.github.lukmccall.pika.PIntrospectionData<*> origin=EXCLEXCL
                   <T0>: io.github.lukmccall.pika.PIntrospectionData<*>
-                  arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+                  arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
                     $this: GET_VAR 'val personArg: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
               arg1: CALL 'public final fun <get-java> <T> (): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=GET_PROPERTY
                 <T>: test.Person
                 $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Person>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Person arg introspectionData.jClass"
+            CONST String type=kotlin.String value="FAIL: Person arg introspection.jClass"
       VAR name:mapDescriptor type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, argumentsPTypes: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
+        CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, parameters: kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor>, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=null
           pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
             jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.collections.Map<K of kotlin.collections.Map, V of kotlin.collections.Map>> origin=null
               $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB INTERFACE name:Map modality:ABSTRACT visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
-          argumentsPTypes: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
+          parameters: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=INVOKE
             <T>: io.github.lukmccall.pika.PTypeDescriptor
             elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PTypeDescriptor> varargElementType=io.github.lukmccall.pika.PTypeDescriptor
-              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                 pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
                   jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
                     $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
                 isNullable: CONST Boolean type=kotlin.Boolean value=false
-                introspectionData: CONST Null type=kotlin.Nothing? value=null
-              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspectionData: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                introspection: CONST Null type=kotlin.Nothing? value=null
+              CONSTRUCTOR_CALL 'public constructor <init> (pType: io.github.lukmccall.pika.PType, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                 pType: CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>) declared in io.github.lukmccall.pika.PType' type=io.github.lukmccall.pika.PType origin=null
                   jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
                     $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
                 isNullable: CONST Boolean type=kotlin.Boolean value=false
-                introspectionData: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
+                introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
                   $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Person.Companion
-          introspectionData: CONST Null type=kotlin.Nothing? value=null
+          introspection: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
@@ -264,18 +264,18 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
                 $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                   GET_VAR 'val mapDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
               arg1: CONST Null type=kotlin.Nothing? value=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Map introspectionData should be null"
+            CONST String type=kotlin.String value="FAIL: Map introspection should be null"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
-                $this: CALL 'public final fun <get-argumentsPTypes> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-parameters> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val mapDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
               arg1: CONST Int type=kotlin.Int value=2
@@ -286,7 +286,7 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
           VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete? [val]
             TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
               CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_ARRAY_ELEMENT
-                $this: CALL 'public final fun <get-argumentsPTypes> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-parameters> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val mapDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
                 index: CONST Int type=kotlin.Int value=0
@@ -304,17 +304,17 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
                 $this: GET_VAR 'val keyArg: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
               arg1: CONST Null type=kotlin.Nothing? value=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: String key arg introspectionData should be null"
+            CONST String type=kotlin.String value="FAIL: String key arg introspection should be null"
       VAR name:valueArg type:io.github.lukmccall.pika.PTypeDescriptor.Concrete [val]
         BLOCK type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=ELVIS
           VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:io.github.lukmccall.pika.PTypeDescriptor.Concrete? [val]
             TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete? origin=SAFE_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
               CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=io.github.lukmccall.pika.PTypeDescriptor origin=GET_ARRAY_ELEMENT
-                $this: CALL 'public final fun <get-argumentsPTypes> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-parameters> (): kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized' type=kotlin.collections.List<io.github.lukmccall.pika.PTypeDescriptor> origin=GET_PROPERTY
                   $this: TYPE_OP type=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized origin=IMPLICIT_CAST typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized
                     GET_VAR 'val mapDescriptor: io.github.lukmccall.pika.PTypeDescriptor declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor origin=null
                 index: CONST Int type=kotlin.Int value=1
@@ -331,10 +331,10 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-            arg0: CALL 'public final fun <get-introspectionData> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
+            arg0: CALL 'public final fun <get-introspection> (): io.github.lukmccall.pika.PIntrospectionData<*>? declared in io.github.lukmccall.pika.PTypeDescriptor.Concrete' type=io.github.lukmccall.pika.PIntrospectionData<*>? origin=GET_PROPERTY
               $this: GET_VAR 'val valueArg: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
             arg1: CONST Null type=kotlin.Nothing? value=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Person value arg introspectionData should not be null"
+            CONST String type=kotlin.String value="FAIL: Person value arg introspection should not be null"
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
         CONST String type=kotlin.String value="OK"

@@ -12,8 +12,8 @@ class Person(val name: String, val address: Address)
 fun box(): String {
   val personDescriptor = typeDescriptorOf<Person>()
   if (personDescriptor !is PTypeDescriptor.Concrete) return "FAIL: Person should be Concrete"
-  val personData = personDescriptor.introspectionData
-    ?: return "FAIL: Person introspectionData should not be null"
+  val personData = personDescriptor.introspection
+    ?: return "FAIL: Person introspection should not be null"
 
   if (personData.properties.size != 2) return "FAIL: should have 2 properties, got ${personData.properties.size}"
 
@@ -21,39 +21,39 @@ fun box(): String {
   val addressProp = personData.properties.find { it.name == "address" }
     ?: return "FAIL: address property not found"
 
-  // The type descriptor of the address property should carry Address's introspectionData
+  // The type descriptor of the address property should carry Address's introspection
   val addressTypeDescriptor = addressProp.type as? PTypeDescriptor.Concrete
     ?: return "FAIL: address property type should be Concrete"
 
   if (addressTypeDescriptor.pType.jClass != Address::class.java)
     return "FAIL: address type kClass should be Address"
 
-  val addressData = addressTypeDescriptor.introspectionData
-    ?: return "FAIL: address property type introspectionData should not be null"
+  val addressData = addressTypeDescriptor.introspection
+    ?: return "FAIL: address property type introspection should not be null"
 
   if (addressData.jClass != Address::class.java)
-    return "FAIL: nested introspectionData.jClass should be Address"
+    return "FAIL: nested introspection.jClass should be Address"
 
   if (addressData.properties.size != 2)
     return "FAIL: Address should have 2 properties, got ${addressData.properties.size}"
 
   val cityProp = addressData.properties.find { it.name == "city" }
-    ?: return "FAIL: city property not found in nested introspectionData"
+    ?: return "FAIL: city property not found in nested introspection"
 
-  // Cross-check: nested introspectionData matches introspectionOf<Address>()
+  // Cross-check: nested introspection matches introspectionOf<Address>()
   val directAddressData = introspectionOf<Address>()
   if (addressData.jClass != directAddressData.jClass)
     return "FAIL: nested kClass mismatch with introspectionOf"
   if (addressData.properties.size != directAddressData.properties.size)
     return "FAIL: nested properties size mismatch with introspectionOf"
 
-  // name property type (String) should have null introspectionData
+  // name property type (String) should have null introspection
   val nameProp = personData.properties.find { it.name == "name" }
     ?: return "FAIL: name property not found"
   val nameType = nameProp.type as? PTypeDescriptor.Concrete
     ?: return "FAIL: name property type should be Concrete"
-  if (nameType.introspectionData != null)
-    return "FAIL: String property type introspectionData should be null"
+  if (nameType.introspection != null)
+    return "FAIL: String property type introspection should be null"
 
   return "OK"
 }

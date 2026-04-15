@@ -16,19 +16,19 @@ FILE: typeInfoNestedGenerics.kt
         }
 
         when () {
-            !=(R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+            !=(R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box String(FAIL: nested should have 2 type arguments)
             }
         }
 
-        lval nestedKeyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: nested key should be Concrete)
+        lval nestedKeyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: nested key should be Concrete)
         when () {
             !=(R|<local>/nestedKeyArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/String|).R|kotlin/jvm/java|<R|kotlin/String|>) ->  {
                 ^box String(FAIL: nested key kClass)
             }
         }
 
-        lval nestedValueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ?: ^box String(FAIL: nested value should be Parameterized)
+        lval nestedValueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized| = (R|<local>/nestedInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized|) ?: ^box String(FAIL: nested value should be Parameterized)
         when () {
             !=(R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/collections/List|).R|kotlin/jvm/java|<R|kotlin/collections/List<*>|>) ->  {
                 ^box String(FAIL: nested value kClass)
@@ -36,12 +36,12 @@ FILE: typeInfoNestedGenerics.kt
         }
 
         when () {
-            !=(R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: nested value should have 1 type arg)
             }
         }
 
-        lval nestedListArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: nested list arg should be Concrete)
+        lval nestedListArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/nestedValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: nested list arg should be Concrete)
         when () {
             !=(R|<local>/nestedListArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/Int|).R|kotlin/jvm/java|<R|kotlin/Int|>) ->  {
                 ^box String(FAIL: nested list arg kClass)

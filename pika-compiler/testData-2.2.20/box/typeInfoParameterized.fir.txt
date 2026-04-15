@@ -22,12 +22,12 @@ FILE: typeInfoParameterized.kt
         }
 
         when () {
-            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: List<String> should have 1 type argument)
             }
         }
 
-        lval listArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: List<String> arg should be Concrete)
+        lval listArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/listStringInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: List<String> arg should be Concrete)
         when () {
             !=(R|<local>/listArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/String|).R|kotlin/jvm/java|<R|kotlin/String|>) ->  {
                 ^box String(FAIL: List<String> arg kClass)
@@ -48,19 +48,19 @@ FILE: typeInfoParameterized.kt
         }
 
         when () {
-            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+            !=(R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box String(FAIL: Map<String, Int> should have 2 type arguments)
             }
         }
 
-        lval mapKeyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map key should be Concrete)
+        lval mapKeyArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map key should be Concrete)
         when () {
             !=(R|<local>/mapKeyArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/String|).R|kotlin/jvm/java|<R|kotlin/String|>) ->  {
                 ^box String(FAIL: Map key kClass)
             }
         }
 
-        lval mapValueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map value should be Concrete)
+        lval mapValueArg: R|io/github/lukmccall/pika/PTypeDescriptor.Concrete| = (R|<local>/mapInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(1)) as? R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ?: ^box String(FAIL: Map value should be Concrete)
         when () {
             !=(R|<local>/mapValueArg|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|kotlin/Int|).R|kotlin/jvm/java|<R|kotlin/Int|>) ->  {
                 ^box String(FAIL: Map value kClass)

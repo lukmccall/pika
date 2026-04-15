@@ -16,13 +16,13 @@ FILE: typeInfoStarProjection.kt
         }
 
         when () {
-            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: List<*> should have 1 type argument)
             }
         }
 
         when () {
-            (R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.argumentsPTypes|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) !is R|io/github/lukmccall/pika/PTypeDescriptor.Star|) ->  {
+            (R|<local>/starInfo|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.Parameterized.parameters|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PTypeDescriptor|>|(Int(0)) !is R|io/github/lukmccall/pika/PTypeDescriptor.Star|) ->  {
                 ^box String(FAIL: List<*> arg should be Star)
             }
         }

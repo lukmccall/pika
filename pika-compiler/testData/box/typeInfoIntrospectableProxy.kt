@@ -12,10 +12,10 @@ fun box(): String {
   // Reified inline proxy with introspectable type
   val fooDescriptor = descriptor<Foo>()
   if (fooDescriptor !is PTypeDescriptor.Concrete) return "FAIL: Foo should be Concrete"
-  if (fooDescriptor.introspectionData == null) return "FAIL: Foo introspectionData should not be null"
+  if (fooDescriptor.introspection == null) return "FAIL: Foo introspection should not be null"
 
-  val data = fooDescriptor.introspectionData!!
-  if (data.jClass != Foo::class.java) return "FAIL: introspectionData.jClass should be Foo"
+  val data = fooDescriptor.introspection!!
+  if (data.jClass != Foo::class.java) return "FAIL: introspection.jClass should be Foo"
   if (data.properties.size != 1) return "FAIL: should have 1 property, got ${data.properties.size}"
 
   // Cross-check with introspectionOf
@@ -26,7 +26,7 @@ fun box(): String {
   // Reified inline proxy with non-introspectable type
   val stringDescriptor = descriptor<String>()
   if (stringDescriptor !is PTypeDescriptor.Concrete) return "FAIL: String should be Concrete"
-  if (stringDescriptor.introspectionData != null) return "FAIL: String introspectionData should be null"
+  if (stringDescriptor.introspection != null) return "FAIL: String introspection should be null"
 
   return "OK"
 }

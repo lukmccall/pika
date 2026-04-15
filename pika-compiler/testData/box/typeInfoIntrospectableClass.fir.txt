@@ -49,15 +49,15 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            ==(R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Person introspectionData should not be null)
+            ==(R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Person introspection should not be null)
             }
         }
 
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|!!
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|!!
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
-                ^box String(FAIL: introspectionData.jClass should be Person)
+                ^box String(FAIL: introspection.jClass should be Person)
             }
         }
 
@@ -94,8 +94,8 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            ==(R|<local>/nullableDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: Person? introspectionData should not be null)
+            ==(R|<local>/nullableDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: Person? introspection should not be null)
             }
         }
 
@@ -107,8 +107,8 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            !=(R|<local>/nonDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: NonIntrospectable introspectionData should be null)
+            !=(R|<local>/nonDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: NonIntrospectable introspection should be null)
             }
         }
 
@@ -120,8 +120,8 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            !=(R|<local>/stringDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspectionData|, Null(null)) ->  {
-                ^box String(FAIL: String introspectionData should be null)
+            !=(R|<local>/stringDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection|, Null(null)) ->  {
+                ^box String(FAIL: String introspection should be null)
             }
         }
 
