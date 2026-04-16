@@ -9,10 +9,22 @@ class PikaCommandLineProcessor : CommandLineProcessor {
   override val pluginId: String
     get() = BuildConfig.KOTLIN_PLUGIN_ID
 
-  override val pluginOptions: Collection<CliOption>
-    get() = emptyList()
+  override val pluginOptions: Collection<CliOption> = listOf(ANNOTATION_OPTION)
 
   override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
-    error("Unexpected config option: '${option.optionName}'")
+    when (option) {
+      ANNOTATION_OPTION -> configuration.appendList(PikaConfigurationKeys.INTROSPECTABLE_ANNOTATION, value)
+      else -> error("Unexpected config option: '${option.optionName}'")
+    }
+  }
+
+  companion object {
+    val ANNOTATION_OPTION = CliOption(
+      "introspectableAnnotation",
+      "<fqname>",
+      "Fully qualified name of an annotation class to treat as @Introspectable",
+      required = false,
+      allowMultipleOccurrences = true,
+    )
   }
 }

@@ -24,13 +24,15 @@ import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.primaryConstructor
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class IRPoet(
   context: IrPluginContext,
   private val symbolFinder: SymbolFinder,
-  moduleFragment: IrModuleFragment
+  moduleFragment: IrModuleFragment,
+  val extraAnnotationClassIds: Set<ClassId> = emptySet(),
 ) {
   val irBuiltIns = context.irBuiltIns
   val kotlin = Kotlin()
@@ -340,7 +342,7 @@ class IRPoet(
       startOffset: Int = -1,
       endOffset: Int = -1
     ): IrExpression? {
-      if (!irClass.hasIntrospectableAnnotation()) {
+      if (!irClass.hasIntrospectableAnnotation(extraAnnotationClassIds)) {
         return null
       }
 
@@ -448,7 +450,7 @@ class IRPoet(
       property: IrProperty,
       ownerClass: IrClass,
       containingFunction: IrSimpleFunction,
-      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+      irFactory: IrFactory
     ): IrExpression {
       val propertyType = property.resolvedType
 
@@ -594,7 +596,7 @@ class IRPoet(
       property: IrProperty,
       ownerClass: IrClass,
       containingFunction: IrSimpleFunction,
-      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+      irFactory: IrFactory
     ): IrExpression? {
       val propertyType = property.resolvedType
       val ownerType = ownerClass.defaultType
@@ -682,7 +684,7 @@ class IRPoet(
       property: IrProperty,
       ownerClass: IrClass,
       containingFunction: IrSimpleFunction,
-      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+      irFactory: IrFactory
     ): IrExpression? {
       if (!property.isDelegated) return null
       val backingField = property.backingField ?: return null
@@ -757,7 +759,7 @@ class IRPoet(
       property: IrProperty,
       ownerClass: IrClass,
       containingFunction: IrSimpleFunction,
-      irFactory: org.jetbrains.kotlin.ir.declarations.IrFactory
+      irFactory: IrFactory
     ): IrExpression {
       val propertyType = property.resolvedType
 
@@ -858,7 +860,7 @@ class IRPoet(
         ?: return kotlin.bool(false)
       val irClass = simpleType.classOrNull?.owner
         ?: return kotlin.bool(false)
-      return kotlin.bool(irClass.hasIntrospectableAnnotation())
+      return kotlin.bool(irClass.hasIntrospectableAnnotation(extraAnnotationClassIds))
     }
 
     fun introspectionOf(type: IrType, originalCall: IrCall): IrExpression {

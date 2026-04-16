@@ -7,3 +7,7 @@ plugins {
 application {
   mainClass.set("sample.MainKt")
 }
+
+pika {
+  introspectableAnnotation("sample.OptimizedRecord")
+}

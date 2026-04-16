@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
@@ -44,7 +45,8 @@ import org.jetbrains.org.objectweb.asm.tree.InsnList
  */
 class PikaJvmIrIntrinsicSupport(
   jvmBackendContext: JvmBackendContext,
-  private val irPluginContext: IrPluginContext
+  private val irPluginContext: IrPluginContext,
+  private val extraAnnotationClassIds: Set<ClassId>,
 ) : JvmIrIntrinsicExtension {
   private val typeSystemContext = jvmBackendContext.typeSystem
   private val typeMapper = jvmBackendContext.defaultTypeMapper
@@ -84,7 +86,7 @@ class PikaJvmIrIntrinsicSupport(
           )
         } else {
           val irClass = (type as? IrSimpleType)?.classOrNull?.owner
-          val isIntrospectable = irClass?.hasIntrospectableAnnotation() ?: false
+          val isIntrospectable = irClass?.hasIntrospectableAnnotation(extraAnnotationClassIds) ?: false
           v.iconst(if (isIntrospectable) 1 else 0)
         }
       }
@@ -170,8 +172,14 @@ class PikaJvmIrIntrinsicSupport(
 
       // Concrete type: emit constant directly.
       val irClass = (typeArg as? IrSimpleType)?.classOrNull?.owner
-      val isIntrospectable = irClass?.hasIntrospectableAnnotation() ?: false
-      codegen.mv.iconst(if (isIntrospectable) 1 else 0)
+      val isIntrospectable = irClass?.hasIntrospectableAnnotation(extraAnnotationClassIds) ?: false
+      codegen.mv.iconst(
+        if (isIntrospectable) {
+          1
+        } else {
+          0
+        }
+      )
       return MaterialValue(codegen, Type.BOOLEAN_TYPE, expression.type)
     }
   }
@@ -270,6 +278,7 @@ class PikaJvmIrIntrinsicSupport(
   private fun createBytecodePoet(adapter: InstructionAdapter): BytecodePoet = BytecodePoet(
     adapter,
     irPluginContext,
-    typeMapper
+    typeMapper,
+    extraAnnotationClassIds,
   )
 }

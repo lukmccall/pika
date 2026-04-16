@@ -11,7 +11,8 @@ class PikaPluginComponentRegistrar : CompilerPluginRegistrar() {
     get() = true
 
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-    FirExtensionRegistrarAdapter.registerExtension(PikaFirPluginRegistrar())
-    IrGenerationExtension.registerExtension(PikaIrGenerationExtension())
+    val extraAnnotations = configuration.get(PikaConfigurationKeys.INTROSPECTABLE_ANNOTATION).orEmpty()
+    FirExtensionRegistrarAdapter.registerExtension(PikaFirPluginRegistrar(extraAnnotations))
+    IrGenerationExtension.registerExtension(PikaIrGenerationExtension(extraAnnotations))
   }
 }

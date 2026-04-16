@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
@@ -26,7 +27,8 @@ import org.jetbrains.org.objectweb.asm.tree.LdcInsnNode
 class BytecodePoet(
   private val adapter: InstructionAdapter,
   private val irPluginContext: IrPluginContext,
-  private val typeMapper: IrTypeMapper
+  private val typeMapper: IrTypeMapper,
+  private val extraAnnotationClassIds: Set<ClassId> = emptySet(),
 ) {
   // The multi dollar syntax isn't available in kotlin 2.1.20
   @Suppress("CanConvertToMultiDollarString")
@@ -72,7 +74,7 @@ class BytecodePoet(
     dup()
     initPType(irClass)
     iconst(if (isNullable) 1 else 0)
-    val pushed = irClass.hasIntrospectableAnnotation() && initPIntrospectionData(irClass)
+    val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
     if (!pushed) aconst(null)
     invokespecial(
       pTypeDescriptorConcreteType.internalName,
@@ -120,7 +122,7 @@ class BytecodePoet(
       false
     )
 
-    val pushed = irClass.hasIntrospectableAnnotation() && initPIntrospectionData(irClass)
+    val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
     if (!pushed) {
       aconst(null)
     }

@@ -9,6 +9,16 @@ import java.io.Serializable
 annotation class MyAnnotation(val value: String)
 
 /**
+ * User-declared marker registered via `pika { introspectableAnnotation(...) }`
+ * in build.gradle.kts. Classes annotated with this should behave identically
+ * to ones annotated with `@Introspectable`.
+ */
+annotation class OptimizedRecord
+
+@OptimizedRecord
+class Product(val sku: String, val price: Double)
+
+/**
  * Example base class.
  */
 open class BaseEntity(open val id: String)
@@ -48,6 +58,18 @@ class User(
 ) : BaseEntity(id), Serializable
 
 fun main() {
+  println("=== Custom @OptimizedRecord marker (registered via Gradle DSL) ===")
+  println()
+  val product = Product(sku = "SKU-1", price = 9.99)
+  val productData = introspectionOf<Product>()
+  println("isIntrospectable<Product>(): ${isIntrospectable<Product>()}")
+  println("productData.jClass: ${productData.jClass}")
+  println("productData.properties: ${productData.properties.size}")
+  for (prop in productData.properties) {
+    println("  - ${prop.name}: getter(product)=${prop.getter(product)}")
+  }
+  println()
+
   println("=== Introspectable Test ===")
   println()
   val person = SimplePerson("Alice", Address("Paris", "France"))

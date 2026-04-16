@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.kotlinFqName
+import org.jetbrains.kotlin.name.ClassId
 
 fun Collection<IrSimpleFunctionSymbol>.firstSingleVarargsArgument(): IrSimpleFunctionSymbol {
   return first { func ->
@@ -116,9 +117,8 @@ private fun IrExpression?.constCopy(
   }
 }
 
-fun IrClass.hasIntrospectableAnnotation(): Boolean {
-  return hasAnnotation(PikaAPI.Introspectable) ||
-    superTypes.any { (it as? IrSimpleType)?.classOrNull?.owner?.hasIntrospectableAnnotation() == true }
+fun IrClass.hasIntrospectableAnnotation(extraAnnotationClassIds: Set<ClassId> = emptySet()): Boolean {
+  return hasAnnotation(PikaAPI.Introspectable) || extraAnnotationClassIds.any { hasAnnotation(it) }
 }
 
 fun IrSimpleFunction.takeIfHasNoBody(): IrSimpleFunction? {

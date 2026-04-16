@@ -45,7 +45,7 @@ class IntrospectableDeclarationGenerator(
   )
 
   override fun FirDeclarationPredicateRegistrar.registerPredicates() {
-    register(introspectablePredicate)
+    register(session.introspectablePredicateMatcher.predicate)
   }
 
   override fun getNestedClassifiersNames(

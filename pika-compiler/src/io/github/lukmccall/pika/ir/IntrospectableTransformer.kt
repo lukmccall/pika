@@ -40,7 +40,7 @@ class IntrospectableTransformer(
       return declaration
     }
 
-    if (!declaration.hasIntrospectableAnnotation()) {
+    if (!declaration.hasIntrospectableAnnotation(poet.extraAnnotationClassIds)) {
       return declaration
     }
 
@@ -246,7 +246,7 @@ class IntrospectableTransformer(
       ?: return null
 
     // Check if parent implements Introspectable
-    if (!superClass.hasIntrospectableAnnotation()) {
+    if (!superClass.hasIntrospectableAnnotation(poet.extraAnnotationClassIds)) {
       return null
     }
 
