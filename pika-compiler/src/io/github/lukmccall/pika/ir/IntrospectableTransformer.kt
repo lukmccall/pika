@@ -171,7 +171,8 @@ class IntrospectableTransformer(
           !func.isFakeOverride &&
           func.correspondingPropertySymbol == null &&
           func.name.asString() != Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME &&
-          func.name.asString() != "<init>"
+          func.name.asString() != "<init>" &&
+          !func.name.asString().startsWith(Identifiers.PIKA_SPECIAL_PREFIX)
       }
       .map { func ->
         poet.pika.pFunction(func)

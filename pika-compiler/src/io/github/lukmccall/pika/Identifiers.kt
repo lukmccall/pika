@@ -16,9 +16,10 @@ object Identifiers {
   const val P_INTROSPECTION_DATA_CACHE_FIELD_NAME = "__pIntrospectionData\$cache"
   const val INTROSPECTABLE_INTERFACE_NAME = "Introspectable"
 
+  const val PIKA_SPECIAL_PREFIX = "__pika\$"
   // Synthetic accessor function name prefixes for backing field access
-  private const val SYNTHETIC_GETTER_PREFIX = "__pika\$get\$"
-  private const val SYNTHETIC_SETTER_PREFIX = "__pika\$set\$"
+  private const val SYNTHETIC_GETTER_PREFIX = "${PIKA_SPECIAL_PREFIX}get\$"
+  private const val SYNTHETIC_SETTER_PREFIX = "${PIKA_SPECIAL_PREFIX}set\$"
 
   fun syntheticGetterName(propertyName: String): String = "$SYNTHETIC_GETTER_PREFIX$propertyName"
   fun syntheticSetterName(propertyName: String): String = "$SYNTHETIC_SETTER_PREFIX$propertyName"

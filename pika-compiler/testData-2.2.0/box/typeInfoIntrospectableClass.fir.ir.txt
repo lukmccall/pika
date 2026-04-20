@@ -153,18 +153,6 @@ FILE fqName:test fileName:/typeInfoIntrospectableClass.kt
             ARG functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               TYPE_ARG T: io.github.lukmccall.pika.PFunction
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                  ARG name: CONST String type=kotlin.String value="__pika$get$name"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                  ARG name: CONST String type=kotlin.String value="__pika$set$name"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                  ARG name: CONST String type=kotlin.String value="__pika$get$age"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility) declared in io.github.lukmccall.pika.PFunction' type=io.github.lukmccall.pika.PFunction origin=null
-                  ARG name: CONST String type=kotlin.String value="__pika$set$age"
-                  ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
             ARG baseClass: CONST Null type=kotlin.Nothing? value=null
       CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Person.Companion [primary]
         BLOCK_BODY
