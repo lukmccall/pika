@@ -1,0 +1,113 @@
+:root {
+  --sl-color-accent-low: #2d1854;
+  --sl-color-accent: #7c4dba;
+  --sl-color-accent-high: #c4aae0;
+  --sl-color-text-accent: #7c4dba;
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #e8ddf5;
+  --sl-color-accent: #5b2d8e;
+  --sl-color-accent-high: #2d1854;
+  --sl-color-text-accent: #5b2d8e;
+}
+
+#mermaid-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+#mermaid-overlay.active {
+  display: flex;
+}
+
+#mermaid-overlay svg {
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+pre.mermaid:hover {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* === Sidebar Toggle Buttons === */
+
+.sidebar-toggle-btn {
+  position: fixed;
+  z-index: 11;
+  top: calc(var(--sl-nav-height) + 1rem);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--sl-color-hairline-shade);
+  background: var(--sl-color-bg-nav);
+  color: var(--sl-color-gray-3);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.sidebar-toggle-btn:hover {
+  color: var(--sl-color-white);
+  background: var(--sl-color-gray-5);
+}
+
+/* Left toggle — desktop only */
+@media (min-width: 50rem) {
+  html[data-has-sidebar] .sidebar-toggle-left {
+    display: flex;
+    left: var(--sl-sidebar-width);
+    border-radius: 0 0.25rem 0.25rem 0;
+    border-inline-start: none;
+  }
+
+  html[data-has-sidebar][data-sidebar-collapsed] .sidebar-toggle-left {
+    left: 0;
+  }
+}
+
+/* Right toggle — large desktop only */
+@media (min-width: 72rem) {
+  html[data-has-toc] .sidebar-toggle-right {
+    display: flex;
+    right: 0;
+    border-radius: 0.25rem 0 0 0.25rem;
+    border-inline-end: none;
+  }
+}
+
+/* === Left Sidebar Collapsed === */
+
+@media (min-width: 50rem) {
+  html[data-sidebar-collapsed] {
+    --sl-content-inline-start: 0px;
+  }
+
+  html[data-sidebar-collapsed] .sidebar-pane {
+    display: none;
+  }
+}
+
+/* === Right Sidebar Collapsed === */
+
+@media (min-width: 72rem) {
+  html[data-toc-collapsed] .right-sidebar-container {
+    display: none;
+  }
+
+  html[data-toc-collapsed][data-has-sidebar][data-has-toc] .main-pane {
+    width: 100% !important;
+    --sl-content-margin-inline: auto;
+  }
+}

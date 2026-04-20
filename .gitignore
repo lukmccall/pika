@@ -5,3 +5,6 @@
 .kotlin/
 build/
 out/
+docs/node_modules/
+docs/.astro/
+docs/dist/
