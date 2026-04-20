@@ -3,6 +3,8 @@ package io.github.lukmccall.pika
 import org.gradle.api.model.ObjectFactory
 
 open class PikaGradleExtension(objectFactory: ObjectFactory) {
+  var enabled: Boolean = true
+
   internal val introspectableAnnotations: MutableList<String> = mutableListOf()
 
   /** Registers an additional annotation class FqName to be treated as @Introspectable. */

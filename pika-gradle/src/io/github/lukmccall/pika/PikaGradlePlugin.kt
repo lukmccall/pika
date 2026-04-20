@@ -36,7 +36,10 @@ class PikaGradlePlugin : KotlinCompilerPluginSupportPlugin {
 
     return project.provider {
       val ext = project.extensions.getByType(PikaGradleExtension::class.java)
-      ext.introspectableAnnotations.map { SubpluginOption("introspectableAnnotation", it) }
+      buildList {
+        add(SubpluginOption("enabled", ext.enabled.toString()))
+        ext.introspectableAnnotations.mapTo(this) { SubpluginOption("introspectableAnnotation", it) }
+      }
     }
   }
 }
