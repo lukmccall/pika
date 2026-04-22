@@ -42,8 +42,8 @@ public object PTypeDescriptorRegistry {
     jClass: Class<*>,
     isNullable: Boolean,
     introspection: PIntrospectionData<*>?
-  ): PTypeDescriptor.Concrete =
-    if (introspection == null) {
+  ): PTypeDescriptor.Concrete {
+    return if (introspection == null) {
       if (isNullable) {
         concreteNullableCache.get(jClass)
       } else {
@@ -53,10 +53,11 @@ public object PTypeDescriptorRegistry {
       val key = ConcreteKey(isNullable, introspection)
       val map = concreteWithIntrospectionCache.get(jClass)
 
-      return map.getOrPut(key) {
+      map.getOrPut(key) {
         PTypeDescriptor.Concrete(PType(jClass), isNullable, introspection)
       }
     }
+  }
 
   @JvmStatic
   public fun getOrCreateParameterized(
