@@ -6,21 +6,20 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
           ISTORE (1)
         LABEL (L1)
         LINENUMBER (17)
-          NEW (io/github/lukmccall/pika/PTypeDescriptor$Concrete)
-          DUP
-          NEW (io/github/lukmccall/pika/PType)
-          DUP
           LDC (Ljava/lang/String;)
-          INVOKESPECIAL (io/github/lukmccall/pika/PType, <init>, (Ljava/lang/Class;)V)
           ICONST_0
           ACONST_NULL
-          INVOKESPECIAL (io/github/lukmccall/pika/PTypeDescriptor$Concrete, <init>, (Lio/github/lukmccall/pika/PType;ZLio/github/lukmccall/pika/PIntrospectionData;)V)
+          INVOKESTATIC (io/github/lukmccall/pika/PTypeDescriptorRegistry, getOrCreateConcrete, (Ljava/lang/Class;ZLio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;)
         LABEL (L2)
         LINENUMBER (11)
           ASTORE (0)
         LABEL (L3)
         LINENUMBER (12)
-          NOP
+          ALOAD (0)
+          INSTANCEOF (io/github/lukmccall/pika/PTypeDescriptor$Concrete)
+          IFNE (L4)
+          LDC (FAIL: should be Concrete)
+          ARETURN
         LABEL (L4)
         LINENUMBER (13)
           ALOAD (0)

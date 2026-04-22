@@ -15,8 +15,11 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 
 /**
- * IR transformer that replaces calls to typeDescriptorOf<T>()
- * and introspectionOf(instance) with constructed expressions.
+ * IR transformer that replaces calls to typeDescriptorOf<T>(), introspectionOf(instance),
+ * and isIntrospectable<T>() with constructed expressions.
+ *
+ * For concrete types, each call is rewritten to a PTypeDescriptorRegistry lookup.
+ * The registry deduplicates descriptors across modules (identity equality ===).
  *
  * Note: When the type argument is a type parameter (e.g., inside an inline function),
  * we skip transformation and leave the call intact. The JvmIrIntrinsicExtension will
@@ -24,7 +27,7 @@ import org.jetbrains.kotlin.ir.visitors.IrTransformer
  * parameters are substituted with concrete types.
  */
 class TypeInfoCallTransformer(
-  private val poet: IRPoet
+  private val poet: IRPoet,
 ) : IrTransformer<Nothing?>() {
 
   override fun visitCall(expression: IrCall, data: Nothing?): IrElement {
@@ -40,34 +43,25 @@ class TypeInfoCallTransformer(
     return when (functionName) {
       Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
-
-        // If the type argument is a type parameter, skip transformation.
         if (isTypeParameter(typeArg)) {
           return expression
         }
-
         poet.pika.typeDescriptor(typeArg)
       }
 
       Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
-
-        // If the type argument is a type parameter, skip transformation.
         if (isTypeParameter(typeArg)) {
           return expression
         }
-
         poet.pika.introspectionOf(typeArg, expression)
       }
 
       Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
-
-        // If the type argument is a type parameter, skip transformation.
         if (isTypeParameter(typeArg)) {
           return expression
         }
-
         poet.pika.isIntrospectable(typeArg)
       }
 
@@ -75,9 +69,6 @@ class TypeInfoCallTransformer(
     }
   }
 
-  /**
-   * Check if the type is a type parameter (not a concrete type).
-   */
   private fun isTypeParameter(type: IrType): Boolean {
     val simpleType = type as? IrSimpleType ?: return false
     return simpleType.classifier is IrTypeParameterSymbol

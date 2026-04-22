@@ -76,6 +76,12 @@ public final class io/github/lukmccall/pika/PTypeDescriptor$Star : io/github/luk
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class io/github/lukmccall/pika/PTypeDescriptorRegistry {
+	public static final field INSTANCE Lio/github/lukmccall/pika/PTypeDescriptorRegistry;
+	public static final fun getOrCreateConcrete (Ljava/lang/Class;ZLio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final fun getOrCreateParameterized (Ljava/lang/Class;ZLjava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete$Parameterized;
+}
+
 public final class io/github/lukmccall/pika/PVisibility : java/lang/Enum {
 	public static final field INTERNAL Lio/github/lukmccall/pika/PVisibility;
 	public static final field PRIVATE Lio/github/lukmccall/pika/PVisibility;

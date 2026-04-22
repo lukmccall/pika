@@ -18,6 +18,8 @@ object PikaAPI {
     val Star = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Star"), isLocal = false)
   }
 
+  val PTypeDescriptorRegistry = ClassId(API_PACKAGE, Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS))
+
   // Introspectable types
   val Introspectable = ClassId(API_PACKAGE, Name.identifier(Identifiers.INTROSPECTABLE_INTERFACE_NAME))
   val PVisibility = ClassId(API_PACKAGE, Name.identifier("PVisibility"))

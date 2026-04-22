@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.declarations.createEmptyExternalPackageFragment
 import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
@@ -254,40 +253,49 @@ class IRPoet(
     }
 
     /**
-     * io.github.lukmccall.pika.PType({Class<{classSymbol}>})
-     */
-    fun pType(classSymbol: IrClassSymbol): IrExpression =
-      symbolFinder
-        .pikaAPI
-        .pType
-        .buildConstructorCall("PType") {
-          arguments[0] = kotlin.javaClass(classSymbol)
-        }
-
-    /**
-     * io.github.lukmccall.pika.PTypeDescriptor.Concrete({PType({classSymbol})}, {isNullable}, {introspection})
+     * PTypeDescriptorRegistry.getOrCreateConcrete({Class<{classSymbol}>}, {isNullable}, {introspection})
      */
     fun concrete(
       classSymbol: IrClassSymbol,
       isNullable: Boolean,
       introspection: IrExpression? = null
-    ): IrExpression =
-      symbolFinder
-        .pikaAPI
-        .pTypeDescriptor
-        .concrete
-        .buildConstructorCall("PTypeDescriptor.Concrete") {
-          arguments[0] = pType(classSymbol)
-          arguments[1] = kotlin.bool(isNullable)
-          arguments[2] = introspection ?: kotlin.`null`()
+    ): IrExpression {
+      val registry = symbolFinder.pikaAPI.pTypeDescriptorRegistry
+      val fnSymbol = registry.getOrCreateConcrete
+      val valueArgs = listOf(
+        kotlin.javaClass(classSymbol),
+        kotlin.bool(isNullable),
+        introspection ?: kotlin.`null`()
+      )
+      return IrCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = symbolFinder.pikaAPI.pTypeDescriptor.concrete.owner.defaultType,
+        symbol = fnSymbol,
+        typeArgumentsCount = 0,
+        origin = null,
+      ).apply {
+        var valueArgIdx = 0
+        fnSymbol.owner.parameters.forEach { param ->
+          when (param.kind) {
+            IrParameterKind.DispatchReceiver -> arguments[param.indexInParameters] =
+              IrGetObjectValueImpl(
+                -1,
+                -1,
+                registry.classSymbol.owner.defaultType,
+                registry.classSymbol
+              )
+
+            IrParameterKind.Regular -> arguments[param.indexInParameters] = valueArgs[valueArgIdx++]
+            else -> {}
+          }
         }
+      }
+    }
 
     /**
-     * io.github.lukmccall.pika.PTypeDescriptor.Concrete.Parameterized(
-     *   {PType({classSymbol})},
-     *   {isNullable},
-     *   {listOf({parameters})},
-     *   {introspection}
+     * PTypeDescriptorRegistry.getOrCreateParameterized(
+     *   {Class<{classSymbol}>}, {isNullable}, *{parameters}, {introspection}
      * )
      */
     fun parameterized(
@@ -295,17 +303,44 @@ class IRPoet(
       isNullable: Boolean,
       parameters: List<IrExpression>,
       introspection: IrExpression? = null
-    ): IrExpression =
-      symbolFinder
-        .pikaAPI
-        .pTypeDescriptor
-        .parameterized
-        .buildConstructorCall("PTypeDescriptor.Concrete.Parameterized") {
-          arguments[0] = pType(classSymbol)
-          arguments[1] = kotlin.bool(isNullable)
-          arguments[2] = kotlin.listOf(symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType, parameters)
-          arguments[3] = introspection ?: kotlin.`null`()
+    ): IrExpression {
+      val registry = symbolFinder.pikaAPI.pTypeDescriptorRegistry
+      val pTypeDescriptorType = symbolFinder.pikaAPI.pTypeDescriptor.root.owner.defaultType
+      val introspectionArg = introspection ?: kotlin.`null`()
+
+      val fnSymbol = registry.getOrCreateParameterized
+      val valueArgs = listOf(
+        kotlin.javaClass(classSymbol),
+        kotlin.bool(isNullable),
+        kotlin.listOf(pTypeDescriptorType, parameters),
+        introspectionArg,
+      )
+
+      return IrCallImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = symbolFinder.pikaAPI.pTypeDescriptor.parameterized.owner.defaultType,
+        symbol = fnSymbol,
+        typeArgumentsCount = 0,
+        origin = null,
+      ).apply {
+        var valueArgIdx = 0
+        fnSymbol.owner.parameters.forEach { param ->
+          when (param.kind) {
+            IrParameterKind.DispatchReceiver -> arguments[param.indexInParameters] =
+              IrGetObjectValueImpl(
+                -1,
+                -1,
+                registry.classSymbol.owner.defaultType,
+                registry.classSymbol
+              )
+
+            IrParameterKind.Regular -> arguments[param.indexInParameters] = valueArgs[valueArgIdx++]
+            else -> {}
+          }
         }
+      }
+    }
 
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
@@ -868,7 +903,5 @@ class IRPoet(
       return buildIntrospectionCallFor(irClass, originalCall.startOffset, originalCall.endOffset)
         ?: originalCall
     }
-
-
   }
 }

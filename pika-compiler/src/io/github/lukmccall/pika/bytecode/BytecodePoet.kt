@@ -33,71 +33,51 @@ class BytecodePoet(
   // The multi dollar syntax isn't available in kotlin 2.1.20
   @Suppress("CanConvertToMultiDollarString")
   companion object {
-    private val pTypeType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PType")
     private val pTypeDescriptorConcreteType: Type =
       Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Concrete")
     private val pTypeDescriptorParameterizedType: Type =
       Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Concrete\$Parameterized")
+    private val pTypeDescriptorRegistryType: Type =
+      Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/${Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS}")
     private val pTypeDescriptorStarType: Type =
       Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor\$Star")
-    private val listType: Type = Type.getObjectType("java/util/List")
+    private val javaLangClassType: Type = Type.getObjectType("java/lang/Class")
 
     val pTypeDescriptorType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PTypeDescriptor")
     val pIntrospectionDataType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PIntrospectionData")
   }
 
   /**
-   * new PType({jClass})
-   */
-  private fun initPType(
-    irClass: IrClass
-  ) = adapter.apply {
-    anew(pTypeType)
-    dup()
-    aconst(irClass.toGeneric())
-    invokespecial(
-      pTypeType.internalName,
-      "<init>",
-      "(Ljava/lang/Class;)V",
-      false
-    )
-  }
-
-  /**
-   * new PTypeDescriptor.Concrete({PType}, {isNullable}, {introspection})
+   * PTypeDescriptorRegistry.getOrCreateConcrete({Class<?>}, {isNullable}, {introspection})
    */
   fun initConcretePTypeDescriptor(
     irClass: IrClass,
     isNullable: Boolean
   ) = adapter.apply {
-    anew(pTypeDescriptorConcreteType)
-    dup()
-    initPType(irClass)
+    aconst(irClass.toGeneric())
     iconst(if (isNullable) 1 else 0)
     val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
     if (!pushed) aconst(null)
-    invokespecial(
-      pTypeDescriptorConcreteType.internalName,
-      "<init>",
-      "(${pTypeType.descriptor}Z${pIntrospectionDataType.descriptor})V",
+    invokestatic(
+      pTypeDescriptorRegistryType.internalName,
+      Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE,
+      "(${javaLangClassType.descriptor}Z${pIntrospectionDataType.descriptor})${pTypeDescriptorConcreteType.descriptor}",
       false
     )
   }
 
   /**
-   * new PTypeDescriptor.Concrete.Parameterized({PType}, {isNullable}, initPTypeDescriptor(*{parameters}))
+   * PTypeDescriptorRegistry.getOrCreateParameterized({Class<?>}, {isNullable}, [*{parameters}].asList(), {introspection})
    */
   fun initParameterizedPTypeDescriptor(
     irClass: IrClass,
     isNullable: Boolean,
     parameters: List<IrTypeArgument>
   ) = adapter.apply {
-    anew(pTypeDescriptorParameterizedType)
-    dup()
-    initPType(irClass)
+    aconst(irClass.toGeneric())
     iconst(if (isNullable) 1 else 0)
 
-    // Create list of type arguments
+    // Build PTypeDescriptor[] then wrap with Arrays.asList - avoids toList() copy in registry
     iconst(parameters.size)
     newarray(pTypeDescriptorType)
 
@@ -106,31 +86,20 @@ class BytecodePoet(
       iconst(index)
       when (arg) {
         is IrTypeProjection -> initPTypeDescriptor(arg.type)
-        is IrStarProjection -> {
-          // PTypeDescriptor.Star is an object
-          getstatic(pTypeDescriptorStarType.internalName, "INSTANCE", pTypeDescriptorStarType.descriptor)
-        }
+        is IrStarProjection -> getstatic(pTypeDescriptorStarType.internalName, "INSTANCE", pTypeDescriptorStarType.descriptor)
       }
       astore(pTypeDescriptorType)
     }
 
-    // Call kotlin.collections.ArraysKt.asList()
-    invokestatic(
-      "kotlin/collections/ArraysKt",
-      "asList",
-      "([Ljava/lang/Object;)${listType.descriptor}",
-      false
-    )
+    invokestatic("java/util/Arrays", "asList", "([Ljava/lang/Object;)Ljava/util/List;", false)
 
     val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
-    if (!pushed) {
-      aconst(null)
-    }
+    if (!pushed) aconst(null)
 
-    invokespecial(
-      pTypeDescriptorParameterizedType.internalName,
-      "<init>",
-      "(${pTypeType.descriptor}Z${listType.descriptor}${pIntrospectionDataType.descriptor})V",
+    invokestatic(
+      pTypeDescriptorRegistryType.internalName,
+      Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED,
+      "(${javaLangClassType.descriptor}ZLjava/util/List;${pIntrospectionDataType.descriptor})${pTypeDescriptorParameterizedType.descriptor}",
       false
     )
   }

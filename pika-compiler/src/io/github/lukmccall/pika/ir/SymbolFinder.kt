@@ -1,5 +1,7 @@
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.Identifiers
+import io.github.lukmccall.pika.Identifiers.toFq
 import io.github.lukmccall.pika.symbols.PikaAPI
 import io.github.lukmccall.pika.symbols.KotlinStd
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
@@ -19,6 +21,31 @@ class SymbolFinder(
   inner class _PikaAPI {
     val pType by cachedReference(PikaAPI.PType)
     val pTypeDescriptor = _PTypeDescriptor()
+    val pTypeDescriptorRegistry = _PTypeDescriptorRegistry()
+
+    inner class _PTypeDescriptorRegistry {
+      val classSymbol by cachedReference(PikaAPI.PTypeDescriptorRegistry)
+
+      val getOrCreateConcrete by lazy {
+        functionResolver(
+          CallableId(
+            Identifiers.PACKAGE_NAME.toFq(),
+            FqName(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS),
+            Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE)
+          )
+        ).firstOrNull() ?: error("Function getOrCreateConcrete not found in PTypeDescriptorRegistry")
+      }
+
+      val getOrCreateParameterized by lazy {
+        functionResolver(
+          CallableId(
+            Identifiers.PACKAGE_NAME.toFq(),
+            FqName(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS),
+            Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED)
+          )
+        ).firstOrNull() ?: error("Function getOrCreateParameterized not found in PTypeDescriptorRegistry")
+      }
+    }
 
     inner class _PTypeDescriptor {
       val root by cachedReference(PikaAPI.PTypeDescriptor.Root)
