@@ -26,8 +26,6 @@ FILE: introspectableFunctions.kt
         internal final fun __pika$set$value(value: R|kotlin/Int|): R|kotlin/Unit|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Calculator>|
-
             private constructor(): R|test/Calculator.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -37,7 +35,7 @@ FILE: introspectableFunctions.kt
     }
     public final fun box(): R|kotlin/String| {
         lval calc: R|test/Calculator| = R|test/Calculator.Calculator|()
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Calculator>| = Q|test/Calculator|.R|test/Calculator.Companion.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Calculator>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Calculator|>()
         when () {
             R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|SubstitutionOverride<kotlin/collections/List.isEmpty: R|kotlin/Boolean|>|() ->  {
                 ^box String(FAIL: should have functions)

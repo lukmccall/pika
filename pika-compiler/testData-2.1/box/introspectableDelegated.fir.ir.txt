@@ -37,7 +37,7 @@ FILE fqName:test fileName:/introspectableDelegated.kt
               receiver: GET_VAR '<this>: test.DelegatedProperties declared in test.DelegatedProperties.<get-regularValue>' type=test.DelegatedProperties origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.DelegatedProperties.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
             <OwnerType>: test.DelegatedProperties
@@ -73,9 +73,9 @@ FILE fqName:test fileName:/introspectableDelegated.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Int
                       VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-lazyValue> (): kotlin.Int declared in test.DelegatedProperties' type=kotlin.Int origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=test.DelegatedProperties origin=null
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: CONST Null type=kotlin.Nothing? value=null
@@ -84,9 +84,9 @@ FILE fqName:test fileName:/introspectableDelegated.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Any?
                       VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Any? declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Any? declared in test.DelegatedProperties.Companion.__pika$IntrospectionData'
                           GET_FIELD 'FIELD PROPERTY_DELEGATE name:lazyValue$delegate type:kotlin.Lazy<kotlin.Int> visibility:private [final] declared in test.DelegatedProperties' type=kotlin.Lazy<kotlin.Int> origin=null
-                            receiver: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=test.DelegatedProperties origin=null
+                            receiver: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
                 CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.String> origin=null
                   <OwnerType>: test.DelegatedProperties
                   <Type>: kotlin.String
@@ -105,9 +105,9 @@ FILE fqName:test fileName:/introspectableDelegated.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.String declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.String declared in test.DelegatedProperties.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-regularValue> (): kotlin.String declared in test.DelegatedProperties' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=test.DelegatedProperties origin=null
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.DelegatedProperties, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -116,8 +116,8 @@ FILE fqName:test fileName:/introspectableDelegated.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$regularValue (value: kotlin.String): kotlin.Unit declared in test.DelegatedProperties' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=test.DelegatedProperties origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
                 CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, kotlin.Int> origin=null
@@ -138,9 +138,9 @@ FILE fqName:test fileName:/introspectableDelegated.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.DelegatedProperties) returnType:kotlin.Int
                       VALUE_PARAMETER name:owner index:0 type:test.DelegatedProperties
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.DelegatedProperties): kotlin.Int declared in test.DelegatedProperties.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-computedValue> (): kotlin.Int declared in test.DelegatedProperties' type=kotlin.Int origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pIntrospectionData$cache.<anonymous>' type=test.DelegatedProperties origin=null
+                            $this: GET_VAR 'owner: test.DelegatedProperties declared in test.DelegatedProperties.Companion.__pika$IntrospectionData.<anonymous>' type=test.DelegatedProperties origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=false
                   setter: CONST Null type=kotlin.Nothing? value=null
@@ -167,12 +167,6 @@ FILE fqName:test fileName:/introspectableDelegated.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.DelegatedProperties.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties>
-        $this: VALUE_PARAMETER name:<this> type:test.DelegatedProperties.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.DelegatedProperties.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> visibility:private [final] declared in test.DelegatedProperties.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
-              receiver: GET_VAR '<this>: test.DelegatedProperties.Companion declared in test.DelegatedProperties.Companion.__PIntrospectionData' type=test.DelegatedProperties.Companion origin=null
     CONSTRUCTOR visibility:public <> () returnType:test.DelegatedProperties [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -215,8 +209,7 @@ FILE fqName:test fileName:/introspectableDelegated.kt
       VAR name:instance type:test.DelegatedProperties [val]
         CONSTRUCTOR_CALL 'public constructor <init> () declared in test.DelegatedProperties' type=test.DelegatedProperties origin=null
       VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> declared in test.DelegatedProperties.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.DelegatedProperties.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> visibility:public [final,static] declared in test.DelegatedProperties.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.DelegatedProperties> origin=null
       VAR name:lazyProp type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> [val]
         BLOCK type=io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *> origin=ELVIS
           VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.PProperty<test.DelegatedProperties, *>? [val]

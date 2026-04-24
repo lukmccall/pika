@@ -3,7 +3,7 @@ package io.github.lukmccall.pika
 /**
  * Returns introspection data for the @Introspectable type T.
  * The compiler plugin replaces calls to this function at compile time
- * with a call to `T.__PIntrospectionData()`.
+ * with a direct field read of the cached introspection data.
  *
  * Example:
  * ```kotlin

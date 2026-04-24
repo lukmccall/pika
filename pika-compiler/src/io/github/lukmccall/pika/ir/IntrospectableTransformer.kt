@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.ir.visitors.IrTransformer
 import org.jetbrains.kotlin.name.Name
 
 /**
- * IR transformer that generates `__PIntrospectionData()` functions for classes
- * that implement the Introspectable marker interface.
+ * IR transformer that generates `__pika$IntrospectionData` cached fields for classes
+ * annotated with @Introspectable.
  */
 class IntrospectableTransformer(
   private val context: IrPluginContext,
@@ -52,31 +52,19 @@ class IntrospectableTransformer(
   }
 
   private fun handleObjectDeclaration(declaration: IrClass): IrStatement = declaration.apply {
-    val function = declaration
-      .find__PIntrospectionData()
-      ?.takeIfHasNoBody()
-      ?: return@apply
-
-    generateIntrospectionDataFunctionBody(
-      declaration,
-      function
+    generateIntrospectionDataField(
+      irClass = declaration,
+      fieldOwner = declaration
     )
   }
 
   private fun handleClassDeclaration(declaration: IrClass): IrStatement = declaration.apply {
-    // First, generate bodies for synthetic accessor functions on the main class
     generateSyntheticAccessorBodies(declaration)
 
-    // Then generate the introspection function in the companion
-    val function = declaration
-      .companionObject()
-      ?.find__PIntrospectionData()
-      ?.takeIfHasNoBody()
-      ?: return@apply
-
-    generateIntrospectionDataFunctionBody(
-      declaration,
-      function
+    val companion = declaration.companionObject() ?: return@apply
+    generateIntrospectionDataField(
+      irClass = declaration,
+      fieldOwner = companion
     )
   }
 
@@ -138,18 +126,10 @@ class IntrospectableTransformer(
     }
   }
 
-  @Suppress("FunctionName")
-  private fun IrClass.find__PIntrospectionData(): IrSimpleFunction? {
-    return declarations
-      .filterIsInstance<IrSimpleFunction>()
-      .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-  }
-
-  private fun generateIntrospectionDataFunctionBody(
+  private fun generateIntrospectionDataField(
     irClass: IrClass,
-    function: IrSimpleFunction
+    fieldOwner: IrClass
   ) {
-    // Build properties list (only properties declared directly on this class)
     val properties = irClass.declarations
       .filterIsInstance<IrProperty>()
       .filter { !it.isFakeOverride }
@@ -157,20 +137,17 @@ class IntrospectableTransformer(
         poet.pika.pProperty(
           property,
           irClass,
-          function,
+          fieldOwner,
           context.irFactory
         )
       }
 
-    // Build functions list (only functions declared directly on this class, excluding special ones)
     val functions = irClass.declarations
       .filterIsInstance<IrSimpleFunction>()
       .filter { func ->
-        // Exclude constructors, property accessors, the generated function, and fake overrides
         !func.name.isSpecial &&
           !func.isFakeOverride &&
           func.correspondingPropertySymbol == null &&
-          func.name.asString() != Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME &&
           func.name.asString() != "<init>" &&
           !func.name.asString().startsWith(Identifiers.PIKA_SPECIAL_PREFIX)
       }
@@ -178,7 +155,6 @@ class IntrospectableTransformer(
         poet.pika.pFunction(func)
       }
 
-    // Build base class reference if parent implements Introspectable
     val baseClassExpr = buildBaseClassReference(irClass)
 
     val introspectionData = poet.pika.pIntrospectionData(
@@ -188,56 +164,27 @@ class IntrospectableTransformer(
       baseClassExpr = baseClassExpr
     )
 
-    val cacheOwner = function.parentAsClass
-    val cacheField = createIntrospectionDataCacheField(
-      owner = cacheOwner,
-      type = introspectionData.type,
-      initializer = introspectionData
-    )
-
-    val dispatchReceiver = function.parameters
-      .first { it.kind == IrParameterKind.DispatchReceiver }
-
-    val getCachedField = IrGetFieldImpl(
-      startOffset = -1, endOffset = -1,
-      symbol = cacheField.symbol,
-      type = cacheField.type,
-      receiver = IrGetValueImpl(-1, -1, cacheOwner.defaultType, dispatchReceiver.symbol)
-    )
-
-    function.body = poet.createReturnBody(context.irFactory, function, getCachedField)
-  }
-
-  private fun createIntrospectionDataCacheField(
-    owner: IrClass,
-    type: org.jetbrains.kotlin.ir.types.IrType,
-    initializer: IrExpression
-  ): IrField {
     val field = context.irFactory.buildField {
       startOffset = -1
       endOffset = -1
-      name = Name.identifier(Identifiers.P_INTROSPECTION_DATA_CACHE_FIELD_NAME)
-      this.type = type
-      visibility = DescriptorVisibilities.PRIVATE
+      name = Name.identifier(Identifiers.INTROSPECTION_DATA_FIELD_NAME)
+      type = introspectionData.type
+      visibility = DescriptorVisibilities.PUBLIC
       isFinal = true
-      isStatic = false
+      isStatic = true
     }.apply {
-      parent = owner
-      this.initializer = context.irFactory.createExpressionBody(-1, -1, initializer).also { body ->
+      parent = fieldOwner
+      initializer = context.irFactory.createExpressionBody(
+        startOffset = -1,
+        endOffset = -1,
+        expression = introspectionData
+      ).also { body ->
         body.patchDeclarationParents(this)
       }
     }
-    owner.declarations.add(field)
-    return field
+    fieldOwner.declarations.add(field)
   }
 
-  /**
-   * Build a call to the parent's companion __PIntrospectionData() function if the parent
-   * has Introspectable annotation, otherwise return null.
-   *
-   * Since the function is now in the companion object, we call it directly:
-   * ParentClass.__PIntrospectionData() (no instance needed)
-   */
   private fun buildBaseClassReference(irClass: IrClass): IrExpression? {
     val superClass = irClass.superTypes
       .filterIsInstance<IrSimpleType>()
@@ -246,36 +193,30 @@ class IntrospectableTransformer(
       .firstOrNull { it.kotlinFqName.asString() != "kotlin.Any" }
       ?: return null
 
-    // Check if parent implements Introspectable
     if (!superClass.hasIntrospectableAnnotation(poet.extraAnnotationClassIds)) {
       return null
     }
 
-    // Find the companion object of the parent class
-    val parentCompanion = superClass.companionObject() ?: return null
+    val fieldOwner = if (superClass.isObject && !superClass.isCompanion) {
+      superClass
+    } else {
+      superClass.companionObject() ?: return null
+    }
 
-    // Find the __PIntrospectionData function on the parent's companion
-    val parentFunction = superClass.companionObject()?.find__PIntrospectionData() ?: return null
+    val field = fieldOwner.declarations
+      .filterIsInstance<IrField>()
+      .find { it.name.asString() == Identifiers.INTROSPECTION_DATA_FIELD_NAME }
+      ?: return null
 
     val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
     val parentReturnType = pIntrospectionDataClass.typeWith(superClass.defaultType)
 
-    return IrCallImpl(
+    return IrGetFieldImpl(
       startOffset = -1,
       endOffset = -1,
+      symbol = field.symbol,
       type = parentReturnType,
-      symbol = parentFunction.symbol,
-      typeArgumentsCount = 0,
-      origin = null
-    ).apply {
-      // Dispatch receiver is the companion object instance
-      // In K2 IR, arguments array contains ALL parameters including dispatch receiver
-      val dispatchReceiverValue = poet.kotlin.getObject(parentCompanion.symbol)
-      parentFunction.parameters.forEach { param ->
-        if (param.kind == IrParameterKind.DispatchReceiver) {
-          arguments[param.indexInParameters] = dispatchReceiverValue
-        }
-      }
-    }
+      receiver = null
+    )
   }
 }

@@ -16,7 +16,7 @@ class Calculator {
 
 fun box(): String {
   val calc = Calculator()
-  val data = Calculator.__PIntrospectionData()
+  val data = introspectionOf<Calculator>()
 
   // Check functions
   if (data.functions.isEmpty()) return "FAIL: should have functions"

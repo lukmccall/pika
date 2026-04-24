@@ -20,8 +20,6 @@ FILE: introspectableCustomAnnotation.kt
         internal final fun __pika$set$name(value: R|kotlin/String|): R|kotlin/Unit|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Person>|
-
             private constructor(): R|test/Person.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -31,7 +29,7 @@ FILE: introspectableCustomAnnotation.kt
     }
     public final fun box(): R|kotlin/String| {
         lval person: R|test/Person| = R|test/Person.Person|(String(Alice))
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = Q|test/Person|.R|test/Person.Companion.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Person|>()
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Person>|>|, <getClass>(Q|test/Person|).R|kotlin/jvm/java|<R|test/Person|>) ->  {
                 ^box String(FAIL: jClass expected Person::class.java)

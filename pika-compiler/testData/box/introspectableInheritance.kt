@@ -11,7 +11,7 @@ class Dog(species: String, val breed: String) : Animal(species)
 
 fun box(): String {
   val dog = Dog("Canine", "Labrador")
-  val data = Dog.__PIntrospectionData()
+  val data = introspectionOf<Dog>()
 
   // Dog's own properties only
   if (data.properties.size != 1) return "FAIL: Dog should have 1 declared property, got ${data.properties.size}"

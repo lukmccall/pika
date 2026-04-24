@@ -27,7 +27,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
               receiver: GET_VAR '<this>: test.Address declared in test.Address.<get-zip>' type=test.Address origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Address.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
             <OwnerType>: test.Address
@@ -63,9 +63,9 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Address) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Address
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Address): kotlin.String declared in test.Address.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Address): kotlin.String declared in test.Address.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-city> (): kotlin.String declared in test.Address' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Address origin=null
+                            $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=test.Address origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Address, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -74,8 +74,8 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$city (value: kotlin.String): kotlin.Unit declared in test.Address' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Address origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=test.Address origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
                 CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Address, kotlin.String> origin=null
@@ -96,9 +96,9 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Address) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Address
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Address): kotlin.String declared in test.Address.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Address): kotlin.String declared in test.Address.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-zip> (): kotlin.String declared in test.Address' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Address origin=null
+                            $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=test.Address origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Address, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -107,8 +107,8 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$zip (value: kotlin.String): kotlin.Unit declared in test.Address' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Address origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Address.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Address declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=test.Address origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Address.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
@@ -132,12 +132,6 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Address.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Address>
-        $this: VALUE_PARAMETER name:<this> type:test.Address.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Address> declared in test.Address.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:private [final] declared in test.Address.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
-              receiver: GET_VAR '<this>: test.Address.Companion declared in test.Address.Companion.__PIntrospectionData' type=test.Address.Companion origin=null
     CONSTRUCTOR visibility:public <> (city:kotlin.String, zip:kotlin.String) returnType:test.Address [primary]
       VALUE_PARAMETER name:city index:0 type:kotlin.String
       VALUE_PARAMETER name:zip index:1 type:kotlin.String
@@ -211,7 +205,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-address>' type=test.Person origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Person.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
             <OwnerType>: test.Person
@@ -247,9 +241,9 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Person) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Person
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): kotlin.String declared in test.Person.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): kotlin.String declared in test.Person.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-name> (): kotlin.String declared in test.Person' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
+                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Person, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -258,8 +252,8 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$name (value: kotlin.String): kotlin.Unit declared in test.Person' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
                 CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Person, test.Address> origin=null
@@ -275,15 +269,14 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                     jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Address> origin=null
                       $receiver: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
                     isNullable: CONST Boolean type=kotlin.Boolean value=false
-                    introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Address> declared in test.Address.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
-                      $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Address.Companion
+                    introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:public [final,static] declared in test.Address.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
                   getter: FUN_EXPR type=kotlin.Function1<test.Person, test.Address> origin=LAMBDA
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Person) returnType:test.Address
                       VALUE_PARAMETER name:owner index:0 type:test.Person
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): test.Address declared in test.Person.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): test.Address declared in test.Person.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-address> (): test.Address declared in test.Person' type=test.Address origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
+                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Person, test.Address, kotlin.Unit> origin=LAMBDA
@@ -292,8 +285,8 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                       VALUE_PARAMETER name:value index:1 type:test.Address
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$address (value: test.Address): kotlin.Unit declared in test.Person' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
-                          value: GET_VAR 'value: test.Address declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Address origin=null
+                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
+                          value: GET_VAR 'value: test.Address declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Address origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
@@ -317,12 +310,6 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Person.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Person>
-        $this: VALUE_PARAMETER name:<this> type:test.Person.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:private [final] declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
-              receiver: GET_VAR '<this>: test.Person.Companion declared in test.Person.Companion.__PIntrospectionData' type=test.Person.Companion origin=null
     CONSTRUCTOR visibility:public <> (name:kotlin.String, address:test.Address) returnType:test.Person [primary]
       VALUE_PARAMETER name:name index:0 type:kotlin.String
       VALUE_PARAMETER name:address index:1 type:test.Address
@@ -376,8 +363,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
           jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
             $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
-          introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
-            $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Person.Companion
+          introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
@@ -535,8 +521,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
               if: CONST Boolean type=kotlin.Boolean value=true
               then: GET_VAR 'val tmp_4: io.github.lukmccall.pika.PProperty<out kotlin.Any, *>? declared in test.box' type=io.github.lukmccall.pika.PProperty<out kotlin.Any, *>? origin=null
       VAR name:directAddressData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Address> declared in test.Address.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Address.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:public [final,static] declared in test.Address.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ

@@ -367,11 +367,6 @@ class IRPoet(
       }
     }
 
-    /**
-     * Builds an IR call to `__PIntrospectionData()` on the appropriate singleton
-     * (the object itself or its companion) if the class has the @Introspectable annotation.
-     * Returns null if the class is not introspectable or the function cannot be found.
-     */
     private fun buildIntrospectionCallFor(
       irClass: IrClass,
       startOffset: Int = -1,
@@ -381,44 +376,27 @@ class IRPoet(
         return null
       }
 
-      val (functionOwner, introspectionDataFunction) = if (irClass.isObject && !irClass.isCompanion) {
-        val function = irClass
-          .declarations
-          .filterIsInstance<IrSimpleFunction>()
-          .find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-        irClass to function
+      val fieldOwner = if (irClass.isObject && !irClass.isCompanion) {
+        irClass
       } else {
-        val companion = irClass.companionObject()
-        val function = companion
-          ?.declarations
-          ?.filterIsInstance<IrSimpleFunction>()
-          ?.find { it.name.asString() == Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME }
-        companion to function
+        irClass.companionObject() ?: return null
       }
 
-      if (introspectionDataFunction == null || functionOwner == null) {
-        return null
-      }
+      val field = fieldOwner.declarations
+        .filterIsInstance<IrField>()
+        .find { it.name.asString() == Identifiers.INTROSPECTION_DATA_FIELD_NAME }
+        ?: return null
 
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
       val returnType = pIntrospectionDataClass.typeWith(irClass.defaultType)
 
-      return IrCallImpl(
+      return IrGetFieldImpl(
         startOffset = startOffset,
         endOffset = endOffset,
+        symbol = field.symbol,
         type = returnType,
-        symbol = introspectionDataFunction.symbol,
-        typeArgumentsCount = 0,
-        origin = null,
-        superQualifierSymbol = null
-      ).apply {
-        val dispatchReceiverValue = kotlin.getObject(functionOwner.symbol)
-        introspectionDataFunction.parameters.forEach { param ->
-          if (param.kind == IrParameterKind.DispatchReceiver) {
-            arguments[param.indexInParameters] = dispatchReceiverValue
-          }
-        }
-      }
+        receiver = null
+      )
     }
 
     /**
@@ -484,7 +462,7 @@ class IRPoet(
     fun propertyGetterLambda(
       property: IrProperty,
       ownerClass: IrClass,
-      containingFunction: IrSimpleFunction,
+      containingDeclaration: IrDeclarationParent,
       irFactory: IrFactory
     ): IrExpression {
       val propertyType = property.resolvedType
@@ -500,7 +478,7 @@ class IRPoet(
         origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
         visibility = DescriptorVisibilities.LOCAL
       }.apply {
-        parent = containingFunction
+        parent = containingDeclaration
         val ownerParam = addValueParameter("owner", ownerType)
 
         val returnValue = if (property.getter != null) {
@@ -630,7 +608,7 @@ class IRPoet(
     fun propertySetterLambda(
       property: IrProperty,
       ownerClass: IrClass,
-      containingFunction: IrSimpleFunction,
+      containingDeclaration: IrDeclarationParent,
       irFactory: IrFactory
     ): IrExpression? {
       val propertyType = property.resolvedType
@@ -652,7 +630,7 @@ class IRPoet(
         origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
         visibility = DescriptorVisibilities.LOCAL
       }.apply {
-        parent = containingFunction
+        parent = containingDeclaration
         val ownerParam = addValueParameter("owner", ownerType)
         val valueParam = addValueParameter("value", propertyType)
 
@@ -718,7 +696,7 @@ class IRPoet(
     fun delegateGetterLambda(
       property: IrProperty,
       ownerClass: IrClass,
-      containingFunction: IrSimpleFunction,
+      containingDeclaration: IrDeclarationParent,
       irFactory: IrFactory
     ): IrExpression? {
       if (!property.isDelegated) return null
@@ -739,7 +717,7 @@ class IRPoet(
         origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
         visibility = DescriptorVisibilities.LOCAL
       }.apply {
-        parent = containingFunction
+        parent = containingDeclaration
         val ownerParam = addValueParameter("owner", ownerType)
 
         val returnValue = if (syntheticGetter != null) {
@@ -793,7 +771,7 @@ class IRPoet(
     fun pProperty(
       property: IrProperty,
       ownerClass: IrClass,
-      containingFunction: IrSimpleFunction,
+      containingDeclaration: IrDeclarationParent,
       irFactory: IrFactory
     ): IrExpression {
       val propertyType = property.resolvedType
@@ -809,10 +787,10 @@ class IRPoet(
       }
 
       val hasBackingField = property.backingField != null
-      val getterLambda = propertyGetterLambda(property, ownerClass, containingFunction, irFactory)
-      val setterLambda = propertySetterLambda(property, ownerClass, containingFunction, irFactory)
+      val getterLambda = propertyGetterLambda(property, ownerClass, containingDeclaration, irFactory)
+      val setterLambda = propertySetterLambda(property, ownerClass, containingDeclaration, irFactory)
       val isDelegated = property.isDelegated
-      val delegateLambda = delegateGetterLambda(property, ownerClass, containingFunction, irFactory)
+      val delegateLambda = delegateGetterLambda(property, ownerClass, containingDeclaration, irFactory)
 
       val ownerType = ownerClass.defaultType
 

@@ -1,0 +1,102 @@
+FILE: introspectableExistingCompanion.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Config : R|kotlin/Any| {
+        public constructor(host: R|kotlin/String|, port: R|kotlin/Int|): R|test/Config| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val host: R|kotlin/String| = R|<local>/host|
+            public get(): R|kotlin/String|
+
+        public final val port: R|kotlin/Int| = R|<local>/port|
+            public get(): R|kotlin/Int|
+
+        public final companion object Companion : R|kotlin/Any| {
+            private constructor(): R|test/Config.Companion| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final const val DEFAULT_HOST: R|kotlin/String| = String(localhost)
+                public get(): R|kotlin/String|
+
+            public final const val DEFAULT_PORT: R|kotlin/Int| = Int(8080)
+                public get(): R|kotlin/Int|
+
+            public final fun default(): R|test/Config| {
+                ^default R|test/Config.Config|(this@R|test/Config.Companion|.R|test/Config.Companion.DEFAULT_HOST|, this@R|test/Config.Companion|.R|test/Config.Companion.DEFAULT_PORT|)
+            }
+
+        }
+
+        internal final fun __pika$set$host(value: R|kotlin/String|): R|kotlin/Unit|
+
+        internal final fun __pika$get$port(): R|kotlin/Int|
+
+        internal final fun __pika$get$host(): R|kotlin/String|
+
+        internal final fun __pika$set$port(value: R|kotlin/Int|): R|kotlin/Unit|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval config: R|test/Config| = Q|test/Config|.R|test/Config.Companion.default|()
+        when () {
+            !=(R|<local>/config|.R|test/Config.host|, String(localhost)) ->  {
+                ^box String(FAIL: default host)
+            }
+        }
+
+        when () {
+            !=(R|<local>/config|.R|test/Config.port|, Int(8080)) ->  {
+                ^box String(FAIL: default port)
+            }
+        }
+
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Config>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Config|>()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Config>|>|, <getClass>(Q|test/Config|).R|kotlin/jvm/java|<R|test/Config|>) ->  {
+                ^box String(FAIL: jClass)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Config, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box <strcat>(String(FAIL: expected 2 properties but got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Config, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval hostProp: R|io/github/lukmccall/pika/PProperty<test/Config, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Config, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Config, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Config, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(host))
+        }
+        ) ?: ^box String(FAIL: host property not found)
+        when () {
+            !=(R|<local>/hostProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Config) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/config|), String(localhost)) ->  {
+                ^box String(FAIL: host getter)
+            }
+        }
+
+        lval portProp: R|io/github/lukmccall/pika/PProperty<test/Config, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Config, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Config, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Config, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(port))
+        }
+        ) ?: ^box String(FAIL: port property not found)
+        when () {
+            !=(R|<local>/portProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Config) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/config|), Int(8080)) ->  {
+                ^box String(FAIL: port getter)
+            }
+        }
+
+        lval td: R|io/github/lukmccall/pika/PTypeDescriptor| = R|io/github/lukmccall/pika/typeDescriptorOf|<R|test/Config|>()
+        when () {
+            (R|<local>/td| !is R|io/github/lukmccall/pika/PTypeDescriptor.Concrete|) ->  {
+                ^box String(FAIL: typeDescriptor not Concrete)
+            }
+        }
+
+        when () {
+            !=(R|<local>/td|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.pType|.R|io/github/lukmccall/pika/PType.jClass|, <getClass>(Q|test/Config|).R|kotlin/jvm/java|<R|test/Config|>) ->  {
+                ^box String(FAIL: typeDescriptor jClass)
+            }
+        }
+
+        ^box String(OK)
+    }

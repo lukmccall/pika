@@ -12,7 +12,7 @@ class DelegatedProperties {
 
 fun box(): String {
   val instance = DelegatedProperties()
-  val data = DelegatedProperties.__PIntrospectionData()
+  val data = introspectionOf<DelegatedProperties>()
 
   // Test lazy delegated property
   val lazyProp = data.properties.find { it.name == "lazyValue" }

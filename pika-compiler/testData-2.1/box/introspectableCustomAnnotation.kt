@@ -13,7 +13,7 @@ class Person(val name: String)
 
 fun box(): String {
   val person = Person("Alice")
-  val data = Person.__PIntrospectionData()
+  val data = introspectionOf<Person>()
 
   if (data.jClass != Person::class.java) return "FAIL: jClass expected Person::class.java"
 

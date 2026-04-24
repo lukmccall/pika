@@ -19,7 +19,7 @@ class Person(
 
 fun box(): String {
   val person = Person("Alice")
-  val data = Person.__PIntrospectionData()
+  val data = introspectionOf<Person>()
 
   // Class annotations (includes @Introspectable and @MyAnnotation)
   if (data.annotations.size != 2) return "FAIL: expected 2 class annotations, got ${data.annotations.size}"

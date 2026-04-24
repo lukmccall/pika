@@ -16,7 +16,7 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
               receiver: GET_VAR '<this>: test.Person declared in test.Person.<get-name>' type=test.Person origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Person.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
             <OwnerType>: test.Person
@@ -52,9 +52,9 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Person) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Person
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): kotlin.String declared in test.Person.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Person): kotlin.String declared in test.Person.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-name> (): kotlin.String declared in test.Person' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
+                            $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Person, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -63,8 +63,8 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$name (value: kotlin.String): kotlin.Unit declared in test.Person' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Person origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Person.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Person declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=test.Person origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Person.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
@@ -88,12 +88,6 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Person.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Person>
-        $this: VALUE_PARAMETER name:<this> type:test.Person.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:private [final] declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
-              receiver: GET_VAR '<this>: test.Person.Companion declared in test.Person.Companion.__PIntrospectionData' type=test.Person.Companion origin=null
     CONSTRUCTOR visibility:public <> (name:kotlin.String) returnType:test.Person [primary]
       VALUE_PARAMETER name:name index:0 type:kotlin.String
       BLOCK_BODY
@@ -141,8 +135,7 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
                 jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
                   $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
                 isNullable: CONST Boolean type=kotlin.Boolean value=false
-                introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
-                  $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Person.Companion
+                introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
           introspection: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
@@ -245,8 +238,7 @@ FILE fqName:test fileName:/typeInfoIntrospectableParameterized.kt
                 jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
                   $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
                 isNullable: CONST Boolean type=kotlin.Boolean value=false
-                introspection: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Person> declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
-                  $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Person.Companion
+                introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
           introspection: CONST Null type=kotlin.Nothing? value=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH

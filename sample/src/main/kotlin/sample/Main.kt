@@ -2,6 +2,9 @@ package sample
 
 import io.github.lukmccall.pika.*
 import java.io.Serializable
+import kotlin.reflect.typeOf
+import kotlin.time.measureTime
+
 
 /**
  * Example annotation for testing.
@@ -58,6 +61,26 @@ class User(
 ) : BaseEntity(id), Serializable
 
 fun main() {
+//  repeat(100) {
+//    val skotlinTypeOf = measureTime {
+//      repeat(10000) {
+//        val typeOf = typeOf<SimplePerson>()
+//      }
+//    }
+//
+//    val sikaTypeOf = measureTime {
+//      repeat(10000) {
+//        val pikaTypeOf = typeDescriptorOf<SimplePerson>()
+//      }
+//    }
+//
+//    println("kotlinTypeOf = $skotlinTypeOf")
+//    println("pikaTypeOf = $sikaTypeOf")
+//
+//  }
+//  return
+
+
   println("=== Custom @OptimizedRecord marker (registered via Gradle DSL) ===")
   println()
   val product = Product(sku = "SKU-1", price = 9.99)
@@ -77,7 +100,7 @@ fun main() {
   // Two equivalent ways to get introspection data:
   // 1. Using the helper function (recommended)
   val data = introspectionOf<SimplePerson>()
-  // 2. Or directly: SimplePerson.Companion.__PIntrospectionData()
+  // 2. Or via typeDescriptorOf<SimplePerson>() which includes introspection data
 
   println("kClass: ${data.jClass}")
   println("properties: ${data.properties.size}")

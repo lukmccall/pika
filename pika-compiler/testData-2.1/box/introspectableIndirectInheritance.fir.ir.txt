@@ -16,7 +16,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
               receiver: GET_VAR '<this>: test.Animal declared in test.Animal.<get-species>' type=test.Animal origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Animal.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Animal> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Animal> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
             <OwnerType>: test.Animal
@@ -52,9 +52,9 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Animal) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Animal
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Animal): kotlin.String declared in test.Animal.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Animal): kotlin.String declared in test.Animal.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-species> (): kotlin.String declared in test.Animal' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Animal origin=null
+                            $this: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__pika$IntrospectionData.<anonymous>' type=test.Animal origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Animal, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -63,8 +63,8 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$species (value: kotlin.String): kotlin.Unit declared in test.Animal' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Animal origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Animal.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Animal declared in test.Animal.Companion.__pika$IntrospectionData.<anonymous>' type=test.Animal origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Animal.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
@@ -88,12 +88,6 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Animal.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Animal>
-        $this: VALUE_PARAMETER name:<this> type:test.Animal.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Animal> visibility:private [final] declared in test.Animal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
-              receiver: GET_VAR '<this>: test.Animal.Companion declared in test.Animal.Companion.__PIntrospectionData' type=test.Animal.Companion origin=null
     CONSTRUCTOR visibility:public <> (species:kotlin.String) returnType:test.Animal [primary]
       VALUE_PARAMETER name:species index:0 type:kotlin.String
       BLOCK_BODY
@@ -142,7 +136,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
               receiver: GET_VAR '<this>: test.Dog declared in test.Dog.<get-breed>' type=test.Dog origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Dog.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
             <OwnerType>: test.Dog
@@ -178,9 +172,9 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Dog) returnType:kotlin.String
                       VALUE_PARAMETER name:owner index:0 type:test.Dog
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Dog): kotlin.String declared in test.Dog.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Dog): kotlin.String declared in test.Dog.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-breed> (): kotlin.String declared in test.Dog' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Dog origin=null
+                            $this: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__pika$IntrospectionData.<anonymous>' type=test.Dog origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Dog, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -189,15 +183,14 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.String
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$breed (value: kotlin.String): kotlin.Unit declared in test.Dog' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Dog origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Dog.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.String origin=null
+                          $this: GET_VAR 'owner: test.Dog declared in test.Dog.Companion.__pika$IntrospectionData.<anonymous>' type=test.Dog origin=null
+                          value: GET_VAR 'value: kotlin.String declared in test.Dog.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               <T>: io.github.lukmccall.pika.PFunction
               elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-            baseClass: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Mammal> declared in test.Mammal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Mammal> origin=null
-              $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Mammal.Companion
+            baseClass: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Mammal> visibility:public [final,static] declared in test.Mammal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Mammal> origin=null
       CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private <> () returnType:test.Dog.Companion [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -215,12 +208,6 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Dog.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Dog>
-        $this: VALUE_PARAMETER name:<this> type:test.Dog.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> visibility:private [final] declared in test.Dog.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
-              receiver: GET_VAR '<this>: test.Dog.Companion declared in test.Dog.Companion.__PIntrospectionData' type=test.Dog.Companion origin=null
     CONSTRUCTOR visibility:public <> (species:kotlin.String, warmBlooded:kotlin.Boolean, breed:kotlin.String) returnType:test.Dog [primary]
       VALUE_PARAMETER name:species index:0 type:kotlin.String
       VALUE_PARAMETER name:warmBlooded index:1 type:kotlin.Boolean
@@ -307,7 +294,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
               receiver: GET_VAR '<this>: test.Mammal declared in test.Mammal.<get-warmBlooded>' type=test.Mammal origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Mammal.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Mammal> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Mammal> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Mammal> origin=null
             <OwnerType>: test.Mammal
@@ -343,9 +330,9 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Mammal) returnType:kotlin.Boolean
                       VALUE_PARAMETER name:owner index:0 type:test.Mammal
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Mammal): kotlin.Boolean declared in test.Mammal.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Mammal): kotlin.Boolean declared in test.Mammal.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-warmBlooded> (): kotlin.Boolean declared in test.Mammal' type=kotlin.Boolean origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Mammal declared in test.Mammal.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Mammal origin=null
+                            $this: GET_VAR 'owner: test.Mammal declared in test.Mammal.Companion.__pika$IntrospectionData.<anonymous>' type=test.Mammal origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Mammal, kotlin.Boolean, kotlin.Unit> origin=LAMBDA
@@ -354,15 +341,14 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.Boolean
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$warmBlooded (value: kotlin.Boolean): kotlin.Unit declared in test.Mammal' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Mammal declared in test.Mammal.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Mammal origin=null
-                          value: GET_VAR 'value: kotlin.Boolean declared in test.Mammal.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.Boolean origin=null
+                          $this: GET_VAR 'owner: test.Mammal declared in test.Mammal.Companion.__pika$IntrospectionData.<anonymous>' type=test.Mammal origin=null
+                          value: GET_VAR 'value: kotlin.Boolean declared in test.Mammal.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.Boolean origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               <T>: io.github.lukmccall.pika.PFunction
               elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-            baseClass: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Animal> declared in test.Animal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
-              $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Animal.Companion
+            baseClass: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Animal> visibility:public [final,static] declared in test.Animal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Animal> origin=null
       CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private <> () returnType:test.Mammal.Companion [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -380,12 +366,6 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Mammal.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Mammal>
-        $this: VALUE_PARAMETER name:<this> type:test.Mammal.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Mammal> declared in test.Mammal.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Mammal> visibility:private [final] declared in test.Mammal.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Mammal> origin=null
-              receiver: GET_VAR '<this>: test.Mammal.Companion declared in test.Mammal.Companion.__PIntrospectionData' type=test.Mammal.Companion origin=null
     CONSTRUCTOR visibility:public <> (species:kotlin.String, warmBlooded:kotlin.Boolean) returnType:test.Mammal [primary]
       VALUE_PARAMETER name:species index:0 type:kotlin.String
       VALUE_PARAMETER name:warmBlooded index:1 type:kotlin.Boolean
@@ -444,8 +424,7 @@ FILE fqName:test fileName:/introspectableIndirectInheritance.kt
           warmBlooded: CONST Boolean type=kotlin.Boolean value=true
           breed: CONST String type=kotlin.String value="Labrador"
       VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Dog> declared in test.Dog.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Dog.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Dog> visibility:public [final,static] declared in test.Dog.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Dog> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ

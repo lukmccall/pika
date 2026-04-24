@@ -14,8 +14,6 @@ FILE: introspectionDataCached.kt
         internal final fun __pika$get$a(): R|kotlin/Int|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>|
-
             private constructor(): R|test/Parent.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -36,8 +34,6 @@ FILE: introspectionDataCached.kt
         internal final fun __pika$set$b(value: R|kotlin/Int|): R|kotlin/Unit|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Child>|
-
             private constructor(): R|test/Child.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -53,8 +49,6 @@ FILE: introspectionDataCached.kt
         public final val version: R|kotlin/String| = String(1.0)
             public get(): R|kotlin/String|
 
-        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>|
-
     }
     public final fun box(): R|kotlin/String| {
         lval a1: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Parent|>()
@@ -65,25 +59,25 @@ FILE: introspectionDataCached.kt
             }
         }
 
-        lval c1: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = Q|test/Parent|.R|test/Parent.Companion.__PIntrospectionData|()
-        lval c2: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = Q|test/Parent|.R|test/Parent.Companion.__PIntrospectionData|()
+        lval c1: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Parent|>()
+        lval c2: R|io/github/lukmccall/pika/PIntrospectionData<test/Parent>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Parent|>()
         when () {
             !==(R|<local>/c1|, R|<local>/c2|) ->  {
-                ^box String(FAIL: Parent.__PIntrospectionData() not cached)
+                ^box String(FAIL: introspectionOf<Parent>() not cached (second check))
             }
         }
 
         when () {
             !==(R|<local>/a1|, R|<local>/c1|) ->  {
-                ^box String(FAIL: introspectionOf<Parent>() and Parent.__PIntrospectionData() differ)
+                ^box String(FAIL: introspectionOf<Parent>() not stable across calls)
             }
         }
 
-        lval s1: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
-        lval s2: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
+        lval s1: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Singleton|>()
+        lval s2: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Singleton|>()
         when () {
             !==(R|<local>/s1|, R|<local>/s2|) ->  {
-                ^box String(FAIL: Singleton.__PIntrospectionData() not cached)
+                ^box String(FAIL: introspectionOf<Singleton>() not cached)
             }
         }
 

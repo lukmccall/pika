@@ -18,7 +18,7 @@ object PikaAPI {
     val Star = ClassId(API_PACKAGE, FqName("PTypeDescriptor.Star"), isLocal = false)
   }
 
-  val PTypeDescriptorRegistry = ClassId(API_PACKAGE, Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS))
+  val PTypeDescriptorRegistry = ClassId(API_PACKAGE, Name.identifier(Identifiers.TYPE_DESCRIPTOR_REGISTRY_CLASS))
 
   // Introspectable types
   val Introspectable = ClassId(API_PACKAGE, Name.identifier(Identifiers.INTROSPECTABLE_INTERFACE_NAME))
@@ -27,8 +27,4 @@ object PikaAPI {
   val PFunction = ClassId(API_PACKAGE, Name.identifier("PFunction"))
   val PAnnotation = ClassId(API_PACKAGE, Name.identifier("PAnnotation"))
   val PIntrospectionData = ClassId(API_PACKAGE, Name.identifier("PIntrospectionData"))
-
-  object Names {
-    val IntrospectionDataFunction = Name.identifier(Identifiers.P_INTROSPECTION_DATA_FUNCTION_NAME)
-  }
 }

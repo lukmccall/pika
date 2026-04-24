@@ -1,7 +1,6 @@
 package io.github.lukmccall.pika.fir
 
 import io.github.lukmccall.pika.Identifiers
-import io.github.lukmccall.pika.symbols.PikaAPI
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibilities
@@ -16,23 +15,17 @@ import org.jetbrains.kotlin.fir.extensions.NestedClassGenerationContext
 import org.jetbrains.kotlin.fir.plugin.createCompanionObject
 import org.jetbrains.kotlin.fir.plugin.createDefaultPrivateConstructor
 import org.jetbrains.kotlin.fir.plugin.createMemberFunction
-import org.jetbrains.kotlin.fir.resolve.defaultType
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
-import org.jetbrains.kotlin.fir.types.constructClassLikeType
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.utils.addToStdlib.enumSetOf
 
 /**
- * FIR extension that generates `__PIntrospectionData()` function declarations
- * in companion objects for classes annotated with @Introspectable.
- *
- * This makes the function visible during FIR resolution so calls to it don't fail
- * with "unresolved reference" errors. The actual implementation is generated
- * during the IR phase by IntrospectableTransformer.
+ * FIR extension that generates companion objects and synthetic accessor declarations
+ * for classes annotated with @Introspectable.
  */
 class IntrospectableDeclarationGenerator(
   session: FirSession
@@ -75,6 +68,7 @@ class IntrospectableDeclarationGenerator(
     if (!name.isCompanionObjectName() || !owner.hasIntrospectableAnnotation(session)) {
       return null
     }
+
     return createCompanionObject(owner, IntrospectableDeclarationGeneratorKey).symbol
   }
 
@@ -90,8 +84,7 @@ class IntrospectableDeclarationGenerator(
   /**
    * Declare callable names for companion objects, object declarations, and main classes.
    * - For regular classes: generate synthetic accessors for backing fields
-   * - For companion objects: generate __PIntrospectionData function
-   * - For object declarations: generate __PIntrospectionData directly on the object
+   * - For pika-generated companion objects: generate constructor
    *
    * Note: We use declarationSymbols here instead of declaredProperties(session) because
    * the latter triggers scope resolution, which would cause infinite recursion
@@ -107,20 +100,17 @@ class IntrospectableDeclarationGenerator(
     }
 
     if (classSymbol.classKind == ClassKind.OBJECT) {
-      return getCallableNamesForObject(classSymbol)
+      return emptySet()
     }
 
     return getCallableNamesForClass(classSymbol)
   }
 
-  private fun getCallableNamesForObject(classSymbol: FirClassSymbol<*>): Set<Name> {
-    if (!classSymbol.hasIntrospectableAnnotation(session)) {
+  private fun getCallableNamesForCompanionObject(classSymbol: FirClassSymbol<*>): Set<Name> {
+    if (!classSymbol.wasGeneratedByPika()) {
       return emptySet()
     }
-    return setOf(PikaAPI.Names.IntrospectionDataFunction)
-  }
 
-  private fun getCallableNamesForCompanionObject(classSymbol: FirClassSymbol<*>): Set<Name> {
     val containingClass = classSymbol.getContainingClassSymbol() as? FirClassSymbol<*>
       ?: return emptySet()
 
@@ -128,12 +118,7 @@ class IntrospectableDeclarationGenerator(
       return emptySet()
     }
 
-    return buildSet {
-      add(PikaAPI.Names.IntrospectionDataFunction)
-      if (classSymbol.wasGeneratedByPika()) {
-        add(SpecialNames.INIT)
-      }
-    }
+    return setOf(SpecialNames.INIT)
   }
 
   private fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>): Set<Name> {
@@ -162,49 +147,11 @@ class IntrospectableDeclarationGenerator(
     val owner = context?.owner ?: return emptyList()
     val callableName = callableId.callableName.asString()
 
-    if (callableId.callableName == PikaAPI.Names.IntrospectionDataFunction) {
-      return generateIntrospectionDataFunction(owner)
-    }
-
     if (Identifiers.isSyntheticAccessor(callableName)) {
       return generateSyntheticAccessor(owner, callableName)
     }
 
     return emptyList()
-  }
-
-  private fun generateIntrospectionDataFunction(owner: FirClassSymbol<*>): List<FirNamedFunctionSymbol> {
-    if (owner.isCompanion) {
-      val containingClass = owner.getContainingClassSymbol() as? FirClassSymbol<*>
-        ?: return emptyList()
-
-      return generateIntrospectionDataFunctionForClass(owner, forClass = containingClass)
-    }
-
-    if (owner.classKind == ClassKind.OBJECT) {
-      return generateIntrospectionDataFunctionForClass(owner, forClass = owner)
-    }
-
-    return emptyList()
-  }
-
-  private fun generateIntrospectionDataFunctionForClass(
-    owner: FirClassSymbol<*>,
-    forClass: FirClassSymbol<*>
-  ): List<FirNamedFunctionSymbol> {
-    val ownerType = forClass.defaultType()
-    val returnType = PikaAPI.PIntrospectionData.constructClassLikeType(
-      arrayOf(ownerType)
-    )
-
-    val function = createMemberFunction(
-      owner,
-      key = IntrospectableDeclarationGeneratorKey,
-      name = PikaAPI.Names.IntrospectionDataFunction,
-      returnType = returnType
-    )
-
-    return listOf(function.symbol)
   }
 
   private fun generateSyntheticAccessor(
@@ -217,8 +164,9 @@ class IntrospectableDeclarationGenerator(
       .filterIsInstance<FirPropertySymbol>()
       .filter { it.hasBackingField }
       .find { prop ->
-        Identifiers.syntheticGetterName(prop.name.asString()) == callableName ||
-          Identifiers.syntheticSetterName(prop.name.asString()) == callableName
+        val propName = prop.name.asString()
+        Identifiers.syntheticGetterName(propName) == callableName ||
+          Identifiers.syntheticSetterName(propName) == callableName
       } ?: return emptyList()
 
     val propertyType = propertySymbol.resolvedReturnType

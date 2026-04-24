@@ -41,7 +41,7 @@ class TypeInfoCallTransformer(
     }
 
     return when (functionName) {
-      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
+      Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
         if (isTypeParameter(typeArg)) {
           return expression
@@ -49,7 +49,7 @@ class TypeInfoCallTransformer(
         poet.pika.typeDescriptor(typeArg)
       }
 
-      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
+      Identifiers.INTROSPECTION_OF_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
         if (isTypeParameter(typeArg)) {
           return expression
@@ -57,7 +57,7 @@ class TypeInfoCallTransformer(
         poet.pika.introspectionOf(typeArg, expression)
       }
 
-      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> {
+      Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME -> {
         val typeArg = expression.typeArguments.getOrNull(0) ?: return expression
         if (isTypeParameter(typeArg)) {
           return expression
@@ -84,9 +84,9 @@ class TypeInfoCallTransformer(
 
   companion object {
     private val PLUGIN_FUNCTION_NAMES = setOf(
-      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME,
-      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME,
-      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
+      Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME,
+      Identifiers.INTROSPECTION_OF_FUNCTION_NAME,
+      Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME
     )
   }
 }

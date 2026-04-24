@@ -54,8 +54,8 @@ class PikaJvmIrIntrinsicSupport(
   override fun getIntrinsic(symbol: IrFunctionSymbol): IntrinsicMethod? {
     val functionName = isTargetMethod(symbol) ?: return null
     return when (functionName) {
-      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> PIsIntrospectableIntrinsicMethod()
-      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> PIntrospectionOfIntrinsicMethod()
+      Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME -> PIsIntrospectableIntrinsicMethod()
+      Identifiers.INTROSPECTION_OF_FUNCTION_NAME -> PIntrospectionOfIntrinsicMethod()
       else -> PTypeDescriptorIntrinsicMethod(functionName)
     }
   }
@@ -71,14 +71,14 @@ class PikaJvmIrIntrinsicSupport(
     val functionName = bytecodePoet.removeReifyMarker(reifiedInsn, instructions) ?: return false
 
     when (functionName) {
-      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME -> {
+      Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME -> {
         val typeDescriptor = with(typeSystemContext) {
           type.typeConstructor().getTypeParameterClassifier()
         }
         if (typeDescriptor != null) {
           bytecodePoet.reifyMarker(
             typeSystemContext, type,
-            Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME,
+            Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME,
             typeDescriptor,
             "io/github/lukmccall/pika/IsIntrospectableKt",
             "throwNonReifiedIsIntrospectableError",
@@ -91,14 +91,14 @@ class PikaJvmIrIntrinsicSupport(
         }
       }
 
-      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME -> {
+      Identifiers.INTROSPECTION_OF_FUNCTION_NAME -> {
         val typeDescriptor = with(typeSystemContext) {
           type.typeConstructor().getTypeParameterClassifier()
         }
         if (typeDescriptor != null) {
           bytecodePoet.reifyMarker(
             typeSystemContext, type,
-            Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME,
+            Identifiers.INTROSPECTION_OF_FUNCTION_NAME,
             typeDescriptor,
             "io/github/lukmccall/pika/IntrospectionOfKt",
             "throwNonReifiedIntrospectionOfError",
@@ -123,12 +123,12 @@ class PikaJvmIrIntrinsicSupport(
     val fqName = function.fqNameWhenAvailable?.asString() ?: return null
 
     return when (fqName) {
-      Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      "TypeDescriptorOfKt.${Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME
-      Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME.withPackageName() -> Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
-      "IsIntrospectableKt.${Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME}".withPackageName() -> Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME
-      Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME.withPackageName() -> Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
-      "IntrospectionOfKt.${Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME
+      Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME.withPackageName() -> Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME
+      "TypeDescriptorOfKt.${Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME
+      Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME.withPackageName() -> Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME
+      "IsIntrospectableKt.${Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME}".withPackageName() -> Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME
+      Identifiers.INTROSPECTION_OF_FUNCTION_NAME.withPackageName() -> Identifiers.INTROSPECTION_OF_FUNCTION_NAME
+      "IntrospectionOfKt.${Identifiers.INTROSPECTION_OF_FUNCTION_NAME}".withPackageName() -> Identifiers.INTROSPECTION_OF_FUNCTION_NAME
       else -> null
     }
   }
@@ -158,7 +158,7 @@ class PikaJvmIrIntrinsicSupport(
         bytecodePoet.reifyMarker(
           typeSystemContext,
           typeArg,
-          Identifiers.P_IS_INTROSPECTABLE_FUNCTION_NAME,
+          Identifiers.IS_INTROSPECTABLE_FUNCTION_NAME,
           typeDescriptor,
           "io/github/lukmccall/pika/IsIntrospectableKt",
           "throwNonReifiedIsIntrospectableError",
@@ -206,7 +206,7 @@ class PikaJvmIrIntrinsicSupport(
         bytecodePoet.reifyMarker(
           typeSystemContext,
           typeArg,
-          Identifiers.P_INTROSPECTION_OF_FUNCTION_NAME,
+          Identifiers.INTROSPECTION_OF_FUNCTION_NAME,
           typeDescriptor,
           "io/github/lukmccall/pika/IntrospectionOfKt",
           "throwNonReifiedIntrospectionOfError",
@@ -270,7 +270,7 @@ class PikaJvmIrIntrinsicSupport(
 
     with(bytecodePoet) {
       when (functionName) {
-        Identifiers.P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> initPTypeDescriptor(type)
+        Identifiers.TYPE_DESCRIPTOR_OF_FUNCTION_NAME -> initPTypeDescriptor(type)
       }
     }
   }

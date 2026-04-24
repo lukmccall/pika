@@ -8,16 +8,15 @@ object Identifiers {
   const val PACKAGE_NAME = "io.github.lukmccall.pika"
   val PACKAGE_NAME_JAVE_NOTATION = PACKAGE_NAME.replace(".", "/")
 
-  const val P_TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "typeDescriptorOf"
-  const val P_INTROSPECTION_OF_FUNCTION_NAME = "introspectionOf"
-  const val P_IS_INTROSPECTABLE_FUNCTION_NAME = "isIntrospectable"
+  const val TYPE_DESCRIPTOR_OF_FUNCTION_NAME = "typeDescriptorOf"
+  const val INTROSPECTION_OF_FUNCTION_NAME = "introspectionOf"
+  const val IS_INTROSPECTABLE_FUNCTION_NAME = "isIntrospectable"
 
-  const val P_INTROSPECTION_DATA_FUNCTION_NAME = "__PIntrospectionData"
-  const val P_INTROSPECTION_DATA_CACHE_FIELD_NAME = "__pIntrospectionData\$cache"
+  const val INTROSPECTION_DATA_FIELD_NAME = "__pika\$IntrospectionData"
 
-  const val P_TYPE_DESCRIPTOR_REGISTRY_CLASS = "PTypeDescriptorRegistry"
-  const val P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE = "getOrCreateConcrete"
-  const val P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED = "getOrCreateParameterized"
+  const val TYPE_DESCRIPTOR_REGISTRY_CLASS = "PTypeDescriptorRegistry"
+  const val TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE = "getOrCreateConcrete"
+  const val TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED = "getOrCreateParameterized"
   const val INTROSPECTABLE_INTERFACE_NAME = "Introspectable"
 
   const val PIKA_SPECIAL_PREFIX = "__pika\$"

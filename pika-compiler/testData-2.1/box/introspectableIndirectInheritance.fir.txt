@@ -14,8 +14,6 @@ FILE: introspectableIndirectInheritance.kt
         internal final fun __pika$set$species(value: R|kotlin/String|): R|kotlin/Unit|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Animal>|
-
             private constructor(): R|test/Animal.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -36,8 +34,6 @@ FILE: introspectableIndirectInheritance.kt
         internal final fun __pika$set$warmBlooded(value: R|kotlin/Boolean|): R|kotlin/Unit|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Mammal>|
-
             private constructor(): R|test/Mammal.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -58,8 +54,6 @@ FILE: introspectableIndirectInheritance.kt
         internal final fun __pika$get$breed(): R|kotlin/String|
 
         public final companion object Companion : R|kotlin/Any| {
-            public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>|
-
             private constructor(): R|test/Dog.Companion| {
                 super<R|kotlin/Any|>()
             }
@@ -69,7 +63,7 @@ FILE: introspectableIndirectInheritance.kt
     }
     public final fun box(): R|kotlin/String| {
         lval dog: R|test/Dog| = R|test/Dog.Dog|(String(Canine), Boolean(true), String(Labrador))
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>| = Q|test/Dog|.R|test/Dog.Companion.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Dog>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Dog|>()
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Dog, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: Dog should have 1 property)

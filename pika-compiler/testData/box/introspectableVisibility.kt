@@ -13,7 +13,7 @@ class Person(
 
 fun box(): String {
   val person = Person("pub", "priv", "prot", "intern")
-  val data = Person.__PIntrospectionData()
+  val data = introspectionOf<Person>()
 
   val publicProp = data.properties.find { it.name == "publicProp" }
     ?: return "FAIL: publicProp not found"

@@ -8,7 +8,7 @@ data class Person(val name: String, val age: Int)
 
 fun box(): String {
   val person = Person("Alice", 30)
-  val data = Person.__PIntrospectionData()
+  val data = introspectionOf<Person>()
 
   // Data class properties
   if (data.properties.size != 2) return "FAIL: expected 2 properties"

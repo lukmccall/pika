@@ -14,7 +14,7 @@ object Singleton {
 }
 
 fun box(): String {
-  val data = Singleton.__PIntrospectionData()
+  val data = introspectionOf<Singleton>()
 
   // Check kClass
   if (data.jClass != Singleton::class.java) return "FAIL: kClass"

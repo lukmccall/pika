@@ -12,7 +12,7 @@ class Person(val name: String) {
 
 fun box(): String {
   val person = Person("Alice")
-  val data = Person.__PIntrospectionData()
+  val data = introspectionOf<Person>()
 
   val nameProp = data.properties.find { it.name == "name" }
     ?: return "FAIL: name not found"

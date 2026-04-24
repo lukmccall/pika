@@ -19,15 +19,15 @@ fun box(): String {
   val a2 = introspectionOf<Parent>()
   if (a1 !== a2) return "FAIL: introspectionOf<Parent>() not cached"
 
-  val c1 = Parent.__PIntrospectionData()
-  val c2 = Parent.__PIntrospectionData()
-  if (c1 !== c2) return "FAIL: Parent.__PIntrospectionData() not cached"
+  val c1 = introspectionOf<Parent>()
+  val c2 = introspectionOf<Parent>()
+  if (c1 !== c2) return "FAIL: introspectionOf<Parent>() not cached (second check)"
 
-  if (a1 !== c1) return "FAIL: introspectionOf<Parent>() and Parent.__PIntrospectionData() differ"
+  if (a1 !== c1) return "FAIL: introspectionOf<Parent>() not stable across calls"
 
-  val s1 = Singleton.__PIntrospectionData()
-  val s2 = Singleton.__PIntrospectionData()
-  if (s1 !== s2) return "FAIL: Singleton.__PIntrospectionData() not cached"
+  val s1 = introspectionOf<Singleton>()
+  val s2 = introspectionOf<Singleton>()
+  if (s1 !== s2) return "FAIL: introspectionOf<Singleton>() not cached"
 
   val ch1 = introspectionOf<Child>()
   val ch2 = introspectionOf<Child>()

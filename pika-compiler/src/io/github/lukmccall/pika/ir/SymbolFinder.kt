@@ -30,8 +30,8 @@ class SymbolFinder(
         functionResolver(
           CallableId(
             Identifiers.PACKAGE_NAME.toFq(),
-            FqName(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS),
-            Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE)
+            FqName(Identifiers.TYPE_DESCRIPTOR_REGISTRY_CLASS),
+            Name.identifier(Identifiers.TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE)
           )
         ).firstOrNull() ?: error("Function getOrCreateConcrete not found in PTypeDescriptorRegistry")
       }
@@ -40,8 +40,8 @@ class SymbolFinder(
         functionResolver(
           CallableId(
             Identifiers.PACKAGE_NAME.toFq(),
-            FqName(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_CLASS),
-            Name.identifier(Identifiers.P_TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED)
+            FqName(Identifiers.TYPE_DESCRIPTOR_REGISTRY_CLASS),
+            Name.identifier(Identifiers.TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_PARAMETERIZED)
           )
         ).firstOrNull() ?: error("Function getOrCreateParameterized not found in PTypeDescriptorRegistry")
       }

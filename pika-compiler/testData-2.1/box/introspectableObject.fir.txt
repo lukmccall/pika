@@ -22,11 +22,9 @@ FILE: introspectableObject.kt
 
         }
 
-        public final fun __PIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>|
-
     }
     public final fun box(): R|kotlin/String| {
-        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = Q|test/Singleton|.R|test/Singleton.__PIntrospectionData|()
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Singleton>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Singleton|>()
         when () {
             !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/Singleton>|>|, <getClass>(Q|test/Singleton|).R|kotlin/jvm/java|<R|test/Singleton|>) ->  {
                 ^box String(FAIL: kClass)

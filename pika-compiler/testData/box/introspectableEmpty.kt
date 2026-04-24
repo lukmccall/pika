@@ -8,7 +8,7 @@ class Empty
 
 fun box(): String {
   val empty = Empty()
-  val data = Empty.__PIntrospectionData()
+  val data = introspectionOf<Empty>()
 
   // Check kClass
   if (data.jClass != Empty::class.java) return "FAIL: kClass"

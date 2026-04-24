@@ -2,7 +2,7 @@
 
 # Test all supported Kotlin versions
 # Usage: ./test-all-versions.sh [--quick]
-#   --quick: Only run compilation and sample, skip tests
+#   --quick: Only run sample, skip tests
 
 VERSIONS="2.1.20 2.2.0 2.2.10 2.2.20 2.2.21 2.3.0 2.3.10 2.3.20"
 QUICK_MODE=false
@@ -29,21 +29,8 @@ for version in $VERSIONS; do
   echo -e "${YELLOW}Testing Kotlin $version${NC}"
   echo "----------------------------------------"
 
-  compile_status="FAIL"
   sample_status="FAIL"
   test_status="SKIP"
-
-  # Test compilation
-  echo -n "  Compiling... "
-  if ./gradlew :pika-compiler:compileKotlin -PkotlinVersion="$version" --quiet 2>/dev/null; then
-    echo -e "${GREEN}OK${NC}"
-    compile_status="PASS"
-  else
-    echo -e "${RED}FAILED${NC}"
-    RESULTS="$RESULTS$version:$compile_status:$sample_status:$test_status\n"
-    echo ""
-    continue
-  fi
 
   # Test sample project
   echo -n "  Running sample... "
@@ -66,7 +53,7 @@ for version in $VERSIONS; do
     fi
   fi
 
-  RESULTS="$RESULTS$version:$compile_status:$sample_status:$test_status\n"
+  RESULTS="$RESULTS$version:$sample_status:$test_status\n"
   echo ""
 done
 
@@ -75,20 +62,12 @@ echo "========================================"
 echo "Summary"
 echo "========================================"
 echo ""
-printf "%-10s | %-10s | %-10s | %-10s\n" "Version" "Compile" "Sample" "Tests"
-printf "%-10s-+-%-10s-+-%-10s-+-%-10s\n" "----------" "----------" "----------" "----------"
+printf "%-10s | %-10s | %-10s\n" "Version" "Sample" "Tests"
+printf "%-10s-+-%-10s-+-%-10s\n" "----------" "----------" "----------"
 
 FAILED=0
-echo -e "$RESULTS" | while IFS=: read -r version compile sample test; do
+echo -e "$RESULTS" | while IFS=: read -r version sample test; do
   [[ -z "$version" ]] && continue
-
-  # Color the status
-  if [[ "$compile" == "PASS" ]]; then
-    compile_display="${GREEN}PASS${NC}"
-  else
-    compile_display="${RED}FAIL${NC}"
-    FAILED=1
-  fi
 
   if [[ "$sample" == "PASS" ]]; then
     sample_display="${GREEN}PASS${NC}"
@@ -106,7 +85,7 @@ echo -e "$RESULTS" | while IFS=: read -r version compile sample test; do
     FAILED=1
   fi
 
-  printf "%-10s | %-19b | %-19b | %-19b\n" "$version" "$compile_display" "$sample_display" "$test_display"
+  printf "%-10s | %-19b | %-19b\n" "$version" "$sample_display" "$test_display"
 done
 
 echo ""

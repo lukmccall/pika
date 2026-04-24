@@ -16,7 +16,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
               receiver: GET_VAR '<this>: test.Child declared in test.Child.<get-b>' type=test.Child origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Child.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
             <OwnerType>: test.Child
@@ -52,9 +52,9 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Child) returnType:kotlin.Int
                       VALUE_PARAMETER name:owner index:0 type:test.Child
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Child): kotlin.Int declared in test.Child.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Child): kotlin.Int declared in test.Child.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-b> (): kotlin.Int declared in test.Child' type=kotlin.Int origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Child declared in test.Child.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Child origin=null
+                            $this: GET_VAR 'owner: test.Child declared in test.Child.Companion.__pika$IntrospectionData.<anonymous>' type=test.Child origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Child, kotlin.Int, kotlin.Unit> origin=LAMBDA
@@ -63,15 +63,14 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.Int
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$b (value: kotlin.Int): kotlin.Unit declared in test.Child' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Child declared in test.Child.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Child origin=null
-                          value: GET_VAR 'value: kotlin.Int declared in test.Child.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.Int origin=null
+                          $this: GET_VAR 'owner: test.Child declared in test.Child.Companion.__pika$IntrospectionData.<anonymous>' type=test.Child origin=null
+                          value: GET_VAR 'value: kotlin.Int declared in test.Child.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.Int origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
               <T>: io.github.lukmccall.pika.PFunction
               elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
-            baseClass: CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-              $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Parent.Companion
+            baseClass: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
       CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private <> () returnType:test.Child.Companion [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -89,12 +88,6 @@ FILE fqName:test fileName:/introspectionDataCached.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Child.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Child>
-        $this: VALUE_PARAMETER name:<this> type:test.Child.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Child> declared in test.Child.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:private [final] declared in test.Child.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
-              receiver: GET_VAR '<this>: test.Child.Companion declared in test.Child.Companion.__PIntrospectionData' type=test.Child.Companion origin=null
     CONSTRUCTOR visibility:public <> (b:kotlin.Int) returnType:test.Child [primary]
       VALUE_PARAMETER name:b index:0 type:kotlin.Int
       BLOCK_BODY
@@ -161,7 +154,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
               receiver: GET_VAR '<this>: test.Parent declared in test.Parent.<get-a>' type=test.Parent origin=null
     CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Parent.Companion
-      FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:private [final]
+      FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
             <OwnerType>: test.Parent
@@ -197,9 +190,9 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Parent) returnType:kotlin.Int
                       VALUE_PARAMETER name:owner index:0 type:test.Parent
                       BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Parent): kotlin.Int declared in test.Parent.Companion.__pIntrospectionData$cache'
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Parent): kotlin.Int declared in test.Parent.Companion.__pika$IntrospectionData'
                           CALL 'public final fun <get-a> (): kotlin.Int declared in test.Parent' type=kotlin.Int origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Parent declared in test.Parent.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Parent origin=null
+                            $this: GET_VAR 'owner: test.Parent declared in test.Parent.Companion.__pika$IntrospectionData.<anonymous>' type=test.Parent origin=null
                   isMutable: CONST Boolean type=kotlin.Boolean value=false
                   hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                   setter: FUN_EXPR type=kotlin.Function2<test.Parent, kotlin.Int, kotlin.Unit> origin=LAMBDA
@@ -208,8 +201,8 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                       VALUE_PARAMETER name:value index:1 type:kotlin.Int
                       BLOCK_BODY
                         CALL 'internal final fun __pika$set$a (value: kotlin.Int): kotlin.Unit declared in test.Parent' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Parent declared in test.Parent.Companion.__pIntrospectionData$cache.<anonymous>' type=test.Parent origin=null
-                          value: GET_VAR 'value: kotlin.Int declared in test.Parent.Companion.__pIntrospectionData$cache.<anonymous>' type=kotlin.Int origin=null
+                          $this: GET_VAR 'owner: test.Parent declared in test.Parent.Companion.__pika$IntrospectionData.<anonymous>' type=test.Parent origin=null
+                          value: GET_VAR 'value: kotlin.Int declared in test.Parent.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.Int origin=null
                   isDelegated: CONST Boolean type=kotlin.Boolean value=false
                   delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
@@ -233,12 +226,6 @@ FILE fqName:test fileName:/introspectionDataCached.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-      FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Parent.Companion) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Parent>
-        $this: VALUE_PARAMETER name:<this> type:test.Parent.Companion
-        BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion'
-            GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:private [final] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-              receiver: GET_VAR '<this>: test.Parent.Companion declared in test.Parent.Companion.__PIntrospectionData' type=test.Parent.Companion origin=null
     CONSTRUCTOR visibility:public <> (a:kotlin.Int) returnType:test.Parent [primary]
       VALUE_PARAMETER name:a index:0 type:kotlin.Int
       BLOCK_BODY
@@ -285,7 +272,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
           RETURN type=kotlin.Nothing from='public final fun <get-version> (): kotlin.String declared in test.Singleton'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:version type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Singleton declared in test.Singleton.<get-version>' type=test.Singleton origin=null
-    FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:private [final]
+    FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:public [final,static]
       EXPRESSION_BODY
         CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
           <OwnerType>: test.Singleton
@@ -321,9 +308,9 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                   FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton) returnType:kotlin.String
                     VALUE_PARAMETER name:owner index:0 type:test.Singleton
                     BLOCK_BODY
-                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Singleton): kotlin.String declared in test.Singleton.__pIntrospectionData$cache'
+                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Singleton): kotlin.String declared in test.Singleton.__pika$IntrospectionData'
                         CALL 'public final fun <get-version> (): kotlin.String declared in test.Singleton' type=kotlin.String origin=GET_PROPERTY
-                          $this: GET_VAR 'owner: test.Singleton declared in test.Singleton.__pIntrospectionData$cache.<anonymous>' type=test.Singleton origin=null
+                          $this: GET_VAR 'owner: test.Singleton declared in test.Singleton.__pika$IntrospectionData.<anonymous>' type=test.Singleton origin=null
                 isMutable: CONST Boolean type=kotlin.Boolean value=false
                 hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                 setter: CONST Null type=kotlin.Nothing? value=null
@@ -350,20 +337,12 @@ FILE fqName:test fileName:/introspectionDataCached.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__PIntrospectionData visibility:public modality:FINAL <> ($this:test.Singleton) returnType:io.github.lukmccall.pika.PIntrospectionData<test.Singleton>
-      $this: VALUE_PARAMETER name:<this> type:test.Singleton
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton'
-          GET_FIELD 'FIELD name:__pIntrospectionData$cache type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:private [final] declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
-            receiver: GET_VAR '<this>: test.Singleton declared in test.Singleton.__PIntrospectionData' type=test.Singleton origin=null
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       VAR name:a1 type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Parent.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
       VAR name:a2 type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Parent.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQEQ
@@ -373,11 +352,9 @@ FILE fqName:test fileName:/introspectionDataCached.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: introspectionOf<Parent>() not cached"
       VAR name:c1 type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Parent.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
       VAR name:c2 type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Parent.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQEQ
@@ -385,7 +362,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
               arg0: GET_VAR 'val c1: io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
               arg1: GET_VAR 'val c2: io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Parent.__PIntrospectionData() not cached"
+            CONST String type=kotlin.String value="FAIL: introspectionOf<Parent>() not cached (second check)"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQEQ
@@ -393,13 +370,11 @@ FILE fqName:test fileName:/introspectionDataCached.kt
               arg0: GET_VAR 'val a1: io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
               arg1: GET_VAR 'val c1: io.github.lukmccall.pika.PIntrospectionData<test.Parent> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: introspectionOf<Parent>() and Parent.__PIntrospectionData() differ"
+            CONST String type=kotlin.String value="FAIL: introspectionOf<Parent>() not stable across calls"
       VAR name:s1 type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
-          $this: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=test.Singleton
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:public [final,static] declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
       VAR name:s2 type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
-          $this: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any]' type=test.Singleton
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:public [final,static] declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQEQ
@@ -407,13 +382,11 @@ FILE fqName:test fileName:/introspectionDataCached.kt
               arg0: GET_VAR 'val s1: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
               arg1: GET_VAR 'val s2: io.github.lukmccall.pika.PIntrospectionData<test.Singleton> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
-            CONST String type=kotlin.String value="FAIL: Singleton.__PIntrospectionData() not cached"
+            CONST String type=kotlin.String value="FAIL: introspectionOf<Singleton>() not cached"
       VAR name:ch1 type:io.github.lukmccall.pika.PIntrospectionData<test.Child> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Child> declared in test.Child.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Child.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:public [final,static] declared in test.Child.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
       VAR name:ch2 type:io.github.lukmccall.pika.PIntrospectionData<test.Child> [val]
-        CALL 'public final fun __PIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<test.Child> declared in test.Child.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
-          $this: GET_OBJECT 'CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=test.Child.Companion
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:public [final,static] declared in test.Child.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQEQ
