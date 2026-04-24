@@ -16,8 +16,10 @@ import org.jetbrains.kotlin.ir.declarations.impl.IrFactoryImpl
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
+import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
+import org.jetbrains.kotlin.ir.symbols.impl.IrFieldSymbolImpl
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
@@ -342,6 +344,42 @@ class IRPoet(
       }
     }
 
+    private val simpleTypeFieldNames: Map<IrClassifierSymbol, Pair<String, String>> by lazy {
+      mapOf(
+        irBuiltIns.intClass to ("INT" to "INT_NULLABLE"),
+        irBuiltIns.longClass to ("LONG" to "LONG_NULLABLE"),
+        irBuiltIns.floatClass to ("FLOAT" to "FLOAT_NULLABLE"),
+        irBuiltIns.shortClass to ("SHORT" to "SHORT_NULLABLE"),
+        irBuiltIns.doubleClass to ("DOUBLE" to "DOUBLE_NULLABLE"),
+        irBuiltIns.stringClass to ("STRING" to "STRING_NULLABLE"),
+        irBuiltIns.booleanClass to ("BOOLEAN" to "BOOLEAN_NULLABLE"),
+      )
+    }
+
+    fun staticFieldDescriptor(fieldName: String): IrExpression {
+      val registry = symbolFinder.pikaAPI.pTypeDescriptorRegistry
+      val concreteType = symbolFinder.pikaAPI.pTypeDescriptor.concrete.owner.defaultType
+      val field = irBuiltIns.irFactory.createField(
+        startOffset = -1,
+        endOffset = -1,
+        origin = IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB,
+        name = Name.identifier(fieldName),
+        visibility = DescriptorVisibilities.PUBLIC,
+        symbol = IrFieldSymbolImpl(),
+        type = concreteType,
+        isFinal = true,
+        isStatic = true,
+        isExternal = false,
+      ).also { it.parent = registry.classSymbol.owner }
+      return IrGetFieldImpl(
+        startOffset = -1,
+        endOffset = -1,
+        symbol = field.symbol,
+        type = concreteType,
+        receiver = null,
+      )
+    }
+
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
      */
@@ -351,6 +389,19 @@ class IRPoet(
 
       val classifier = simpleType.classifier
       val isNullable = simpleType.isMarkedNullable()
+
+      if (simpleType.arguments.isEmpty()) {
+        val fieldNames = simpleTypeFieldNames[classifier]
+        if (fieldNames != null) {
+          val fieldName = if (isNullable) {
+            fieldNames.second
+          } else {
+            fieldNames.first
+          }
+          return pika.staticFieldDescriptor(fieldName)
+        }
+      }
+
       val irClass = (classifier as? IrClassSymbol)?.owner
       val introspection = irClass?.let { buildIntrospectionCallFor(it) }
 

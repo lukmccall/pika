@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
+import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
@@ -47,6 +48,16 @@ class BytecodePoet(
     val pIntrospectionDataType: Type = Type.getObjectType("${Identifiers.PACKAGE_NAME_JAVE_NOTATION}/PIntrospectionData")
   }
 
+  private fun simpleTypeFieldName(irClass: IrClass, isNullable: Boolean): String? {
+    val fqName = irClass.kotlinFqName.asString()
+    val (nonNullable, nullable) = Identifiers.SIMPLE_TYPE_FIELD_NAMES[fqName] ?: return null
+    return if (isNullable) {
+      nullable
+    } else {
+      nonNullable
+    }
+  }
+
   /**
    * PTypeDescriptorRegistry.getOrCreateConcrete({Class<?>}, {isNullable}, {introspection})
    */
@@ -54,6 +65,16 @@ class BytecodePoet(
     irClass: IrClass,
     isNullable: Boolean
   ) = adapter.apply {
+    val fieldName = simpleTypeFieldName(irClass, isNullable)
+    if (fieldName != null) {
+      getstatic(
+        pTypeDescriptorRegistryType.internalName,
+        fieldName,
+        pTypeDescriptorConcreteType.descriptor
+      )
+      return@apply
+    }
+
     aconst(irClass.toGeneric())
     iconst(if (isNullable) 1 else 0)
     val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
@@ -94,7 +115,9 @@ class BytecodePoet(
     invokestatic("java/util/Arrays", "asList", "([Ljava/lang/Object;)Ljava/util/List;", false)
 
     val pushed = irClass.hasIntrospectableAnnotation(extraAnnotationClassIds) && initPIntrospectionData(irClass)
-    if (!pushed) aconst(null)
+    if (!pushed) {
+      aconst(null)
+    }
 
     invokestatic(
       pTypeDescriptorRegistryType.internalName,

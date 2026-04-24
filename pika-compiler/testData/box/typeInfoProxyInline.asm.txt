@@ -6,10 +6,7 @@ public final class test/TypeInfoProxyInlineKt : java/lang/Object {
           ISTORE (1)
         LABEL (L1)
         LINENUMBER (17)
-          LDC (Ljava/lang/String;)
-          ICONST_0
-          ACONST_NULL
-          INVOKESTATIC (io/github/lukmccall/pika/PTypeDescriptorRegistry, getOrCreateConcrete, (Ljava/lang/Class;ZLio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;)
+          GETSTATIC (io/github/lukmccall/pika/PTypeDescriptorRegistry, STRING, Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;)
         LABEL (L2)
         LINENUMBER (11)
           ASTORE (0)

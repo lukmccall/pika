@@ -2,12 +2,7 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
   FUN name:box visibility:public modality:FINAL returnType:kotlin.String
     BLOCK_BODY
       VAR name:stringInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-          ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-          ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-          ARG introspection: CONST Null type=kotlin.Nothing? value=null
+        GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
@@ -35,12 +30,7 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: String should not be nullable"
       VAR name:intInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-          ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-          ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-          ARG introspection: CONST Null type=kotlin.Nothing? value=null
+        GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:INT type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
@@ -68,12 +58,7 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Int should not be nullable"
       VAR name:boolInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-          ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Boolean> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Boolean modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.Boolean>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-          ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-          ARG introspection: CONST Null type=kotlin.Nothing? value=null
+        GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:BOOLEAN type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
@@ -94,12 +79,7 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Boolean kClass"
       VAR name:nullableIntInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-          ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-          ARG isNullable: CONST Boolean type=kotlin.Boolean value=true
-          ARG introspection: CONST Null type=kotlin.Nothing? value=null
+        GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:INT_NULLABLE type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete
@@ -128,12 +108,7 @@ FILE fqName:test fileName:/typeInfoSimpleTypes.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: Int? should be nullable"
       VAR name:nullableStringInfo type:io.github.lukmccall.pika.PTypeDescriptor [val]
-        CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-          ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-          ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-          ARG isNullable: CONST Boolean type=kotlin.Boolean value=true
-          ARG introspection: CONST Null type=kotlin.Nothing? value=null
+        GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING_NULLABLE type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete

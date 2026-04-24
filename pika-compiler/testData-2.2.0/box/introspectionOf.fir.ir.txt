@@ -61,12 +61,7 @@ FILE fqName:test fileName:/introspectionOf.kt
                   ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
                     TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
                     ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  ARG type: CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-                    ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.String> origin=null
-                      ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:String modality:FINAL visibility:public superTypes:[kotlin.Comparable<kotlin.String>; kotlin.CharSequence; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-                    ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                    ARG introspection: CONST Null type=kotlin.Nothing? value=null
+                  ARG type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                   ARG getter: FUN_EXPR type=kotlin.Function1<test.Person, kotlin.String> origin=LAMBDA
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
                       VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Person
@@ -94,12 +89,7 @@ FILE fqName:test fileName:/introspectionOf.kt
                   ARG annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
                     TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
                     ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  ARG type: CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                    ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
-                    ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<kotlin.Int> origin=null
-                      ARG $receiver: CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Int modality:FINAL visibility:public superTypes:[kotlin.Number; kotlin.Comparable<kotlin.Int>; java.io.Serializable]' type=kotlin.reflect.KClass<*>
-                    ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
-                    ARG introspection: CONST Null type=kotlin.Nothing? value=null
+                  ARG type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:INT type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                   ARG getter: FUN_EXPR type=kotlin.Function1<test.Person, kotlin.Int> origin=LAMBDA
                     FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Int
                       VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Person
