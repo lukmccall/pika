@@ -29,11 +29,11 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Config.Companion
       FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static]
         EXPRESSION_BODY
-          CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.collections.List<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
+          CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, _propertiesFactory: kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>>?, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
             <OwnerType>: test.Config
             jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Config> origin=null
               $receiver: CLASS_REFERENCE 'CLASS CLASS name:Config modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
-            annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
+            annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               <T>: io.github.lukmccall.pika.PAnnotation
               elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
                 CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<*>, arguments: kotlin.collections.Map<kotlin.String, kotlin.Any?>) declared in io.github.lukmccall.pika.PAnnotation' type=io.github.lukmccall.pika.PAnnotation origin=null
@@ -42,68 +42,66 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
                   arguments: CALL 'public final fun emptyMap <K, V> (): kotlin.collections.Map<K of kotlin.collections.emptyMap, V of kotlin.collections.emptyMap> declared in kotlin.collections' type=kotlin.collections.Map<kotlin.String, kotlin.Any?> origin=null
                     <K>: kotlin.String
                     <V>: kotlin.Any?
-            properties: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> origin=INVOKE
-              <T>: io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
-              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Config, kotlin.String> origin=null
-                  <OwnerType>: test.Config
-                  <Type>: kotlin.String
-                  name: CONST String type=kotlin.String value="host"
-                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                    <T>: io.github.lukmccall.pika.PAnnotation
-                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                  getter: FUN_EXPR type=kotlin.Function1<test.Config, kotlin.String> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.String
-                      VALUE_PARAMETER name:owner index:0 type:test.Config
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.String declared in test.Config.Companion.__pika$IntrospectionData'
-                          CALL 'public final fun <get-host> (): kotlin.String declared in test.Config' type=kotlin.String origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=test.Config origin=null
-                  isMutable: CONST Boolean type=kotlin.Boolean value=false
-                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                  setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.String, kotlin.Unit> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config, value:kotlin.String) returnType:kotlin.Unit
-                      VALUE_PARAMETER name:owner index:0 type:test.Config
-                      VALUE_PARAMETER name:value index:1 type:kotlin.String
-                      BLOCK_BODY
-                        CALL 'internal final fun __pika$set$host (value: kotlin.String): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=test.Config origin=null
-                          value: GET_VAR 'value: kotlin.String declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.String origin=null
-                  isDelegated: CONST Boolean type=kotlin.Boolean value=false
-                  delegateGetter: CONST Null type=kotlin.Nothing? value=null
-                CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.collections.List<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Int> origin=null
-                  <OwnerType>: test.Config
-                  <Type>: kotlin.Int
-                  name: CONST String type=kotlin.String value="port"
-                  visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
-                  annotations: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PAnnotation> origin=INVOKE
-                    <T>: io.github.lukmccall.pika.PAnnotation
-                    elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
-                  type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:INT type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
-                  getter: FUN_EXPR type=kotlin.Function1<test.Config, kotlin.Int> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.Int
-                      VALUE_PARAMETER name:owner index:0 type:test.Config
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData'
-                          CALL 'public final fun <get-port> (): kotlin.Int declared in test.Config' type=kotlin.Int origin=GET_PROPERTY
-                            $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=test.Config origin=null
-                  isMutable: CONST Boolean type=kotlin.Boolean value=false
-                  hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                  setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.Int, kotlin.Unit> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config, value:kotlin.Int) returnType:kotlin.Unit
-                      VALUE_PARAMETER name:owner index:0 type:test.Config
-                      VALUE_PARAMETER name:value index:1 type:kotlin.Int
-                      BLOCK_BODY
-                        CALL 'internal final fun __pika$set$port (value: kotlin.Int): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
-                          $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=test.Config origin=null
-                          value: GET_VAR 'value: kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>' type=kotlin.Int origin=null
-                  isDelegated: CONST Boolean type=kotlin.Boolean value=false
-                  delegateGetter: CONST Null type=kotlin.Nothing? value=null
-            functions: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<io.github.lukmccall.pika.PFunction> origin=INVOKE
-              <T>: io.github.lukmccall.pika.PFunction
-              elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PFunction> varargElementType=io.github.lukmccall.pika.PFunction
+            _propertiesFactory: FUN_EXPR type=kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>>> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> declared in test.Config.Companion.__pika$IntrospectionData'
+                    CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> origin=null
+                      <T>: io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
+                      elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
+                        CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Config, kotlin.String> origin=null
+                          <OwnerType>: test.Config
+                          <Type>: kotlin.String
+                          name: CONST String type=kotlin.String value="host"
+                          visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                          annotations: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:EMPTY_ANNOTATIONS type:kotlin.Array<io.github.lukmccall.pika.PAnnotation> visibility:public [final,static] declared in io.github.lukmccall.pika.PEmptyArrays' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
+                          type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                          getter: FUN_EXPR type=kotlin.Function1<test.Config, kotlin.String> origin=LAMBDA
+                            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.String
+                              VALUE_PARAMETER name:owner index:0 type:test.Config
+                              BLOCK_BODY
+                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.String declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>'
+                                  CALL 'public final fun <get-host> (): kotlin.String declared in test.Config' type=kotlin.String origin=GET_PROPERTY
+                                    $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                          isMutable: CONST Boolean type=kotlin.Boolean value=false
+                          hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                          setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.String, kotlin.Unit> origin=LAMBDA
+                            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config, value:kotlin.String) returnType:kotlin.Unit
+                              VALUE_PARAMETER name:owner index:0 type:test.Config
+                              VALUE_PARAMETER name:value index:1 type:kotlin.String
+                              BLOCK_BODY
+                                CALL 'internal final fun __pika$set$host (value: kotlin.String): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
+                                  $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                  value: GET_VAR 'value: kotlin.String declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.String origin=null
+                          isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                          delegateGetter: CONST Null type=kotlin.Nothing? value=null
+                        CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Int> origin=null
+                          <OwnerType>: test.Config
+                          <Type>: kotlin.Int
+                          name: CONST String type=kotlin.String value="port"
+                          visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:PUBLIC' type=io.github.lukmccall.pika.PVisibility
+                          annotations: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:EMPTY_ANNOTATIONS type:kotlin.Array<io.github.lukmccall.pika.PAnnotation> visibility:public [final,static] declared in io.github.lukmccall.pika.PEmptyArrays' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
+                          type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:INT type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
+                          getter: FUN_EXPR type=kotlin.Function1<test.Config, kotlin.Int> origin=LAMBDA
+                            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.Int
+                              VALUE_PARAMETER name:owner index:0 type:test.Config
+                              BLOCK_BODY
+                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>'
+                                  CALL 'public final fun <get-port> (): kotlin.Int declared in test.Config' type=kotlin.Int origin=GET_PROPERTY
+                                    $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                          isMutable: CONST Boolean type=kotlin.Boolean value=false
+                          hasBackingField: CONST Boolean type=kotlin.Boolean value=true
+                          setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.Int, kotlin.Unit> origin=LAMBDA
+                            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config, value:kotlin.Int) returnType:kotlin.Unit
+                              VALUE_PARAMETER name:owner index:0 type:test.Config
+                              VALUE_PARAMETER name:value index:1 type:kotlin.Int
+                              BLOCK_BODY
+                                CALL 'internal final fun __pika$set$port (value: kotlin.Int): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
+                                  $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                  value: GET_VAR 'value: kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.Int origin=null
+                          isDelegated: CONST Boolean type=kotlin.Boolean value=false
+                          delegateGetter: CONST Null type=kotlin.Nothing? value=null
+            functions: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:EMPTY_FUNCTIONS type:kotlin.Array<io.github.lukmccall.pika.PFunction> visibility:public [final,static] declared in io.github.lukmccall.pika.PEmptyArrays' type=kotlin.Array<io.github.lukmccall.pika.PFunction> origin=null
             baseClass: CONST Null type=kotlin.Nothing? value=null
       CONSTRUCTOR visibility:private <> () returnType:test.Config.Companion [primary]
         BLOCK_BODY
@@ -236,22 +234,22 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
-                $this: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
+              arg0: CALL 'public final fun <get-size> (): kotlin.Int declared in kotlin.Array' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-properties> (): kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
                   $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Config> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
               arg1: CONST Int type=kotlin.Int value=2
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             STRING_CONCATENATION type=kotlin.String
               CONST String type=kotlin.String value="FAIL: expected 2 properties but got "
-              CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
-                $this: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
+              CALL 'public final fun <get-size> (): kotlin.Int declared in kotlin.Array' type=kotlin.Int origin=GET_PROPERTY
+                $this: CALL 'public final fun <get-properties> (): kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
                   $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Config> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
       VAR name:hostProp type:io.github.lukmccall.pika.PProperty<test.Config, *> [val]
         BLOCK type=io.github.lukmccall.pika.PProperty<test.Config, *> origin=ELVIS
           VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:io.github.lukmccall.pika.PProperty<test.Config, *>? [val]
             CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.Config, *>? origin=null
               <T>: io.github.lukmccall.pika.PProperty<test.Config, *>
-              $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
+              $receiver: CALL 'public final fun <get-properties> (): kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
                 $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Config> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
               predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.Config, *>, kotlin.Boolean> origin=LAMBDA
                 FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.Config, *>) returnType:kotlin.Boolean
@@ -288,7 +286,7 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
           VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:io.github.lukmccall.pika.PProperty<test.Config, *>? [val]
             CALL 'public final fun find <T> (predicate: kotlin.Function1<T of kotlin.collections.find, kotlin.Boolean>): T of kotlin.collections.find? declared in kotlin.collections' type=io.github.lukmccall.pika.PProperty<test.Config, *>? origin=null
               <T>: io.github.lukmccall.pika.PProperty<test.Config, *>
-              $receiver: CALL 'public final fun <get-properties> (): kotlin.collections.List<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.collections.List<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
+              $receiver: CALL 'public final fun <get-properties> (): kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>> declared in io.github.lukmccall.pika.PIntrospectionData' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, *>> origin=GET_PROPERTY
                 $this: GET_VAR 'val data: io.github.lukmccall.pika.PIntrospectionData<test.Config> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
               predicate: FUN_EXPR type=kotlin.Function1<io.github.lukmccall.pika.PProperty<test.Config, *>, kotlin.Boolean> origin=LAMBDA
                 FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:io.github.lukmccall.pika.PProperty<test.Config, *>) returnType:kotlin.Boolean

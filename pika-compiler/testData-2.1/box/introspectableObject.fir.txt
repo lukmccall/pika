@@ -32,12 +32,12 @@ FILE: introspectableObject.kt
         }
 
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(2)) ->  {
                 ^box String(FAIL: expected 2 properties)
             }
         }
 
-        lval versionProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval versionProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(version))
         }
         ) ?: ^box String(FAIL: version not found)
@@ -47,7 +47,7 @@ FILE: introspectableObject.kt
             }
         }
 
-        lval counterProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval counterProp: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Singleton, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Singleton, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(counter))
         }
         ) ?: ^box String(FAIL: counter not found)
@@ -57,7 +57,7 @@ FILE: introspectableObject.kt
             }
         }
 
-        lval incrementFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval incrementFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(increment))
         }
         ) ?: ^box String(FAIL: increment not found)

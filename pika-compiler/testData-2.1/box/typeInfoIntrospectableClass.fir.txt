@@ -60,8 +60,8 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
-                ^box <strcat>(String(FAIL: should have 2 properties, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box <strcat>(String(FAIL: should have 2 properties, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|)
             }
         }
 
@@ -73,7 +73,7 @@ FILE: typeInfoIntrospectableClass.kt
         }
 
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|) ->  {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, R|<local>/direct|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|) ->  {
                 ^box String(FAIL: properties size mismatch)
             }
         }

@@ -37,12 +37,12 @@ FILE: introspectableFunctions.kt
         lval calc: R|test/Calculator| = R|test/Calculator.Calculator|()
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Calculator>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Calculator|>()
         when () {
-            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|SubstitutionOverride<kotlin/collections/List.isEmpty: R|kotlin/Boolean|>|() ->  {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/isEmpty|<R|io/github/lukmccall/pika/PFunction|>() ->  {
                 ^box String(FAIL: should have functions)
             }
         }
 
-        lval addFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval addFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(add))
         }
         ) ?: ^box String(FAIL: add function not found)
@@ -52,7 +52,7 @@ FILE: introspectableFunctions.kt
             }
         }
 
-        lval multiplyFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval multiplyFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(multiply))
         }
         ) ?: ^box String(FAIL: multiply function not found)
@@ -62,7 +62,7 @@ FILE: introspectableFunctions.kt
             }
         }
 
-        lval subtractFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval subtractFunc: R|io/github/lukmccall/pika/PFunction| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PFunction|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PFunction|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(subtract))
         }
         ) ?: ^box String(FAIL: subtract function not found)

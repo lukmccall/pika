@@ -161,7 +161,9 @@ class IntrospectableTransformer(
       irClass = irClass,
       properties = properties,
       functions = functions,
-      baseClassExpr = baseClassExpr
+      baseClassExpr = baseClassExpr,
+      irFactory = context.irFactory,
+      containingDeclaration = fieldOwner
     )
 
     val field = context.irFactory.buildField {

@@ -162,6 +162,24 @@ class IRPoet(
     }
 
     /**
+     * arrayOf<{type}>({elements})
+     */
+    fun arrayOf(type: IrType, elements: List<IrExpression>): IrExpression {
+      val arrayType = irBuiltIns.arrayClass.typeWith(type)
+      return IrCallImpl(
+        -1,
+        -1,
+        arrayType,
+        irBuiltIns.arrayOf,
+        typeArgumentsCount = 1,
+        origin = null
+      ).apply {
+        typeArguments[0] = type
+        arguments[0] = IrVarargImpl(-1, -1, arrayType, type, elements)
+      }
+    }
+
+    /**
      * listOf<{type}>({elements})
      */
     fun listOf(type: IrType, elements: List<IrExpression>): IrExpression {
@@ -379,6 +397,29 @@ class IRPoet(
         receiver = null,
       )
     }
+
+    private fun staticArrayField(fieldName: String, elementType: IrType, parentClass: IrClass): IrExpression {
+      val arrayType = irBuiltIns.arrayClass.typeWith(elementType)
+      val field = irBuiltIns.irFactory.createField(
+        startOffset = -1,
+        endOffset = -1,
+        origin = IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB,
+        name = Name.identifier(fieldName),
+        visibility = DescriptorVisibilities.PUBLIC,
+        symbol = IrFieldSymbolImpl(),
+        type = arrayType,
+        isFinal = true,
+        isStatic = true,
+        isExternal = false,
+      ).also { it.parent = parentClass }
+      return IrGetFieldImpl(-1, -1, field.symbol, arrayType, receiver = null)
+    }
+
+    fun emptyAnnotationsArray(): IrExpression =
+      staticArrayField("EMPTY_ANNOTATIONS", symbolFinder.pikaAPI.pAnnotation.owner.defaultType, symbolFinder.pikaAPI.pEmptyArrays.owner)
+
+    fun emptyFunctionsArray(): IrExpression =
+      staticArrayField("EMPTY_FUNCTIONS", symbolFinder.pikaAPI.pFunction.owner.defaultType, symbolFinder.pikaAPI.pEmptyArrays.owner)
 
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
@@ -861,7 +902,11 @@ class IRPoet(
         call.typeArguments[1] = propertyType
         call.arguments[0] = kotlin.string(property.name.asString())
         call.arguments[1] = pika.pVisibility(property.visibility)
-        call.arguments[2] = kotlin.listOf(pAnnotationClass.owner.defaultType, annotations)
+        call.arguments[2] = if (annotations.isEmpty()) {
+          pika.emptyAnnotationsArray()
+        } else {
+          kotlin.arrayOf(pAnnotationClass.owner.defaultType, annotations)
+        }
         call.arguments[3] = pika.typeDescriptor(propertyType)
         call.arguments[4] = getterLambda
         call.arguments[5] = kotlin.bool(property.isVar)
@@ -880,6 +925,8 @@ class IRPoet(
       properties: List<IrExpression>,
       functions: List<IrExpression>,
       baseClassExpr: IrExpression?,
+      irFactory: IrFactory,
+      containingDeclaration: IrDeclarationParent
     ): IrExpression {
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
       val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
@@ -898,8 +945,50 @@ class IRPoet(
       // PIntrospectionData<OwnerType>
       val pIntrospectionDataType = pIntrospectionDataClass.typeWith(ownerType)
 
-      // PProperty<OwnerType, *> (use star projection for the list)
+      // PProperty<OwnerType, *> (use star projection for the array)
       val pPropertyStarType = pPropertyClass.typeWith(ownerType, irBuiltIns.anyNType)
+
+      // Build properties factory lambda: () -> Array<PProperty<OwnerType, *>>
+      val propertiesArrayType = irBuiltIns.arrayClass.typeWith(pPropertyStarType)
+      val function0Type = irBuiltIns.functionN(0).typeWith(propertiesArrayType)
+
+      val propertiesArrayExpr = if (properties.isEmpty()) {
+        kotlin.arrayOf(pPropertyStarType, emptyList())
+      } else {
+        kotlin.arrayOf(pPropertyStarType, properties)
+      }
+
+      val lambdaFunction = irFactory.buildFun {
+        name = Name.special("<anonymous>")
+        returnType = propertiesArrayType
+        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        visibility = DescriptorVisibilities.LOCAL
+      }.apply {
+        parent = containingDeclaration
+        body = createReturnBody(irFactory, this, propertiesArrayExpr)
+      }
+
+      val propertiesLambda = IrFunctionExpressionImpl(
+        startOffset = -1,
+        endOffset = -1,
+        type = function0Type,
+        function = lambdaFunction,
+        origin = IrStatementOrigin.LAMBDA
+      )
+
+      // Annotations array
+      val annotationsExpr = if (classAnnotations.isEmpty()) {
+        pika.emptyAnnotationsArray()
+      } else {
+        kotlin.arrayOf(pAnnotationClass.owner.defaultType, classAnnotations)
+      }
+
+      // Functions array
+      val functionsExpr = if (functions.isEmpty()) {
+        pika.emptyFunctionsArray()
+      } else {
+        kotlin.arrayOf(pFunctionClass.owner.defaultType, functions)
+      }
 
       return IrConstructorCallImpl(
         startOffset = -1,
@@ -912,9 +1001,9 @@ class IRPoet(
       ).also { call ->
         call.typeArguments[0] = ownerType
         call.arguments[0] = kotlin.javaClass(irClass.symbol)
-        call.arguments[1] = kotlin.listOf(pAnnotationClass.owner.defaultType, classAnnotations)
-        call.arguments[2] = kotlin.listOf(pPropertyStarType, properties)
-        call.arguments[3] = kotlin.listOf(pFunctionClass.owner.defaultType, functions)
+        call.arguments[1] = annotationsExpr
+        call.arguments[2] = propertiesLambda
+        call.arguments[3] = functionsExpr
         call.arguments[4] = baseClassExpr ?: kotlin.`null`()
       }
     }

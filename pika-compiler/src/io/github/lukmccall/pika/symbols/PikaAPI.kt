@@ -27,4 +27,5 @@ object PikaAPI {
   val PFunction = ClassId(API_PACKAGE, Name.identifier("PFunction"))
   val PAnnotation = ClassId(API_PACKAGE, Name.identifier("PAnnotation"))
   val PIntrospectionData = ClassId(API_PACKAGE, Name.identifier("PIntrospectionData"))
+  val PEmptyArrays = ClassId(API_PACKAGE, Name.identifier("PEmptyArrays"))
 }

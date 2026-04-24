@@ -71,10 +71,7 @@ fun IrConstructorCall.toArgsMap(
   }
 
   return if (args.isEmpty()) {
-    poet.kotlin.emptyMap(
-      keyType = poet.irBuiltIns.stringType,
-      valueType = poet.irBuiltIns.anyNType,
-    )
+    poet.kotlin.emptyMap(poet.irBuiltIns.stringType, poet.irBuiltIns.anyNType)
   } else {
     poet.kotlin.mapOf(
       keyType = poet.irBuiltIns.stringType,

@@ -17,7 +17,7 @@ package io.github.lukmccall.pika
 public class PProperty<OwnerType, Type>(
   public val name: String,
   public val visibility: PVisibility,
-  public val annotations: List<PAnnotation>,
+  public val annotations: Array<PAnnotation>,
   public val type: PTypeDescriptor,
   public val getter: (OwnerType) -> Type,
   public val isMutable: Boolean,

@@ -24,25 +24,25 @@ FILE: introspectableEmpty.kt
         }
 
         when () {
-            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Empty, *>>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PProperty<test/Empty, *>|>() ->  {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Empty, *>>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PProperty<test/Empty, *>|>() ->  {
                 ^box String(FAIL: should have no properties)
             }
         }
 
         when () {
-            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/collections/List<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PFunction|>() ->  {
+            R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.functions: R|kotlin/Array<io/github/lukmccall/pika/PFunction>|>|.R|kotlin/collections/isNotEmpty|<R|io/github/lukmccall/pika/PFunction|>() ->  {
                 ^box String(FAIL: should have no functions)
             }
         }
 
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(1)) ->  {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/Array<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(1)) ->  {
                 ^box String(FAIL: should have 1 annotation (@Introspectable))
             }
         }
 
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/collections/List<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/collections/List.get: R|io/github/lukmccall/pika/PAnnotation|>|(Int(0)).R|io/github/lukmccall/pika/PAnnotation.jClass|, <getClass>(Q|io/github/lukmccall/pika/Introspectable|).R|kotlin/jvm/java|<R|io/github/lukmccall/pika/Introspectable|>) ->  {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.annotations: R|kotlin/Array<io/github/lukmccall/pika/PAnnotation>|>|.R|SubstitutionOverride<kotlin/Array.get: R|io/github/lukmccall/pika/PAnnotation|>|(Int(0)).R|io/github/lukmccall/pika/PAnnotation.jClass|, <getClass>(Q|io/github/lukmccall/pika/Introspectable|).R|kotlin/jvm/java|<R|io/github/lukmccall/pika/Introspectable|>) ->  {
                 ^box String(FAIL: annotation should be @Introspectable)
             }
         }

@@ -17,6 +17,12 @@ public final class io/github/lukmccall/pika/PAnnotation {
 	public final fun getJClass ()Ljava/lang/Class;
 }
 
+public final class io/github/lukmccall/pika/PEmptyArrays {
+	public static final field EMPTY_ANNOTATIONS [Lio/github/lukmccall/pika/PAnnotation;
+	public static final field EMPTY_FUNCTIONS [Lio/github/lukmccall/pika/PFunction;
+	public static final field INSTANCE Lio/github/lukmccall/pika/PEmptyArrays;
+}
+
 public final class io/github/lukmccall/pika/PFunction {
 	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;)V
 	public final fun getName ()Ljava/lang/String;
@@ -24,17 +30,17 @@ public final class io/github/lukmccall/pika/PFunction {
 }
 
 public final class io/github/lukmccall/pika/PIntrospectionData {
-	public fun <init> (Ljava/lang/Class;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;)V
-	public final fun getAnnotations ()Ljava/util/List;
+	public fun <init> (Ljava/lang/Class;[Lio/github/lukmccall/pika/PAnnotation;Lkotlin/jvm/functions/Function0;[Lio/github/lukmccall/pika/PFunction;Lio/github/lukmccall/pika/PIntrospectionData;)V
+	public final fun getAnnotations ()[Lio/github/lukmccall/pika/PAnnotation;
 	public final fun getBaseClass ()Lio/github/lukmccall/pika/PIntrospectionData;
-	public final fun getFunctions ()Ljava/util/List;
+	public final fun getFunctions ()[Lio/github/lukmccall/pika/PFunction;
 	public final fun getJClass ()Ljava/lang/Class;
-	public final fun getProperties ()Ljava/util/List;
+	public final fun getProperties ()[Lio/github/lukmccall/pika/PProperty;
 }
 
 public final class io/github/lukmccall/pika/PProperty {
-	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;Ljava/util/List;Lio/github/lukmccall/pika/PTypeDescriptor;Lkotlin/jvm/functions/Function1;ZZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function1;)V
-	public final fun getAnnotations ()Ljava/util/List;
+	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;[Lio/github/lukmccall/pika/PAnnotation;Lio/github/lukmccall/pika/PTypeDescriptor;Lkotlin/jvm/functions/Function1;ZZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function1;)V
+	public final fun getAnnotations ()[Lio/github/lukmccall/pika/PAnnotation;
 	public final fun getDelegateGetter ()Lkotlin/jvm/functions/Function1;
 	public final fun getGetter ()Lkotlin/jvm/functions/Function1;
 	public final fun getHasBackingField ()Z
@@ -77,7 +83,21 @@ public final class io/github/lukmccall/pika/PTypeDescriptor$Star : io/github/luk
 }
 
 public final class io/github/lukmccall/pika/PTypeDescriptorRegistry {
+	public static final field BOOLEAN Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field BOOLEAN_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field DOUBLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field DOUBLE_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field FLOAT Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field FLOAT_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
 	public static final field INSTANCE Lio/github/lukmccall/pika/PTypeDescriptorRegistry;
+	public static final field INT Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field INT_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field LONG Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field LONG_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field SHORT Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field SHORT_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field STRING Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
+	public static final field STRING_NULLABLE Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
 	public static final fun getOrCreateConcrete (Ljava/lang/Class;ZLio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete;
 	public static final fun getOrCreateParameterized (Ljava/lang/Class;ZLjava/util/List;Lio/github/lukmccall/pika/PIntrospectionData;)Lio/github/lukmccall/pika/PTypeDescriptor$Concrete$Parameterized;
 }

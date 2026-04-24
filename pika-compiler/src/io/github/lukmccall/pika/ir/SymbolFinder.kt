@@ -62,6 +62,7 @@ class SymbolFinder(
     val pFunction by cachedReference(PikaAPI.PFunction)
     val pAnnotation by cachedReference(PikaAPI.PAnnotation)
     val pIntrospectionData by cachedReference(PikaAPI.PIntrospectionData)
+    val pEmptyArrays by cachedReference(PikaAPI.PEmptyArrays)
   }
 
   val kotlinStd = _KotlinStd()

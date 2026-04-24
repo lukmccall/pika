@@ -37,7 +37,7 @@ FILE: introspectableDelegated.kt
     public final fun box(): R|kotlin/String| {
         lval instance: R|test/DelegatedProperties| = R|test/DelegatedProperties.DelegatedProperties|()
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/DelegatedProperties>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/DelegatedProperties|>()
-        lval lazyProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval lazyProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(lazyValue))
         }
         ) ?: ^box String(FAIL: lazyValue not found)
@@ -60,7 +60,7 @@ FILE: introspectableDelegated.kt
             }
         }
 
-        lval regularProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval regularProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(regularValue))
         }
         )!!
@@ -76,7 +76,7 @@ FILE: introspectableDelegated.kt
             }
         }
 
-        lval computedProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval computedProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(computedValue))
         }
         )!!

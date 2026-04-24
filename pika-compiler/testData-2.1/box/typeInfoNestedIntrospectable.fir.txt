@@ -65,12 +65,12 @@ FILE: typeInfoNestedIntrospectable.kt
 
         lval personData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = R|<local>/personDescriptor|.R|io/github/lukmccall/pika/PTypeDescriptor.Concrete.introspection| ?: ^box String(FAIL: Person introspection should not be null)
         when () {
-            !=(R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
-                ^box <strcat>(String(FAIL: should have 2 properties, got ), R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            !=(R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box <strcat>(String(FAIL: should have 2 properties, got ), R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|)
             }
         }
 
-        lval addressProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval addressProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(address))
         }
         ) ?: ^box String(FAIL: address property not found)
@@ -89,12 +89,12 @@ FILE: typeInfoNestedIntrospectable.kt
         }
 
         when () {
-            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, Int(2)) ->  {
-                ^box <strcat>(String(FAIL: Address should have 2 properties, got ), R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|)
+            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box <strcat>(String(FAIL: Address should have 2 properties, got ), R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|)
             }
         }
 
-        lval cityProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval cityProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(city))
         }
         ) ?: ^box String(FAIL: city property not found in nested introspection)
@@ -106,12 +106,12 @@ FILE: typeInfoNestedIntrospectable.kt
         }
 
         when () {
-            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|, R|<local>/directAddressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<test/Address, *>>|>|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|) ->  {
+            !=(R|<local>/addressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, R|<local>/directAddressData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Address, *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|) ->  {
                 ^box String(FAIL: nested properties size mismatch with introspectionOf)
             }
         }
 
-        lval nameProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/collections/List<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval nameProp: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>| = R|<local>/personData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<out kotlin/Any, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(name))
         }
         ) ?: ^box String(FAIL: name property not found)
