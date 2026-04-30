@@ -2,10 +2,10 @@
 
 package io.github.lukmccall.pika.ir
 
+import io.github.lukmccall.pika.Identifiers
 import io.github.lukmccall.pika.symbols.PikaAPI
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
-import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -14,10 +14,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrClassReferenceImpl
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
-import org.jetbrains.kotlin.ir.types.IrSimpleType
-import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.hasAnnotation
-import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.name.ClassId
 
 fun Collection<IrSimpleFunctionSymbol>.firstSingleVarargsArgument(): IrSimpleFunctionSymbol {
@@ -25,16 +22,6 @@ fun Collection<IrSimpleFunctionSymbol>.firstSingleVarargsArgument(): IrSimpleFun
     func.owner.parameters.count { it.varargElementType != null } == 1 &&
       func.owner.parameters.size == 1
   }
-}
-
-fun IrSimpleType?.isAny(): Boolean {
-  if (this == null) {
-    return false
-  }
-
-  val owner = classOrNull?.owner ?: return false
-
-  return owner.kotlinFqName.asString() == "kotlin.Any"
 }
 
 /**
@@ -114,10 +101,10 @@ private fun IrExpression?.constCopy(
   }
 }
 
+fun IrClass.pikaObject(): IrClass? = declarations
+  .filterIsInstance<IrClass>()
+  .find { it.name.asString() == Identifiers.PIKA_NESTED_OBJECT_NAME }
+
 fun IrClass.hasIntrospectableAnnotation(extraAnnotationClassIds: Set<ClassId> = emptySet()): Boolean {
   return hasAnnotation(PikaAPI.Introspectable) || extraAnnotationClassIds.any { hasAnnotation(it) }
-}
-
-fun IrSimpleFunction.takeIfHasNoBody(): IrSimpleFunction? {
-  return takeIf { it.body == null }
 }

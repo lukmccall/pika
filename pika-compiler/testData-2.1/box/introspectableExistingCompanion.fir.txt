@@ -29,13 +29,12 @@ FILE: introspectableExistingCompanion.kt
 
         }
 
-        internal final fun __pika$set$host(value: R|kotlin/String|): R|kotlin/Unit|
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Config.__Pika| {
+                super<R|kotlin/Any|>()
+            }
 
-        internal final fun __pika$get$port(): R|kotlin/Int|
-
-        internal final fun __pika$get$host(): R|kotlin/String|
-
-        internal final fun __pika$set$port(value: R|kotlin/Int|): R|kotlin/Unit|
+        }
 
     }
     public final fun box(): R|kotlin/String| {

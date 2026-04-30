@@ -12,16 +12,8 @@ FILE: typeInfoNestedIntrospectable.kt
         public final val zip: R|kotlin/String| = R|<local>/zip|
             public get(): R|kotlin/String|
 
-        internal final fun __pika$set$zip(value: R|kotlin/String|): R|kotlin/Unit|
-
-        internal final fun __pika$get$city(): R|kotlin/String|
-
-        internal final fun __pika$set$city(value: R|kotlin/String|): R|kotlin/Unit|
-
-        internal final fun __pika$get$zip(): R|kotlin/String|
-
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Address.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Address.__Pika| {
                 super<R|kotlin/Any|>()
             }
 
@@ -39,16 +31,8 @@ FILE: typeInfoNestedIntrospectable.kt
         public final val address: R|test/Address| = R|<local>/address|
             public get(): R|test/Address|
 
-        internal final fun __pika$get$name(): R|kotlin/String|
-
-        internal final fun __pika$get$address(): R|test/Address|
-
-        internal final fun __pika$set$address(value: R|test/Address|): R|kotlin/Unit|
-
-        internal final fun __pika$set$name(value: R|kotlin/String|): R|kotlin/Unit|
-
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Person.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Person.__Pika| {
                 super<R|kotlin/Any|>()
             }
 

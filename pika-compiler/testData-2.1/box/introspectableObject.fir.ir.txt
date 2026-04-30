@@ -71,7 +71,14 @@ FILE fqName:test fileName:/introspectableObject.kt
                                   $this: GET_VAR 'owner: test.Singleton declared in test.Singleton.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Singleton origin=null
                         isMutable: CONST Boolean type=kotlin.Boolean value=false
                         hasBackingField: CONST Boolean type=kotlin.Boolean value=true
-                        setter: CONST Null type=kotlin.Nothing? value=null
+                        setter: FUN_EXPR type=kotlin.Function2<test.Singleton, kotlin.String, kotlin.Unit> origin=LAMBDA
+                          FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Singleton, value:kotlin.String) returnType:kotlin.Unit
+                            VALUE_PARAMETER name:owner index:0 type:test.Singleton
+                            VALUE_PARAMETER name:value index:1 type:kotlin.String
+                            BLOCK_BODY
+                              SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:version type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+                                receiver: GET_VAR 'owner: test.Singleton declared in test.Singleton.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Singleton origin=null
+                                value: GET_VAR 'value: kotlin.String declared in test.Singleton.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.String origin=null
                         isDelegated: CONST Boolean type=kotlin.Boolean value=false
                         delegateGetter: CONST Null type=kotlin.Nothing? value=null
                       CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Singleton, kotlin.Int> origin=null

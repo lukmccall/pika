@@ -5,12 +5,8 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent
 import org.jetbrains.kotlin.fir.extensions.predicate.DeclarationPredicate
 import org.jetbrains.kotlin.fir.extensions.predicateBasedProvider
-import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.name.SpecialNames
 
 /**
  * Session component holding the predicate that matches @Introspectable-equivalent
@@ -47,10 +43,3 @@ val FirSession.introspectablePredicateMatcher: FirIntrospectablePredicateMatcher
 fun FirClassSymbol<*>.hasIntrospectableAnnotation(session: FirSession): Boolean {
   return session.predicateBasedProvider.matches(session.introspectablePredicateMatcher.predicate, this)
 }
-
-@OptIn(SymbolInternals::class)
-fun FirClassSymbol<*>.hasCompanionObject(): Boolean {
-  return (this as? FirRegularClassSymbol)?.companionObjectSymbol != null
-}
-
-fun Name.isCompanionObjectName(): Boolean = this == SpecialNames.DEFAULT_NAME_FOR_COMPANION_OBJECT

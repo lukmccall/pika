@@ -9,12 +9,8 @@ FILE: introspectionDataCached.kt
         public final val a: R|kotlin/Int| = R|<local>/a|
             public get(): R|kotlin/Int|
 
-        internal final fun __pika$set$a(value: R|kotlin/Int|): R|kotlin/Unit|
-
-        internal final fun __pika$get$a(): R|kotlin/Int|
-
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Parent.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Parent.__Pika| {
                 super<R|kotlin/Any|>()
             }
 
@@ -29,12 +25,8 @@ FILE: introspectionDataCached.kt
         public final val b: R|kotlin/Int| = R|<local>/b|
             public get(): R|kotlin/Int|
 
-        internal final fun __pika$get$b(): R|kotlin/Int|
-
-        internal final fun __pika$set$b(value: R|kotlin/Int|): R|kotlin/Unit|
-
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Child.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Child.__Pika| {
                 super<R|kotlin/Any|>()
             }
 

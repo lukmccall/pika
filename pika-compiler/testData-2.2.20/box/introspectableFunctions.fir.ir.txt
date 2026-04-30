@@ -4,7 +4,7 @@ FILE fqName:test fileName:/introspectableFunctions.kt
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Calculator
     PROPERTY name:value visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:private
+      FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:internal
         EXPRESSION_BODY
           CONST Int type=kotlin.Int value=0
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-value> visibility:public modality:FINAL returnType:kotlin.Int
@@ -12,10 +12,10 @@ FILE fqName:test fileName:/introspectableFunctions.kt
         correspondingProperty: PROPERTY name:value visibility:public modality:FINAL [val]
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-value> (): kotlin.Int declared in test.Calculator'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:internal' type=kotlin.Int origin=null
               receiver: GET_VAR '<this>: test.Calculator declared in test.Calculator.<get-value>' type=test.Calculator origin=null
-    CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
-      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Calculator.Companion
+    CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:__Pika modality:FINAL visibility:public superTypes:[kotlin.Any]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Calculator.__Pika
       FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, _propertiesFactory: kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>>?, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
@@ -34,7 +34,7 @@ FILE fqName:test fileName:/introspectableFunctions.kt
             ARG _propertiesFactory: FUN_EXPR type=kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>>> origin=LAMBDA
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>>
                 BLOCK_BODY
-                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> declared in test.Calculator.Companion.__pika$IntrospectionData'
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> declared in test.Calculator.__Pika.__pika$IntrospectionData'
                     CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> origin=null
                       TYPE_ARG T: io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
                       ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Calculator, kotlin.Any?>
@@ -49,9 +49,9 @@ FILE fqName:test fileName:/introspectableFunctions.kt
                             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Int
                               VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
                               BLOCK_BODY
-                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Calculator): kotlin.Int declared in test.Calculator.Companion.__pika$IntrospectionData.<anonymous>'
+                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Calculator): kotlin.Int declared in test.Calculator.__Pika.__pika$IntrospectionData.<anonymous>'
                                   CALL 'public final fun <get-value> (): kotlin.Int declared in test.Calculator' type=kotlin.Int origin=GET_PROPERTY
-                                    ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Calculator origin=null
+                                    ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Calculator origin=null
                           ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
                           ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                           ARG setter: FUN_EXPR type=kotlin.Function2<test.Calculator, kotlin.Int, kotlin.Unit> origin=LAMBDA
@@ -59,9 +59,9 @@ FILE fqName:test fileName:/introspectableFunctions.kt
                               VALUE_PARAMETER kind:Regular name:owner index:0 type:test.Calculator
                               VALUE_PARAMETER kind:Regular name:value index:1 type:kotlin.Int
                               BLOCK_BODY
-                                CALL 'internal final fun __pika$set$value (value: kotlin.Int): kotlin.Unit declared in test.Calculator' type=kotlin.Unit origin=null
-                                  ARG <this>: GET_VAR 'owner: test.Calculator declared in test.Calculator.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Calculator origin=null
-                                  ARG value: GET_VAR 'value: kotlin.Int declared in test.Calculator.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.Int origin=null
+                                SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:internal' type=kotlin.Unit origin=null
+                                  receiver: GET_VAR 'owner: test.Calculator declared in test.Calculator.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Calculator origin=null
+                                  value: GET_VAR 'value: kotlin.Int declared in test.Calculator.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.Int origin=null
                           ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
                           ARG delegateGetter: CONST Null type=kotlin.Nothing? value=null
             ARG functions: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PFunction> origin=null
@@ -77,10 +77,10 @@ FILE fqName:test fileName:/introspectableFunctions.kt
                   ARG name: CONST String type=kotlin.String value="subtract"
                   ARG visibility: GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:INTERNAL' type=io.github.lukmccall.pika.PVisibility
             ARG baseClass: CONST Null type=kotlin.Nothing? value=null
-      CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Calculator.Companion [primary]
+      CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private returnType:test.Calculator.__Pika [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]' type=kotlin.Unit
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:__Pika modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
       FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
         VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
         VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -111,19 +111,6 @@ FILE fqName:test fileName:/introspectableFunctions.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$value visibility:internal modality:FINAL returnType:kotlin.Int
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Calculator
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='internal final fun __pika$get$value (): kotlin.Int declared in test.Calculator'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:private' type=kotlin.Int origin=null
-            receiver: GET_VAR '<this>: test.Calculator declared in test.Calculator.__pika$get$value' type=test.Calculator origin=null
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$value visibility:internal modality:FINAL returnType:kotlin.Unit
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Calculator
-      VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] kind:Regular name:value index:1 type:kotlin.Int
-      BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
-          receiver: GET_VAR '<this>: test.Calculator declared in test.Calculator.__pika$set$value' type=test.Calculator origin=null
-          value: GET_VAR 'value: kotlin.Int declared in test.Calculator.__pika$set$value' type=kotlin.Int origin=null
     FUN name:add visibility:public modality:FINAL returnType:kotlin.Int
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Calculator
       VALUE_PARAMETER kind:Regular name:a index:1 type:kotlin.Int
@@ -156,7 +143,7 @@ FILE fqName:test fileName:/introspectableFunctions.kt
       VAR name:calc type:test.Calculator [val]
         CONSTRUCTOR_CALL 'public constructor <init> () declared in test.Calculator' type=test.Calculator origin=null
       VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> [val]
-        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> visibility:public [final,static] declared in test.Calculator.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Calculator> visibility:public [final,static] declared in test.Calculator.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Calculator> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun isEmpty <T> (<this>: kotlin.Array<out T of kotlin.collections.isEmpty>): kotlin.Boolean declared in kotlin.collections' type=kotlin.Boolean origin=null

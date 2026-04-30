@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.symbols.impl.IrFieldSymbolImpl
 import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.primaryConstructor
@@ -220,18 +219,6 @@ class IRPoet(
       ).apply {
         arguments[0] = kClassReference
       }
-    }
-
-    /**
-     * Get reference to an object (companion object or singleton)
-     */
-    fun getObject(classSymbol: IrClassSymbol): IrExpression {
-      return IrGetObjectValueImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = classSymbol.owner.defaultType,
-        symbol = classSymbol
-      )
     }
   }
 
@@ -471,12 +458,13 @@ class IRPoet(
       val fieldOwner = if (irClass.isObject && !irClass.isCompanion) {
         irClass
       } else {
-        irClass.companionObject() ?: return null
+        irClass.pikaObject()
       }
 
-      val field = fieldOwner.declarations
-        .filterIsInstance<IrField>()
-        .find { it.name.asString() == Identifiers.INTROSPECTION_DATA_FIELD_NAME }
+      val field = fieldOwner
+        ?.declarations
+        ?.filterIsInstance<IrField>()
+        ?.find { it.name.asString() == Identifiers.INTROSPECTION_DATA_FIELD_NAME }
         ?: return null
 
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
@@ -549,7 +537,7 @@ class IRPoet(
 
     /**
      * Creates a getter lambda: { owner -> owner.propertyName }
-     * Uses the property getter if available, otherwise uses the synthetic accessor.
+     * Uses the property getter if available, otherwise accesses the backing field directly.
      */
     fun propertyGetterLambda(
       property: IrProperty,
@@ -574,7 +562,6 @@ class IRPoet(
         val ownerParam = addValueParameter("owner", ownerType)
 
         val returnValue = if (property.getter != null) {
-          // Call the getter
           val getter = property.getter!!
           IrCallImpl(
             -1,
@@ -593,40 +580,18 @@ class IRPoet(
               )
             }
         } else {
-          // Use synthetic getter to access backing field
-          val syntheticGetter = ownerClass.findSyntheticGetter(property)
-          if (syntheticGetter != null) {
-            IrCallImpl(
-              -1,
-              -1,
-              propertyType,
-              syntheticGetter.symbol,
-              0,
-              null,
-              null
-            )
-              .apply {
-                bindFunctionParameters(
-                  syntheticGetter,
-                  ownerParam,
-                  ownerType
-                )
-              }
-          } else {
-            // Fallback: direct field access (only works for instance methods)
-            IrGetFieldImpl(
+          IrGetFieldImpl(
+            startOffset = -1,
+            endOffset = -1,
+            symbol = property.backingField!!.symbol,
+            type = propertyType,
+            receiver = IrGetValueImpl(
               startOffset = -1,
               endOffset = -1,
-              symbol = property.backingField!!.symbol,
-              type = propertyType,
-              receiver = IrGetValueImpl(
-                startOffset = -1,
-                endOffset = -1,
-                type = ownerType,
-                symbol = ownerParam.symbol
-              )
+              type = ownerType,
+              symbol = ownerParam.symbol
             )
-          }
+          )
         }
 
         body = createReturnBody(irFactory, this, returnValue)
@@ -676,26 +641,9 @@ class IRPoet(
       }
     }
 
-    private fun IrClass.findSyntheticAccessor(
-      property: IrProperty,
-      nameTransform: (String) -> String
-    ): IrSimpleFunction? {
-      val name = nameTransform(property.name.asString())
-      return declarations
-        .filterIsInstance<IrSimpleFunction>()
-        .find { it.name.asString() == name }
-    }
-
-    private fun IrClass.findSyntheticGetter(property: IrProperty) =
-      findSyntheticAccessor(property, Identifiers::syntheticGetterName)
-
-    private fun IrClass.findSyntheticSetter(property: IrProperty) =
-      findSyntheticAccessor(property, Identifiers::syntheticSetterName)
-
     /**
      * Creates a setter lambda: { owner, value -> owner.property = value }
-     * Uses the property setter if available, otherwise uses the synthetic accessor
-     * to access the backing field.
+     * Uses the property setter if available, otherwise writes the backing field directly.
      */
     fun propertySetterLambda(
       property: IrProperty,
@@ -706,12 +654,9 @@ class IRPoet(
       val propertyType = property.resolvedType
       val ownerType = ownerClass.defaultType
 
-      // Find setter: either Kotlin setter or synthetic setter
       val kotlinSetter = property.setter
-      val syntheticSetter = ownerClass.findSyntheticSetter(property)
 
-      // Need at least one way to set the value
-      if (kotlinSetter == null && syntheticSetter == null) return null
+      if (kotlinSetter == null && property.backingField == null) return null
 
       // Create Function2<OwnerType, PropertyType, Unit>
       val function2Type = irBuiltIns.functionN(2).typeWith(ownerType, propertyType, irBuiltIns.unitType)
@@ -746,24 +691,14 @@ class IRPoet(
               )
             }
         } else {
-          IrCallImpl(
-            -1,
-            -1,
-            irBuiltIns.unitType,
-            syntheticSetter!!.symbol,
-            0,
-            null,
-            null
+          IrSetFieldImpl(
+            startOffset = -1,
+            endOffset = -1,
+            symbol = property.backingField!!.symbol,
+            receiver = IrGetValueImpl(-1, -1, ownerType, ownerParam.symbol),
+            value = IrGetValueImpl(-1, -1, propertyType, valueParam.symbol),
+            type = irBuiltIns.unitType
           )
-            .apply {
-              bindFunctionParameters(
-                syntheticSetter,
-                ownerParam,
-                ownerType,
-                valueParam,
-                propertyType
-              )
-            }
         }
 
         body = irFactory.createBlockBody(-1, -1).apply {
@@ -782,7 +717,6 @@ class IRPoet(
 
     /**
      * Creates a delegate getter lambda: { owner -> owner.<delegate_backing_field> }
-     * Uses synthetic accessor to access the delegate backing field.
      * Returns null if property is not delegated.
      */
     fun delegateGetterLambda(
@@ -800,9 +734,6 @@ class IRPoet(
       // Function1<OwnerType, Any?>
       val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, irBuiltIns.anyNType)
 
-      // Find synthetic getter for the delegate field
-      val syntheticGetter = ownerClass.findSyntheticGetter(property)
-
       val lambdaFunction = irFactory.buildFun {
         name = Name.special("<anonymous>")
         returnType = irBuiltIns.anyNType
@@ -812,38 +743,18 @@ class IRPoet(
         parent = containingDeclaration
         val ownerParam = addValueParameter("owner", ownerType)
 
-        val returnValue = if (syntheticGetter != null) {
-          IrCallImpl(
-            -1,
-            -1,
-            delegateType,
-            syntheticGetter.symbol,
-            0,
-            null,
-            null
-          )
-            .apply {
-              bindFunctionParameters(
-                syntheticGetter,
-                ownerParam,
-                ownerType
-              )
-            }
-        } else {
-          // Fallback: direct field access
-          IrGetFieldImpl(
+        val returnValue = IrGetFieldImpl(
+          startOffset = -1,
+          endOffset = -1,
+          symbol = backingField.symbol,
+          type = delegateType,
+          receiver = IrGetValueImpl(
             startOffset = -1,
             endOffset = -1,
-            symbol = backingField.symbol,
-            type = delegateType,
-            receiver = IrGetValueImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = ownerType,
-              symbol = ownerParam.symbol
-            )
+            type = ownerType,
+            symbol = ownerParam.symbol
           )
-        }
+        )
 
         body = createReturnBody(irFactory, this, returnValue)
       }

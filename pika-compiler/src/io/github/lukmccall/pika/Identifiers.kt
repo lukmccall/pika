@@ -13,6 +13,7 @@ object Identifiers {
   const val IS_INTROSPECTABLE_FUNCTION_NAME = "isIntrospectable"
 
   const val INTROSPECTION_DATA_FIELD_NAME = "__pika\$IntrospectionData"
+  const val PIKA_NESTED_OBJECT_NAME = "__Pika"
 
   const val TYPE_DESCRIPTOR_REGISTRY_CLASS = "PTypeDescriptorRegistry"
   const val TYPE_DESCRIPTOR_REGISTRY_GET_OR_CREATE_CONCRETE = "getOrCreateConcrete"
@@ -30,24 +31,6 @@ object Identifiers {
   )
 
   const val PIKA_SPECIAL_PREFIX = "__pika\$"
-  // Synthetic accessor function name prefixes for backing field access
-  private const val SYNTHETIC_GETTER_PREFIX = "${PIKA_SPECIAL_PREFIX}get\$"
-  private const val SYNTHETIC_SETTER_PREFIX = "${PIKA_SPECIAL_PREFIX}set\$"
-
-  fun syntheticGetterName(propertyName: String): String = "$SYNTHETIC_GETTER_PREFIX$propertyName"
-  fun syntheticSetterName(propertyName: String): String = "$SYNTHETIC_SETTER_PREFIX$propertyName"
-
-  fun isSyntheticAccessor(name: String): Boolean =
-    isSyntheticGetter(name) || isSyntheticSetter(name)
-
-  fun isSyntheticGetter(name: String): Boolean =
-    name.startsWith(SYNTHETIC_GETTER_PREFIX)
-
-  fun isSyntheticSetter(name: String): Boolean =
-    name.startsWith(SYNTHETIC_SETTER_PREFIX)
-
-  fun removeSyntheticAccessor(name: String): String =
-    name.removePrefix(SYNTHETIC_SETTER_PREFIX).removePrefix(SYNTHETIC_GETTER_PREFIX)
 
   fun String.withPackageName(): String {
     return "$PACKAGE_NAME.$this"

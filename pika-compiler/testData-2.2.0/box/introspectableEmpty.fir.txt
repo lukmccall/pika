@@ -6,8 +6,8 @@ FILE: introspectableEmpty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Empty.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Empty.__Pika| {
                 super<R|kotlin/Any|>()
             }
 

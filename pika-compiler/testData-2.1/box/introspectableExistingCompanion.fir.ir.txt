@@ -4,7 +4,7 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
       Introspectable
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Config
     PROPERTY name:host visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:private
+      FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:internal
         EXPRESSION_BODY
           GET_VAR 'host: kotlin.String declared in test.Config.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-host> visibility:public modality:FINAL <> ($this:test.Config) returnType:kotlin.String
@@ -12,10 +12,10 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
         $this: VALUE_PARAMETER name:<this> type:test.Config
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-host> (): kotlin.String declared in test.Config'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:private' type=kotlin.String origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:internal' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: test.Config declared in test.Config.<get-host>' type=test.Config origin=null
     PROPERTY name:port visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:private
+      FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:internal
         EXPRESSION_BODY
           GET_VAR 'port: kotlin.Int declared in test.Config.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-port> visibility:public modality:FINAL <> ($this:test.Config) returnType:kotlin.Int
@@ -23,10 +23,10 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
         $this: VALUE_PARAMETER name:<this> type:test.Config
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-port> (): kotlin.Int declared in test.Config'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:internal' type=kotlin.Int origin=null
               receiver: GET_VAR '<this>: test.Config declared in test.Config.<get-port>' type=test.Config origin=null
-    CLASS OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
-      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Config.Companion
+    CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:__Pika modality:FINAL visibility:public superTypes:[kotlin.Any]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Config.__Pika
       FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, _propertiesFactory: kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>>?, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
@@ -45,7 +45,7 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
             _propertiesFactory: FUN_EXPR type=kotlin.Function0<kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>>> origin=LAMBDA
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>>
                 BLOCK_BODY
-                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> declared in test.Config.Companion.__pika$IntrospectionData'
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> declared in test.Config.__Pika.__pika$IntrospectionData'
                     CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> origin=null
                       <T>: io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
                       elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>> varargElementType=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Any?>
@@ -60,9 +60,9 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
                             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.String
                               VALUE_PARAMETER name:owner index:0 type:test.Config
                               BLOCK_BODY
-                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.String declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>'
+                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.String declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>'
                                   CALL 'public final fun <get-host> (): kotlin.String declared in test.Config' type=kotlin.String origin=GET_PROPERTY
-                                    $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                    $this: GET_VAR 'owner: test.Config declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
                           isMutable: CONST Boolean type=kotlin.Boolean value=false
                           hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                           setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.String, kotlin.Unit> origin=LAMBDA
@@ -70,9 +70,9 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
                               VALUE_PARAMETER name:owner index:0 type:test.Config
                               VALUE_PARAMETER name:value index:1 type:kotlin.String
                               BLOCK_BODY
-                                CALL 'internal final fun __pika$set$host (value: kotlin.String): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
-                                  $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
-                                  value: GET_VAR 'value: kotlin.String declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.String origin=null
+                                SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:internal' type=kotlin.Unit origin=null
+                                  receiver: GET_VAR 'owner: test.Config declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                  value: GET_VAR 'value: kotlin.String declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.String origin=null
                           isDelegated: CONST Boolean type=kotlin.Boolean value=false
                           delegateGetter: CONST Null type=kotlin.Nothing? value=null
                         CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, visibility: io.github.lukmccall.pika.PVisibility, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, type: io.github.lukmccall.pika.PTypeDescriptor, getter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty>, isMutable: kotlin.Boolean, hasBackingField: kotlin.Boolean, setter: kotlin.Function2<OwnerType of io.github.lukmccall.pika.PProperty, Type of io.github.lukmccall.pika.PProperty, kotlin.Unit>?, isDelegated: kotlin.Boolean, delegateGetter: kotlin.Function1<OwnerType of io.github.lukmccall.pika.PProperty, kotlin.Any?>?) declared in io.github.lukmccall.pika.PProperty' type=io.github.lukmccall.pika.PProperty<test.Config, kotlin.Int> origin=null
@@ -86,9 +86,9 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
                             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (owner:test.Config) returnType:kotlin.Int
                               VALUE_PARAMETER name:owner index:0 type:test.Config
                               BLOCK_BODY
-                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>'
+                                RETURN type=kotlin.Nothing from='local final fun <anonymous> (owner: test.Config): kotlin.Int declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>'
                                   CALL 'public final fun <get-port> (): kotlin.Int declared in test.Config' type=kotlin.Int origin=GET_PROPERTY
-                                    $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                    $this: GET_VAR 'owner: test.Config declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
                           isMutable: CONST Boolean type=kotlin.Boolean value=false
                           hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                           setter: FUN_EXPR type=kotlin.Function2<test.Config, kotlin.Int, kotlin.Unit> origin=LAMBDA
@@ -96,13 +96,32 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
                               VALUE_PARAMETER name:owner index:0 type:test.Config
                               VALUE_PARAMETER name:value index:1 type:kotlin.Int
                               BLOCK_BODY
-                                CALL 'internal final fun __pika$set$port (value: kotlin.Int): kotlin.Unit declared in test.Config' type=kotlin.Unit origin=null
-                                  $this: GET_VAR 'owner: test.Config declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
-                                  value: GET_VAR 'value: kotlin.Int declared in test.Config.Companion.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.Int origin=null
+                                SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:internal' type=kotlin.Unit origin=null
+                                  receiver: GET_VAR 'owner: test.Config declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=test.Config origin=null
+                                  value: GET_VAR 'value: kotlin.Int declared in test.Config.__Pika.__pika$IntrospectionData.<anonymous>.<anonymous>' type=kotlin.Int origin=null
                           isDelegated: CONST Boolean type=kotlin.Boolean value=false
                           delegateGetter: CONST Null type=kotlin.Nothing? value=null
             functions: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:EMPTY_FUNCTIONS type:kotlin.Array<io.github.lukmccall.pika.PFunction> visibility:public [final,static] declared in io.github.lukmccall.pika.PEmptyArrays' type=kotlin.Array<io.github.lukmccall.pika.PFunction> origin=null
             baseClass: CONST Null type=kotlin.Nothing? value=null
+      CONSTRUCTOR GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] visibility:private <> () returnType:test.Config.__Pika [primary]
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] OBJECT name:__Pika modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    CLASS OBJECT name:Companion modality:FINAL visibility:public [companion] superTypes:[kotlin.Any]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.Config.Companion
       CONSTRUCTOR visibility:private <> () returnType:test.Config.Companion [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -168,32 +187,6 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$host visibility:internal modality:FINAL <> ($this:test.Config) returnType:kotlin.String
-      $this: VALUE_PARAMETER name:<this> type:test.Config
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='internal final fun __pika$get$host (): kotlin.String declared in test.Config'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:private' type=kotlin.String origin=null
-            receiver: GET_VAR '<this>: test.Config declared in test.Config.__pika$get$host' type=test.Config origin=null
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$get$port visibility:internal modality:FINAL <> ($this:test.Config) returnType:kotlin.Int
-      $this: VALUE_PARAMETER name:<this> type:test.Config
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='internal final fun __pika$get$port (): kotlin.Int declared in test.Config'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:private' type=kotlin.Int origin=null
-            receiver: GET_VAR '<this>: test.Config declared in test.Config.__pika$get$port' type=test.Config origin=null
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$host visibility:internal modality:FINAL <> ($this:test.Config, value:kotlin.String) returnType:kotlin.Unit
-      $this: VALUE_PARAMETER name:<this> type:test.Config
-      VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.String
-      BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:host type:kotlin.String visibility:private' type=kotlin.Unit origin=null
-          receiver: GET_VAR '<this>: test.Config declared in test.Config.__pika$set$host' type=test.Config origin=null
-          value: GET_VAR 'value: kotlin.String declared in test.Config.__pika$set$host' type=kotlin.String origin=null
-    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:__pika$set$port visibility:internal modality:FINAL <> ($this:test.Config, value:kotlin.Int) returnType:kotlin.Unit
-      $this: VALUE_PARAMETER name:<this> type:test.Config
-      VALUE_PARAMETER GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:value index:0 type:kotlin.Int
-      BLOCK_BODY
-        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:port type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
-          receiver: GET_VAR '<this>: test.Config declared in test.Config.__pika$set$port' type=test.Config origin=null
-          value: GET_VAR 'value: kotlin.Int declared in test.Config.__pika$set$port' type=kotlin.Int origin=null
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       VAR name:config type:test.Config [val]
@@ -218,7 +211,7 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: default port"
       VAR name:data type:io.github.lukmccall.pika.PIntrospectionData<test.Config> [val]
-        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static] declared in test.Config.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
+        GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static] declared in test.Config.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
@@ -324,7 +317,7 @@ FILE fqName:test fileName:/introspectableExistingCompanion.kt
           jClass: CALL 'public final fun <get-java> (): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Config> origin=null
             $receiver: CLASS_REFERENCE 'CLASS CLASS name:Config modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
           isNullable: CONST Boolean type=kotlin.Boolean value=false
-          introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static] declared in test.Config.Companion' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
+          introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Config> visibility:public [final,static] declared in test.Config.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Config> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=io.github.lukmccall.pika.PTypeDescriptor.Concrete

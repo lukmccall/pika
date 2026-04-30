@@ -9,12 +9,8 @@ FILE: introspectionOfProxy.kt
         public final val x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        internal final fun __pika$get$x(): R|kotlin/Int|
-
-        internal final fun __pika$set$x(value: R|kotlin/Int|): R|kotlin/Unit|
-
-        public final companion object Companion : R|kotlin/Any| {
-            private constructor(): R|test/Foo.Companion| {
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Foo.__Pika| {
                 super<R|kotlin/Any|>()
             }
 

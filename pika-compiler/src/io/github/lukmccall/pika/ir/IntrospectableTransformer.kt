@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.declarations.buildField
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrField
-import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -59,71 +58,25 @@ class IntrospectableTransformer(
   }
 
   private fun handleClassDeclaration(declaration: IrClass): IrStatement = declaration.apply {
-    generateSyntheticAccessorBodies(declaration)
+    relaxBackingFieldAccess(declaration)
 
-    val companion = declaration.companionObject() ?: return@apply
+    val pikaObject = declaration.pikaObject() ?: return@apply
     generateIntrospectionDataField(
       irClass = declaration,
-      fieldOwner = companion
+      fieldOwner = pikaObject
     )
   }
 
-  private fun generateSyntheticAccessorBodies(irClass: IrClass) {
-    val allProperties = irClass
-      .declarations
+  private fun relaxBackingFieldAccess(irClass: IrClass) {
+    irClass.declarations
       .filterIsInstance<IrProperty>()
-      .filter { it.backingField != null }
-      .associateBy { it.name.asString() }
-
-    val syntheticAccessors = irClass
-      .declarations
-      .asSequence()
-      .filterIsInstance<IrSimpleFunction>()
-      .filter { Identifiers.isSyntheticAccessor(it.name.asString()) && it.body == null }
-      .mapNotNull {
-        val propertyName = Identifiers.removeSyntheticAccessor(it.name.asString())
-        val property = allProperties[propertyName] ?: return@mapNotNull null
-        property to it
-      }
-
-    for ((originalProperty, syntheticAccessor) in syntheticAccessors) {
-      val isGetter = Identifiers.isSyntheticGetter(syntheticAccessor.name.asString())
-      val backingField = requireNotNull(originalProperty.backingField)
-
-      val dispatchReceiver = syntheticAccessor.parameters
-        .first { it.kind == IrParameterKind.DispatchReceiver }
-
-      if (isGetter) {
-        // Generate: return this.<backingField>
-        val getField = IrGetFieldImpl(
-          startOffset = -1, endOffset = -1,
-          symbol = backingField.symbol,
-          type = backingField.type,
-          receiver = IrGetValueImpl(-1, -1, irClass.defaultType, dispatchReceiver.symbol)
-        )
-        syntheticAccessor.body = poet.createReturnBody(context.irFactory, syntheticAccessor, getField)
-      } else {
-        val valueParam = syntheticAccessor.parameters.first { it.kind == IrParameterKind.Regular }
-
-        // Strip ACC_FINAL so PUTFIELD from the synthetic setter (non-<init>) does not
-        // throw java.lang.IllegalAccessError: Update to non-static final field ...
-        // attempted from a different method (__pika$set$...) than the initializer method <init>
+      .mapNotNull { it.backingField  }
+      .forEach { backingField ->
         backingField.isFinal = false
-
-        // Generate: this.<backingField> = value
-        syntheticAccessor.body = context.irFactory.createBlockBody(-1, -1).apply {
-          statements.add(
-            IrSetFieldImpl(
-              startOffset = -1, endOffset = -1,
-              symbol = backingField.symbol,
-              receiver = IrGetValueImpl(-1, -1, irClass.defaultType, dispatchReceiver.symbol),
-              value = IrGetValueImpl(-1, -1, valueParam.type, valueParam.symbol),
-              type = context.irBuiltIns.unitType
-            )
-          )
+        if (DescriptorVisibilities.isPrivate(backingField.visibility)) {
+          backingField.visibility = DescriptorVisibilities.INTERNAL
         }
       }
-    }
   }
 
   private fun generateIntrospectionDataField(
@@ -202,7 +155,7 @@ class IntrospectableTransformer(
     val fieldOwner = if (superClass.isObject && !superClass.isCompanion) {
       superClass
     } else {
-      superClass.companionObject() ?: return null
+      superClass.pikaObject() ?: return null
     }
 
     val field = fieldOwner.declarations

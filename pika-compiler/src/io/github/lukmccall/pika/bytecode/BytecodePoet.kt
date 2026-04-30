@@ -6,13 +6,13 @@ import io.github.lukmccall.pika.Identifiers
 import io.github.lukmccall.pika.Identifiers.removePackageName
 import io.github.lukmccall.pika.Identifiers.withPackageName
 import io.github.lukmccall.pika.ir.hasIntrospectableAnnotation
+import io.github.lukmccall.pika.ir.pikaObject
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.mapping.IrTypeMapper
 import org.jetbrains.kotlin.codegen.inline.ReifiedTypeInliner
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.util.companionObject
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.kotlinFqName
@@ -138,10 +138,10 @@ class BytecodePoet(
       )
       true
     } else {
-      val companion = irClass.companionObject() ?: return false
-      val companionType = typeMapper.mapTypeCommon(companion.defaultType, TypeMappingMode.DEFAULT)
+      val pikaObject = irClass.pikaObject() ?: return false
+      val pikaObjectType = typeMapper.mapTypeCommon(pikaObject.defaultType, TypeMappingMode.DEFAULT)
       adapter.getstatic(
-        companionType.internalName,
+        pikaObjectType.internalName,
         Identifiers.INTROSPECTION_DATA_FIELD_NAME,
         fieldDescriptor
       )
