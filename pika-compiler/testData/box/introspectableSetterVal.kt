@@ -10,25 +10,18 @@ fun box(): String {
   val person = Person("Alice", 30)
   val data = introspectionOf<Person>()
 
-  val nameProp = data.properties.find { it.name == "name" }
+  val nameProp = data.properties.find { it.name == "name" } as? PProperty<Person, String>
     ?: return "FAIL: name not found"
 
   // Verify val has backing field
   if (!nameProp.hasBackingField) return "FAIL: name should have backing field"
   if (nameProp.isMutable) return "FAIL: name should not be mutable"
 
-  // CRITICAL: setter should exist for val with backing field
-  if (nameProp.setter == null) return "FAIL: val with backing should have setter"
+  // Use set to modify val (allowed because it has a backing field)
+  nameProp.set(person, "Bob")
 
-  // Use setter to modify val
-  @Suppress("UNCHECKED_CAST")
-  val setter = nameProp.setter as (Person, String) -> Unit
-  setter(person, "Bob")
-
-  // Verify change via getter
-  @Suppress("UNCHECKED_CAST")
-  val getter = nameProp.getter as (Person) -> String
-  if (getter(person) != "Bob") return "FAIL: setter didn't work, got ${getter(person)}"
+  // Verify change via get
+  if (nameProp.get(person) != "Bob") return "FAIL: setter didn't work, got ${nameProp.get(person)}"
 
   // Verify change via direct access
   if (person.name != "Bob") return "FAIL: direct access shows ${person.name}"

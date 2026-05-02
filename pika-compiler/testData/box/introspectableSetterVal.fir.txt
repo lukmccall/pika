@@ -23,10 +23,10 @@ FILE: introspectableSetterVal.kt
     public final fun box(): R|kotlin/String| {
         lval person: R|test/Person| = R|test/Person.Person|(String(Alice), Int(30))
         lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/Person>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Person|>()
-        lval nameProp: R|io/github/lukmccall/pika/PProperty<test/Person, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lval nameProp: R|io/github/lukmccall/pika/PProperty<test/Person, kotlin/String>| = (R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Person, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/Person, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/Person, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(name))
         }
-        ) ?: ^box String(FAIL: name not found)
+        ) as? R|io/github/lukmccall/pika/PProperty<test/Person, kotlin/String>|) ?: ^box String(FAIL: name not found)
         when () {
             R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>|.R|kotlin/Boolean.not|() ->  {
                 ^box String(FAIL: name should have backing field)
@@ -39,18 +39,10 @@ FILE: introspectableSetterVal.kt
             }
         }
 
+        R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.set: R|kotlin/Unit|>|(R|<local>/person|, String(Bob))
         when () {
-            ==(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
-                ^box String(FAIL: val with backing should have setter)
-            }
-        }
-
-        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval setter: R|(test/Person, kotlin/String) -> kotlin/Unit| = (R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>| as R|(test/Person, kotlin/String) -> kotlin/Unit|)
-        R|<local>/setter|.R|SubstitutionOverride<kotlin/Function2.invoke: R|kotlin/Unit|>|(R|<local>/person|, String(Bob))
-        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval getter: R|(test/Person) -> kotlin/String| = (R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>| as R|(test/Person) -> kotlin/String|)
-        when () {
-            !=(R|<local>/getter|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/String|>|(R|<local>/person|), String(Bob)) ->  {
-                ^box <strcat>(String(FAIL: setter didn't work, got ), R|<local>/getter|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/String|>|(R|<local>/person|))
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|kotlin/String|>|(R|<local>/person|), String(Bob)) ->  {
+                ^box <strcat>(String(FAIL: setter didn't work, got ), R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|kotlin/String|>|(R|<local>/person|))
             }
         }
 

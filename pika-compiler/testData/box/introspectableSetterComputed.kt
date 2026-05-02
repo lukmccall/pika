@@ -14,19 +14,22 @@ fun box(): String {
   val person = Person("Alice", "Smith")
   val data = introspectionOf<Person>()
 
-  val fullNameProp = data.properties.find { it.name == "fullName" }
+  val fullNameProp = data.properties.find { it.name == "fullName" } as? PProperty<Person, String>
     ?: return "FAIL: fullName not found"
 
   // Computed property has no backing field
   if (fullNameProp.hasBackingField) return "FAIL: fullName should not have backing field"
 
-  // Setter should be null for computed properties
-  if (fullNameProp.setter != null) return "FAIL: computed property should not have setter"
-
   // Getter should still work
-  @Suppress("UNCHECKED_CAST")
-  val getter = fullNameProp.getter as (Person) -> String
-  if (getter(person) != "Alice Smith") return "FAIL: fullName getter"
+  if (fullNameProp.get(person) != "Alice Smith") return "FAIL: fullName getter"
+
+  // Set should throw for computed properties
+  try {
+    fullNameProp.set(person, "should fail")
+    return "FAIL: set should throw for computed property"
+  } catch (e: UnsupportedOperationException) {
+    // expected
+  }
 
   return "OK"
 }

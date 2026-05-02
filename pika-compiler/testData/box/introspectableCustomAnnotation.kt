@@ -22,7 +22,7 @@ fun box(): String {
   val nameProp = data.properties.find { it.name == "name" }
     ?: return "FAIL: name property not found"
 
-  if (nameProp.getter(person) != "Alice") return "FAIL: getter expected Alice but got ${nameProp.getter(person)}"
+  if (nameProp.get(person) != "Alice") return "FAIL: getter expected Alice but got ${nameProp.get(person)}"
 
   return "OK"
 }

@@ -2,8 +2,6 @@ package sample
 
 import io.github.lukmccall.pika.*
 import java.io.Serializable
-import kotlin.reflect.typeOf
-import kotlin.time.measureTime
 
 
 /**
@@ -30,7 +28,7 @@ open class BaseEntity(open val id: String)
  * Example nested introspectable class.
  */
 @Introspectable
-class Address(val city: String, val country: String)
+data class Address(val city: String, val country: String)
 
 /**
  * Simple test class for Introspectable.
@@ -61,26 +59,6 @@ class User(
 ) : BaseEntity(id), Serializable
 
 fun main() {
-//  repeat(100) {
-//    val skotlinTypeOf = measureTime {
-//      repeat(10000) {
-//        val typeOf = typeOf<SimplePerson>()
-//      }
-//    }
-//
-//    val sikaTypeOf = measureTime {
-//      repeat(10000) {
-//        val pikaTypeOf = typeDescriptorOf<SimplePerson>()
-//      }
-//    }
-//
-//    println("kotlinTypeOf = $skotlinTypeOf")
-//    println("pikaTypeOf = $sikaTypeOf")
-//
-//  }
-//  return
-
-
   println("=== Custom @OptimizedRecord marker (registered via Gradle DSL) ===")
   println()
   val product = Product(sku = "SKU-1", price = 9.99)
@@ -89,7 +67,15 @@ fun main() {
   println("productData.jClass: ${productData.jClass}")
   println("productData.properties: ${productData.properties.size}")
   for (prop in productData.properties) {
-    println("  - ${prop.name}: getter(product)=${prop.getter(product)}")
+    println("  - ${prop.name}: get(product)=${prop.get(product)}")
+  }
+
+  println("After set:")
+
+  val skuProperty: PProperty<Product, String> = productData.properties.first { it.name == "sku" }.cast()
+  skuProperty.set(product, "sku-2")
+  for (prop in productData.properties) {
+    println("  - ${prop.name}: get(product)=${prop.get(product)}")
   }
   println()
 
@@ -106,7 +92,7 @@ fun main() {
   println("properties: ${data.properties.size}")
 
   for (prop in data.properties) {
-    println("  - ${prop.name}: getter(person)=${prop.getter(person)}")
+    println("  - ${prop.name}: get(person)=${prop.get(person)}")
   }
   println()
 
@@ -218,20 +204,7 @@ fun main() {
     println("  ${prop.name}:")
     println("    isDelegated: ${prop.isDelegated}")
     println("    hasBackingField: ${prop.hasBackingField}")
-    if (prop.isDelegated && prop.delegateGetter != null) {
-      val delegate = prop.delegateGetter!!(delegatedExample)
-      println("    delegate type: ${delegate?.let { it::class.simpleName }}")
-      if (delegate is Lazy<*>) {
-        println("    isInitialized: ${delegate.isInitialized()}")
-      }
-    }
-    println("    value: ${prop.getter(delegatedExample)}")
-    if (prop.isDelegated && prop.delegateGetter != null) {
-      val delegate = prop.delegateGetter!!(delegatedExample)
-      if (delegate is Lazy<*>) {
-        println("    isInitialized (after access): ${delegate.isInitialized()}")
-      }
-    }
+    println("    value: ${prop.get(delegatedExample)}")
     println()
   }
 }

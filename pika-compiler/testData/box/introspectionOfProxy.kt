@@ -13,6 +13,6 @@ fun box(): String {
   if (data.jClass != Foo::class.java) return "FAIL: wrong kClass, got ${data.jClass}"
   if (data.properties.size != 1) return "FAIL: wrong property count, got ${data.properties.size}"
   val foo = Foo(42)
-  if (data.properties[0].getter(foo) != 42) return "FAIL: getter returned ${data.properties[0].getter(foo)}"
+  if (data.properties[0].get(foo) != 42) return "FAIL: getter returned ${data.properties[0].get(foo)}"
   return "OK"
 }

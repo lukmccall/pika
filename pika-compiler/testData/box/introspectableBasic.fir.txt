@@ -37,8 +37,8 @@ FILE: introspectableBasic.kt
         }
         ) ?: ^box String(FAIL: name property not found)
         when () {
-            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
-                ^box <strcat>(String(FAIL: getter expected Alice but got ), R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|))
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
+                ^box <strcat>(String(FAIL: getter expected Alice but got ), R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/person|))
             }
         }
 

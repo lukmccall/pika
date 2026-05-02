@@ -30,7 +30,7 @@ public final class io/github/lukmccall/pika/PFunction {
 }
 
 public final class io/github/lukmccall/pika/PIntrospectionData {
-	public fun <init> (Ljava/lang/Class;[Lio/github/lukmccall/pika/PAnnotation;Lkotlin/jvm/functions/Function0;[Lio/github/lukmccall/pika/PFunction;Lio/github/lukmccall/pika/PIntrospectionData;)V
+	public fun <init> (Ljava/lang/Class;[Lio/github/lukmccall/pika/PAnnotation;[Lio/github/lukmccall/pika/PProperty;[Lio/github/lukmccall/pika/PFunction;Lio/github/lukmccall/pika/PIntrospectionData;)V
 	public final fun getAnnotations ()[Lio/github/lukmccall/pika/PAnnotation;
 	public final fun getBaseClass ()Lio/github/lukmccall/pika/PIntrospectionData;
 	public final fun getFunctions ()[Lio/github/lukmccall/pika/PFunction;
@@ -39,17 +39,22 @@ public final class io/github/lukmccall/pika/PIntrospectionData {
 }
 
 public final class io/github/lukmccall/pika/PProperty {
-	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;[Lio/github/lukmccall/pika/PAnnotation;Lio/github/lukmccall/pika/PTypeDescriptor;Lkotlin/jvm/functions/Function1;ZZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function1;)V
+	public fun <init> (Ljava/lang/String;Lio/github/lukmccall/pika/PVisibility;[Lio/github/lukmccall/pika/PAnnotation;Lio/github/lukmccall/pika/PTypeDescriptor;ILio/github/lukmccall/pika/PPropertyAccessor;ZZZ)V
+	public final fun get (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun getAnnotations ()[Lio/github/lukmccall/pika/PAnnotation;
-	public final fun getDelegateGetter ()Lkotlin/jvm/functions/Function1;
-	public final fun getGetter ()Lkotlin/jvm/functions/Function1;
 	public final fun getHasBackingField ()Z
+	public final fun getIndex ()I
 	public final fun getName ()Ljava/lang/String;
-	public final fun getSetter ()Lkotlin/jvm/functions/Function2;
 	public final fun getType ()Lio/github/lukmccall/pika/PTypeDescriptor;
 	public final fun getVisibility ()Lio/github/lukmccall/pika/PVisibility;
 	public final fun isDelegated ()Z
 	public final fun isMutable ()Z
+	public final fun set (Ljava/lang/Object;Ljava/lang/Object;)V
+}
+
+public abstract interface class io/github/lukmccall/pika/PPropertyAccessor {
+	public abstract fun __pika$PropertyGet (Ljava/lang/Object;I)Ljava/lang/Object;
+	public abstract fun __pika$PropertySet (Ljava/lang/Object;ILjava/lang/Object;)V
 }
 
 public final class io/github/lukmccall/pika/PType {

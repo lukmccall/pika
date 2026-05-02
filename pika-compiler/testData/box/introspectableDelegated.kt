@@ -18,18 +18,19 @@ fun box(): String {
   val lazyProp = data.properties.find { it.name == "lazyValue" }
     ?: return "FAIL: lazyValue not found"
   if (!lazyProp.isDelegated) return "FAIL: lazyValue should be delegated"
-  if (lazyProp.delegateGetter == null) return "FAIL: lazyValue should have delegateGetter"
-  val lazyDelegate = lazyProp.delegateGetter!!(instance)
-  if (lazyDelegate !is Lazy<*>) return "FAIL: delegate should be Lazy"
 
   // Test regular property (not delegated)
   val regularProp = data.properties.find { it.name == "regularValue" }!!
   if (regularProp.isDelegated) return "FAIL: regularValue should not be delegated"
-  if (regularProp.delegateGetter != null) return "FAIL: regularValue delegateGetter should be null"
 
   // Test computed property (not delegated)
   val computedProp = data.properties.find { it.name == "computedValue" }!!
   if (computedProp.isDelegated) return "FAIL: computedValue should not be delegated"
+
+  // Test getter via get()
+  if (lazyProp.get(instance) != 42) return "FAIL: lazyValue getter"
+  if (regularProp.get(instance) != "hello") return "FAIL: regularValue getter"
+  if (computedProp.get(instance) != 100) return "FAIL: computedValue getter"
 
   return "OK"
 }

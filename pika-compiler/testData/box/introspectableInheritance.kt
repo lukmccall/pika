@@ -18,7 +18,7 @@ fun box(): String {
   if (data.properties[0].name != "breed") return "FAIL: Dog property should be breed"
 
   // Base class reference
-  val baseData = data.baseClass
+  val baseData = data.baseClass as? PIntrospectionData<Animal>
     ?: return "FAIL: Dog should have baseClass reference"
 
   if (baseData.jClass != Animal::class.java) return "FAIL: baseClass should be Animal"
@@ -26,9 +26,7 @@ fun box(): String {
   if (baseData.properties[0].name != "species") return "FAIL: Animal property should be species"
 
   // Access inherited property via baseClass
-  @Suppress("UNCHECKED_CAST")
-  val speciesGetter = baseData.properties[0].getter as (Any) -> String
-  if (speciesGetter(dog) != "Canine") return "FAIL: species getter"
+  if (baseData.properties[0].get(dog) != "Canine") return "FAIL: species getter"
 
   return "OK"
 }

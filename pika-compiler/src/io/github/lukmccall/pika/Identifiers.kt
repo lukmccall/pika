@@ -30,6 +30,9 @@ object Identifiers {
     "kotlin.Boolean" to ("BOOLEAN" to "BOOLEAN_NULLABLE"),
   )
 
+  const val PROPERTY_ACCESSOR_GET_NAME = "__pika\$PropertyGet"
+  const val PROPERTY_ACCESSOR_SET_NAME = "__pika\$PropertySet"
+
   const val PIKA_SPECIAL_PREFIX = "__pika\$"
 
   fun String.withPackageName(): String {

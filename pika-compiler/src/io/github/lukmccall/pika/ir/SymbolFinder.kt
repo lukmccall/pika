@@ -2,6 +2,7 @@ package io.github.lukmccall.pika.ir
 
 import io.github.lukmccall.pika.Identifiers
 import io.github.lukmccall.pika.Identifiers.toFq
+import io.github.lukmccall.pika.symbols.JavaLang
 import io.github.lukmccall.pika.symbols.PikaAPI
 import io.github.lukmccall.pika.symbols.KotlinStd
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
@@ -59,6 +60,27 @@ class SymbolFinder(
     val introspectable by cachedReference(PikaAPI.Introspectable)
     val pVisibility by cachedReference(PikaAPI.PVisibility)
     val pProperty by cachedReference(PikaAPI.PProperty)
+    val pPropertyAccessor by cachedReference(PikaAPI.PPropertyAccessor)
+
+    val pPropertyAccessorGet by lazy {
+      functionResolver(
+        CallableId(
+          Identifiers.PACKAGE_NAME.toFq(),
+          FqName("PPropertyAccessor"),
+          Name.identifier(Identifiers.PROPERTY_ACCESSOR_GET_NAME)
+        )
+      ).firstOrNull() ?: error("Function ${Identifiers.PROPERTY_ACCESSOR_GET_NAME} not found in PPropertyAccessor")
+    }
+
+    val pPropertyAccessorSet by lazy {
+      functionResolver(
+        CallableId(
+          Identifiers.PACKAGE_NAME.toFq(),
+          FqName("PPropertyAccessor"),
+          Name.identifier(Identifiers.PROPERTY_ACCESSOR_SET_NAME)
+        )
+      ).firstOrNull() ?: error("Function ${Identifiers.PROPERTY_ACCESSOR_SET_NAME} not found in PPropertyAccessor")
+    }
     val pFunction by cachedReference(PikaAPI.PFunction)
     val pAnnotation by cachedReference(PikaAPI.PAnnotation)
     val pIntrospectionData by cachedReference(PikaAPI.PIntrospectionData)
@@ -72,13 +94,19 @@ class SymbolFinder(
 
     inner class _Collections {
       val listOf by cachedFunction(KotlinStd.Collections.listOf)
-      val emptyList by cachedFunction(KotlinStd.Collections.emptyList)
       val emptyMap by cachedFunction(KotlinStd.Collections.emptyMap)
       val mapOf by cachedFunction(KotlinStd.Collections.mapOf)
     }
 
     val pair by cachedReference(KotlinStd.pair)
     val to by cachedFunction(KotlinStd.to)
+  }
+
+  val javaLang = _JavaLang()
+
+  inner class _JavaLang {
+    val indexOutOfBoundsException by cachedReference(JavaLang.indexOutOfBoundsException)
+    val unsupportedOperationException by cachedReference(JavaLang.unsupportedOperationException)
   }
 
   val javaLangClass by cachedReference(ClassId(FqName("java.lang"), Name.identifier("Class")))

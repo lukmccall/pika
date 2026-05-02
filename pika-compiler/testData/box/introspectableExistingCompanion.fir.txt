@@ -69,7 +69,7 @@ FILE: introspectableExistingCompanion.kt
         }
         ) ?: ^box String(FAIL: host property not found)
         when () {
-            !=(R|<local>/hostProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Config) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/config|), String(localhost)) ->  {
+            !=(R|<local>/hostProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/config|), String(localhost)) ->  {
                 ^box String(FAIL: host getter)
             }
         }
@@ -79,7 +79,7 @@ FILE: introspectableExistingCompanion.kt
         }
         ) ?: ^box String(FAIL: port property not found)
         when () {
-            !=(R|<local>/portProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Config) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/config|), Int(8080)) ->  {
+            !=(R|<local>/portProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/config|), Int(8080)) ->  {
                 ^box String(FAIL: port getter)
             }
         }

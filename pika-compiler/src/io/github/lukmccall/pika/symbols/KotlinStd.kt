@@ -8,7 +8,6 @@ import org.jetbrains.kotlin.name.Name
 object KotlinStd {
   object Collections {
     val listOf = CallableId(FqName("kotlin.collections"), Name.identifier("listOf"))
-    val emptyList = CallableId(FqName("kotlin.collections"), Name.identifier("emptyList"))
     val emptyMap = CallableId(FqName("kotlin.collections"), Name.identifier("emptyMap"))
     val mapOf = CallableId(FqName("kotlin.collections"), Name.identifier("mapOf"))
   }

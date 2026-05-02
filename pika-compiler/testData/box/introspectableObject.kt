@@ -35,9 +35,7 @@ fun box(): String {
     ?: return "FAIL: increment not found"
 
   // Test getter
-  @Suppress("UNCHECKED_CAST")
-  val versionGetter = versionProp.getter as (Any) -> String
-  if (versionGetter(Singleton) != "1.0") return "FAIL: version getter"
+  if (versionProp.get(Singleton) != "1.0") return "FAIL: version getter"
 
   return "OK"
 }

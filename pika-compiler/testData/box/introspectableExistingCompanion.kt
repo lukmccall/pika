@@ -26,11 +26,11 @@ fun box(): String {
 
   val hostProp = data.properties.find { it.name == "host" }
     ?: return "FAIL: host property not found"
-  if (hostProp.getter(config) != "localhost") return "FAIL: host getter"
+  if (hostProp.get(config) != "localhost") return "FAIL: host getter"
 
   val portProp = data.properties.find { it.name == "port" }
     ?: return "FAIL: port property not found"
-  if (portProp.getter(config) != 8080) return "FAIL: port getter"
+  if (portProp.get(config) != 8080) return "FAIL: port getter"
 
   // Verify typeDescriptorOf works too
   val td = typeDescriptorOf<Config>()

@@ -27,14 +27,14 @@ fun box(): String {
   if (greetingProp.hasBackingField) return "FAIL: greeting should not have backing field"
 
   // Verify getters work
-  if (nameProp.getter(person) != "Alice") return "FAIL: name getter"
-  if (greetingProp.getter(person) != "Hello, Alice") return "FAIL: greeting getter"
+  if (nameProp.get(person) != "Alice") return "FAIL: name getter"
+  if (greetingProp.get(person) != "Hello, Alice") return "FAIL: greeting getter"
 
-  // name has setter (because it has backing field)
-  if (nameProp.setter == null) return "FAIL: name should have setter"
+  // name has backing field so set should work
+  if (!nameProp.hasBackingField) return "FAIL: name should have backing field for set"
 
-  // greeting has no setter (computed property)
-  if (greetingProp.setter != null) return "FAIL: greeting should not have setter"
+  // greeting has no backing field so set should throw
+  if (greetingProp.hasBackingField) return "FAIL: greeting should not have backing field"
 
   return "OK"
 }

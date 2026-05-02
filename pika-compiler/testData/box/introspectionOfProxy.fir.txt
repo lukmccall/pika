@@ -36,8 +36,8 @@ FILE: introspectionOfProxy.kt
 
         lval foo: R|test/Foo| = R|test/Foo.Foo|(Int(42))
         when () {
-            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/Array.get: R|io/github/lukmccall/pika/PProperty<test/Foo, *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Foo) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/foo|), Int(42)) ->  {
-                ^box <strcat>(String(FAIL: getter returned ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/Array.get: R|io/github/lukmccall/pika/PProperty<test/Foo, *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Foo) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/foo|))
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/Array.get: R|io/github/lukmccall/pika/PProperty<test/Foo, *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/foo|), Int(42)) ->  {
+                ^box <strcat>(String(FAIL: getter returned ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/Foo, *>>|>|.R|SubstitutionOverride<kotlin/Array.get: R|io/github/lukmccall/pika/PProperty<test/Foo, *>|>|(Int(0)).R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/foo|))
             }
         }
 

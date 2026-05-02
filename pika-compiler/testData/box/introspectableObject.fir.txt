@@ -61,9 +61,8 @@ FILE: introspectableObject.kt
             ^ ==(R|<local>/it|.R|io/github/lukmccall/pika/PFunction.name|, String(increment))
         }
         ) ?: ^box String(FAIL: increment not found)
-        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval versionGetter: R|(kotlin/Any) -> kotlin/String| = (R|<local>/versionProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Singleton) -> CapturedType(*)|>| as R|(kotlin/Any) -> kotlin/String|)
         when () {
-            !=(R|<local>/versionGetter|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/String|>|(Q|test/Singleton|), String(1.0)) ->  {
+            !=(R|<local>/versionProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(Q|test/Singleton|), String(1.0)) ->  {
                 ^box String(FAIL: version getter)
             }
         }

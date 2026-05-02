@@ -8,8 +8,6 @@ import org.jetbrains.kotlin.backend.common.ir.createExtensionReceiver
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
 import org.jetbrains.kotlin.ir.builders.declarations.addGetter
-import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
-import org.jetbrains.kotlin.ir.builders.declarations.buildFun
 import org.jetbrains.kotlin.ir.builders.declarations.buildProperty
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.declarations.impl.IrFactoryImpl
@@ -140,7 +138,8 @@ class IRPoet(
         typeArguments[0] = keyType
         typeArguments[1] = valueType
         arguments[0] = IrVarargImpl(
-          startOffset = -1, endOffset = -1,
+          startOffset = -1,
+          endOffset = -1,
           type = irBuiltIns.arrayClass.typeWith(pairType),
           varargElementType = pairType,
           elements = pairs
@@ -187,7 +186,8 @@ class IRPoet(
       return buildIrCall(listType, listOf, typeArgumentsCount = 1, origin = IrStatementOrigin.INVOKE) {
         typeArguments[0] = type
         arguments[0] = IrVarargImpl(
-          startOffset = -1, endOffset = -1,
+          startOffset = -1,
+          endOffset = -1,
           type = irBuiltIns.arrayClass.typeWith(type),
           varargElementType = type,
           elements = elements
@@ -403,10 +403,18 @@ class IRPoet(
     }
 
     fun emptyAnnotationsArray(): IrExpression =
-      staticArrayField("EMPTY_ANNOTATIONS", symbolFinder.pikaAPI.pAnnotation.owner.defaultType, symbolFinder.pikaAPI.pEmptyArrays.owner)
+      staticArrayField(
+        "EMPTY_ANNOTATIONS",
+        symbolFinder.pikaAPI.pAnnotation.owner.defaultType,
+        symbolFinder.pikaAPI.pEmptyArrays.owner
+      )
 
     fun emptyFunctionsArray(): IrExpression =
-      staticArrayField("EMPTY_FUNCTIONS", symbolFinder.pikaAPI.pFunction.owner.defaultType, symbolFinder.pikaAPI.pEmptyArrays.owner)
+      staticArrayField(
+        "EMPTY_FUNCTIONS",
+        symbolFinder.pikaAPI.pFunction.owner.defaultType,
+        symbolFinder.pikaAPI.pEmptyArrays.owner
+      )
 
     /**
      * IrType -> io.github.lukmccall.pika.PTypeDescriptor.*
@@ -535,237 +543,117 @@ class IRPoet(
           arguments[1] = pika.pVisibility(function.visibility)
         }
 
+    private fun castInstance(instanceParam: IrValueParameter, ownerType: IrType): IrExpression =
+      IrTypeOperatorCallImpl(
+        -1,
+        -1,
+        ownerType,
+        IrTypeOperator.CAST,
+        ownerType,
+        IrGetValueImpl(
+          -1,
+          -1,
+          irBuiltIns.anyNType,
+          instanceParam.symbol
+        )
+      )
+
     /**
-     * Creates a getter lambda: { owner -> owner.propertyName }
-     * Uses the property getter if available, otherwise accesses the backing field directly.
+     * Builds an expression that reads a property value from an instance.
+     * The instance parameter is cast from Any? to ownerType.
      */
-    fun propertyGetterLambda(
+    fun propertyGetExpression(
       property: IrProperty,
-      ownerClass: IrClass,
-      containingDeclaration: IrDeclarationParent,
-      irFactory: IrFactory
+      ownerType: IrType,
+      instanceParam: IrValueParameter
     ): IrExpression {
       val propertyType = property.resolvedType
-
-      val ownerType = ownerClass.defaultType
-
-      // Create Function1<OwnerType, PropertyType>
-      val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, propertyType)
-
-      val lambdaFunction = irFactory.buildFun {
-        name = Name.special("<anonymous>")
-        returnType = propertyType
-        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
-        visibility = DescriptorVisibilities.LOCAL
-      }.apply {
-        parent = containingDeclaration
-        val ownerParam = addValueParameter("owner", ownerType)
-
-        val returnValue = if (property.getter != null) {
-          val getter = property.getter!!
-          IrCallImpl(
-            -1,
-            -1,
-            propertyType,
-            getter.symbol,
-            0,
-            IrStatementOrigin.GET_PROPERTY,
-            null
-          )
-            .apply {
-              bindFunctionParameters(
-                getter,
-                ownerParam,
-                ownerType
-              )
+      val castedInstance = castInstance(instanceParam, ownerType)
+      return if (property.getter != null) {
+        val getter = property.getter!!
+        IrCallImpl(
+          -1,
+          -1,
+          propertyType,
+          getter.symbol,
+          0,
+          IrStatementOrigin.GET_PROPERTY,
+          null
+        )
+          .apply {
+            getter.parameters.forEach { param ->
+              if (param.kind == IrParameterKind.DispatchReceiver) {
+                arguments[param.indexInParameters] = castedInstance
+              }
             }
-        } else {
-          IrGetFieldImpl(
-            startOffset = -1,
-            endOffset = -1,
-            symbol = property.backingField!!.symbol,
-            type = propertyType,
-            receiver = IrGetValueImpl(
-              startOffset = -1,
-              endOffset = -1,
-              type = ownerType,
-              symbol = ownerParam.symbol
-            )
-          )
-        }
-
-        body = createReturnBody(irFactory, this, returnValue)
-      }
-
-      return IrFunctionExpressionImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = function1Type,
-        function = lambdaFunction,
-        origin = IrStatementOrigin.LAMBDA
-      )
-    }
-
-    /**
-     * Sets arguments for dispatch receiver (and optionally a regular/value parameter)
-     * on a function call, using K2 IR's unified `arguments` array indexed by `indexInParameters`.
-     */
-    private fun IrCallImpl.bindFunctionParameters(
-      function: IrSimpleFunction,
-      dispatchParam: IrValueParameter,
-      dispatchType: IrType,
-      regularParam: IrValueParameter? = null,
-      regularType: IrType? = null
-    ) {
-      function.parameters.forEach { param ->
-        when (param.kind) {
-          IrParameterKind.DispatchReceiver ->
-            arguments[param.indexInParameters] = IrGetValueImpl(
-              -1,
-              -1,
-              dispatchType,
-              dispatchParam.symbol
-            )
-
-          IrParameterKind.Regular -> if (regularParam != null) {
-            arguments[param.indexInParameters] = IrGetValueImpl(
-              -1,
-              -1,
-              regularType!!,
-              regularParam.symbol
-            )
           }
-
-          else -> {}
-        }
+      } else {
+        IrGetFieldImpl(
+          startOffset = -1, endOffset = -1,
+          symbol = property.backingField!!.symbol,
+          type = propertyType,
+          receiver = castedInstance
+        )
       }
     }
 
     /**
-     * Creates a setter lambda: { owner, value -> owner.property = value }
-     * Uses the property setter if available, otherwise writes the backing field directly.
+     * Builds an expression that writes a property value on an instance.
+     * Both instance and value parameters are cast from Any? to their target types.
      */
-    fun propertySetterLambda(
+    fun propertySetExpression(
       property: IrProperty,
-      ownerClass: IrClass,
-      containingDeclaration: IrDeclarationParent,
-      irFactory: IrFactory
-    ): IrExpression? {
+      ownerType: IrType,
+      instanceParam: IrValueParameter,
+      valueParam: IrValueParameter
+    ): IrExpression {
       val propertyType = property.resolvedType
-      val ownerType = ownerClass.defaultType
+      val castedInstance = castInstance(instanceParam, ownerType)
+      val castedValue = IrTypeOperatorCallImpl(
+        -1,
+        -1,
+        propertyType,
+        IrTypeOperator.CAST,
+        propertyType,
+        IrGetValueImpl(
+          -1,
+          -1,
+          irBuiltIns.anyNType,
+          valueParam.symbol
+        )
+      )
 
       val kotlinSetter = property.setter
-
-      if (kotlinSetter == null && property.backingField == null) return null
-
-      // Create Function2<OwnerType, PropertyType, Unit>
-      val function2Type = irBuiltIns.functionN(2).typeWith(ownerType, propertyType, irBuiltIns.unitType)
-
-      val lambdaFunction = irFactory.buildFun {
-        name = Name.special("<anonymous>")
-        returnType = irBuiltIns.unitType
-        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
-        visibility = DescriptorVisibilities.LOCAL
-      }.apply {
-        parent = containingDeclaration
-        val ownerParam = addValueParameter("owner", ownerType)
-        val valueParam = addValueParameter("value", propertyType)
-
-        val setterCall = if (kotlinSetter != null) {
-          IrCallImpl(
-            -1,
-            -1,
-            irBuiltIns.unitType,
-            kotlinSetter.symbol,
-            0,
-            IrStatementOrigin.EQ,
-            null
-          )
-            .apply {
-              bindFunctionParameters(
-                kotlinSetter,
-                ownerParam,
-                ownerType,
-                valueParam,
-                propertyType
-              )
-            }
-        } else {
-          IrSetFieldImpl(
-            startOffset = -1,
-            endOffset = -1,
-            symbol = property.backingField!!.symbol,
-            receiver = IrGetValueImpl(-1, -1, ownerType, ownerParam.symbol),
-            value = IrGetValueImpl(-1, -1, propertyType, valueParam.symbol),
-            type = irBuiltIns.unitType
-          )
-        }
-
-        body = irFactory.createBlockBody(-1, -1).apply {
-          statements.add(setterCall)
-        }
-      }
-
-      return IrFunctionExpressionImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = function2Type,
-        function = lambdaFunction,
-        origin = IrStatementOrigin.LAMBDA
-      )
-    }
-
-    /**
-     * Creates a delegate getter lambda: { owner -> owner.<delegate_backing_field> }
-     * Returns null if property is not delegated.
-     */
-    fun delegateGetterLambda(
-      property: IrProperty,
-      ownerClass: IrClass,
-      containingDeclaration: IrDeclarationParent,
-      irFactory: IrFactory
-    ): IrExpression? {
-      if (!property.isDelegated) return null
-      val backingField = property.backingField ?: return null
-
-      val delegateType = backingField.type
-      val ownerType = ownerClass.defaultType
-
-      // Function1<OwnerType, Any?>
-      val function1Type = irBuiltIns.functionN(1).typeWith(ownerType, irBuiltIns.anyNType)
-
-      val lambdaFunction = irFactory.buildFun {
-        name = Name.special("<anonymous>")
-        returnType = irBuiltIns.anyNType
-        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
-        visibility = DescriptorVisibilities.LOCAL
-      }.apply {
-        parent = containingDeclaration
-        val ownerParam = addValueParameter("owner", ownerType)
-
-        val returnValue = IrGetFieldImpl(
-          startOffset = -1,
-          endOffset = -1,
-          symbol = backingField.symbol,
-          type = delegateType,
-          receiver = IrGetValueImpl(
-            startOffset = -1,
-            endOffset = -1,
-            type = ownerType,
-            symbol = ownerParam.symbol
-          )
+      return if (kotlinSetter != null) {
+        IrCallImpl(
+          -1,
+          -1,
+          irBuiltIns.unitType,
+          kotlinSetter.symbol,
+          0,
+          IrStatementOrigin.EQ,
+          null
         )
-
-        body = createReturnBody(irFactory, this, returnValue)
+          .apply {
+            kotlinSetter.parameters.forEach { param ->
+              when (param.kind) {
+                IrParameterKind.DispatchReceiver ->
+                  arguments[param.indexInParameters] = castedInstance
+                IrParameterKind.Regular ->
+                  arguments[param.indexInParameters] = castedValue
+                else -> {}
+              }
+            }
+          }
+      } else {
+        IrSetFieldImpl(
+          startOffset = -1, endOffset = -1,
+          symbol = property.backingField!!.symbol,
+          receiver = castedInstance,
+          value = castedValue,
+          type = irBuiltIns.unitType
+        )
       }
-
-      return IrFunctionExpressionImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = function1Type,
-        function = lambdaFunction,
-        origin = IrStatementOrigin.LAMBDA
-      )
     }
 
     /**
@@ -774,11 +662,9 @@ class IRPoet(
     fun pProperty(
       property: IrProperty,
       ownerClass: IrClass,
-      containingDeclaration: IrDeclarationParent,
-      irFactory: IrFactory
+      index: Int,
+      accessorExpr: IrExpression
     ): IrExpression {
-      val propertyType = property.resolvedType
-
       val pPropertyClass = symbolFinder.pikaAPI.pProperty
       val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
 
@@ -790,27 +676,21 @@ class IRPoet(
       }
 
       val hasBackingField = property.backingField != null
-      val getterLambda = propertyGetterLambda(property, ownerClass, containingDeclaration, irFactory)
-      val setterLambda = propertySetterLambda(property, ownerClass, containingDeclaration, irFactory)
-      val isDelegated = property.isDelegated
-      val delegateLambda = delegateGetterLambda(property, ownerClass, containingDeclaration, irFactory)
-
       val ownerType = ownerClass.defaultType
 
-      // PProperty<OwnerType, Type>
-      val pPropertyType = pPropertyClass.typeWith(ownerType, propertyType)
+      // PProperty<OwnerType>
+      val pPropertyType = pPropertyClass.typeWith(ownerType)
 
       return IrConstructorCallImpl(
         startOffset = -1,
         endOffset = -1,
         type = pPropertyType,
         symbol = constructor.symbol,
-        typeArgumentsCount = 2,
-        constructorTypeArgumentsCount = 2,
+        typeArgumentsCount = 1,
+        constructorTypeArgumentsCount = 1,
         origin = null
       ).also { call ->
         call.typeArguments[0] = ownerType
-        call.typeArguments[1] = propertyType
         call.arguments[0] = kotlin.string(property.name.asString())
         call.arguments[1] = pika.pVisibility(property.visibility)
         call.arguments[2] = if (annotations.isEmpty()) {
@@ -818,13 +698,12 @@ class IRPoet(
         } else {
           kotlin.arrayOf(pAnnotationClass.owner.defaultType, annotations)
         }
-        call.arguments[3] = pika.typeDescriptor(propertyType)
-        call.arguments[4] = getterLambda
-        call.arguments[5] = kotlin.bool(property.isVar)
-        call.arguments[6] = kotlin.bool(hasBackingField)
-        call.arguments[7] = setterLambda ?: kotlin.`null`()
-        call.arguments[8] = kotlin.bool(isDelegated)
-        call.arguments[9] = delegateLambda ?: kotlin.`null`()
+        call.arguments[3] = pika.typeDescriptor(property.resolvedType)
+        call.arguments[4] = IrConstImpl.int(-1, -1, irBuiltIns.intType, index)
+        call.arguments[5] = accessorExpr
+        call.arguments[6] = kotlin.bool(property.isVar)
+        call.arguments[7] = kotlin.bool(hasBackingField)
+        call.arguments[8] = kotlin.bool(property.isDelegated)
       }
     }
 
@@ -836,8 +715,6 @@ class IRPoet(
       properties: List<IrExpression>,
       functions: List<IrExpression>,
       baseClassExpr: IrExpression?,
-      irFactory: IrFactory,
-      containingDeclaration: IrDeclarationParent
     ): IrExpression {
       val pIntrospectionDataClass = symbolFinder.pikaAPI.pIntrospectionData
       val pAnnotationClass = symbolFinder.pikaAPI.pAnnotation
@@ -856,36 +733,14 @@ class IRPoet(
       // PIntrospectionData<OwnerType>
       val pIntrospectionDataType = pIntrospectionDataClass.typeWith(ownerType)
 
-      // PProperty<OwnerType, *> (use star projection for the array)
-      val pPropertyStarType = pPropertyClass.typeWith(ownerType, irBuiltIns.anyNType)
-
-      // Build properties factory lambda: () -> Array<PProperty<OwnerType, *>>
-      val propertiesArrayType = irBuiltIns.arrayClass.typeWith(pPropertyStarType)
-      val function0Type = irBuiltIns.functionN(0).typeWith(propertiesArrayType)
+      // PProperty<OwnerType>
+      val pPropertyType = pPropertyClass.typeWith(ownerType)
 
       val propertiesArrayExpr = if (properties.isEmpty()) {
-        kotlin.arrayOf(pPropertyStarType, emptyList())
+        kotlin.arrayOf(pPropertyType, emptyList())
       } else {
-        kotlin.arrayOf(pPropertyStarType, properties)
+        kotlin.arrayOf(pPropertyType, properties)
       }
-
-      val lambdaFunction = irFactory.buildFun {
-        name = Name.special("<anonymous>")
-        returnType = propertiesArrayType
-        origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
-        visibility = DescriptorVisibilities.LOCAL
-      }.apply {
-        parent = containingDeclaration
-        body = createReturnBody(irFactory, this, propertiesArrayExpr)
-      }
-
-      val propertiesLambda = IrFunctionExpressionImpl(
-        startOffset = -1,
-        endOffset = -1,
-        type = function0Type,
-        function = lambdaFunction,
-        origin = IrStatementOrigin.LAMBDA
-      )
 
       // Annotations array
       val annotationsExpr = if (classAnnotations.isEmpty()) {
@@ -913,7 +768,7 @@ class IRPoet(
         call.typeArguments[0] = ownerType
         call.arguments[0] = kotlin.javaClass(irClass.symbol)
         call.arguments[1] = annotationsExpr
-        call.arguments[2] = propertiesLambda
+        call.arguments[2] = propertiesArrayExpr
         call.arguments[3] = functionsExpr
         call.arguments[4] = baseClassExpr ?: kotlin.`null`()
       }

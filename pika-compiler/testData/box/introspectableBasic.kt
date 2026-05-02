@@ -21,7 +21,7 @@ fun box(): String {
     ?: return "FAIL: name property not found"
 
   // Test getter
-  if (nameProp.getter(person) != "Alice") return "FAIL: getter expected Alice but got ${nameProp.getter(person)}"
+  if (nameProp.get(person) != "Alice") return "FAIL: getter expected Alice but got ${nameProp.get(person)}"
 
   return "OK"
 }

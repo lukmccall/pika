@@ -43,19 +43,6 @@ FILE: introspectableDelegated.kt
             }
         }
 
-        when () {
-            ==(R|<local>/lazyProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.delegateGetter: R|((test/DelegatedProperties) -> kotlin/Any?)?|>|, Null(null)) ->  {
-                ^box String(FAIL: lazyValue should have delegateGetter)
-            }
-        }
-
-        lval lazyDelegate: R|kotlin/Any?| = R|<local>/lazyProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.delegateGetter: R|((test/DelegatedProperties) -> kotlin/Any?)?|>|!!.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Any?|>|(R|<local>/instance|)
-        when () {
-            (R|<local>/lazyDelegate| !is R|kotlin/Lazy<*>|) ->  {
-                ^box String(FAIL: delegate should be Lazy)
-            }
-        }
-
         lval regularProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(regularValue))
         }
@@ -66,12 +53,6 @@ FILE: introspectableDelegated.kt
             }
         }
 
-        when () {
-            !=(R|<local>/regularProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.delegateGetter: R|((test/DelegatedProperties) -> kotlin/Any?)?|>|, Null(null)) ->  {
-                ^box String(FAIL: regularValue delegateGetter should be null)
-            }
-        }
-
         lval computedProp: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/DelegatedProperties, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(computedValue))
         }
@@ -79,6 +60,24 @@ FILE: introspectableDelegated.kt
         when () {
             R|<local>/computedProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.isDelegated: R|kotlin/Boolean|>| ->  {
                 ^box String(FAIL: computedValue should not be delegated)
+            }
+        }
+
+        when () {
+            !=(R|<local>/lazyProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/instance|), Int(42)) ->  {
+                ^box String(FAIL: lazyValue getter)
+            }
+        }
+
+        when () {
+            !=(R|<local>/regularProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/instance|), String(hello)) ->  {
+                ^box String(FAIL: regularValue getter)
+            }
+        }
+
+        when () {
+            !=(R|<local>/computedProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/instance|), Int(100)) ->  {
+                ^box String(FAIL: computedValue getter)
             }
         }
 

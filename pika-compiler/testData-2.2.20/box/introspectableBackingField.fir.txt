@@ -46,26 +46,26 @@ FILE: introspectableBackingField.kt
         }
 
         when () {
-            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
+            !=(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/person|), String(Alice)) ->  {
                 ^box String(FAIL: name getter)
             }
         }
 
         when () {
-            !=(R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.getter: R|(test/Person) -> CapturedType(*)|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|CapturedType(*)|>|(R|<local>/person|), String(Hello, Alice)) ->  {
+            !=(R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/person|), String(Hello, Alice)) ->  {
                 ^box String(FAIL: greeting getter)
             }
         }
 
         when () {
-            ==(R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
-                ^box String(FAIL: name should have setter)
+            R|<local>/nameProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>|.R|kotlin/Boolean.not|() ->  {
+                ^box String(FAIL: name should have backing field for set)
             }
         }
 
         when () {
-            !=(R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.setter: R|((test/Person, CapturedType(*)) -> kotlin/Unit)?|>|, Null(null)) ->  {
-                ^box String(FAIL: greeting should not have setter)
+            R|<local>/greetingProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.hasBackingField: R|kotlin/Boolean|>| ->  {
+                ^box String(FAIL: greeting should not have backing field)
             }
         }
 

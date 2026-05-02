@@ -13,30 +13,22 @@ fun box(): String {
   // Data class properties
   if (data.properties.size != 2) return "FAIL: expected 2 properties"
 
-  val nameProp = data.properties.find { it.name == "name" }
+  val nameProp = data.properties.find { it.name == "name" } as? PProperty<Person, String>
     ?: return "FAIL: name not found"
 
-  val ageProp = data.properties.find { it.name == "age" }
+  val ageProp = data.properties.find { it.name == "age" } as? PProperty<Person, Int>
     ?: return "FAIL: age not found"
 
   // Both should have backing fields
   if (!nameProp.hasBackingField) return "FAIL: name should have backing field"
   if (!ageProp.hasBackingField) return "FAIL: age should have backing field"
 
-  // Both should have setters (via synthetic accessors)
-  if (nameProp.setter == null) return "FAIL: name should have setter"
-  if (ageProp.setter == null) return "FAIL: age should have setter"
-
-  // Use setter to modify val
-  @Suppress("UNCHECKED_CAST")
-  val nameSetter = nameProp.setter as (Person, String) -> Unit
-  nameSetter(person, "Bob")
+  // Use set to modify val
+  nameProp.set(person, "Bob")
 
   if (person.name != "Bob") return "FAIL: name setter didn't work"
 
-  @Suppress("UNCHECKED_CAST")
-  val ageSetter = ageProp.setter as (Person, Int) -> Unit
-  ageSetter(person, 25)
+  ageProp.set(person, 25)
 
   if (person.age != 25) return "FAIL: age setter didn't work"
 

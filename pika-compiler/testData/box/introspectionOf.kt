@@ -20,18 +20,15 @@ fun box(): String {
 
   val nameProp = data.properties.find { it.name == "name" }
     ?: return "FAIL: name property not found"
-  val ageProp = data.properties.find { it.name == "age" }
+  val ageProp = data.properties.find { it.name == "age" } as? PProperty<Person, Int>
     ?: return "FAIL: age property not found"
 
-  // Test getter via introspectionOf result
-  if (nameProp.getter(person) != "Alice") return "FAIL: name getter returned ${nameProp.getter(person)}"
-  if (ageProp.getter(person) != 30) return "FAIL: age getter returned ${ageProp.getter(person)}"
+  // Test getter via get()
+  if (nameProp.get(person) != "Alice") return "FAIL: name getter returned ${nameProp.get(person)}"
+  if (ageProp.get(person) != 30) return "FAIL: age getter returned ${ageProp.get(person)}"
 
-  // Test setter (need to cast due to star projection)
-  @Suppress("UNCHECKED_CAST")
-  val ageSetter = ageProp.setter as? ((Person, Int) -> Unit)
-    ?: return "FAIL: age setter should not be null"
-  ageSetter(person, 31)
+  // Test setter via set()
+  ageProp.set(person, 31)
   if (person.age != 31) return "FAIL: age setter didn't work"
 
   return "OK"
