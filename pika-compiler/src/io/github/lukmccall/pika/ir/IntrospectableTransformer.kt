@@ -50,7 +50,7 @@ class IntrospectableTransformer(
   override fun visitClass(declaration: IrClass, data: Nothing?): IrStatement {
     declaration.transformChildren(this, data)
 
-    if (declaration.isInterface || declaration.modality == Modality.ABSTRACT) {
+    if (declaration.isInterface) {
       return declaration
     }
 
