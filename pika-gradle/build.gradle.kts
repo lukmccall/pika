@@ -13,14 +13,11 @@ kotlin {
   jvmToolchain(11)
 }
 
-// Coordinates for the compiler plugin artifacts (must match root build.gradle.kts)
 val pluginGroup = "io.github.lukmccall.pika"
 val pikaVersion: String = libs.versions.pika.get()
-val kotlinVersion: String = libs.versions.kotlin.asProvider().get()
-val pluginVersion = "$pikaVersion-$kotlinVersion"
 
 group = pluginGroup
-version = pluginVersion
+version = pikaVersion
 
 sourceSets {
   main {
@@ -34,6 +31,7 @@ sourceSets {
 }
 
 dependencies {
+  compileOnly(libs.kotlin.gradle.plugin)
   implementation(libs.kotlin.gradle.plugin.api)
   testImplementation(libs.kotlin.test.junit5)
 }
@@ -44,11 +42,11 @@ buildConfig {
   buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"$pluginGroup\"")
   buildConfigField("String", "KOTLIN_PLUGIN_GROUP", "\"$pluginGroup\"")
   buildConfigField("String", "KOTLIN_PLUGIN_NAME", "\"pika-compiler\"")
-  buildConfigField("String", "KOTLIN_PLUGIN_VERSION", "\"$pluginVersion\"")
+  buildConfigField("String", "PIKA_VERSION", "\"$pikaVersion\"")
   buildConfigField(
     type = "String",
     name = "ANNOTATIONS_LIBRARY_COORDINATES",
-    expression = "\"$pluginGroup:pika-api:$pluginVersion\""
+    expression = "\"$pluginGroup:pika-api:$pikaVersion\""
   )
 }
 

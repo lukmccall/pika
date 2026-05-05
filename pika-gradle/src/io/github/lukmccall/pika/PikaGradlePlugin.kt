@@ -7,10 +7,14 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilerPluginSupportPlugin
 import org.jetbrains.kotlin.gradle.plugin.SubpluginArtifact
 import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
+import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 @Suppress("unused") // Used via reflection.
 class PikaGradlePlugin : KotlinCompilerPluginSupportPlugin {
+  private lateinit var project: Project
+
   override fun apply(target: Project) {
+    project = target
     target.extensions.create("pika", PikaGradleExtension::class.java)
   }
 
@@ -21,7 +25,7 @@ class PikaGradlePlugin : KotlinCompilerPluginSupportPlugin {
   override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
     groupId = BuildConfig.KOTLIN_PLUGIN_GROUP,
     artifactId = BuildConfig.KOTLIN_PLUGIN_NAME,
-    version = BuildConfig.KOTLIN_PLUGIN_VERSION,
+    version = "${BuildConfig.PIKA_VERSION}-${project.getKotlinPluginVersion()}",
   )
 
   override fun applyToCompilation(

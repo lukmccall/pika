@@ -4,6 +4,8 @@ plugins {
   alias(libs.plugins.vanniktech.mavenPublish)
 }
 
+version = libs.versions.pika.get()
+
 kotlin {
   explicitApi()
   jvmToolchain(11)

@@ -54,16 +54,25 @@ else
   echo "Kotlin version is already $KOTLIN_VERSION"
 fi
 
-# ── Publish ───────────────────────────────────────────────────────────────────
+# ── Publish universal artifacts (pika-api and pika-gradle) ───────────────────
 
 echo ""
-echo "Publishing all artifacts for Kotlin $KOTLIN_VERSION to local Maven..."
+echo "Publishing pika-api and pika-gradle (universal) to local Maven..."
 echo ""
 
 ./gradlew \
   :pika-api:publishToMavenLocal \
-  :pika-compiler:publishToMavenLocal \
   :pika-gradle:publishToMavenLocal \
+  --no-configuration-cache
+
+# ── Publish Kotlin-specific artifact (pika-compiler) ────────────────────────
+
+echo ""
+echo "Publishing pika-compiler for Kotlin $KOTLIN_VERSION to local Maven..."
+echo ""
+
+./gradlew \
+  :pika-compiler:publishToMavenLocal \
   --no-configuration-cache
 
 echo ""
