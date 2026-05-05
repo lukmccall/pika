@@ -1,7 +1,9 @@
 package io.github.lukmccall.pika.fir
 
 import io.github.lukmccall.pika.Identifiers
+import io.github.lukmccall.pika.symbols.PikaAPI
 import org.jetbrains.kotlin.descriptors.ClassKind
+import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.extensions.FirDeclarationGenerationExtension
@@ -9,11 +11,15 @@ import org.jetbrains.kotlin.fir.extensions.FirDeclarationPredicateRegistrar
 import org.jetbrains.kotlin.fir.extensions.MemberGenerationContext
 import org.jetbrains.kotlin.fir.extensions.NestedClassGenerationContext
 import org.jetbrains.kotlin.fir.plugin.createDefaultPrivateConstructor
+import org.jetbrains.kotlin.fir.plugin.createMemberFunction
 import org.jetbrains.kotlin.fir.plugin.createNestedClass
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirConstructorSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
+import org.jetbrains.kotlin.fir.types.ConeStarProjection
+import org.jetbrains.kotlin.fir.types.constructClassLikeType
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.utils.addToStdlib.enumSetOf
@@ -85,7 +91,43 @@ class IntrospectableDeclarationGenerator(
       return getCallableNamesForPikaObject(classSymbol)
     }
 
+    if (classSymbol.hasIntrospectableAnnotation(session)) {
+      return setOf(Name.identifier(Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME))
+    }
+
     return emptySet()
+  }
+
+  override fun generateFunctions(
+    callableId: org.jetbrains.kotlin.name.CallableId,
+    context: MemberGenerationContext?
+  ): List<FirNamedFunctionSymbol> {
+    if (context == null) {
+      return emptyList()
+    }
+
+    val owner = context.owner
+    if (callableId.callableName.asString() != Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME) {
+      return emptyList()
+    }
+    if (!owner.hasIntrospectableAnnotation(session)) {
+      return emptyList()
+    }
+
+    val returnType = PikaAPI.PIntrospectionData.constructClassLikeType(
+      arrayOf(ConeStarProjection), isMarkedNullable = false
+    )
+
+    val function = createMemberFunction(
+      owner,
+      IntrospectableDeclarationGeneratorKey,
+      callableId.callableName,
+      returnType
+    ) {
+      modality = Modality.OPEN
+    }
+
+    return listOf(function.symbol)
   }
 
   private fun getCallableNamesForPikaObject(classSymbol: FirClassSymbol<*>): Set<Name> {

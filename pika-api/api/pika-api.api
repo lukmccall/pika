@@ -3,6 +3,7 @@ public abstract interface annotation class io/github/lukmccall/pika/Introspectab
 
 public final class io/github/lukmccall/pika/IntrospectionOfKt {
 	public static final fun introspectionOf ()Lio/github/lukmccall/pika/PIntrospectionData;
+	public static final fun introspectionOf (Ljava/lang/Object;)Lio/github/lukmccall/pika/PIntrospectionData;
 	public static final fun throwNonReifiedIntrospectionOfError ()Lio/github/lukmccall/pika/PIntrospectionData;
 }
 
@@ -36,6 +37,10 @@ public final class io/github/lukmccall/pika/PIntrospectionData {
 	public final fun getFunctions ()[Lio/github/lukmccall/pika/PFunction;
 	public final fun getJClass ()Ljava/lang/Class;
 	public final fun getProperties ()[Lio/github/lukmccall/pika/PProperty;
+}
+
+public abstract interface class io/github/lukmccall/pika/PIntrospectionProvider {
+	public abstract fun getIntrospectionData ()Lio/github/lukmccall/pika/PIntrospectionData;
 }
 
 public final class io/github/lukmccall/pika/PProperty {

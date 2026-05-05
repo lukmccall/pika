@@ -1,13 +1,15 @@
 FILE: introspectionOfProxy.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Foo : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Foo : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(x: R|kotlin/Int|): R|test/Foo| {
             super<R|kotlin/Any|>()
         }
 
         public final val x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Foo.__Pika| {

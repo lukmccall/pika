@@ -28,5 +28,6 @@ object PikaAPI {
   val PAnnotation = ClassId(API_PACKAGE, Name.identifier("PAnnotation"))
   val PIntrospectionData = ClassId(API_PACKAGE, Name.identifier("PIntrospectionData"))
   val PPropertyAccessor = ClassId(API_PACKAGE, Name.identifier("PPropertyAccessor"))
+  val PIntrospectionProvider = ClassId(API_PACKAGE, Name.identifier("PIntrospectionProvider"))
   val PEmptyArrays = ClassId(API_PACKAGE, Name.identifier("PEmptyArrays"))
 }

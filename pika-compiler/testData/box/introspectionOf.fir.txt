@@ -1,7 +1,7 @@
 FILE: introspectionOf.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(name: R|kotlin/String|, age: R|kotlin/Int|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
@@ -12,6 +12,8 @@ FILE: introspectionOf.kt
         public final var age: R|kotlin/Int| = R|<local>/age|
             public get(): R|kotlin/Int|
             public set(value: R|kotlin/Int|): R|kotlin/Unit|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Person.__Pika| {

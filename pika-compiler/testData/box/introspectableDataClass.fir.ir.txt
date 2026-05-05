@@ -1,5 +1,5 @@
 FILE fqName:test fileName:/introspectableDataClass.kt
-  CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any]
+  CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Person
@@ -32,7 +32,7 @@ FILE fqName:test fileName:/introspectableDataClass.kt
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
             TYPE_ARG OwnerType: test.Person
             ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
-              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -173,7 +173,14 @@ FILE fqName:test fileName:/introspectableDataClass.kt
       VALUE_PARAMETER kind:Regular name:age index:1 type:kotlin.Int
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Person modality:FINAL visibility:public [data] superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.Unit
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Person
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Person'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
     FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:kotlin.String [operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Person
       BLOCK_BODY
@@ -206,6 +213,7 @@ FILE fqName:test fileName:/introspectableDataClass.kt
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
       BLOCK_BODY
         WHEN type=kotlin.Unit origin=null
           BRANCH
@@ -249,6 +257,7 @@ FILE fqName:test fileName:/introspectableDataClass.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Person
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
       BLOCK_BODY
         VAR name:result type:kotlin.Int [var]
           CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
@@ -268,6 +277,7 @@ FILE fqName:test fileName:/introspectableDataClass.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Person
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in test.Person'
           STRING_CONCATENATION type=kotlin.String

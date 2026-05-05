@@ -61,6 +61,17 @@ class SymbolFinder(
     val pVisibility by cachedReference(PikaAPI.PVisibility)
     val pProperty by cachedReference(PikaAPI.PProperty)
     val pPropertyAccessor by cachedReference(PikaAPI.PPropertyAccessor)
+    val pIntrospectionProvider by cachedReference(PikaAPI.PIntrospectionProvider)
+
+    val pIntrospectionProviderGetData by lazy {
+      functionResolver(
+        CallableId(
+          Identifiers.PACKAGE_NAME.toFq(),
+          FqName("PIntrospectionProvider"),
+          Name.identifier(Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME)
+        )
+      ).firstOrNull() ?: error("Function ${Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME} not found in PIntrospectionProvider")
+    }
 
     val pPropertyAccessorGet by lazy {
       functionResolver(

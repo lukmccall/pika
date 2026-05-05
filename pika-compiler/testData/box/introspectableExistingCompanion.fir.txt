@@ -1,7 +1,7 @@
 FILE: introspectableExistingCompanion.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Config : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Config : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(host: R|kotlin/String|, port: R|kotlin/Int|): R|test/Config| {
             super<R|kotlin/Any|>()
         }
@@ -28,6 +28,8 @@ FILE: introspectableExistingCompanion.kt
             }
 
         }
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Config.__Pika| {

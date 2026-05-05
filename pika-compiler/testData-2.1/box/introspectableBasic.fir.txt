@@ -1,13 +1,15 @@
 FILE: introspectableBasic.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(name: R|kotlin/String|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
 
         public final val name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Person.__Pika| {

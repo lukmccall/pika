@@ -70,6 +70,7 @@ class IntrospectableTransformer(
       irClass = declaration,
       fieldOwner = declaration
     )
+    generateGetIntrospectionDataMethod(declaration, declaration)
   }
 
   private fun handleClassDeclaration(declaration: IrClass): IrStatement = declaration.apply {
@@ -80,6 +81,7 @@ class IntrospectableTransformer(
       irClass = declaration,
       fieldOwner = pikaObject
     )
+    generateGetIntrospectionDataMethod(declaration, pikaObject)
   }
 
   private fun relaxBackingFieldAccess(irClass: IrClass) {
@@ -161,7 +163,8 @@ class IntrospectableTransformer(
           !func.isFakeOverride &&
           func.correspondingPropertySymbol == null &&
           func.name.asString() != "<init>" &&
-          !func.name.asString().startsWith(Identifiers.PIKA_SPECIAL_PREFIX)
+          !func.name.asString().startsWith(Identifiers.PIKA_SPECIAL_PREFIX) &&
+          func.name.asString() != Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME
       }
       .map { func -> poet.pika.pFunction(func) }
 
@@ -286,6 +289,39 @@ class IntrospectableTransformer(
       }
     }
     fieldOwner.declarations.add(setMethod)
+  }
+
+  private fun generateGetIntrospectionDataMethod(
+    irClass: IrClass,
+    fieldOwner: IrClass
+  ) {
+    val providerType = symbolFinder.pikaAPI.pIntrospectionProvider.owner.defaultType
+    if (irClass.superTypes.none { it.classOrNull == symbolFinder.pikaAPI.pIntrospectionProvider }) {
+      irClass.superTypes = irClass.superTypes + providerType
+    }
+
+    val existingFunction = irClass.declarations
+      .filterIsInstance<IrSimpleFunction>()
+      .find { it.name.asString() == Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME }
+      ?: return
+
+    val field = fieldOwner.declarations
+      .filterIsInstance<IrField>()
+      .find { it.name.asString() == Identifiers.INTROSPECTION_DATA_FIELD_NAME }
+      ?: return
+
+    existingFunction.overriddenSymbols = listOf(symbolFinder.pikaAPI.pIntrospectionProviderGetData)
+
+    existingFunction.body = poet.createReturnBody(
+      context.irFactory, existingFunction,
+      IrGetFieldImpl(
+        startOffset = -1,
+        endOffset = -1,
+        symbol = field.symbol,
+        type = field.type,
+        receiver = null
+      )
+    )
   }
 
   private fun buildBaseClassReference(irClass: IrClass): IrExpression? {

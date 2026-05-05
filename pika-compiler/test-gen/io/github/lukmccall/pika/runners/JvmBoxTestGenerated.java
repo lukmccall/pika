@@ -87,6 +87,24 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("introspectableInterface.kt")
+  public void testIntrospectableInterface() {
+    runTest("pika-compiler/testData/box/introspectableInterface.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableInterfaceInheritance.kt")
+  public void testIntrospectableInterfaceInheritance() {
+    runTest("pika-compiler/testData/box/introspectableInterfaceInheritance.kt");
+  }
+
+  @Test
+  @TestMetadata("introspectableInterfaceObject.kt")
+  public void testIntrospectableInterfaceObject() {
+    runTest("pika-compiler/testData/box/introspectableInterfaceObject.kt");
+  }
+
+  @Test
   @TestMetadata("introspectableObject.kt")
   public void testIntrospectableObject() {
     runTest("pika-compiler/testData/box/introspectableObject.kt");

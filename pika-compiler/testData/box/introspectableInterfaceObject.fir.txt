@@ -1,0 +1,44 @@
+FILE: introspectableInterfaceObject.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public final object Config : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
+        private constructor(): R|test/Config| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val version: R|kotlin/String| = String(1.0)
+            public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval obj: R|kotlin/Any| = Q|test/Config|
+        when () {
+            (R|<local>/obj| !is R|io/github/lukmccall/pika/PIntrospectionProvider|) ->  {
+                ^box String(FAIL: object should implement PIntrospectionProvider)
+            }
+        }
+
+        lval data: R|io/github/lukmccall/pika/PIntrospectionData<*>| = (R|<local>/obj| as R|io/github/lukmccall/pika/PIntrospectionProvider|).R|io/github/lukmccall/pika/PIntrospectionProvider.getIntrospectionData|()
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Config|).R|kotlin/jvm/java|<R|test/Config|>) ->  {
+                ^box <strcat>(String(FAIL: jClass should be Config, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(1)) ->  {
+                ^box <strcat>(String(FAIL: expected 1 property, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<CapturedType(*), *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval staticData: R|io/github/lukmccall/pika/PIntrospectionData<test/Config>| = R|io/github/lukmccall/pika/introspectionOf|<R|test/Config|>()
+        when () {
+            !==(R|<local>/data|, R|<local>/staticData|) ->  {
+                ^box String(FAIL: should return same cached instance)
+            }
+        }
+
+        ^box String(OK)
+    }

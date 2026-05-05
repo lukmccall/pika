@@ -1,5 +1,5 @@
 FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
-  CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]
+  CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Address
@@ -32,7 +32,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
             TYPE_ARG OwnerType: test.Address
             ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Address> origin=null
-              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -153,21 +153,31 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
       VALUE_PARAMETER kind:Regular name:zip index:1 type:kotlin.String
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
-  CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Address
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Address'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:public [final,static] declared in test.Address.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
+  CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Person
@@ -200,7 +210,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
             TYPE_ARG OwnerType: test.Person
             ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
-              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -232,7 +242,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                   ARG type: CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                     ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
                     ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Address> origin=null
-                      ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+                      ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
                     ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
                     ARG introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Address> visibility:public [final,static] declared in test.Address.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Address> origin=null
                   ARG index: CONST Int type=kotlin.Int value=1
@@ -326,27 +336,37 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
       VALUE_PARAMETER kind:Regular name:address index:1 type:test.Address
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Person
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Person'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
   FUN name:box visibility:public modality:FINAL returnType:kotlin.String
     BLOCK_BODY
       VAR name:personDescriptor type:io.github.lukmccall.pika.PTypeDescriptor [val]
         CALL 'public final fun getOrCreateConcrete (jClass: java.lang.Class<*>, isNullable: kotlin.Boolean, introspection: io.github.lukmccall.pika.PIntrospectionData<*>?): io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
           ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:PTypeDescriptorRegistry modality:FINAL visibility:public superTypes:[kotlin.Any]' type=io.github.lukmccall.pika.PTypeDescriptorRegistry
           ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Person> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+            ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
           ARG isNullable: CONST Boolean type=kotlin.Boolean value=false
           ARG introspection: GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Person> visibility:public [final,static] declared in test.Person.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Person> origin=null
       WHEN type=kotlin.Unit origin=IF
@@ -436,7 +456,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                   ARG <this>: GET_VAR 'val addressTypeDescriptor: io.github.lukmccall.pika.PTypeDescriptor.Concrete declared in test.box' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
               ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Address> origin=GET_PROPERTY
                 TYPE_ARG T: test.Address
-                ARG <this>: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Address>
+                ARG <this>: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<test.Address>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: address type kClass should be Address"
       VAR name:addressData type:io.github.lukmccall.pika.PIntrospectionData<*> [val]
@@ -462,7 +482,7 @@ FILE fqName:test fileName:/typeInfoNestedIntrospectable.kt
                 ARG <this>: GET_VAR 'val addressData: io.github.lukmccall.pika.PIntrospectionData<*> declared in test.box' type=io.github.lukmccall.pika.PIntrospectionData<*> origin=null
               ARG arg1: CALL 'public final fun <get-java> <T> (<this>: kotlin.reflect.KClass<T of kotlin.jvm.<get-java>>): java.lang.Class<T of kotlin.jvm.<get-java>> declared in kotlin.jvm' type=java.lang.Class<test.Address> origin=GET_PROPERTY
                 TYPE_ARG T: test.Address
-                ARG <this>: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<test.Address>
+                ARG <this>: CLASS_REFERENCE 'CLASS CLASS name:Address modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<test.Address>
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in test'
             CONST String type=kotlin.String value="FAIL: nested introspection.jClass should be Address"
       WHEN type=kotlin.Unit origin=IF

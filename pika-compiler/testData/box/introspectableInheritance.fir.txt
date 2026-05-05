@@ -1,13 +1,15 @@
 FILE: introspectableInheritance.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(species: R|kotlin/String|): R|test/Animal| {
             super<R|kotlin/Any|>()
         }
 
         public final val species: R|kotlin/String| = R|<local>/species|
             public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Animal.__Pika| {
@@ -17,13 +19,15 @@ FILE: introspectableInheritance.kt
         }
 
     }
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Animal| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Animal|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(species: R|kotlin/String|, breed: R|kotlin/String|): R|test/Dog| {
             super<R|test/Animal|>(R|<local>/species|)
         }
 
         public final val breed: R|kotlin/String| = R|<local>/breed|
             public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Dog.__Pika| {

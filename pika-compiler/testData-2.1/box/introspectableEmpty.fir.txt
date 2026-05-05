@@ -1,10 +1,12 @@
 FILE: introspectableEmpty.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Empty : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Empty : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(): R|test/Empty| {
             super<R|kotlin/Any|>()
         }
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Empty.__Pika| {

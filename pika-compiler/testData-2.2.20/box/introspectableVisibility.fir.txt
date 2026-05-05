@@ -1,7 +1,7 @@
 FILE: introspectableVisibility.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(publicProp: R|kotlin/String|, privateProp: R|kotlin/String|, protectedProp: R|kotlin/String|, internalProp: R|kotlin/String|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
@@ -17,6 +17,8 @@ FILE: introspectableVisibility.kt
 
         internal final val internalProp: R|kotlin/String| = R|<local>/internalProp|
             internal get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Person.__Pika| {

@@ -1,13 +1,15 @@
 FILE: introspectableIndirectInheritance.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(species: R|kotlin/String|): R|test/Animal| {
             super<R|kotlin/Any|>()
         }
 
         public final val species: R|kotlin/String| = R|<local>/species|
             public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Animal.__Pika| {
@@ -17,13 +19,15 @@ FILE: introspectableIndirectInheritance.kt
         }
 
     }
-    @R|io/github/lukmccall/pika/Introspectable|() public open class Mammal : R|test/Animal| {
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Mammal : R|test/Animal|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(species: R|kotlin/String|, warmBlooded: R|kotlin/Boolean|): R|test/Mammal| {
             super<R|test/Animal|>(R|<local>/species|)
         }
 
         public final val warmBlooded: R|kotlin/Boolean| = R|<local>/warmBlooded|
             public get(): R|kotlin/Boolean|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Mammal.__Pika| {
@@ -33,13 +37,15 @@ FILE: introspectableIndirectInheritance.kt
         }
 
     }
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Mammal| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Mammal|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(species: R|kotlin/String|, warmBlooded: R|kotlin/Boolean|, breed: R|kotlin/String|): R|test/Dog| {
             super<R|test/Mammal|>(R|<local>/species|, R|<local>/warmBlooded|)
         }
 
         public final val breed: R|kotlin/String| = R|<local>/breed|
             public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Dog.__Pika| {

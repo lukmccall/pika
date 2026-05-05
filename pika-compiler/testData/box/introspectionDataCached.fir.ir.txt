@@ -1,5 +1,5 @@
 FILE fqName:test fileName:/introspectionDataCached.kt
-  CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent]
+  CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent; io.github.lukmccall.pika.PIntrospectionProvider]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Child
@@ -21,7 +21,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
             TYPE_ARG OwnerType: test.Child
             ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Child> origin=null
-              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent]' type=kotlin.reflect.KClass<*>
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -115,20 +115,30 @@ FILE fqName:test fileName:/introspectionDataCached.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (a: kotlin.Int) declared in test.Parent'
           ARG a: CONST Int type=kotlin.Int value=0
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Child modality:FINAL visibility:public superTypes:[test.Parent; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in test.Parent
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun hashCode (): kotlin.Int declared in test.Parent
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in test.Parent
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Child
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Child'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Child> visibility:public [final,static] declared in test.Child.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Child> origin=null
     PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,val]
       overridden:
         public final a: kotlin.Int declared in test.Parent
@@ -137,7 +147,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,val]
         overridden:
           public final fun <get-a> (): kotlin.Int declared in test.Parent
-  CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any]
+  CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Parent
@@ -159,7 +169,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
           CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
             TYPE_ARG OwnerType: test.Parent
             ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Parent> origin=null
-              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.reflect.KClass<*>
+              ARG $receiver: CLASS_REFERENCE 'CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.reflect.KClass<*>
             ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
               TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
               ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -252,21 +262,31 @@ FILE fqName:test fileName:/introspectionDataCached.kt
       VALUE_PARAMETER kind:Regular name:a index:0 type:kotlin.Int
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Parent modality:OPEN visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
-  CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PPropertyAccessor]
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Parent
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Parent'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Parent> visibility:public [final,static] declared in test.Parent.__Pika' type=io.github.lukmccall.pika.PIntrospectionData<test.Parent> origin=null
+  CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider; io.github.lukmccall.pika.PPropertyAccessor]
     annotations:
       Introspectable
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:test.Singleton
@@ -286,7 +306,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
         CONSTRUCTOR_CALL 'public constructor <init> (jClass: java.lang.Class<OwnerType of io.github.lukmccall.pika.PIntrospectionData>, annotations: kotlin.Array<io.github.lukmccall.pika.PAnnotation>, properties: kotlin.Array<io.github.lukmccall.pika.PProperty<OwnerType of io.github.lukmccall.pika.PIntrospectionData, *>>, functions: kotlin.Array<io.github.lukmccall.pika.PFunction>, baseClass: io.github.lukmccall.pika.PIntrospectionData<*>?) declared in io.github.lukmccall.pika.PIntrospectionData' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
           TYPE_ARG OwnerType: test.Singleton
           ARG jClass: CALL 'public final fun <get-java> ($receiver: kotlin.reflect.KClass<*>): java.lang.Class<T of java.lang.Class> declared in kotlin.jvm' type=java.lang.Class<test.Singleton> origin=null
-            ARG $receiver: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PPropertyAccessor]' type=kotlin.reflect.KClass<*>
+            ARG $receiver: CLASS_REFERENCE 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider; io.github.lukmccall.pika.PPropertyAccessor]' type=kotlin.reflect.KClass<*>
           ARG annotations: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
             TYPE_ARG T: io.github.lukmccall.pika.PAnnotation
             ARG elements: VARARG type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> varargElementType=io.github.lukmccall.pika.PAnnotation
@@ -306,7 +326,7 @@ FILE fqName:test fileName:/introspectionDataCached.kt
                 ARG annotations: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:EMPTY_ANNOTATIONS type:kotlin.Array<io.github.lukmccall.pika.PAnnotation> visibility:public [final,static] declared in io.github.lukmccall.pika.PEmptyArrays' type=kotlin.Array<io.github.lukmccall.pika.PAnnotation> origin=null
                 ARG type: GET_FIELD 'FIELD IR_EXTERNAL_DECLARATION_STUB name:STRING type:io.github.lukmccall.pika.PTypeDescriptor.Concrete visibility:public [final,static] declared in io.github.lukmccall.pika.PTypeDescriptorRegistry' type=io.github.lukmccall.pika.PTypeDescriptor.Concrete origin=null
                 ARG index: CONST Int type=kotlin.Int value=0
-                ARG accessor: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PPropertyAccessor]' type=test.Singleton
+                ARG accessor: GET_OBJECT 'CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider; io.github.lukmccall.pika.PPropertyAccessor]' type=test.Singleton
                 ARG isMutable: CONST Boolean type=kotlin.Boolean value=false
                 ARG hasBackingField: CONST Boolean type=kotlin.Boolean value=true
                 ARG isDelegated: CONST Boolean type=kotlin.Boolean value=false
@@ -315,20 +335,30 @@ FILE fqName:test fileName:/introspectionDataCached.kt
     CONSTRUCTOR visibility:private returnType:test.Singleton [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PPropertyAccessor]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Singleton modality:FINAL visibility:public superTypes:[kotlin.Any; io.github.lukmccall.pika.PIntrospectionProvider; io.github.lukmccall.pika.PPropertyAccessor]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        public open fun hashCode (): kotlin.Int declared in io.github.lukmccall.pika.PIntrospectionProvider
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
+        public open fun toString (): kotlin.String declared in io.github.lukmccall.pika.PIntrospectionProvider
+    FUN GENERATED[io.github.lukmccall.pika.fir.IntrospectableDeclarationGeneratorKey] name:getIntrospectionData visibility:public modality:OPEN returnType:io.github.lukmccall.pika.PIntrospectionData<*>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Singleton
+      overridden:
+        public abstract fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in io.github.lukmccall.pika.PIntrospectionProvider
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun getIntrospectionData (): io.github.lukmccall.pika.PIntrospectionData<*> declared in test.Singleton'
+          GET_FIELD 'FIELD name:__pika$IntrospectionData type:io.github.lukmccall.pika.PIntrospectionData<test.Singleton> visibility:public [final,static] declared in test.Singleton' type=io.github.lukmccall.pika.PIntrospectionData<test.Singleton> origin=null
     FUN name:__pika$PropertyGet visibility:public modality:OPEN returnType:kotlin.Any?
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:test.Singleton
       VALUE_PARAMETER kind:Regular name:instance index:1 type:kotlin.Any?

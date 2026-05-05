@@ -1,0 +1,70 @@
+FILE: introspectableInterfaceInheritance.kt
+    package test
+
+    @R|io/github/lukmccall/pika/Introspectable|() public open class Animal : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
+        public constructor(species: R|kotlin/String|): R|test/Animal| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val species: R|kotlin/String| = R|<local>/species|
+            public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
+
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Animal.__Pika| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Dog : R|test/Animal|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
+        public constructor(species: R|kotlin/String|, breed: R|kotlin/String|): R|test/Dog| {
+            super<R|test/Animal|>(R|<local>/species|)
+        }
+
+        public final val breed: R|kotlin/String| = R|<local>/breed|
+            public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
+
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/Dog.__Pika| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval dog: R|kotlin/Any| = R|test/Dog.Dog|(String(Canine), String(Lab))
+        lval animal: R|kotlin/Any| = R|test/Animal.Animal|(String(Feline))
+        when () {
+            (R|<local>/dog| !is R|io/github/lukmccall/pika/PIntrospectionProvider|) ->  {
+                ^box String(FAIL: Dog should be PIntrospectionProvider)
+            }
+        }
+
+        when () {
+            (R|<local>/animal| !is R|io/github/lukmccall/pika/PIntrospectionProvider|) ->  {
+                ^box String(FAIL: Animal should be PIntrospectionProvider)
+            }
+        }
+
+        lval dogData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = (R|<local>/dog| as R|io/github/lukmccall/pika/PIntrospectionProvider|).R|io/github/lukmccall/pika/PIntrospectionProvider.getIntrospectionData|()
+        lval animalData: R|io/github/lukmccall/pika/PIntrospectionData<*>| = (R|<local>/animal| as R|io/github/lukmccall/pika/PIntrospectionProvider|).R|io/github/lukmccall/pika/PIntrospectionProvider.getIntrospectionData|()
+        when () {
+            !=(R|<local>/dogData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Dog|).R|kotlin/jvm/java|<R|test/Dog|>) ->  {
+                ^box <strcat>(String(FAIL: dog data should be Dog, got ), R|<local>/dogData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|, <getClass>(Q|test/Animal|).R|kotlin/jvm/java|<R|test/Animal|>) ->  {
+                ^box <strcat>(String(FAIL: animal data should be Animal, got ), R|<local>/animalData|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<CapturedType(*)>|>|)
+            }
+        }
+
+        ^box String(OK)
+    }

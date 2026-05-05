@@ -18,6 +18,13 @@ package io.github.lukmccall.pika
 public fun <T> introspectionOf(): PIntrospectionData<T & Any> =
   throw NotImplementedError("introspectionOf<T>() should be replaced by the compiler plugin")
 
+public fun introspectionOf(instance: Any?): PIntrospectionData<*>? {
+  if (instance is PIntrospectionProvider) {
+    return instance.getIntrospectionData()
+  }
+  return null
+}
+
 /**
  * Called at runtime when introspectionOf is used inside an inline function whose
  * type parameter is not reified. This always throws — the compiler plugin must replace

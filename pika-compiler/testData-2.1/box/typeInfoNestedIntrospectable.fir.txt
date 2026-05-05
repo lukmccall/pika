@@ -1,7 +1,7 @@
 FILE: typeInfoNestedIntrospectable.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Address : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Address : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(city: R|kotlin/String|, zip: R|kotlin/String|): R|test/Address| {
             super<R|kotlin/Any|>()
         }
@@ -12,6 +12,8 @@ FILE: typeInfoNestedIntrospectable.kt
         public final val zip: R|kotlin/String| = R|<local>/zip|
             public get(): R|kotlin/String|
 
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
+
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Address.__Pika| {
                 super<R|kotlin/Any|>()
@@ -20,7 +22,7 @@ FILE: typeInfoNestedIntrospectable.kt
         }
 
     }
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Person : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(name: R|kotlin/String|, address: R|test/Address|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
@@ -30,6 +32,8 @@ FILE: typeInfoNestedIntrospectable.kt
 
         public final val address: R|test/Address| = R|<local>/address|
             public get(): R|test/Address|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Person.__Pika| {

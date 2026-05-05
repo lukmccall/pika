@@ -1,7 +1,7 @@
 FILE: introspectableDataClass.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final data class Person : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final data class Person : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(name: R|kotlin/String|, age: R|kotlin/Int|): R|test/Person| {
             super<R|kotlin/Any|>()
         }
@@ -17,6 +17,8 @@ FILE: introspectableDataClass.kt
         public final operator fun component2(): R|kotlin/Int|
 
         public final fun copy(name: R|kotlin/String| = this@R|test/Person|.R|test/Person.name|, age: R|kotlin/Int| = this@R|test/Person|.R|test/Person.age|): R|test/Person|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Person.__Pika| {

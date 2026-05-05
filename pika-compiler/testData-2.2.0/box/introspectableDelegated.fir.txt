@@ -1,7 +1,7 @@
 FILE: introspectableDelegated.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class DelegatedProperties : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class DelegatedProperties : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(): R|test/DelegatedProperties| {
             super<R|kotlin/Any|>()
         }
@@ -21,6 +21,8 @@ FILE: introspectableDelegated.kt
             public get(): R|kotlin/Int| {
                 ^ Int(100)
             }
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/DelegatedProperties.__Pika| {

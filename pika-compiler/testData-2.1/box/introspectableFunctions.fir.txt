@@ -1,7 +1,7 @@
 FILE: introspectableFunctions.kt
     package test
 
-    @R|io/github/lukmccall/pika/Introspectable|() public final class Calculator : R|kotlin/Any| {
+    @R|io/github/lukmccall/pika/Introspectable|() public final class Calculator : R|kotlin/Any|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
         public constructor(): R|test/Calculator| {
             super<R|kotlin/Any|>()
         }
@@ -20,6 +20,8 @@ FILE: introspectableFunctions.kt
         internal final fun subtract(a: R|kotlin/Int|, b: R|kotlin/Int|): R|kotlin/Int| {
             ^subtract R|<local>/a|.R|kotlin/Int.minus|(R|<local>/b|)
         }
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
 
         public final object __Pika : R|kotlin/Any| {
             private constructor(): R|test/Calculator.__Pika| {
