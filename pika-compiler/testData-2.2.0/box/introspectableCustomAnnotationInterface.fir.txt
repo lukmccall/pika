@@ -1,0 +1,78 @@
+FILE: introspectableCustomAnnotationInterface.kt
+    package test
+
+    public final annotation class OptimizedRecord : R|kotlin/Annotation| {
+        public constructor(): R|test/OptimizedRecord| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    @R|test/OptimizedRecord|() public abstract interface RecordWithId : R|kotlin/Any| {
+        public abstract val id: R|kotlin/String|
+            public get(): R|kotlin/String|
+
+    }
+    @R|io/github/lukmccall/pika/Introspectable|() public final class UserRecord : R|test/RecordWithId|, R|io/github/lukmccall/pika/PIntrospectionProvider| {
+        public constructor(id: R|kotlin/String|, email: R|kotlin/String|): R|test/UserRecord| {
+            super<R|kotlin/Any|>()
+        }
+
+        public open override val id: R|kotlin/String| = R|<local>/id|
+            public get(): R|kotlin/String|
+
+        public final val email: R|kotlin/String| = R|<local>/email|
+            public get(): R|kotlin/String|
+
+        public open fun getIntrospectionData(): R|io/github/lukmccall/pika/PIntrospectionData<*>|
+
+        public final object __Pika : R|kotlin/Any| {
+            private constructor(): R|test/UserRecord.__Pika| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+    }
+    public final fun box(): R|kotlin/String| {
+        lval user: R|test/UserRecord| = R|test/UserRecord.UserRecord|(String(u1), String(alice@test.com))
+        when () {
+            (R|<local>/user| !is R|io/github/lukmccall/pika/PIntrospectionProvider|) ->  {
+                ^box String(FAIL: UserRecord should implement PIntrospectionProvider)
+            }
+        }
+
+        @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) lval data: R|io/github/lukmccall/pika/PIntrospectionData<test/UserRecord>| = ((R|<local>/user| as R|io/github/lukmccall/pika/PIntrospectionProvider|).R|io/github/lukmccall/pika/PIntrospectionProvider.getIntrospectionData|() as R|io/github/lukmccall/pika/PIntrospectionData<test/UserRecord>|)
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/UserRecord>|>|, <getClass>(Q|test/UserRecord|).R|kotlin/jvm/java|<R|test/UserRecord|>) ->  {
+                ^box <strcat>(String(FAIL: jClass should be UserRecord, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.jClass: R|java/lang/Class<test/UserRecord>|>|)
+            }
+        }
+
+        when () {
+            !=(R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/UserRecord, *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|, Int(2)) ->  {
+                ^box <strcat>(String(FAIL: expected 2 properties, got ), R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/UserRecord, *>>|>|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|)
+            }
+        }
+
+        lval idProp: R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/UserRecord, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(id))
+        }
+        ) ?: ^box String(FAIL: id property not found)
+        when () {
+            !=(R|<local>/idProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/user|), String(u1)) ->  {
+                ^box <strcat>(String(FAIL: id getter expected u1 but got ), R|<local>/idProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/user|))
+            }
+        }
+
+        lval emailProp: R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>| = R|<local>/data|.R|SubstitutionOverride<io/github/lukmccall/pika/PIntrospectionData.properties: R|kotlin/Array<io/github/lukmccall/pika/PProperty<test/UserRecord, *>>|>|.R|kotlin/collections/find|<R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>|>(<L> = find@fun <anonymous>(it: R|io/github/lukmccall/pika/PProperty<test/UserRecord, *>|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+            ^ ==(R|<local>/it|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.name: R|kotlin/String|>|, String(email))
+        }
+        ) ?: ^box String(FAIL: email property not found)
+        when () {
+            !=(R|<local>/emailProp|.R|SubstitutionOverride<io/github/lukmccall/pika/PProperty.get: R|CapturedType(*)|>|(R|<local>/user|), String(alice@test.com)) ->  {
+                ^box String(FAIL: email getter expected alice@test.com)
+            }
+        }
+
+        ^box String(OK)
+    }

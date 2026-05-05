@@ -37,6 +37,12 @@ class IntrospectableDeclarationGenerator(
     ClassKind.INTERFACE
   )
 
+  private val noCallableClassKinds = enumSetOf(
+    ClassKind.ANNOTATION_CLASS,
+    ClassKind.ENUM_CLASS,
+    ClassKind.INTERFACE
+  )
+
   override fun FirDeclarationPredicateRegistrar.registerPredicates() {
     register(session.introspectablePredicateMatcher.predicate)
   }
@@ -91,7 +97,7 @@ class IntrospectableDeclarationGenerator(
       return getCallableNamesForPikaObject(classSymbol)
     }
 
-    if (classSymbol.hasIntrospectableAnnotation(session)) {
+    if (classSymbol.hasIntrospectableAnnotation(session) && !noCallableClassKinds.contains(classSymbol.classKind)) {
       return setOf(Name.identifier(Identifiers.GET_INTROSPECTION_DATA_METHOD_NAME))
     }
 
@@ -111,6 +117,9 @@ class IntrospectableDeclarationGenerator(
       return emptyList()
     }
     if (!owner.hasIntrospectableAnnotation(session)) {
+      return emptyList()
+    }
+    if (noCallableClassKinds.contains(owner.classKind)) {
       return emptyList()
     }
 
