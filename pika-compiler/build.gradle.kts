@@ -64,7 +64,7 @@ dependencies {
   testFixturesApi(libs.kotlin.compiler)
   testFixturesRuntimeOnly(libs.junit)
 
-  annotationsRuntimeClasspath(project(":pika-api"))
+  annotationsRuntimeClasspath("io.github.lukmccall.pika:pika-api")
 
   // Dependencies required to run the internal test framework.
   testArtifacts(libs.kotlin.stdlib)
@@ -85,12 +85,14 @@ buildConfig {
 }
 
 tasks.test {
-  dependsOn(annotationsRuntimeClasspath)
+  val annotationsFiles = files(annotationsRuntimeClasspath)
 
   useJUnitPlatform()
   workingDir = rootDir
 
-  systemProperty("annotationsRuntime.classpath", annotationsRuntimeClasspath.asPath)
+  jvmArgumentProviders.add(CommandLineArgumentProvider {
+    listOf("-DannotationsRuntime.classpath=${annotationsFiles.asPath}")
+  })
 
   // Properties required to run the internal test framework.
   setLibraryProperty("org.jetbrains.kotlin.test.kotlin-stdlib", "kotlin-stdlib")

@@ -60,10 +60,8 @@ echo ""
 echo "Publishing pika-api and pika-gradle (universal) to local Maven..."
 echo ""
 
-./gradlew \
-  :pika-api:publishToMavenLocal \
-  :pika-gradle:publishToMavenLocal \
-  --no-configuration-cache
+./gradlew -p pika-api publishToMavenLocal --no-configuration-cache
+./gradlew -p pika-gradle publishToMavenLocal --no-configuration-cache
 
 # ── Publish Kotlin-specific artifact (pika-compiler) ────────────────────────
 

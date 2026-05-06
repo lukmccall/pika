@@ -23,5 +23,10 @@ dependencyResolutionManagement {
 rootProject.name = "pika"
 
 include("pika-compiler")
-include("pika-api")
 include("sample")
+
+includeBuild("pika-api") {
+  dependencySubstitution {
+    substitute(module("io.github.lukmccall.pika:pika-api")).using(project(":"))
+  }
+}
