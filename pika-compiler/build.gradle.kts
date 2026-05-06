@@ -89,6 +89,7 @@ tasks.test {
 
   useJUnitPlatform()
   workingDir = rootDir
+  inputs.files(annotationsFiles)
 
   jvmArgumentProviders.add(CommandLineArgumentProvider {
     listOf("-DannotationsRuntime.classpath=${annotationsFiles.asPath}")
